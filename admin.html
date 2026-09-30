@@ -1322,46 +1322,63 @@
             const wrapper = document.getElementById('wrapper-alasan-hukuman');
             if (wrapper) wrapper.style.display = (nilai === "UNLOCK") ? "none" : "block";
         }
-        async function eksekusiLockPromotorAdmin() {
-            const nama = document.getElementById('admin-select-sales-lock').value;
-            const aksi = document.getElementById('admin-select-status-lock').value;
-            const alasan = document.getElementById('admin-select-alasan') ? document.getElementById('admin-select-alasan').value : "";
-            const durasi = document.getElementById('admin-input-durasi-menit') ? parseInt(document.getElementById('admin-input-durasi-menit').value) || 15 : 15;
+      async function eksekusiLockPromotorAdmin() {
+    const nama = document.getElementById('admin-select-sales-lock').value;
+    const aksi = document.getElementById('admin-select-status-lock').value;
+    const alasan = document.getElementById('admin-select-alasan') ? document.getElementById('admin-select-alasan').value : "";
+    const durasi = document.getElementById('admin-input-durasi-menit') ? parseInt(document.getElementById('admin-input-durasi-menit').value) || 15 : 15;
 
-            if (!nama) { alert("Pilih promotor!"); return; }
-            const clean = sanitizeNama(nama);
+    if (!nama) { alert("Pilih promotor!"); return; }
+    const clean = sanitizeNama(nama);
 
-            const btn = document.getElementById('btn-modal-action-ok');
-            btn.disabled = true;
-            btn.innerHTML = `<span class="spinner"></span> Memproses...`;
+    const btn = document.getElementById('btn-modal-action-ok');
+    btn.disabled = true;
+    btn.innerHTML = `<span class="spinner"></span> Memproses...`;
 
-            try {
-                if (aksi === "LOCK") {
-                    const waktuSelesai = Date.now() + (durasi * 60 * 1000);
-                    // Simpan status lock ke node 'lockPromotor'
-                    await window.dbUpdate(window.dbRef(window.db, 'lockPromotor/' + clean), {
-                        nama: nama,
-                        locked: true,
-                        alasan: alasan,
-                        waktuSelesaiLock: waktuSelesai
-                    });
-                    // Hapus dari antrian kalau ada
-                    await window.dbRemove(window.dbRef(window.db, 'antrian/' + clean));
-                    tutupModal();
-                    tampilkanModal("Berhasil", `${nama} dikunci ${durasi} menit.`);
-                } else {
-                    // Unlock
-                    await window.dbUpdate(window.dbRef(window.db, 'lockPromotor/' + clean), {
-                        locked: false, alasan: "", waktuSelesaiLock: 0
-                    });
-                    tutupModal();
-                    tampilkanModal("Berhasil", `${nama} dibuka.`);
-                }
-            } catch (e) {
-                tutupModal();
-                tampilkanModal("Gagal", "Tidak bisa memproses.");
-            }
+    try {
+        if (aksi === "LOCK") {
+            const waktuSelesai = Date.now() + (durasi * 60 * 1000);
+            
+            // 1. Simpan status lock
+            await window.dbUpdate(window.dbRef(window.db, 'lockPromotor/' + clean), {
+                nama: nama,
+                locked: true,
+                alasan: alasan,
+                waktuSelesaiLock: waktuSelesai
+            });
+            
+            // 2. Hapus dari antrian kalau ada
+            await window.dbRemove(window.dbRef(window.db, 'antrian/' + clean));
+            
+            // 3. ✅ CATAT KE STATISTIK (AUTOKICK)
+            await window.dbPush(window.dbRef(window.db, 'statistikAktivitas'), {
+                nama: nama,
+                aksi: "Autokick",
+                waktu: Date.now(),
+                tanggal: getTanggalIndo(),
+                hasil: `Dikunci Admin (${durasi} menit)`,
+                kategori: "Lock Hukuman",
+                sumber: "Admin",
+                alasan: alasan,
+                durasi: durasi
+            });
+            
+            tutupModal();
+            tampilkanModal("Berhasil", `${nama} dikunci ${durasi} menit.\nAktivitas dicatat di Autokick.`);
+        } else {
+            // Unlock
+            await window.dbUpdate(window.dbRef(window.db, 'lockPromotor/' + clean), {
+                locked: false, alasan: "", waktuSelesaiLock: 0
+            });
+            tutupModal();
+            tampilkanModal("Berhasil", `${nama} dibuka.`);
         }
+    } catch (e) {
+        console.warn("Error lock:", e);
+        tutupModal();
+        tampilkanModal("Gagal", "Tidak bisa memproses.");
+    }
+}
 
         
         function bukaModalResetTotal() {
