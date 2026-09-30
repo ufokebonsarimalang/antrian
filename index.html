@@ -807,10 +807,12 @@
             }, 150);
         }
 
-       function inisialisasiRealtimeFirebase() {
+      function inisialisasiRealtimeFirebase() {
     const db = window.db;
 
-    // Listener 1: antrian (sudah ada)
+    // ============================================
+    // LISTENER 1: ANTRIAN (realtime)
+    // ============================================
     window.dbOnValue(window.dbRef(db, 'antrian'), (snapshot) => {
         const dataRaw = snapshot.val();
         daftarAntrianGlobal = [];
@@ -827,7 +829,9 @@
         renderAktivitas();
     });
 
-    // Listener 2: mastersales (sudah ada)
+    // ============================================
+    // LISTENER 2: MASTER SALES (dari 'mastersales' atau fallback 'data')
+    // ============================================
     const pathUtama = 'mastersales';
     window.dbOnValue(window.dbRef(db, pathUtama), (snapshot) => {
         const dataRaw = snapshot.val();
@@ -845,7 +849,9 @@
         }
     });
 
-    // Listener 3: setting (sudah ada)
+    // ============================================
+    // LISTENER 3: SETTING (status sistem, GPS toko)
+    // ============================================
     window.dbOnValue(window.dbRef(db, 'setting'), (snapshot) => {
         const setting = snapshot.val();
         if (setting) {
@@ -857,7 +863,9 @@
         renderUI();
     });
 
-    // Listener 4: statistikAktivitas (sudah ada)
+    // ============================================
+    // LISTENER 4: STATISTIK AKTIVITAS
+    // ============================================
     window.dbOnValue(window.dbRef(db, 'statistikAktivitas'), (snapshot) => {
         const dataRaw = snapshot.val();
         aktivitasGlobal = [];
@@ -873,7 +881,10 @@
         renderAktivitas();
     });
 
-    // ✅ LISTENER BARU: checkinHarian (untuk fallback kalau cache hilang)
+    // ============================================
+    // LISTENER 5: CHECK-IN HARIAN
+    // Fungsi: fallback kalau localStorage hilang (clear cache)
+    // ============================================
     window.dbOnValue(window.dbRef(db, 'checkinHarian'), (snapshot) => {
         const dataCheckin = snapshot.val() || {};
         const akunSaya = sanitizeNama(getAkunAktif());
@@ -883,11 +894,11 @@
         const hariIni = getTanggalKey();
 
         if (checkinSaya && checkinSaya.tanggalKey === hariIni) {
-            // ✅ Sudah check-in hari ini → set localStorage
+            // ✅ Sudah check-in hari ini → set flag di localStorage
             localStorage.setItem('ufo_checkin_hari_ini', 'true');
             localStorage.setItem('ufo_checkin_tanggal', hariIni);
         } else {
-            // ❌ Belum check-in → hapus flag
+            // ❌ Belum check-in hari ini → hapus flag
             localStorage.removeItem('ufo_checkin_hari_ini');
             localStorage.removeItem('ufo_checkin_tanggal');
         }
