@@ -38,106 +38,201 @@
       window.dispatchEvent(new Event('firebase-ready'));
     </script>
 
-    <style>
-    /* Hapus atau timpa semua variabel root lama untuk dark mode */
+<style>
+    /* ====== VARIABEL WARNA (LIGHT MODE) ====== */
     :root {
         --bg-color: #f8fafc;
         --card-bg: #ffffff;
         --text-main: #0f172a;
         --text-muted: #64748b;
         --border: #e2e8f0;
-        /* Warna dasar lainnya tetap... */
         --primary: #0f172a;
-        --success: #059669;
+        --closing-red: #dc2626;
+        --amber-rest: #d97706;
     }
 
-    /* =====================================================
-       PERUBAHAN TOTAL UNTUK DARK MODE - GAYA NEON MERAH
-       ===================================================== */
+    /* ====== GAYA DASAR BODY ====== */
+    body {
+        background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+        background-size: cover;
+        color: var(--text-main);
+        margin: 0;
+        padding: 16px;
+        display: flex;
+        justify-content: center;
+        min-height: 100vh;
+        font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+
+    /* ====== CSS DARK MODE NEON MERAH (LENGKAP) ====== */
     body.dark-mode {
-        background: #000000 !important; /* Hitam total untuk background body */
+        background: #000000 !important; /* Hitam total */
         --bg-color: #000000 !important;
+        --card-bg: #000000 !important;
         --text-main: #ffffff !important;
         --text-muted: #ff8585 !important;
+        --border: #ff1f3d !important; /* Neon Merah */
     }
 
-    /* Container Utama - Border Neon Merah Tebal */
+    /* Kontainer Utama */
+    .app-container {
+        width: 100%;
+        max-width: 500px;
+        background: var(--card-bg);
+        border-radius: 20px;
+        padding: 24px;
+        border: 1px solid var(--border);
+        box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        box-sizing: border-box;
+        margin: auto;
+    }
+
     body.dark-mode .app-container {
-        background: #000000 !important; /* Hitam pekat */
-        border: 3px solid #ff1f3d !important; /* Border Neon Merah Tebal */
-        box-shadow: 0 0 30px rgba(255, 31, 61, 0.7) !important; /* Glow Tebal */
-        border-radius: 20px !important;
-    }
-
-    /* Header */
-    body.dark-mode .gradient-header {
-        background: linear-gradient(135deg, #1a0004 0%, #000000 100%) !important; /* Gradient gelap kemerahan */
+        background: #000000 !important;
         border: 2px solid #ff1f3d !important;
-        box-shadow: 0 0 15px rgba(255, 31, 61, 0.5) !important;
+        box-shadow: 0 0 30px rgba(255, 31, 61, 0.5) !important;
     }
 
-    /* Badge Status - Border Neon */
-    body.dark-mode .status-badge-sistem {
-        background: #000000 !important;
-        border: 1.5px solid #ff1f3d !important;
-        color: #ffffff !important;
-        box-shadow: 0 0 10px rgba(255, 31, 61, 0.4);
+    /* Tombol Mode Gelap */
+    .dark-mode-btn {
+        background: #0f172a;
+        color: #ffffff;
+        border: 1px solid #334155;
+        font-weight: 700;
+        border-radius: 10px;
+        padding: 8px 14px;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        margin-bottom: 16px;
     }
 
-    /* Semua Kotak Input, Select, User Badge, Card Timer, Item List */
-    body.dark-mode select, 
-    body.dark-mode input[type="text"],
-    body.dark-mode .user-badge,
-    body.dark-mode .timer-card-admin,
-    body.dark-mode .list-antrian li,
-    body.dark-mode .aktivitas-header-toggle,
-    body.dark-mode .aktivitas-title,
-    body.dark-mode .aktivitas-list li,
-    body.dark-mode .modal-box {
-        background: #000000 !important; /* Hitam pekat */
-        border: 1.5px solid #ff1f3d !important; /* Border Neon Merah */
-        color: #ffffff !important;
-        box-shadow: none !important; /* Hilangkan shadow agar border lebih tajam */
-    }
-
-    /* Tombol Utama */
-    body.dark-mode button {
-        border: 1.5px solid #ff1f3d !important;
-        box-shadow: 0 0 10px rgba(255, 31, 61, 0.5) !important;
-        color: white !important;
-        background: #000000 !important;
-        text-shadow: none !important;
-    }
-    body.dark-mode button:hover {
-        background: #ff1f3d !important; /* Hover jadi merah solid */
-        color: black !important;
-    }
-
-    /* Tombol Gelap di Atas */
     body.dark-mode .dark-mode-btn {
-        background: #000000 !important;
+        background: #140205 !important;
         border: 1.5px solid #ff1f3d !important;
         color: #ffffff !important;
         box-shadow: 0 0 10px rgba(255, 31, 61, 0.3);
     }
 
-    /* Item List yang "Saya Sendiri" */
-    body.dark-mode .list-antrian li.saya-sendiri {
-        border: 2px solid #ff788c !important; /* Lebih terang */
-        background: #1a0004 !important; /* Sedikit merah */
+    /* Header Gradient */
+    .gradient-header {
+        background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+        border-radius: 14px;
+        padding: 20px;
+        color: white;
+        margin-bottom: 18px;
+        border: 1px solid #334155;
     }
 
-    /* Hilangkan panah select default */
-    body.dark-mode select {
-        background-image: none !important;
+    body.dark-mode .gradient-header {
+        background: linear-gradient(135deg, #1a0004 0%, #000000 100%) !important;
+        border: 1.5px solid #ff1f3d !important;
+        box-shadow: 0 0 15px rgba(255, 31, 61, 0.4) !important;
     }
 
-    /* Atur ulang warna teks di dalam badge status di list */
-    body.dark-mode .badge-status-item {
-        color: #000000 !important; /* Teks di dalam badge jadi hitam agar kontras */
-        text-shadow: none !important;
+    .gradient-header h2 { margin: 0; font-size: 20px; font-weight: 800; }
+    .gradient-header p { margin: 6px 0 0 0; font-size: 13px; color: #94a3b8; }
+    body.dark-mode .gradient-header h2, 
+    body.dark-mode .gradient-header p { color: #ffffff !important; }
+
+    /* Status Badge */
+    .status-badge-sistem {
+        display: inline-block;
+        padding: 6px 14px;
+        border-radius: 20px;
+        font-size: 11px;
+        font-weight: 800;
+        text-transform: uppercase;
+        margin-bottom: 16px;
     }
-    /* ===================================================== */
+    .status-open { background: #dcfce7; color: #166534; border: 1px solid #bbf7d0; }
+    
+    body.dark-mode .status-badge-sistem {
+        background: #140205 !important;
+        border: 1.5px solid #ff1f3d !important;
+        color: #ffffff !important;
+        box-shadow: 0 0 10px rgba(255, 31, 61, 0.3);
+    }
+
+    /* Grup Input & Select */
+    .input-group { margin-bottom: 16px; text-align: left; }
+    .input-group label { display: block; font-size: 11px; font-weight: 700; color: var(--text-muted); text-transform: uppercase; margin-bottom: 6px; }
+
+    select, input[type="text"] {
+        width: 100%; padding: 12px 14px; border-radius: 12px;
+        border: 1px solid var(--border); background: #f8fafc;
+        font-size: 14px; color: var(--text-main); outline: none;
+        box-sizing: border-box;
+    }
+
+    body.dark-mode select, 
+    body.dark-mode input[type="text"] {
+        background: #140205 !important;
+        border: 1.5px solid #ff1f3d !important;
+        color: #ffffff !important;
+    }
+
+    /* User Badge */
+    .user-badge {
+        background: #f8fafc; border: 1px solid var(--border);
+        border-radius: 12px; padding: 12px 14px; margin-bottom: 16px;
+        text-align: left; font-size: 13px; font-weight: 600;
+    }
+    body.dark-mode .user-badge { background: #140205 !important; border: 1.5px solid #ff1f3d !important; color: #ffffff !important; }
+
+    /* Timer Section */
+    .timer-box-wrapper { display: flex; flex-direction: column; gap: 12px; margin-bottom: 18px; }
+    .timer-card-admin { background: #f8fafc; border-radius: 14px; padding: 14px; text-align: center; border: 1px solid var(--border); }
+    body.dark-mode .timer-card-admin { background: #140205 !important; border: 1.5px solid #ff1f3d !important; }
+    
+    .timer-badge-title { font-size: 12px; font-weight: 800; text-transform: uppercase; display: block; color: var(--text-muted); }
+    body.dark-mode .timer-badge-title { color: #ff8585 !important; }
+
+    .promotor-nama-aktif { font-size: 19px; font-weight: 800; margin-top: 4px; }
+    body.dark-mode .promotor-nama-aktif { color: #ffffff !important; }
+
+    /* Tombol Umum */
+    button {
+        width: 100%; padding: 12px 14px; border-radius: 12px;
+        font-size: 12px; font-weight: 700; cursor: pointer; border: none;
+        text-transform: uppercase; transition: all 0.2s ease;
+    }
+    .btn-customer { background: #0f172a; color: white; }
+    
+    body.dark-mode button {
+        background: #140205 !important;
+        border: 1.5px solid #ff1f3d !important;
+        color: #ffffff !important;
+        box-shadow: 0 0 10px rgba(255, 31, 61, 0.3);
+    }
+    body.dark-mode button:hover { background: #ff1f3d !important; color: black !important; }
+
+    /* List Antrian */
+    .list-antrian { list-style: none; padding: 0; margin: 6px 0 0 0; text-align: left; }
+    .list-antrian li {
+        padding: 10px 14px; background: #f8fafc; border-radius: 10px; margin-bottom: 6px;
+        display: flex; justify-content: space-between; align-items: center;
+        border: 1px solid var(--border); font-size: 14px; font-weight: 700;
+    }
+    
+    body.dark-mode .list-antrian li { background: #140205 !important; border: 1.5px solid #ff1f3d !important; color: #ffffff !important; }
+    
+    .badge-status-item { font-size: 11px; font-weight: 800; padding: 4px 10px; border-radius: 6px; white-space: nowrap; }
+    .badge-giliran-anda { background: #dc2626 !important; color: #ffffff !important; }
+    .badge-standby { background: #eab308 !important; color: #ffffff !important; }
+
+    /* Aktivitas Harian Toggle */
+    .aktivitas-section { margin-top: 20px; text-align: left; }
+    .aktivitas-header-toggle {
+        display: flex; justify-content: space-between; align-items: center;
+        cursor: pointer; padding: 12px 14px; border-radius: 12px;
+        background: linear-gradient(135deg, #0f172a, #1e293b); color: #ffffff;
+    }
+    body.dark-mode .aktivitas-header-toggle {
+        background: #140205 !important;
+        border: 1.5px solid #ff1f3d !important;
+        color: #ffffff !important;
+    }
 </style>
 </head>
 <body>
