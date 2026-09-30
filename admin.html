@@ -1287,50 +1287,76 @@ if (listAutokick.length > 0) {
             }
         }
 
-        function bukaModalLockPromotorAdmin() {
-            if (masterSalesGlobal.length === 0) { tampilkanModal("Info", "Belum ada promotor di Master Sales."); return; }
-            let options = '<option value="">-- Pilih Promotor --</option>';
-            masterSalesGlobal.forEach(n => {
-                const lockIcon = n.locked ? " 🔒" : "";
-                options += `<option value="${n.nama}">${n.nama}${lockIcon}</option>`;
-            });
+    function bukaModalLockPromotorAdmin() {
+    if (masterSalesGlobal.length === 0) { tampilkanModal("Info", "Belum ada promotor di Master Sales."); return; }
+    let options = '<option value="">-- Pilih Promotor --</option>';
+    masterSalesGlobal.forEach(n => {
+        const lockIcon = n.locked ? " 🔒" : "";
+        options += `<option value="${n.nama}">${n.nama}${lockIcon}</option>`;
+    });
 
-            document.getElementById('modal-title').innerText = "Kontrol Hukuman / Lock Akun";
-            document.getElementById('modal-desc').innerHTML = `
-                Pilih Promotor:<br>
-                <select id="admin-select-sales-lock" style="margin-bottom:12px;">${options}</select>
-                Aksi:<br>
-                <select id="admin-select-status-lock" style="margin-bottom:12px;" onchange="toggleAlasanLockField(this.value)">
-                    <option value="LOCK">🔒 Kunci Akun (Beri Hukuman)</option>
-                    <option value="UNLOCK">🔓 Buka Akun (Lepas Hukuman)</option>
-                </select>
-                <div id="wrapper-alasan-hukuman">
-                    Alasan:<br>
-                    <select id="admin-select-alasan" style="margin-bottom:12px;">
-                        <option value="Pulang tanpa keluar antrian">Pulang tanpa keluar antrian</option>
-                        <option value="Istirahat tanpa keluar antrian">Istirahat tanpa keluar antrian</option>
-                        <option value="Melayani tapi tidak menekan tombol">Melayani tapi tidak menekan tombol</option>
-                        <option value="Pelanggaran lain">Pelanggaran lain</option>
-                    </select>
-                    Durasi (Menit):<br>
-                    <input type="number" id="admin-input-durasi-menit" value="15" min="1" max="1440">
-                </div>
-            `;
-            document.getElementById('modal-actions').innerHTML = `
-                <button type="button" class="btn-cancel" onclick="tutupModal()">Batal</button>
-                <button type="button" id="btn-modal-action-ok" onclick="eksekusiLockPromotorAdmin()">Proses</button>
-            `;
-            document.getElementById('custom-modal').classList.add('active');
-        }
-        function toggleAlasanLockField(nilai) {
-            const wrapper = document.getElementById('wrapper-alasan-hukuman');
-            if (wrapper) wrapper.style.display = (nilai === "UNLOCK") ? "none" : "block";
-        }
-      async function eksekusiLockPromotorAdmin() {
+    // Set default tanggal = hari ini, jam = sekarang
+    const now = new Date();
+    const tglDefault = now.toISOString().split('T')[0];
+    const jamDefault = String(now.getHours()).padStart(2, '0') + ':' + String(now.getMinutes()).padStart(2, '0');
+
+    document.getElementById('modal-title').innerText = "Kontrol Hukuman / Lock Akun";
+    document.getElementById('modal-desc').innerHTML = `
+        Pilih Promotor:<br>
+        <select id="admin-select-sales-lock" style="margin-bottom:12px;">${options}</select>
+        
+        Aksi:<br>
+        <select id="admin-select-status-lock" style="margin-bottom:12px;" onchange="toggleAlasanLockField(this.value)">
+            <option value="LOCK">🔒 Kunci Akun (Beri Hukuman)</option>
+            <option value="UNLOCK">🔓 Buka Akun (Lepas Hukuman)</option>
+        </select>
+        
+        <div id="wrapper-alasan-hukuman">
+            Alasan:<br>
+            <select id="admin-select-alasan" style="margin-bottom:12px;">
+                <option value="Pulang tanpa keluar antrian">Pulang tanpa keluar antrian</option>
+                <option value="Istirahat tanpa keluar antrian">Istirahat tanpa keluar antrian</option>
+                <option value="Melayani tapi tidak menekan tombol">Melayani tapi tidak menekan tombol</option>
+                <option value="Pelanggaran lain">Pelanggaran lain</option>
+            </select>
+            
+            <!-- ✅ WAKTU MULAI LOCK -->
+            <label style="font-size:11px; font-weight:700;">Waktu Mulai Hukuman:</label><br>
+            <select id="admin-select-waktu-mulai" style="margin-bottom:10px;" onchange="toggleJadwalField(this.value)">
+                <option value="SEKARANG">🔒 Lock Sekarang</option>
+                <option value="TERJADWAL">⏰ Lock Terjadwal</option>
+            </select>
+            
+            <!-- Field jadwal (muncul kalau pilih TERJADWAL) -->
+            <div id="wrapper-jadwal" style="display:none;">
+                Tanggal Mulai:<br>
+                <input type="date" id="admin-input-tgl-mulai" value="${tglDefault}" style="margin-bottom:8px;">
+                Jam Mulai:<br>
+                <input type="time" id="admin-input-jam-mulai" value="${jamDefault}" style="margin-bottom:8px;">
+            </div>
+            
+            Durasi Hukuman (Menit):<br>
+            <input type="number" id="admin-input-durasi-menit" value="60" min="1" max="10080">
+            <div style="font-size:10px; color:#94a3b8; margin-top:4px;">Contoh: 60 = 1 jam, 1440 = 24 jam, 10080 = 7 hari</div>
+        </div>
+    `;
+    document.getElementById('modal-actions').innerHTML = `
+        <button type="button" class="btn-cancel" onclick="tutupModal()">Batal</button>
+        <button type="button" id="btn-modal-action-ok" onclick="eksekusiLockPromotorAdmin()">Proses</button>
+    `;
+    document.getElementById('custom-modal').classList.add('active');
+}
+
+function toggleJadwalField(nilai) {
+    const wrapper = document.getElementById('wrapper-jadwal');
+    if (wrapper) wrapper.style.display = (nilai === "TERJADWAL") ? "block" : "none";
+}
+     async function eksekusiLockPromotorAdmin() {
     const nama = document.getElementById('admin-select-sales-lock').value;
     const aksi = document.getElementById('admin-select-status-lock').value;
     const alasan = document.getElementById('admin-select-alasan') ? document.getElementById('admin-select-alasan').value : "";
-    const durasi = document.getElementById('admin-input-durasi-menit') ? parseInt(document.getElementById('admin-input-durasi-menit').value) || 15 : 15;
+    const durasi = document.getElementById('admin-input-durasi-menit') ? parseInt(document.getElementById('admin-input-durasi-menit').value) || 60 : 60;
+    const waktuMulai = document.getElementById('admin-select-waktu-mulai') ? document.getElementById('admin-select-waktu-mulai').value : "SEKARANG";
 
     if (!nama) { alert("Pilih promotor!"); return; }
     const clean = sanitizeNama(nama);
@@ -1341,38 +1367,77 @@ if (listAutokick.length > 0) {
 
     try {
         if (aksi === "LOCK") {
-            const waktuSelesai = Date.now() + (durasi * 60 * 1000);
-            
-            // 1. Simpan status lock
+            // Tentukan waktu mulai
+            let timestampMulai = Date.now(); // default sekarang
+
+            if (waktuMulai === "TERJADWAL") {
+                const tgl = document.getElementById('admin-input-tgl-mulai').value;
+                const jam = document.getElementById('admin-input-jam-mulai').value;
+                
+                if (!tgl || !jam) {
+                    btn.disabled = false;
+                    btn.innerHTML = "Proses";
+                    alert("Isi tanggal & jam mulai hukuman!");
+                    return;
+                }
+
+                // Buat Date dari input (format: YYYY-MM-DD + HH:MM)
+                const dateObj = new Date(`${tgl}T${jam}:00`);
+                timestampMulai = dateObj.getTime();
+
+                if (timestampMulai < Date.now()) {
+                    btn.disabled = false;
+                    btn.innerHTML = "Proses";
+                    alert("Waktu mulai tidak boleh di masa lalu!");
+                    return;
+                }
+            }
+
+            const waktuSelesai = timestampMulai + (durasi * 60 * 1000);
+
+            // 1. Simpan lock dengan waktu mulai & selesai
             await window.dbUpdate(window.dbRef(window.db, 'lockPromotor/' + clean), {
                 nama: nama,
                 locked: true,
                 alasan: alasan,
-                waktuSelesaiLock: waktuSelesai
+                waktuMulaiLock: timestampMulai,        // ✅ waktu mulai lock
+                waktuSelesaiLock: waktuSelesai,        // ✅ waktu lock berakhir
+                waktuDibuat: Date.now(),               // ✅ kapan admin buat
+                modeTerjadwal: waktuMulai === "TERJADWAL"  // ✅ flag terjadwal
             });
-            
-            // 2. Hapus dari antrian kalau ada
-            await window.dbRemove(window.dbRef(window.db, 'antrian/' + clean));
-            
-            // 3. ✅ CATAT KE STATISTIK (AUTOKICK)
+
+            // 2. Kalau lock sekarang → hapus dari antrian
+            if (waktuMulai === "SEKARANG") {
+                await window.dbRemove(window.dbRef(window.db, 'antrian/' + clean));
+            }
+
+            // 3. Catat ke Autokick
+            const teksWaktu = waktuMulai === "SEKARANG" 
+                ? `Dikunci Sekarang (${durasi} menit)`
+                : `Dikunci Terjadwal: ${new Date(timestampMulai).toLocaleString('id-ID')} (${durasi} menit)`;
+
             await window.dbPush(window.dbRef(window.db, 'statistikAktivitas'), {
                 nama: nama,
                 aksi: "Autokick",
                 waktu: Date.now(),
                 tanggal: getTanggalIndo(),
-                hasil: `Dikunci Admin (${durasi} menit)`,
+                hasil: teksWaktu,
                 kategori: "Lock Hukuman",
                 sumber: "Admin",
                 alasan: alasan,
                 durasi: durasi
             });
-            
+
             tutupModal();
-            tampilkanModal("Berhasil", `${nama} dikunci ${durasi} menit.\nAktivitas dicatat di Autokick.`);
+            tampilkanModal("Berhasil", 
+                waktuMulai === "SEKARANG"
+                    ? `${nama} dikunci SEKARANG (${durasi} menit).`
+                    : `${nama} akan dikunci pada ${new Date(timestampMulai).toLocaleString('id-ID')} selama ${durasi} menit.`
+            );
         } else {
             // Unlock
             await window.dbUpdate(window.dbRef(window.db, 'lockPromotor/' + clean), {
-                locked: false, alasan: "", waktuSelesaiLock: 0
+                locked: false, alasan: "", waktuSelesaiLock: 0, waktuMulaiLock: 0
             });
             tutupModal();
             tampilkanModal("Berhasil", `${nama} dibuka.`);
@@ -1383,7 +1448,6 @@ if (listAutokick.length > 0) {
         tampilkanModal("Gagal", "Tidak bisa memproses.");
     }
 }
-
         
         function bukaModalResetTotal() {
             document.getElementById('modal-title').innerText = 'Reset Semua Antrian & Log';
