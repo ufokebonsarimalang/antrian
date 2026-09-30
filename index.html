@@ -807,24 +807,93 @@
             }, 150);
         }
 
-        function inisialisasiRealtimeFirebase() {
-            const db = window.db;
+       function inisialisasiRealtimeFirebase() {
+    const db = window.db;
 
-            window.dbOnValue(window.dbRef(db, 'antrian'), (snapshot) => {
-                const dataRaw = snapshot.val();
-                daftarAntrianGlobal = [];
-                if (dataRaw) {
-                    Object.keys(dataRaw).forEach(k => {
-                        const item = dataRaw[k];
-                        if (item && item.nama) {
-                            item._key = k;
-                            daftarAntrianGlobal.push(item);
-                        }
-                    });
+    // Listener 1: antrian (sudah ada)
+    window.dbOnValue(window.dbRef(db, 'antrian'), (snapshot) => {
+        const dataRaw = snapshot.val();
+        daftarAntrianGlobal = [];
+        if (dataRaw) {
+            Object.keys(dataRaw).forEach(k => {
+                const item = dataRaw[k];
+                if (item && item.nama) {
+                    item._key = k;
+                    daftarAntrianGlobal.push(item);
                 }
-                renderUI();
-                renderAktivitas();
             });
+        }
+        renderUI();
+        renderAktivitas();
+    });
+
+    // Listener 2: mastersales (sudah ada)
+    const pathUtama = 'mastersales';
+    window.dbOnValue(window.dbRef(db, pathUtama), (snapshot) => {
+        const dataRaw = snapshot.val();
+        if (dataRaw) {
+            prosesMasterSales(dataRaw);
+            masterSalesLoaded = true;
+        } else if (!masterSalesLoaded) {
+            window.dbOnValue(window.dbRef(db, 'data'), (snap2) => {
+                const d2 = snap2.val();
+                if (d2 && !masterSalesLoaded) {
+                    prosesMasterSales(d2);
+                    masterSalesLoaded = true;
+                }
+            });
+        }
+    });
+
+    // Listener 3: setting (sudah ada)
+    window.dbOnValue(window.dbRef(db, 'setting'), (snapshot) => {
+        const setting = snapshot.val();
+        if (setting) {
+            statusSistemGlobal = setting.statusAntrian || "BUKA";
+            koordinatToko.lat = setting.latToko ? Number(setting.latToko) : null;
+            koordinatToko.lng = setting.lngToko ? Number(setting.lngToko) : null;
+            koordinatToko.radius = Number(setting.radiusToko) || 50;
+        }
+        renderUI();
+    });
+
+    // Listener 4: statistikAktivitas (sudah ada)
+    window.dbOnValue(window.dbRef(db, 'statistikAktivitas'), (snapshot) => {
+        const dataRaw = snapshot.val();
+        aktivitasGlobal = [];
+        if (dataRaw) {
+            Object.keys(dataRaw).forEach(k => {
+                const item = dataRaw[k];
+                if (item && item.nama) {
+                    item._key = k;
+                    aktivitasGlobal.push(item);
+                }
+            });
+        }
+        renderAktivitas();
+    });
+
+    // ✅ LISTENER BARU: checkinHarian (untuk fallback kalau cache hilang)
+    window.dbOnValue(window.dbRef(db, 'checkinHarian'), (snapshot) => {
+        const dataCheckin = snapshot.val() || {};
+        const akunSaya = sanitizeNama(getAkunAktif());
+        if (!akunSaya) return;
+
+        const checkinSaya = dataCheckin[akunSaya];
+        const hariIni = getTanggalKey();
+
+        if (checkinSaya && checkinSaya.tanggalKey === hariIni) {
+            // ✅ Sudah check-in hari ini → set localStorage
+            localStorage.setItem('ufo_checkin_hari_ini', 'true');
+            localStorage.setItem('ufo_checkin_tanggal', hariIni);
+        } else {
+            // ❌ Belum check-in → hapus flag
+            localStorage.removeItem('ufo_checkin_hari_ini');
+            localStorage.removeItem('ufo_checkin_tanggal');
+        }
+        renderUI();
+    });
+}
 
             const pathUtama = 'mastersales';
             window.dbOnValue(window.dbRef(db, pathUtama), (snapshot) => {
@@ -1015,14 +1084,22 @@
             const nama = getAkunAktif();
             const clean = sanitizeNama(nama);
 
-            window.dbSet(window.dbRef(window.db, 'antrian/' + clean), {
-                nama: nama, status: "Standby", waktuStandby: Date.now(), kategori: kat, subkategori: kat, timerMulai: 0, timerAksi: "", posisiTerkunci: 0
-            }).then(() => {
-                localStorage.setItem('ufo_checkin_hari_ini', 'true');
-                localStorage.setItem('ufo_checkin_tanggal', getTanggalKey());
-                catatAktivitas(nama, "CheckIn", kat);
-                renderUI();
-            });
+           window.dbSet(window.dbRef(window.db, 'antrian/' + clean), {
+    nama: nama, status: "Standby", waktuStandby: Date.now(), kategori: kat, subkategori: kat, timerMulai: 0, timerAksi: "", posisiTerkunci: 0
+}).then(() => {
+    // ✅ Simpan ke Firebase biar tahan cache
+    window.dbSet(window.dbRef(window.db, 'checkinHarian/' + clean), {
+        nama: nama,
+        tanggal: getTanggalIndo(),
+        tanggalKey: getTanggalKey(),
+        waktu: Date.now()
+    });
+    // Simpan juga di localStorage sebagai fallback
+    localStorage.setItem('ufo_checkin_hari_ini', 'true');
+    localStorage.setItem('ufo_checkin_tanggal', getTanggalKey());
+    catatAktivitas(nama, "CheckIn", kat);
+    renderUI();
+});
         }
 
         function aksiDaftarAntrianNormal() {
@@ -1031,9 +1108,20 @@
             const nama = getAkunAktif();
             const clean = sanitizeNama(nama);
 
-            window.dbSet(window.dbRef(window.db, 'antrian/' + clean), {
-                nama: nama, status: "Standby", waktuStandby: Date.now(), kategori: kat, subkategori: kat, timerMulai: 0, timerAksi: "", posisiTerkunci: 0
-            }).then(() => catatAktivitas(nama, "DaftarAntrian", kat));
+          window.dbSet(window.dbRef(window.db, 'antrian/' + clean), {
+    nama: nama, status: "Standby", waktuStandby: Date.now(), kategori: kat, subkategori: kat, timerMulai: 0, timerAksi: "", posisiTerkunci: 0
+}).then(() => {
+    // ✅ Simpan ke Firebase juga
+    window.dbSet(window.dbRef(window.db, 'checkinHarian/' + clean), {
+        nama: nama,
+        tanggal: getTanggalIndo(),
+        tanggalKey: getTanggalKey(),
+        waktu: Date.now()
+    });
+    localStorage.setItem('ufo_checkin_hari_ini', 'true');
+    localStorage.setItem('ufo_checkin_tanggal', getTanggalKey());
+    catatAktivitas(nama, "DaftarAntrian", kat);
+});
         }
 
         function aksiUtamaCustomer() {
