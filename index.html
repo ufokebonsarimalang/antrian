@@ -971,18 +971,42 @@ window.dbOnValue(window.dbRef(db, 'lockPromotor'), (snapshot) => {
             return namaSalesAktifGlobal;
         }
 
-        function simpanAkunHP() {
-            const namaPilih = document.getElementById('pilih-sales').value;
-            if(!namaPilih) { tampilkanModal("Perhatian", "Silakan pilih nama Anda!"); return; }
+       function simpanAkunHP() {
+    const namaPilih = document.getElementById('pilih-sales').value;
+    if(!namaPilih) { tampilkanModal("Perhatian", "Silakan pilih nama Anda!"); return; }
 
-            namaSalesAktifGlobal = namaPilih;
-            localStorage.setItem('ufo_nama_sales_aktif', namaPilih);
-            document.getElementById('panel-login').style.display = 'none';
-            document.getElementById('panel-menu-utama').style.display = 'block';
-            document.getElementById('label-user-aktif').innerText = namaPilih;
-            renderUI();
-            renderAktivitas();
+    const clean = sanitizeNama(namaPilih);
+
+    // ✅ CEK LOCK SEBELUM SIMPAN
+    window.dbGet(window.dbRef(window.db, 'lockPromotor/' + clean)).then(snap => {
+        if (snap.exists()) {
+            const lockData = snap.val();
+            if (lockData && lockData.locked) {
+                const waktuExpired = Number(lockData.waktuSelesaiLock) || 0;
+                if (waktuExpired === 0 || Date.now() < waktuExpired) {
+                    let sisaTeks = "tanpa batas waktu";
+                    if (waktuExpired > 0) {
+                        const sisaMenit = Math.ceil((waktuExpired - Date.now()) / 60000);
+                        sisaTeks = `${sisaMenit} menit lagi`;
+                    }
+                    tampilkanModal("🔒 Akun Dikunci", 
+                        `Nama "${namaPilih}" sedang DIKUNCI.\n\nAlasan: ${lockData.alasan || "-"}\nSisa: ${sisaTeks}\n\nHubungi admin.`
+                    );
+                    return;
+                }
+            }
         }
+
+        // Lanjut simpan
+        namaSalesAktifGlobal = namaPilih;
+        localStorage.setItem('ufo_nama_sales_aktif', namaPilih);
+        document.getElementById('panel-login').style.display = 'none';
+        document.getElementById('panel-menu-utama').style.display = 'block';
+        document.getElementById('label-user-aktif').innerText = namaPilih;
+        renderUI();
+        renderAktivitas();
+    });
+}
 
         // ====== PETA GPS ======
         function initPetaPromotor() {
@@ -1077,38 +1101,68 @@ window.dbOnValue(window.dbRef(db, 'lockPromotor'), (snapshot) => {
             mapPromotor.fitBounds(bounds, { padding: [30, 30], maxZoom: 17 });
         }
 
-        // ====== AKSI ======
-        function aksiHadirKerja() {
-            if (statusSistemGlobal !== "BUKA") { tampilkanModal("Antrian Tutup", "Sistem antrian sedang ditutup."); return; }
+       function aksiHadirKerja() {
+    if (statusSistemGlobal !== "BUKA") { tampilkanModal("Antrian Tutup", "Sistem antrian sedang ditutup."); return; }
 
-            if (koordinatToko.lat && koordinatToko.lng) {
-                if (!posisiSaya.ok) {
-                    tampilkanModal("Di Luar Radius", "Anda harus berada di dalam radius toko untuk check-in. Silakan mendekat ke toko.");
+    const akunSaya = sanitizeNama(getAkunAktif());
+
+    // ✅ CEK LOCK DULU
+    window.dbGet(window.dbRef(window.db, 'lockPromotor/' + akunSaya)).then(snap => {
+        if (snap.exists()) {
+            const lockData = snap.val();
+            if (lockData && lockData.locked) {
+                const waktuExpired = Number(lockData.waktuSelesaiLock) || 0;
+                if (waktuExpired === 0 || Date.now() < waktuExpired) {
+                    // Catat percobaan check-in saat lock
+                    window.dbPush(window.dbRef(window.db, 'statistikAktivitas'), {
+                        nama: getAkunAktif(),
+                        aksi: "Autokick",
+                        waktu: Date.now(),
+                        tanggal: getTanggalIndo(),
+                        hasil: "Coba Check-in Saat Lock",
+                        kategori: "Lock Hukuman",
+                        sumber: "Promotor"
+                    });
+
+                    let sisaTeks = "tanpa batas waktu";
+                    if (waktuExpired > 0) {
+                        const sisaMenit = Math.ceil((waktuExpired - Date.now()) / 60000);
+                        sisaTeks = `${sisaMenit} menit lagi`;
+                    }
+                    tampilkanModal("🔒 Akun Dikunci", 
+                        `Akun Anda sedang DIKUNCI.\n\nAlasan: ${lockData.alasan || "-"}\nSisa: ${sisaTeks}`
+                    );
                     return;
                 }
             }
-
-            const kat = document.getElementById('pilih-kategori-hadir').value;
-            const nama = getAkunAktif();
-            const clean = sanitizeNama(nama);
-
-           window.dbSet(window.dbRef(window.db, 'antrian/' + clean), {
-    nama: nama, status: "Standby", waktuStandby: Date.now(), kategori: kat, subkategori: kat, timerMulai: 0, timerAksi: "", posisiTerkunci: 0
-}).then(() => {
-    // ✅ Simpan ke Firebase biar tahan cache
-    window.dbSet(window.dbRef(window.db, 'checkinHarian/' + clean), {
-        nama: nama,
-        tanggal: getTanggalIndo(),
-        tanggalKey: getTanggalKey(),
-        waktu: Date.now()
-    });
-    // Simpan juga di localStorage sebagai fallback
-    localStorage.setItem('ufo_checkin_hari_ini', 'true');
-    localStorage.setItem('ufo_checkin_tanggal', getTanggalKey());
-    catatAktivitas(nama, "CheckIn", kat);
-    renderUI();
-});
         }
+
+        // Cek GPS setelah lock lolos
+        if (koordinatToko.lat && koordinatToko.lng) {
+            if (!posisiSaya.ok) {
+                tampilkanModal("Di Luar Radius", "Anda harus berada di dalam radius toko untuk check-in.");
+                return;
+            }
+        }
+
+        // Lanjut check-in
+        const kat = document.getElementById('pilih-kategori-hadir').value;
+        const nama = getAkunAktif();
+        const clean = sanitizeNama(nama);
+
+        window.dbSet(window.dbRef(window.db, 'antrian/' + clean), {
+            nama: nama, status: "Standby", waktuStandby: Date.now(), kategori: kat, subkategori: kat, timerMulai: 0, timerAksi: "", posisiTerkunci: 0
+        }).then(() => {
+            window.dbSet(window.dbRef(window.db, 'checkinHarian/' + clean), {
+                nama: nama, tanggal: getTanggalIndo(), tanggalKey: getTanggalKey(), waktu: Date.now()
+            });
+            localStorage.setItem('ufo_checkin_hari_ini', 'true');
+            localStorage.setItem('ufo_checkin_tanggal', getTanggalKey());
+            catatAktivitas(nama, "CheckIn", kat);
+            renderUI();
+        });
+    });
+}
 
         function aksiDaftarAntrianNormal() {
             if (statusSistemGlobal !== "BUKA") { tampilkanModal("Antrian Tutup", "Sistem antrian sedang ditutup."); return; }
