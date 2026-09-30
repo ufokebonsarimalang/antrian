@@ -904,6 +904,47 @@
         }
         renderUI();
     });
+          // ============================================
+// LISTENER 6: LOCK PROMOTOR (status hukuman)
+// ============================================
+window.dbOnValue(window.dbRef(db, 'lockPromotor'), (snapshot) => {
+    const dataLock = snapshot.val() || {};
+    const akunSaya = sanitizeNama(getAkunAktif());
+    if (!akunSaya) return;
+
+    const lockSaya = dataLock[akunSaya];
+    if (lockSaya && lockSaya.locked) {
+        const waktuExpired = Number(lockSaya.waktuSelesaiLock) || 0;
+        const masihLock = (waktuExpired === 0 || Date.now() < waktuExpired);
+        
+        if (masihLock) {
+            // Hitung sisa waktu
+            let sisaTeks = "tanpa batas waktu";
+            if (waktuExpired > 0) {
+                const sisaMs = waktuExpired - Date.now();
+                const sisaMenit = Math.ceil(sisaMs / 60000);
+                sisaTeks = `${sisaMenit} menit lagi`;
+            }
+            
+            // Keluarkan dari antrian kalau ada
+            if (daftarAntrianGlobal.find(it => sanitizeNama(it.nama) === akunSaya)) {
+                window.dbRemove(window.dbRef(window.db, 'antrian/' + akunSaya));
+            }
+            
+            // Tampilkan modal peringatan (hanya sekali)
+            const sudahDitampilkan = sessionStorage.getItem('ufo_lock_notif_' + akunSaya);
+            if (!sudahDitampilkan) {
+                tampilkanModal("🔒 Akun Dikunci", 
+                    `Akun Anda sedang DIKUNCI oleh admin.\n\n` +
+                    `Alasan: ${lockSaya.alasan || "Tidak disebutkan"}\n` +
+                    `Sisa waktu: ${sisaTeks}\n\n` +
+                    `Hubungi admin untuk info lebih lanjut.`
+                );
+                sessionStorage.setItem('ufo_lock_notif_' + akunSaya, 'true');
+            }
+        }
+    }
+});
 }
 
                 function prosesMasterSales(dataRaw) {
