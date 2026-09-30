@@ -969,28 +969,32 @@
                 html += `</div></li>`;
             }
 
-            // 5. AUTOKICK
-            if (listAutokick.length > 0) {
-                html += `<li class="stat-kategori-card">
-                    <div class="stat-kategori-header">
-                        <span class="stat-kategori-icon maroon">${ICON.AUTOKICK}</span>
-                        <b>AUTOKICK (PELANGGARAN / ADMIN)</b>
-                        <span class="stat-kategori-count">${listAutokick.length}</span>
-                    </div>
-                    <div class="stat-kategori-body">`;
-                listAutokick.forEach(a => {
-                    html += `
-                        <div class="stat-detail-row">
-                            <div class="stat-detail-left">
-                                <b class="stat-action-name">${a.nama}</b>
-                                <b class="stat-action-time">${formatJam(a.waktu)}</b>
-                            </div>
-                            <span class="stat-badge-info">${a.kategori || a.hasil || ""}</span>
-                        </div>
-                    `;
-                });
-                html += `</div></li>`;
-            }
+        // 5. AUTOKICK
+if (listAutokick.length > 0) {
+    html += `<li class="stat-kategori-card">
+        <div class="stat-kategori-header">
+            <span class="stat-kategori-icon maroon">${ICON.AUTOKICK}</span>
+            <b>AUTOKICK (PELANGGARAN / ADMIN)</b>
+            <span class="stat-kategori-count">${listAutokick.length}</span>
+        </div>
+        <div class="stat-kategori-body">`;
+    listAutokick.forEach(a => {
+        // ✅ Tampilkan alasan kalau ada, kalau tidak pakai kategori
+        const teksAlasan = a.alasan ? a.alasan : (a.kategori || a.hasil || "");
+        
+        html += `
+            <div class="stat-detail-row">
+                <div class="stat-detail-left">
+                    <b class="stat-action-name">${a.nama}</b>
+                    <span class="stat-action-label">${teksAlasan}</span>
+                    <b class="stat-action-time">${formatJam(a.waktu)}</b>
+                </div>
+                <span class="stat-badge-info">${a.sumber || ""}</span>
+            </div>
+        `;
+    });
+    html += `</div></li>`;
+}
 
             if (!html) {
                 html = `<li style="list-style:none;"><span style="color:#94a3b8; font-style:italic;">Belum ada aktivitas</span></li>`;
