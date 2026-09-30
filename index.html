@@ -44,14 +44,6 @@
             --primary: #0f172a;
             --primary-dark: #1e293b;
             --success: #059669;
-            --customer-blue: #0f172a;
-            --closing-red: #dc2626;
-            --purple-cs: #0f172a;
-            --teal-cs: #059669;
-            --amber-rest: #d97706;
-            --maroon-exit: #dc2626;
-            --indigo-ibadah: #0f172a;
-            --gold-eat: #d97706;
             --bg-color: #f8fafc;
             --card-bg: #ffffff;
             --text-main: #0f172a;
@@ -190,48 +182,11 @@
             box-shadow: 0 0 12px rgba(255, 31, 61, 0.7), inset 0 0 5px rgba(255, 31, 61, 0.4) !important;
             text-shadow: 0 0 8px rgba(255, 31, 61, 0.8);
         }
-
-        body.dark-mode .badge-giliran-anda { 
-            background: #99001f !important; 
-            color: #ffffff !important; 
-            border: 2px solid #ff1f3d !important; 
-            box-shadow: 0 0 15px rgba(255, 31, 61, 0.9), inset 0 0 6px rgba(255, 255, 255, 0.5) !important;
-            text-shadow: 0 0 10px rgba(255, 255, 255, 0.9);
-        }
-        
-        body.dark-mode .badge-standby { 
-            background: #422006 !important; 
-            color: #fef08a !important; 
-            border: 2px solid #facc15 !important; 
-            box-shadow: 0 0 15px rgba(250, 204, 21, 0.8), inset 0 0 6px rgba(250, 204, 21, 0.4) !important;
-            text-shadow: 0 0 8px rgba(250, 204, 21, 0.9);
-            font-weight: 800 !important; 
-        }
-
-        body.dark-mode .badge-melayani { 
-            background: #022c22 !important; 
-            color: #34d399 !important; 
-            border: 2px solid #059669 !important; 
-            box-shadow: 0 0 15px rgba(5, 150, 105, 0.8), inset 0 0 6px rgba(52, 211, 153, 0.4) !important;
-            text-shadow: 0 0 8px rgba(52, 211, 153, 0.9);
-        }
-
-        body.dark-mode .badge-cs, 
-        body.dark-mode .badge-ibadah { 
-            background: #3b0764 !important; 
-            color: #e9d5ff !important; 
-            border: 2px solid #a855f7 !important; 
-            box-shadow: 0 0 15px rgba(168, 85, 247, 0.8), inset 0 0 6px rgba(233, 213, 255, 0.4) !important;
-            text-shadow: 0 0 8px rgba(233, 213, 255, 0.9);
-        }
-
-        body.dark-mode .badge-makan { 
-            background: #042f2e !important; 
-            color: #5eead4 !important; 
-            border: 2px solid #0d9488 !important; 
-            box-shadow: 0 0 15px rgba(13, 148, 136, 0.8), inset 0 0 6px rgba(94, 234, 212, 0.4) !important;
-            text-shadow: 0 0 8px rgba(94, 234, 212, 0.9);
-        }
+        body.dark-mode .badge-giliran-anda { background: #99001f !important; color: #ffffff !important; border: 2px solid #ff1f3d !important; box-shadow: 0 0 15px rgba(255, 31, 61, 0.9), inset 0 0 6px rgba(255, 255, 255, 0.5) !important; text-shadow: 0 0 10px rgba(255, 255, 255, 0.9); }
+        body.dark-mode .badge-standby { background: #422006 !important; color: #fef08a !important; border: 2px solid #facc15 !important; box-shadow: 0 0 15px rgba(250, 204, 21, 0.8), inset 0 0 6px rgba(250, 204, 21, 0.4) !important; text-shadow: 0 0 8px rgba(250, 204, 21, 0.9); font-weight: 800 !important; }
+        body.dark-mode .badge-melayani { background: #022c22 !important; color: #34d399 !important; border: 2px solid #059669 !important; box-shadow: 0 0 15px rgba(5, 150, 105, 0.8), inset 0 0 6px rgba(52, 211, 153, 0.4) !important; text-shadow: 0 0 8px rgba(52, 211, 153, 0.9); }
+        body.dark-mode .badge-cs, body.dark-mode .badge-ibadah { background: #3b0764 !important; color: #e9d5ff !important; border: 2px solid #a855f7 !important; box-shadow: 0 0 15px rgba(168, 85, 247, 0.8), inset 0 0 6px rgba(233, 213, 255, 0.4) !important; text-shadow: 0 0 8px rgba(233, 213, 255, 0.9); }
+        body.dark-mode .badge-makan { background: #042f2e !important; color: #5eead4 !important; border: 2px solid #0d9488 !important; box-shadow: 0 0 15px rgba(13, 148, 136, 0.8), inset 0 0 6px rgba(94, 234, 212, 0.4) !important; text-shadow: 0 0 8px rgba(94, 234, 212, 0.9); }
 
         @keyframes goldGlow {
             0% { transform: scale(1); box-shadow: 0 0 10px rgba(245, 158, 11, 0.6), inset 0 0 6px rgba(255, 255, 255, 0.5); }
@@ -244,13 +199,6 @@
             border: 2px solid #fde68a !important;
             animation: goldGlow 1.8s infinite ease-in-out; 
         }
-
-        @keyframes pulseGlow {
-            0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(15, 23, 42, 0.2); }
-            70% { transform: scale(1.01); box-shadow: 0 0 0 6px rgba(15, 23, 42, 0); }
-            100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(15, 23, 42, 0); }
-        }
-        .btn-pulse { animation: pulseGlow 2s infinite; }
 
         button { width: 100%; padding: 12px 14px; border-radius: 12px; font-size: 12px; font-weight: 700; cursor: pointer; border: none; text-transform: uppercase; transition: all 0.2s ease; display: inline-flex; justify-content: center; align-items: center; gap: 8px; letter-spacing: 0.3px; box-shadow: 0 2px 4px rgba(0,0,0,0.04); }
         button:active { transform: scale(0.98); }
@@ -291,12 +239,7 @@
         .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(15, 23, 42, 0.6); backdrop-filter: blur(4px); display: flex; justify-content: center; align-items: center; z-index: 9999; opacity: 0; visibility: hidden; transition: all 0.2s; padding: 16px; }
         .modal-overlay.active { opacity: 1; visibility: visible; }
         .modal-box { background: white; width: 100%; max-width: 380px; padding: 22px; border-radius: 16px; text-align: center; border: 1px solid var(--border); box-shadow: 0 10px 25px rgba(0,0,0,0.1); }
-        body.dark-mode .modal-box { 
-            background: #090204 !important; 
-            border: 2px solid #ff1f3d !important; 
-            color: #ffffff !important; 
-            box-shadow: 0 0 35px rgba(255, 31, 61, 0.8) !important;
-        }
+        body.dark-mode .modal-box { background: #090204 !important; border: 2px solid #ff1f3d !important; color: #ffffff !important; box-shadow: 0 0 35px rgba(255, 31, 61, 0.8) !important; }
         .modal-title { font-size: 16px; font-weight: 800; margin-bottom: 8px; color: var(--text-main); }
         body.dark-mode .modal-title { color: #ffffff !important; }
         .modal-desc { font-size: 13px; color: var(--text-muted); margin-bottom: 18px; line-height: 1.4; font-weight: 600; text-align: left; }
@@ -305,50 +248,17 @@
         .modal-actions button { flex: 1; padding: 10px; font-size: 12px; }
 
         .aktivitas-section { margin-top: 20px; text-align: left; }
-        .aktivitas-title {
-            font-size: 12px; font-weight: 800; text-transform: uppercase;
-            padding: 10px 12px; border-radius: 8px; color: white;
-            display: flex; justify-content: space-between; align-items: center;
-            margin-bottom: 6px; letter-spacing: 0.5px;
-            gap: 8px;
-        }
+        .aktivitas-title { font-size: 12px; font-weight: 800; text-transform: uppercase; padding: 10px 12px; border-radius: 8px; color: white; display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; letter-spacing: 0.5px; gap: 8px; }
         .aktivitas-title .count { font-size: 10px; background: rgba(255,255,255,0.25); padding: 2px 8px; border-radius: 10px; }
+        .aktivitas-title .judul-kategori { display: flex; align-items: center; gap: 8px; flex: 1; }
+        .aktivitas-icon { width: 22px; height: 22px; display: inline-flex; align-items: center; justify-content: center; border-radius: 6px; flex-shrink: 0; background: rgba(255,255,255,0.2); }
+        .aktivitas-icon svg { width: 13px; height: 13px; stroke: currentColor; stroke-width: 2.4; fill: none; stroke-linecap: round; stroke-linejoin: round; }
 
-        .aktivitas-title .judul-kategori {
-            display: flex; align-items: center; gap: 8px; flex: 1;
-        }
-        .aktivitas-icon {
-            width: 22px; height: 22px;
-            display: inline-flex; align-items: center; justify-content: center;
-            border-radius: 6px; flex-shrink: 0;
-            background: rgba(255,255,255,0.2);
-        }
-        .aktivitas-icon svg {
-            width: 13px; height: 13px;
-            stroke: currentColor; stroke-width: 2.4; fill: none;
-            stroke-linecap: round; stroke-linejoin: round;
-        }
-
-        .t-bawa-customer,
-        .t-ibadah,
-        .t-makan,
-        .t-keluar,
-        .t-autokick {
-            background: linear-gradient(135deg, #0f172a, #1e293b);
-        }
+        .t-bawa-customer, .t-ibadah, .t-makan, .t-keluar, .t-autokick { background: linear-gradient(135deg, #0f172a, #1e293b); }
 
         .aktivitas-list { list-style: none; padding: 0; margin: 0 0 6px 0; }
-        .aktivitas-list li {
-            background: #f8fafc; border: 1px solid var(--border); border-radius: 10px;
-            padding: 8px 12px; margin-bottom: 5px; font-size: 12px; font-weight: 600;
-            display: flex; justify-content: space-between; align-items: center; gap: 8px;
-        }
-        body.dark-mode .aktivitas-list li { 
-            background: #2b0007; 
-            border: 2px solid #ff1f3d;
-            box-shadow: 0 0 15px rgba(255, 31, 61, 0.4);
-            color: #ffffff;
-        }
+        .aktivitas-list li { background: #f8fafc; border: 1px solid var(--border); border-radius: 10px; padding: 8px 12px; margin-bottom: 5px; font-size: 12px; font-weight: 600; display: flex; justify-content: space-between; align-items: center; gap: 8px; }
+        body.dark-mode .aktivitas-list li { background: #2b0007; border: 2px solid #ff1f3d; box-shadow: 0 0 15px rgba(255, 31, 61, 0.4); color: #ffffff; }
         .aktivitas-list li .nama { flex: 1; font-weight: 800; color: var(--text-main); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
         body.dark-mode .aktivitas-list li .nama { color: #ffffff; }
         .aktivitas-list li .waktu { font-size: 11px; color: var(--text-muted); font-weight: 700; font-variant-numeric: tabular-nums; white-space: nowrap; }
@@ -359,170 +269,37 @@
         .check-deal { display: inline-flex; align-items: center; justify-content: center; margin-left: 6px; flex-shrink: 0; vertical-align: middle; }
         .label-lihat { font-size: 10px; color: #64748b; font-weight: 700; }
         body.dark-mode .label-lihat { color: #ff99a8; }
-        .label-melayani {
-            font-size: 10px;
-            color: #059669;
-            font-weight: 800;
-            text-transform: uppercase;
-            letter-spacing: 0.3px;
-        }
+        .label-melayani { font-size: 10px; color: #059669; font-weight: 800; text-transform: uppercase; letter-spacing: 0.3px; }
         body.dark-mode .label-melayani { color: #34d399; text-shadow: 0 0 8px rgba(52, 211, 153, 0.8); }
 
-        .aktivitas-header-toggle {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            cursor: pointer;
-            user-select: none;
-            padding: 12px 14px;
-            border-radius: 12px;
-            background: linear-gradient(135deg, #0f172a, #1e293b);
-            color: #ffffff;
-            margin-bottom: 0;
-            transition: all 0.2s ease;
-            box-shadow: 0 2px 6px rgba(15, 23, 42, 0.15);
-        }
-        .aktivitas-header-toggle:hover {
-            background: linear-gradient(135deg, #1e293b, #334155);
-        }
-        body.dark-mode .aktivitas-header-toggle {
-            background: #2b0007;
-            border: 2px solid #ff1f3d;
-            box-shadow: 0 0 25px rgba(255, 31, 61, 0.6);
-        }
-        .aktivitas-header-toggle .judul {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-size: 12px;
-            font-weight: 800;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-        .aktivitas-header-toggle .judul svg {
-            width: 14px; height: 14px;
-            stroke: currentColor;
-            stroke-width: 2.4;
-            fill: none;
-            stroke-linecap: round;
-            stroke-linejoin: round;
-        }
-        .aktivitas-header-toggle .arrow {
-            width: 24px; height: 24px;
-            display: inline-flex; align-items: center; justify-content: center;
-            border-radius: 50%;
-            background: rgba(255,255,255,0.15);
-            transition: transform 0.3s ease;
-            flex-shrink: 0;
-        }
-        .aktivitas-header-toggle .arrow svg {
-            width: 12px; height: 12px;
-            stroke: #ffffff;
-            stroke-width: 2.6;
-            fill: none;
-            stroke-linecap: round;
-            stroke-linejoin: round;
-        }
-        .aktivitas-header-toggle.open .arrow {
-            transform: rotate(180deg);
-        }
+        .aktivitas-header-toggle { display: flex; justify-content: space-between; align-items: center; cursor: pointer; user-select: none; padding: 12px 14px; border-radius: 12px; background: linear-gradient(135deg, #0f172a, #1e293b); color: #ffffff; margin-bottom: 0; transition: all 0.2s ease; box-shadow: 0 2px 6px rgba(15, 23, 42, 0.15); }
+        .aktivitas-header-toggle:hover { background: linear-gradient(135deg, #1e293b, #334155); }
+        body.dark-mode .aktivitas-header-toggle { background: #2b0007; border: 2px solid #ff1f3d; box-shadow: 0 0 25px rgba(255, 31, 61, 0.6); }
+        .aktivitas-header-toggle .judul { display: flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px; }
+        .aktivitas-header-toggle .judul svg { width: 14px; height: 14px; stroke: currentColor; stroke-width: 2.4; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+        .aktivitas-header-toggle .arrow { width: 24px; height: 24px; display: inline-flex; align-items: center; justify-content: center; border-radius: 50%; background: rgba(255,255,255,0.15); transition: transform 0.3s ease; flex-shrink: 0; }
+        .aktivitas-header-toggle .arrow svg { width: 12px; height: 12px; stroke: #ffffff; stroke-width: 2.6; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+        .aktivitas-header-toggle.open .arrow { transform: rotate(180deg); }
 
-        .aktivitas-content {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.35s ease, padding 0.2s ease, opacity 0.2s ease;
-            opacity: 0;
-            padding: 0;
-        }
-        .aktivitas-content.open {
-            max-height: 3000px;
-            opacity: 1;
-            padding-top: 12px;
-        }
+        .aktivitas-content { max-height: 0; overflow: hidden; transition: max-height 0.35s ease, padding 0.2s ease, opacity 0.2s ease; opacity: 0; padding: 0; }
+        .aktivitas-content.open { max-height: 3000px; opacity: 1; padding-top: 12px; }
 
-        .gps-box {
-            background: #f8fafc;
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 12px;
-            margin-bottom: 12px;
-        }
-        body.dark-mode .gps-box {
-            background: #2b0007;
-            border: 2px solid #ff1f3d;
-            box-shadow: 0 0 25px rgba(255, 31, 61, 0.6);
-        }
-        #map-promotor {
-            width: 100%;
-            height: 160px;
-            border-radius: 10px;
-            border: 1px solid var(--border);
-            margin-bottom: 8px;
-            z-index: 1;
-        }
-        .info-radius {
-            font-size: 11px;
-            color: var(--text-muted);
-            font-weight: 700;
-            text-align: center;
-            padding: 6px 8px;
-            border-radius: 8px;
-            background: rgba(100, 116, 139, 0.1);
-        }
-        .info-radius.ok {
-            color: #059669;
-            background: rgba(5, 150, 105, 0.12);
-            font-weight: 800;
-        }
-        .info-radius.err {
-            color: #dc2626;
-            background: rgba(220, 38, 38, 0.12);
-            font-weight: 800;
-        }
-        body.dark-mode .info-radius {
-            color: #ffb3bc;
-            background: #50000e;
-            border: 1px solid #ff1f3d;
-        }
-        body.dark-mode .info-radius.ok {
-            color: #34d399;
-            background: #022c22;
-            border: 1px solid #059669;
-            text-shadow: 0 0 8px rgba(52, 211, 153, 0.8);
-        }
-        body.dark-mode .info-radius.err {
-            color: #ff667a;
-            background: #50000e;
-            border: 1px solid #ff1f3d;
-            text-shadow: 0 0 8px rgba(255, 102, 122, 0.8);
-        }
+        .gps-box { background: #f8fafc; border: 1px solid var(--border); border-radius: 12px; padding: 12px; margin-bottom: 12px; }
+        body.dark-mode .gps-box { background: #2b0007; border: 2px solid #ff1f3d; box-shadow: 0 0 25px rgba(255, 31, 61, 0.6); }
+        #map-promotor { width: 100%; height: 160px; border-radius: 10px; border: 1px solid var(--border); margin-bottom: 8px; z-index: 1; }
+        .info-radius { font-size: 11px; color: var(--text-muted); font-weight: 700; text-align: center; padding: 6px 8px; border-radius: 8px; background: rgba(100, 116, 139, 0.1); }
+        .info-radius.ok { color: #059669; background: rgba(5, 150, 105, 0.12); font-weight: 800; }
+        .info-radius.err { color: #dc2626; background: rgba(220, 38, 38, 0.12); font-weight: 800; }
+        body.dark-mode .info-radius { color: #ffb3bc; background: #50000e; border: 1px solid #ff1f3d; }
+        body.dark-mode .info-radius.ok { color: #34d399; background: #022c22; border: 1px solid #059669; text-shadow: 0 0 8px rgba(52, 211, 153, 0.8); }
+        body.dark-mode .info-radius.err { color: #ff667a; background: #50000e; border: 1px solid #ff1f3d; text-shadow: 0 0 8px rgba(255, 102, 122, 0.8); }
 
-        /* Box lock timer */
-        #box-lock-timer .timer-card-admin {
-            background: #50000e !important;
-            border: 2px solid #dc2626 !important;
-            box-shadow: 0 0 25px rgba(220, 38, 38, 0.7) !important;
-        }
-        #box-lock-timer .timer-badge-title {
-            color: #ff667a;
-        }
-        #box-lock-timer .timer-display {
-            color: #ff667a;
-            text-shadow: 0 0 12px rgba(255, 102, 122, 0.8);
-        }
+        #box-lock-timer .timer-card-admin { background: #50000e !important; border: 2px solid #dc2626 !important; box-shadow: 0 0 25px rgba(220, 38, 38, 0.7) !important; }
+        #box-lock-timer .timer-badge-title { color: #ff667a; }
+        #box-lock-timer .timer-display { color: #ff667a; text-shadow: 0 0 12px rgba(255, 102, 122, 0.8); }
 
         @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-        .spinner { 
-            display: inline-block; 
-            width: 14px; 
-            height: 14px; 
-            border: 2px solid rgba(255,255,255,0.3); 
-            border-radius: 50%; 
-            border-top-color: #fff; 
-            animation: spin 0.8s ease-in-out infinite; 
-            vertical-align: middle; 
-            margin-right: 6px; 
-        }
+        .spinner { display: inline-block; width: 14px; height: 14px; border: 2px solid rgba(255,255,255,0.3); border-radius: 50%; border-top-color: #fff; animation: spin 0.8s ease-in-out infinite; vertical-align: middle; margin-right: 6px; }
     </style>
 </head>
 <body>
@@ -552,17 +329,12 @@
                 <span style="color: var(--text-muted);">Promotor:</span> <strong id="label-user-aktif" style="color:var(--primary); font-size: 14px;">-</strong>
             </div>
 
-            <!-- BOX LOCK TIMER -->
             <div id="box-lock-timer" style="display:none; margin-bottom: 16px;">
                 <div class="timer-card-admin">
                     <span class="timer-badge-title">🔒 AKUN DIKUNCI</span>
                     <div class="timer-display" id="lock-timer-display">--:--</div>
-                    <div id="lock-reason-display" style="font-size:11px; color:#ffb3bc; margin-top:6px; font-weight:600;">
-                        Alasan: -
-                    </div>
-                    <div style="font-size:10px; color:#ff8585; margin-top:4px;">
-                        Akun akan terbuka otomatis setelah timer habis
-                    </div>
+                    <div id="lock-reason-display" style="font-size:11px; color:#ffb3bc; margin-top:6px; font-weight:600;">Alasan: -</div>
+                    <div style="font-size:10px; color:#ff8585; margin-top:4px;">Akun akan terbuka otomatis setelah timer habis</div>
                 </div>
             </div>
 
@@ -585,9 +357,7 @@
 
             <div id="section-checkin-awal" style="display: none;">
                 <div class="gps-box">
-                    <div style="font-size:11px; font-weight:800; color:var(--text-muted); text-transform:uppercase; margin-bottom:8px; letter-spacing:0.3px; text-align:left;">
-                        📍 Peta Posisi Toko & Radius
-                    </div>
+                    <div style="font-size:11px; font-weight:800; color:var(--text-muted); text-transform:uppercase; margin-bottom:8px; letter-spacing:0.3px; text-align:left;">📍 Peta Posisi Toko & Radius</div>
                     <div id="map-promotor"></div>
                     <div id="info-radius" class="info-radius">📡 Mendeteksi lokasi Anda...</div>
                 </div>
@@ -610,7 +380,6 @@
                     </select>
                 </div>
                 <button type="button" id="btn-daftar-antrian" class="btn-success" onclick="aksiDaftarAntrianNormal()" style="display: none;">Daftar Antrian</button>
-                
                 <button type="button" id="btn-utama-customer" class="btn-customer" onclick="aksiUtamaCustomer()" style="display: none; margin-top: 10px;">Sudah Membawa Customer</button>
                 <button type="button" id="btn-waktu-makan" class="btn-amber" onclick="aksiToggleMakan()" style="display: none; margin-top: 10px;">WAKTU MAKAN</button>
                 <button type="button" id="btn-selesai-closing" class="btn-closing" onclick="aksiSelesaiClosing()" style="display: none; margin-top: 10px;">SELESAI MELAYANI</button>
@@ -623,7 +392,6 @@
         <div style="margin-top: 20px; text-align: left;">
             <div style="font-size: 13px; font-weight: 800; border-bottom: 2px solid var(--border); padding-bottom: 6px; margin-bottom: 10px; text-transform: uppercase;">LIVE URUTAN KATEGORI HA</div>
             <ul id="list-HA" class="list-antrian"><li><span>Memuat...</span></li></ul>
-
             <div style="font-size: 13px; font-weight: 800; border-bottom: 2px solid var(--border); padding-bottom: 6px; margin-top: 20px; margin-bottom: 10px; text-transform: uppercase;">LIVE URUTAN KATEGORI AV</div>
             <ul id="list-AV" class="list-antrian"><li><span>Memuat...</span></li></ul>
         </div>
@@ -644,56 +412,31 @@
 
             <div class="aktivitas-content" id="content-aktivitas">
                 <div class="aktivitas-title t-bawa-customer">
-                    <span class="judul-kategori">
-                        <span class="aktivitas-icon">
-                            <svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
-                        </span>
-                        Bawa Customer
-                    </span>
+                    <span class="judul-kategori"><span class="aktivitas-icon"><svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg></span>Bawa Customer</span>
                     <span class="count" id="count-bawa">0</span>
                 </div>
                 <ul id="list-bawa" class="aktivitas-list"></ul>
 
                 <div class="aktivitas-title t-ibadah">
-                    <span class="judul-kategori">
-                        <span class="aktivitas-icon">
-                            <svg viewBox="0 0 24 24"><path d="M12 3v18"/><path d="M5 8l7-4 7 4"/><path d="M5 16l7-4 7 4"/></svg>
-                        </span>
-                        Ibadah
-                    </span>
+                    <span class="judul-kategori"><span class="aktivitas-icon"><svg viewBox="0 0 24 24"><path d="M12 3v18"/><path d="M5 8l7-4 7 4"/><path d="M5 16l7-4 7 4"/></svg></span>Ibadah</span>
                     <span class="count" id="count-ibadah">0</span>
                 </div>
                 <ul id="list-ibadah" class="aktivitas-list"></ul>
 
                 <div class="aktivitas-title t-makan">
-                    <span class="judul-kategori">
-                        <span class="aktivitas-icon">
-                            <svg viewBox="0 0 24 24"><path d="M7 2v9a2 2 0 0 0 4 0V2"/><line x1="9" y1="11" x2="9" y2="22"/><path d="M17 2v6a2 2 0 0 1-2 2h-2v12"/></svg>
-                        </span>
-                        Waktu Makan
-                    </span>
+                    <span class="judul-kategori"><span class="aktivitas-icon"><svg viewBox="0 0 24 24"><path d="M7 2v9a2 2 0 0 0 4 0V2"/><line x1="9" y1="11" x2="9" y2="22"/><path d="M17 2v6a2 2 0 0 1-2 2h-2v12"/></svg></span>Waktu Makan</span>
                     <span class="count" id="count-makan">0</span>
                 </div>
                 <ul id="list-makan" class="aktivitas-list"></ul>
 
                 <div class="aktivitas-title t-keluar">
-                    <span class="judul-kategori">
-                        <span class="aktivitas-icon">
-                            <svg viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
-                        </span>
-                        Keluar Antrian
-                    </span>
+                    <span class="judul-kategori"><span class="aktivitas-icon"><svg viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg></span>Keluar Antrian</span>
                     <span class="count" id="count-keluar">0</span>
                 </div>
                 <ul id="list-keluar" class="aktivitas-list"></ul>
 
                 <div class="aktivitas-title t-autokick">
-                    <span class="judul-kategori">
-                        <span class="aktivitas-icon">
-                            <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><line x1="9" y1="9" x2="15" y2="15"/><line x1="15" y1="9" x2="9" y2="15"/></svg>
-                        </span>
-                        Autokick (Pelanggaran)
-                    </span>
+                    <span class="judul-kategori"><span class="aktivitas-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><line x1="9" y1="9" x2="15" y2="15"/><line x1="15" y1="9" x2="9" y2="15"/></svg></span>Autokick (Pelanggaran)</span>
                     <span class="count" id="count-autokick">0</span>
                 </div>
                 <ul id="list-autokick" class="aktivitas-list"></ul>
@@ -718,7 +461,6 @@
         let masterSalesLoaded = false;
         let aktivitasGlobal = [];
 
-        // GPS state
         let koordinatToko = { lat: null, lng: null, radius: 50 };
         let mapPromotor = null;
         let circleTokoPeta = null;
@@ -727,15 +469,12 @@
         let posisiSaya = { lat: null, lng: null, ok: false };
         let geolocationWatchId = null;
 
-        // ✅ LOCK TIMER STATE
         let lockTimerInterval = null;
         let lockDataGlobal = null;
 
         const DURASI_TIMER_MENIT = 15;
-
         const SVG_CHECK_DEAL = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="11" fill="#059669"/><path d="M7 12.5L10.5 16L17 9" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
 
-        // ====== UTIL ======
         function getTanggalIndo() {
             const now = new Date();
             return `${String(now.getDate()).padStart(2, '0')}-${String(now.getMonth() + 1).padStart(2, '0')}-${now.getFullYear()}`;
@@ -766,7 +505,6 @@
             return R * c;
         }
 
-        // ====== INIT ======
         window.addEventListener('firebase-ready', () => {
             initDarkMode();
             resetCheckinHarianJikaPerlu();
@@ -802,7 +540,6 @@
             const header = document.getElementById('toggle-aktivitas');
             const content = document.getElementById('content-aktivitas');
             if (!header || !content) return;
-
             const isOpen = content.classList.contains('open');
             if (isOpen) {
                 content.classList.remove('open');
@@ -829,11 +566,9 @@
             }, 150);
         }
 
-        // ====== FIREBASE LISTENERS ======
         function inisialisasiRealtimeFirebase() {
             const db = window.db;
 
-            // Listener 1: Antrian
             window.dbOnValue(window.dbRef(db, 'antrian'), (snapshot) => {
                 const dataRaw = snapshot.val();
                 daftarAntrianGlobal = [];
@@ -850,7 +585,6 @@
                 renderAktivitas();
             });
 
-            // Listener 2: Master sales
             const pathUtama = 'mastersales';
             window.dbOnValue(window.dbRef(db, pathUtama), (snapshot) => {
                 const dataRaw = snapshot.val();
@@ -868,7 +602,6 @@
                 }
             });
 
-            // Listener 3: Setting
             window.dbOnValue(window.dbRef(db, 'setting'), (snapshot) => {
                 const setting = snapshot.val();
                 if (setting) {
@@ -880,7 +613,6 @@
                 renderUI();
             });
 
-            // Listener 4: Statistik aktivitas
             window.dbOnValue(window.dbRef(db, 'statistikAktivitas'), (snapshot) => {
                 const dataRaw = snapshot.val();
                 aktivitasGlobal = [];
@@ -896,15 +628,12 @@
                 renderAktivitas();
             });
 
-            // Listener 5: Check-in harian
             window.dbOnValue(window.dbRef(db, 'checkinHarian'), (snapshot) => {
                 const dataCheckin = snapshot.val() || {};
                 const akunSaya = sanitizeNama(getAkunAktif());
                 if (!akunSaya) return;
-
                 const checkinSaya = dataCheckin[akunSaya];
                 const hariIni = getTanggalKey();
-
                 if (checkinSaya && checkinSaya.tanggalKey === hariIni) {
                     localStorage.setItem('ufo_checkin_hari_ini', 'true');
                     localStorage.setItem('ufo_checkin_tanggal', hariIni);
@@ -915,7 +644,6 @@
                 renderUI();
             });
 
-            // Listener 6: Lock promotor
             window.dbOnValue(window.dbRef(db, 'lockPromotor'), (snapshot) => {
                 const dataLock = snapshot.val() || {};
                 const akunSaya = sanitizeNama(getAkunAktif());
@@ -924,31 +652,37 @@
                 const lockSaya = dataLock[akunSaya];
                 
                 if (lockSaya && lockSaya.locked) {
+                    const sekarang = Date.now();
+                    const waktuMulai = Number(lockSaya.waktuMulaiLock) || 0;
                     const waktuExpired = Number(lockSaya.waktuSelesaiLock) || 0;
-                    const masihLock = (waktuExpired === 0 || Date.now() < waktuExpired);
                     
-                    if (masihLock) {
+                    const sudahMulai = waktuMulai === 0 || sekarang >= waktuMulai;
+                    const belumExpired = waktuExpired === 0 || sekarang < waktuExpired;
+                    
+                    if (sudahMulai && belumExpired) {
                         lockDataGlobal = { waktuExpired, alasan: lockSaya.alasan || "-" };
                         mulaiLockTimer(waktuExpired, lockSaya.alasan || "-");
                         
-                        // Keluarkan dari antrian kalau ada
                         if (daftarAntrianGlobal.find(it => sanitizeNama(it.nama) === akunSaya)) {
                             window.dbRemove(window.dbRef(window.db, 'antrian/' + akunSaya));
                         }
                         
-                        // Notif sekali
                         const sudahDitampilkan = sessionStorage.getItem('ufo_lock_notif_' + akunSaya);
                         if (!sudahDitampilkan) {
                             let sisaTeks = "tanpa batas waktu";
                             if (waktuExpired > 0) {
-                                const sisaMenit = Math.ceil((waktuExpired - Date.now()) / 60000);
+                                const sisaMenit = Math.ceil((waktuExpired - sekarang) / 60000);
                                 sisaTeks = `${sisaMenit} menit lagi`;
                             }
                             tampilkanModal("🔒 Akun Dikunci", 
-                                `Akun Anda sedang DIKUNCI.\n\nAlasan: ${lockSaya.alasan || "-"}\nSisa: ${sisaTeks}\n\nCek timer di halaman utama.`
+                                `Akun Anda sedang DIKUNCI.\n\nAlasan: ${lockSaya.alasan || "-"}\nSisa: ${sisaTeks}`
                             );
                             sessionStorage.setItem('ufo_lock_notif_' + akunSaya, 'true');
                         }
+                    } else if (!sudahMulai) {
+                        lockDataGlobal = null;
+                        sembunyikanLockTimer();
+                        console.log(`⏰ Lock terjadwal untuk ${akunSaya} mulai: ${new Date(waktuMulai).toLocaleString('id-ID')}`);
                     } else {
                         lockDataGlobal = null;
                         sembunyikanLockTimer();
@@ -962,7 +696,6 @@
             });
         }
 
-        // ====== LOCK TIMER ======
         function mulaiLockTimer(waktuExpired, alasan) {
             const box = document.getElementById('box-lock-timer');
             const display = document.getElementById('lock-timer-display');
@@ -981,7 +714,6 @@
             }
             
             display.style.fontSize = "";
-            
             if (lockTimerInterval) { clearInterval(lockTimerInterval); lockTimerInterval = null; }
             
             const tick = () => {
@@ -1006,12 +738,8 @@
                 }
                 
                 display.innerText = teks;
-                
-                if (sisa <= 60000) {
-                    display.classList.add('warning');
-                } else {
-                    display.classList.remove('warning');
-                }
+                if (sisa <= 60000) display.classList.add('warning');
+                else display.classList.remove('warning');
             };
             
             tick();
@@ -1024,7 +752,6 @@
             if (lockTimerInterval) { clearInterval(lockTimerInterval); lockTimerInterval = null; }
         }
 
-        // ====== MASTER SALES ======
         function prosesMasterSales(dataRaw) {
             let selectHtml = '<option value="">-- Pilih Nama Anda --</option>';
             let listSales = Array.isArray(dataRaw) ? dataRaw : Object.values(dataRaw);
@@ -1043,7 +770,6 @@
             if (selectEl) selectEl.innerHTML = selectHtml;
         }
 
-        // ====== AKUN ======
         function getAkunAktif() {
             if (!namaSalesAktifGlobal) namaSalesAktifGlobal = localStorage.getItem('ufo_nama_sales_aktif') || "";
             return namaSalesAktifGlobal;
@@ -1055,27 +781,30 @@
 
             const clean = sanitizeNama(namaPilih);
 
-            // CEK LOCK SEBELUM SIMPAN
             window.dbGet(window.dbRef(window.db, 'lockPromotor/' + clean)).then(snap => {
                 if (snap.exists()) {
                     const lockData = snap.val();
                     if (lockData && lockData.locked) {
+                        const sekarang = Date.now();
+                        const waktuMulai = Number(lockData.waktuMulaiLock) || 0;
                         const waktuExpired = Number(lockData.waktuSelesaiLock) || 0;
-                        if (waktuExpired === 0 || Date.now() < waktuExpired) {
+                        const sudahMulai = waktuMulai === 0 || sekarang >= waktuMulai;
+                        const belumExpired = waktuExpired === 0 || sekarang < waktuExpired;
+                        
+                        if (sudahMulai && belumExpired) {
                             let sisaTeks = "tanpa batas waktu";
                             if (waktuExpired > 0) {
-                                const sisaMenit = Math.ceil((waktuExpired - Date.now()) / 60000);
+                                const sisaMenit = Math.ceil((waktuExpired - sekarang) / 60000);
                                 sisaTeks = `${sisaMenit} menit lagi`;
                             }
                             tampilkanModal("🔒 Akun Dikunci", 
-                                `Nama "${namaPilih}" sedang DIKUNCI.\n\nAlasan: ${lockData.alasan || "-"}\nSisa: ${sisaTeks}\n\nHubungi admin.`
+                                `Nama "${namaPilih}" sedang DIKUNCI.\n\nAlasan: ${lockData.alasan || "-"}\nSisa: ${sisaTeks}`
                             );
                             return;
                         }
                     }
                 }
 
-                // Lanjut simpan
                 namaSalesAktifGlobal = namaPilih;
                 localStorage.setItem('ufo_nama_sales_aktif', namaPilih);
                 document.getElementById('panel-login').style.display = 'none';
@@ -1086,7 +815,6 @@
             });
         }
 
-        // ====== PETA GPS ======
         function initPetaPromotor() {
             if (mapPromotor) return;
             const container = document.getElementById('map-promotor');
@@ -1100,30 +828,20 @@
             }
 
             mapPromotor = L.map('map-promotor', { zoomControl: false }).setView([koordinatToko.lat, koordinatToko.lng], 16);
-            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                maxZoom: 19, attribution: '© OpenStreetMap'
-            }).addTo(mapPromotor);
-
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 19, attribution: '© OpenStreetMap' }).addTo(mapPromotor);
             markerTokoPeta = L.marker([koordinatToko.lat, koordinatToko.lng]).addTo(mapPromotor).bindPopup("Lokasi Toko");
-            circleTokoPeta = L.circle([koordinatToko.lat, koordinatToko.lng], {
-                radius: koordinatToko.radius, color: '#059669', fillColor: '#059669', fillOpacity: 0.15
-            }).addTo(mapPromotor);
-
+            circleTokoPeta = L.circle([koordinatToko.lat, koordinatToko.lng], { radius: koordinatToko.radius, color: '#059669', fillColor: '#059669', fillOpacity: 0.15 }).addTo(mapPromotor);
             setTimeout(() => mapPromotor.invalidateSize(), 200);
             mulaiDeteksiLokasi();
         }
 
         function mulaiDeteksiLokasi() {
-            if (geolocationWatchId !== null) {
-                navigator.geolocation.clearWatch(geolocationWatchId);
-            }
-
+            if (geolocationWatchId !== null) navigator.geolocation.clearWatch(geolocationWatchId);
             if (!navigator.geolocation) {
                 document.getElementById('info-radius').innerText = "❌ Browser tidak mendukung GPS";
                 document.getElementById('info-radius').className = "info-radius err";
                 return;
             }
-
             geolocationWatchId = navigator.geolocation.watchPosition(
                 (pos) => {
                     posisiSaya.lat = pos.coords.latitude;
@@ -1141,14 +859,9 @@
         function updatePetaLokasiSaya() {
             if (!mapPromotor || !koordinatToko.lat) return;
             const lat = posisiSaya.lat, lng = posisiSaya.lng;
-
             if (markerSayaPeta) mapPromotor.removeLayer(markerSayaPeta);
             markerSayaPeta = L.marker([lat, lng], {
-                icon: L.divIcon({ 
-                    className: '', 
-                    html: '<div style="background:#dc2626;width:16px;height:16px;border-radius:50%;border:3px solid white;box-shadow:0 0 6px rgba(0,0,0,0.5);"></div>', 
-                    iconSize: [16,16] 
-                })
+                icon: L.divIcon({ className: '', html: '<div style="background:#dc2626;width:16px;height:16px;border-radius:50%;border:3px solid white;box-shadow:0 0 6px rgba(0,0,0,0.5);"></div>', iconSize: [16,16] })
             }).addTo(mapPromotor).bindPopup("Posisi Anda");
 
             const jarak = hitungJarak(lat, lng, koordinatToko.lat, koordinatToko.lng);
@@ -1174,48 +887,36 @@
                     btnHadir.innerText = `Di Luar Radius (${Math.round(jarak)}m)`;
                 }
             }
-
             const bounds = L.latLngBounds([[lat, lng], [koordinatToko.lat, koordinatToko.lng]]);
             mapPromotor.fitBounds(bounds, { padding: [30, 30], maxZoom: 17 });
         }
 
-        // ====== AKSI ======
         function aksiHadirKerja() {
             if (statusSistemGlobal !== "BUKA") { tampilkanModal("Antrian Tutup", "Sistem antrian sedang ditutup."); return; }
-
             const akunSaya = sanitizeNama(getAkunAktif());
 
-            // CEK LOCK DULU
             window.dbGet(window.dbRef(window.db, 'lockPromotor/' + akunSaya)).then(snap => {
                 if (snap.exists()) {
                     const lockData = snap.val();
                     if (lockData && lockData.locked) {
+                        const sekarang = Date.now();
+                        const waktuMulai = Number(lockData.waktuMulaiLock) || 0;
                         const waktuExpired = Number(lockData.waktuSelesaiLock) || 0;
-                        if (waktuExpired === 0 || Date.now() < waktuExpired) {
+                        const sudahMulai = waktuMulai === 0 || sekarang >= waktuMulai;
+                        const belumExpired = waktuExpired === 0 || sekarang < waktuExpired;
+                        
+                        if (sudahMulai && belumExpired) {
                             window.dbPush(window.dbRef(window.db, 'statistikAktivitas'), {
-                                nama: getAkunAktif(),
-                                aksi: "Autokick",
-                                waktu: Date.now(),
-                                tanggal: getTanggalIndo(),
-                                hasil: "Coba Check-in Saat Lock",
-                                kategori: "Lock Hukuman",
-                                sumber: "Promotor"
+                                nama: getAkunAktif(), aksi: "Autokick", waktu: Date.now(),
+                                tanggal: getTanggalIndo(), hasil: "Coba Check-in Saat Lock",
+                                kategori: "Lock Hukuman", sumber: "Promotor"
                             });
-
-                            let sisaTeks = "tanpa batas waktu";
-                            if (waktuExpired > 0) {
-                                const sisaMenit = Math.ceil((waktuExpired - Date.now()) / 60000);
-                                sisaTeks = `${sisaMenit} menit lagi`;
-                            }
-                            tampilkanModal("🔒 Akun Dikunci", 
-                                `Akun Anda sedang DIKUNCI.\n\nAlasan: ${lockData.alasan || "-"}\nSisa: ${sisaTeks}`
-                            );
+                            tampilkanModal("🔒 Akun Dikunci", `Akun Anda sedang DIKUNCI.\n\nAlasan: ${lockData.alasan || "-"}`);
                             return;
                         }
                     }
                 }
 
-                // Cek GPS
                 if (koordinatToko.lat && koordinatToko.lng) {
                     if (!posisiSaya.ok) {
                         tampilkanModal("Di Luar Radius", "Anda harus berada di dalam radius toko untuk check-in.");
@@ -1223,7 +924,6 @@
                     }
                 }
 
-                // Lanjut check-in
                 const kat = document.getElementById('pilih-kategori-hadir').value;
                 const nama = getAkunAktif();
                 const clean = sanitizeNama(nama);
@@ -1244,24 +944,23 @@
 
         function aksiDaftarAntrianNormal() {
             if (statusSistemGlobal !== "BUKA") { tampilkanModal("Antrian Tutup", "Sistem antrian sedang ditutup."); return; }
-
             const akunSaya = sanitizeNama(getAkunAktif());
 
-            // CEK LOCK DULU
             window.dbGet(window.dbRef(window.db, 'lockPromotor/' + akunSaya)).then(snap => {
                 if (snap.exists()) {
                     const lockData = snap.val();
                     if (lockData && lockData.locked) {
+                        const sekarang = Date.now();
+                        const waktuMulai = Number(lockData.waktuMulaiLock) || 0;
                         const waktuExpired = Number(lockData.waktuSelesaiLock) || 0;
-                        if (waktuExpired === 0 || Date.now() < waktuExpired) {
+                        const sudahMulai = waktuMulai === 0 || sekarang >= waktuMulai;
+                        const belumExpired = waktuExpired === 0 || sekarang < waktuExpired;
+                        
+                        if (sudahMulai && belumExpired) {
                             window.dbPush(window.dbRef(window.db, 'statistikAktivitas'), {
-                                nama: getAkunAktif(),
-                                aksi: "Autokick",
-                                waktu: Date.now(),
-                                tanggal: getTanggalIndo(),
-                                hasil: "Coba Daftar Saat Lock",
-                                kategori: "Lock Hukuman",
-                                sumber: "Promotor"
+                                nama: getAkunAktif(), aksi: "Autokick", waktu: Date.now(),
+                                tanggal: getTanggalIndo(), hasil: "Coba Daftar Saat Lock",
+                                kategori: "Lock Hukuman", sumber: "Promotor"
                             });
                             tampilkanModal("🔒 Akun Dikunci", `Akun Anda sedang DIKUNCI.\n\nAlasan: ${lockData.alasan || "-"}`);
                             return;
@@ -1269,7 +968,6 @@
                     }
                 }
 
-                // Lanjut daftar
                 const kat = document.getElementById('pilih-kategori-normal').value;
                 const nama = getAkunAktif();
                 const clean = sanitizeNama(nama);
@@ -1292,11 +990,7 @@
             const clean = sanitizeNama(nama);
             const now = Date.now();
             window.dbUpdate(window.dbRef(window.db, 'antrian/' + clean), { 
-                status: "Melayani", 
-                timerMulai: 0, 
-                timerAksi: "", 
-                posisiTerkunci: 0,
-                waktuMulaiMelayani: now 
+                status: "Melayani", timerMulai: 0, timerAksi: "", posisiTerkunci: 0, waktuMulaiMelayani: now 
             }).then(() => catatAktivitas(nama, "BawaCustomer", "", { waktuMulai: now }));
         }
 
@@ -1318,7 +1012,7 @@
                     .sort((a,b) => (a.waktuStandby||0) - (b.waktuStandby||0));
                 const posisi = listStandby.findIndex(i => sanitizeNama(i.nama) === clean) + 1;
 
-                tampilkanModalKonfirmasi("Waktu Makan", `Posisi antrian Anda (#${posisi}) akan DIKUNCI selama 15 menit. Jika timer habis sebelum Anda selesai, Anda otomatis KELUAR dari antrian. Lanjutkan?`, () => {
+                tampilkanModalKonfirmasi("Waktu Makan", `Posisi antrian Anda (#${posisi}) akan DIKUNCI selama 15 menit. Lanjutkan?`, () => {
                     localStorage.setItem('ufo_sudah_makan_' + clean, 'true');
                     const now = Date.now();
                     window.dbUpdate(window.dbRef(window.db, 'antrian/' + clean), {
@@ -1347,7 +1041,7 @@
                     .sort((a,b) => (a.waktuStandby||0) - (b.waktuStandby||0));
                 const posisi = listStandby.findIndex(i => sanitizeNama(i.nama) === clean) + 1;
 
-                tampilkanModalKonfirmasi("Sedang Ibadah", `Posisi antrian Anda (#${posisi}) akan DIKUNCI selama 15 menit. Jika timer habis sebelum Anda selesai, Anda otomatis KELUAR dari antrian. Lanjutkan?`, () => {
+                tampilkanModalKonfirmasi("Sedang Ibadah", `Posisi antrian Anda (#${posisi}) akan DIKUNCI selama 15 menit. Lanjutkan?`, () => {
                     const now = Date.now();
                     window.dbUpdate(window.dbRef(window.db, 'antrian/' + clean), { status: "Ibadah", timerMulai: now, timerAksi: "Ibadah", posisiTerkunci: posisi })
                     .then(() => catatAktivitasIbadah(nama, "MulaiIbadah", now, posisi));
@@ -1370,7 +1064,6 @@
                 </div>`;
             document.getElementById('modal-actions').innerHTML = ``;
             document.getElementById('custom-modal').classList.add('active');
-
             document.getElementById('btn-pilih-deal').onclick = () => selesaiMelayaniAction("Deal");
             document.getElementById('btn-pilih-lihat').onclick = () => selesaiMelayaniAction("Lihat");
         }
@@ -1380,36 +1073,25 @@
             const nama = getAkunAktif();
             const clean = sanitizeNama(nama);
             const now = Date.now();
-
             const itemSaya = daftarAntrianGlobal.find(it => sanitizeNama(it.nama) === clean);
             const waktuMulaiMelayani = itemSaya ? (itemSaya.waktuMulaiMelayani || now) : now;
-
             const hariIni = getTanggalIndo();
             const cleanSaya = sanitizeNama(nama);
             const kandidat = aktivitasGlobal
-                .filter(a => sanitizeNama(a.nama) === cleanSaya 
-                    && a.tanggal === hariIni 
-                    && a.aksi === "BawaCustomer"
-                    && !a.waktuSelesai)
+                .filter(a => sanitizeNama(a.nama) === cleanSaya && a.tanggal === hariIni && a.aksi === "BawaCustomer" && !a.waktuSelesai)
                 .sort((a,b) => (b.waktu||0) - (a.waktu||0));
 
             const target = kandidat[0];
-
             if (target && target._key) {
                 window.dbUpdate(window.dbRef(window.db, 'statistikAktivitas/' + target._key), {
-                    waktuSelesai: now,
-                    hasil: hasil,
-                    durasiDetik: Math.floor((now - waktuMulaiMelayani) / 1000)
+                    waktuSelesai: now, hasil: hasil, durasiDetik: Math.floor((now - waktuMulaiMelayani) / 1000)
                 });
             } else {
                 window.dbPush(window.dbRef(window.db, 'statistikAktivitas'), {
-                    nama: nama, aksi: "BawaCustomer", waktu: waktuMulaiMelayani, 
-                    waktuMulai: waktuMulaiMelayani, waktuSelesai: now,
-                    tanggal: hariIni, hasil: hasil,
-                    durasiDetik: Math.floor((now - waktuMulaiMelayani) / 1000)
+                    nama: nama, aksi: "BawaCustomer", waktu: waktuMulaiMelayani, waktuMulai: waktuMulaiMelayani, waktuSelesai: now,
+                    tanggal: hariIni, hasil: hasil, durasiDetik: Math.floor((now - waktuMulaiMelayani) / 1000)
                 });
             }
-
             window.dbRemove(window.dbRef(window.db, 'antrian/' + clean));
         }
 
@@ -1438,18 +1120,13 @@
         }
 
         function catatAktivitas(nama, aksi, hasil, extra) {
-            const payload = {
-                nama: nama, aksi: aksi, waktu: Date.now(), tanggal: getTanggalIndo(), hasil: hasil || ""
-            };
+            const payload = { nama: nama, aksi: aksi, waktu: Date.now(), tanggal: getTanggalIndo(), hasil: hasil || "" };
             if (extra) Object.assign(payload, extra);
             window.dbPush(window.dbRef(window.db, 'statistikAktivitas'), payload);
         }
 
         function catatAktivitasMakan(nama, aksi, waktuSekarang, posisi, waktuMulaiSebelumnya) {
-            const payload = {
-                nama: nama, aksi: aksi, waktu: waktuSekarang, tanggal: getTanggalIndo(), hasil: "",
-                kategori: "Waktu Makan", posisi: posisi || 0
-            };
+            const payload = { nama: nama, aksi: aksi, waktu: waktuSekarang, tanggal: getTanggalIndo(), hasil: "", kategori: "Waktu Makan", posisi: posisi || 0 };
             if (aksi === "MulaiMakan") payload.waktuMulai = waktuSekarang;
             if (aksi === "SelesaiMakan") {
                 payload.waktuMulai = waktuMulaiSebelumnya || waktuSekarang;
@@ -1460,10 +1137,7 @@
         }
 
         function catatAktivitasIbadah(nama, aksi, waktuSekarang, posisi, waktuMulaiSebelumnya) {
-            const payload = {
-                nama: nama, aksi: aksi, waktu: waktuSekarang, tanggal: getTanggalIndo(), hasil: "",
-                kategori: "Ibadah", posisi: posisi || 0
-            };
+            const payload = { nama: nama, aksi: aksi, waktu: waktuSekarang, tanggal: getTanggalIndo(), hasil: "", kategori: "Ibadah", posisi: posisi || 0 };
             if (aksi === "MulaiIbadah") payload.waktuMulai = waktuSekarang;
             if (aksi === "SelesaiIbadah") {
                 payload.waktuMulai = waktuMulaiSebelumnya || waktuSekarang;
@@ -1481,14 +1155,12 @@
             });
         }
 
-        // ====== TIMER MAKAN & IBADAH ======
         function updateTimerAktif(itemSaya) {
             const box = document.getElementById('timer-aktif-box');
             const label = document.getElementById('timer-aktif-label');
             const display = document.getElementById('timer-aktif-display');
 
             const isTimerStatus = itemSaya && (itemSaya.status === "Waktu Makan" || itemSaya.status === "Ibadah");
-
             if (!isTimerStatus || !itemSaya.timerMulai || itemSaya.timerMulai === 0) {
                 box.style.display = 'none';
                 if (timerIntervalGlobal) { clearInterval(timerIntervalGlobal); timerIntervalGlobal = null; }
@@ -1516,7 +1188,7 @@
                     window.dbRemove(window.dbRef(window.db, 'antrian/' + cleanNama))
                     .then(() => {
                         catatAutokickTimer(itemSaya.nama, statusSaatItu === "Waktu Makan" ? "Waktu Makan" : "Ibadah", posisiSaatItu, timerMulaiSaatItu);
-                        tampilkanModal("Waktu Habis - Auto Keluar", `Waktu ${itemSaya.timerAksi} Anda sudah habis dan Anda belum menyelesaikan. Anda otomatis DIKELUARKAN dari antrian.`);
+                        tampilkanModal("Waktu Habis - Auto Keluar", `Waktu ${itemSaya.timerAksi} Anda sudah habis. Anda otomatis DIKELUARKAN dari antrian.`);
                     });
                     return;
                 }
@@ -1524,7 +1196,6 @@
                 const m = String(Math.floor(sisa / 60)).padStart(2, '0');
                 const s = String(sisa % 60).padStart(2, '0');
                 display.innerText = `${m}:${s}`;
-
                 if (sisa <= 120) display.classList.add('warning');
                 else display.classList.remove('warning');
             };
@@ -1534,12 +1205,10 @@
             timerIntervalGlobal = setInterval(tick, 1000);
         }
 
-        // ====== RENDER AKTIVITAS ======
         function renderAktivitas() {
             const hariIni = getTanggalIndo();
             const list = aktivitasGlobal.filter(a => a.tanggal === hariIni);
 
-            // BAWA CUSTOMER
             const listBawaStatistik = list.filter(a => a.aksi === "BawaCustomer");
             const statistikSelesai = listBawaStatistik.filter(a => a.waktuSelesai);
             const statistikMasihProses = listBawaStatistik.filter(a => !a.waktuSelesai);
@@ -1548,30 +1217,19 @@
             const listSedangMelayani = daftarAntrianGlobal
                 .filter(item => item.status === "Melayani")
                 .filter(item => !namaSudahSelesai.has(sanitizeNama(item.nama)))
-                .map(item => ({
-                    nama: item.nama,
-                    waktuMulai: item.waktuMulaiMelayani || item.waktuStandby || Date.now(),
-                    waktuSelesai: null, hasil: null, _sedangMelayani: true
-                }));
+                .map(item => ({ nama: item.nama, waktuMulai: item.waktuMulaiMelayani || item.waktuStandby || Date.now(), waktuSelesai: null, hasil: null, _sedangMelayani: true }));
 
             const namaSedangMelayani = new Set(listSedangMelayani.map(i => sanitizeNama(i.nama)));
-
             let semuaBawa = [];
             listSedangMelayani.forEach(item => semuaBawa.push(item));
             statistikMasihProses.forEach(a => {
                 const clean = sanitizeNama(a.nama);
                 if (!namaSedangMelayani.has(clean)) {
-                    semuaBawa.push({
-                        nama: a.nama, waktuMulai: a.waktuMulai || a.waktu,
-                        waktuSelesai: null, hasil: null, _sedangMelayani: false
-                    });
+                    semuaBawa.push({ nama: a.nama, waktuMulai: a.waktuMulai || a.waktu, waktuSelesai: null, hasil: null, _sedangMelayani: false });
                 }
             });
             statistikSelesai.forEach(a => {
-                semuaBawa.push({
-                    nama: a.nama, waktuMulai: a.waktuMulai || a.waktu,
-                    waktuSelesai: a.waktuSelesai, hasil: a.hasil, _sedangMelayani: false
-                });
+                semuaBawa.push({ nama: a.nama, waktuMulai: a.waktuMulai || a.waktu, waktuSelesai: a.waktuSelesai, hasil: a.hasil, _sedangMelayani: false });
             });
             semuaBawa.sort((a, b) => (b.waktuMulai || 0) - (a.waktuMulai || 0));
 
@@ -1582,72 +1240,52 @@
                     const mulai = a.waktuMulai;
                     const selesai = a.waktuSelesai;
                     let rangeLabel, namaLabel;
-
                     if (a._sedangMelayani) {
                         rangeLabel = `(${formatJam(mulai)} - ...)`;
                         namaLabel = `${a.nama} <span class="label-melayani">(MELAYANI)</span>`;
                     } else if (selesai) {
                         rangeLabel = `(${formatJam(mulai)} - ${formatJam(selesai)})`;
-                        if (a.hasil === "Deal") {
-                            namaLabel = `${a.nama} <span class="check-deal">${SVG_CHECK_DEAL}</span>`;
-                        } else if (a.hasil === "Lihat") {
-                            namaLabel = `${a.nama} <span class="label-lihat">(Lihat-lihat)</span>`;
-                        } else {
-                            namaLabel = `${a.nama} <span class="label-lihat">(selesai)</span>`;
-                        }
+                        if (a.hasil === "Deal") namaLabel = `${a.nama} <span class="check-deal">${SVG_CHECK_DEAL}</span>`;
+                        else if (a.hasil === "Lihat") namaLabel = `${a.nama} <span class="label-lihat">(Lihat-lihat)</span>`;
+                        else namaLabel = `${a.nama} <span class="label-lihat">(selesai)</span>`;
                     } else {
                         rangeLabel = `(${formatJam(mulai)} - ...)`;
                         namaLabel = `${a.nama} <span class="label-lihat">(proses)</span>`;
                     }
-
-                    return `<li>
-                        <span class="nama">${namaLabel}</span>
-                        <span class="waktu">${rangeLabel}</span>
-                    </li>`;
+                    return `<li><span class="nama">${namaLabel}</span><span class="waktu">${rangeLabel}</span></li>`;
                 }).join('');
 
-            // IBADAH
             const listIbadah = gabungRentang(list, "MulaiIbadah", "SelesaiIbadah");
             document.getElementById('count-ibadah').innerText = listIbadah.length;
             document.getElementById('list-ibadah').innerHTML = listIbadah.length === 0
                 ? '<div class="aktivitas-empty">Belum ada aktivitas ibadah</div>'
-                : listIbadah.map(a => `<li>
-                    <span class="nama">${a.nama} <span style="font-size:10px; color:#7c3aed; font-weight:700;">#${a.posisi||'-'}</span></span>
-                    <span class="waktu">${a.label}</span>
-                </li>`).join('');
+                : listIbadah.map(a => `<li><span class="nama">${a.nama} <span style="font-size:10px; color:#7c3aed; font-weight:700;">#${a.posisi||'-'}</span></span><span class="waktu">${a.label}</span></li>`).join('');
 
-            // WAKTU MAKAN
             const listMakan = gabungRentang(list, "MulaiMakan", "SelesaiMakan");
             document.getElementById('count-makan').innerText = listMakan.length;
             document.getElementById('list-makan').innerHTML = listMakan.length === 0
                 ? '<div class="aktivitas-empty">Belum ada aktivitas makan</div>'
-                : listMakan.map(a => `<li>
-                    <span class="nama">${a.nama} <span style="font-size:10px; color:#0d9488; font-weight:700;">#${a.posisi||'-'}</span></span>
-                    <span class="waktu">${a.label}</span>
-                </li>`).join('');
+                : listMakan.map(a => `<li><span class="nama">${a.nama} <span style="font-size:10px; color:#0d9488; font-weight:700;">#${a.posisi||'-'}</span></span><span class="waktu">${a.label}</span></li>`).join('');
 
-            // KELUAR ANTRIAN
             const listKeluar = list.filter(a => a.aksi === "KeluarAntrian").sort((a,b) => (b.waktu||0) - (a.waktu||0));
             document.getElementById('count-keluar').innerText = listKeluar.length;
             document.getElementById('list-keluar').innerHTML = listKeluar.length === 0
                 ? '<div class="aktivitas-empty">Belum ada yang keluar antrian</div>'
                 : listKeluar.map(a => `<li><span class="nama">${a.nama}</span><span class="waktu">${formatJam(a.waktu)}</span></li>`).join('');
 
-        // ===== AUTOKICK =====
-const listAutokick = list.filter(a => a.aksi === "Autokick").sort((a,b) => (b.waktu||0) - (a.waktu||0));
-document.getElementById('count-autokick').innerText = listAutokick.length;
-document.getElementById('list-autokick').innerHTML = listAutokick.length === 0
-    ? '<div class="aktivitas-empty">Tidak ada pelanggaran hari ini 👍</div>'
-    : listAutokick.map(a => {
-        // ✅ Tampilkan alasan kalau ada
-        const teksAlasan = a.alasan ? a.alasan : (a.kategori || "");
-        
-        return `<li>
-            <span class="nama">${a.nama} <span style="font-size:10px; color:#dc2626; font-weight:700;">${teksAlasan}</span></span>
-            <span class="waktu">${formatJam(a.waktu)} <span style="font-size:9px; color:#991b1b;">${a.sumber||''}</span></span>
-        </li>`;
-    }).join('');
-        }     
+            const listAutokick = list.filter(a => a.aksi === "Autokick").sort((a,b) => (b.waktu||0) - (a.waktu||0));
+            document.getElementById('count-autokick').innerText = listAutokick.length;
+            document.getElementById('list-autokick').innerHTML = listAutokick.length === 0
+                ? '<div class="aktivitas-empty">Tidak ada pelanggaran hari ini 👍</div>'
+                : listAutokick.map(a => {
+                    const teksAlasan = a.alasan ? a.alasan : (a.kategori || "");
+                    return `<li>
+                        <span class="nama">${a.nama} <span style="font-size:10px; color:#dc2626; font-weight:700;">${teksAlasan}</span></span>
+                        <span class="waktu">${formatJam(a.waktu)} <span style="font-size:9px; color:#991b1b;">${a.sumber||''}</span></span>
+                    </li>`;
+                }).join('');
+        }
+
         function gabungRentang(list, aksiMulai, aksiSelesai) {
             const perNama = {};
             list.forEach(a => {
@@ -1659,17 +1297,12 @@ document.getElementById('list-autokick').innerHTML = listAutokick.length === 0
                     else perNama[a.nama].selesai = a.waktuSelesai || a.waktu;
                 }
             });
-            return Object.values(perNama)
-                .sort((a,b) => (b.mulai||0) - (a.mulai||0))
-                .map(a => {
-                    const label = a.selesai
-                        ? `(${formatJam(a.mulai)} - ${formatJam(a.selesai)})`
-                        : `(${formatJam(a.mulai)} - ...)`;
-                    return { ...a, label };
-                });
+            return Object.values(perNama).sort((a,b) => (b.mulai||0) - (a.mulai||0)).map(a => {
+                const label = a.selesai ? `(${formatJam(a.mulai)} - ${formatJam(a.selesai)})` : `(${formatJam(a.mulai)} - ...)`;
+                return { ...a, label };
+            });
         }
 
-        // ====== RENDER UI UTAMA ======
         function renderUI() {
             const badge = document.getElementById('badge-status-sistem');
             badge.innerText = statusSistemGlobal === "BUKA" ? "STATUS ANTRIAN: OPEN" : "STATUS ANTRIAN: CLOSED";
@@ -1678,9 +1311,7 @@ document.getElementById('list-autokick').innerHTML = listAutokick.length === 0
             let listHA = "", listAV = "";
             let urutHA = 1, urutAV = 1;
             const akunSaya = sanitizeNama(getAkunAktif());
-
             const sorted = [...daftarAntrianGlobal].sort((a,b) => (a.waktuStandby||0) - (b.waktuStandby||0));
-
             const dataStandby = sorted.filter(item => item.status === "Standby");
             document.getElementById('promotor-nama-ha').textContent = (dataStandby.find(i => String(i.kategori).toUpperCase() === "HA") || {}).nama || "Belum Ada";
             document.getElementById('promotor-nama-av').textContent = (dataStandby.find(i => String(i.kategori).toUpperCase() === "AV") || {}).nama || "Belum Ada";
@@ -1690,7 +1321,6 @@ document.getElementById('list-autokick').innerHTML = listAutokick.length === 0
                 let itemHtml = "";
                 const isSaya = sanitizeNama(item.nama) === akunSaya;
                 const clsSaya = isSaya ? ' class="saya-sendiri"' : '';
-
                 if (item.status === "Standby") {
                     let urut = kat === "HA" ? urutHA++ : urutAV++;
                     let badgeHtml = (urut === 1) ? `<span class="badge-status-item badge-giliran-anda">Giliran Utama</span>` : `<span class="badge-status-item badge-standby">Standby #${urut}</span>`;
@@ -1715,9 +1345,7 @@ document.getElementById('list-autokick').innerHTML = listAutokick.length === 0
             const statusSaya = itemSaya ? itemSaya.status : "belum_ada";
             const sudahMakan = localStorage.getItem('ufo_sudah_makan_' + akunSaya) === 'true';
 
-            // CEK LOCK → sembunyikan tombol
             const sedangDiLock = lockDataGlobal && (lockDataGlobal.waktuExpired === 0 || Date.now() < lockDataGlobal.waktuExpired);
-
             if (sedangDiLock) {
                 document.getElementById('section-checkin-awal').style.display = 'none';
                 document.getElementById('section-normal').style.display = 'none';
@@ -1790,7 +1418,6 @@ document.getElementById('list-autokick').innerHTML = listAutokick.length === 0
             updateTimerAktif(itemSaya);
         }
 
-        // ====== DARK MODE ======
         function toggleDarkMode() {
             document.body.classList.toggle('dark-mode');
             localStorage.setItem('ufo_dark_mode', document.body.classList.contains('dark-mode'));
@@ -1804,7 +1431,6 @@ document.getElementById('list-autokick').innerHTML = listAutokick.length === 0
             }
         }
 
-        // ====== MODAL ======
         function tampilkanModal(j, d) {
             document.getElementById('modal-title').innerText = j;
             document.getElementById('modal-desc').innerText = d;
@@ -1825,7 +1451,6 @@ document.getElementById('list-autokick').innerHTML = listAutokick.length === 0
 
         function tutupModal() { document.getElementById('custom-modal').classList.remove('active'); }
 
-        // Expose ke global
         window.simpanAkunHP = simpanAkunHP;
         window.aksiHadirKerja = aksiHadirKerja;
         window.aksiDaftarAntrianNormal = aksiDaftarAntrianNormal;
