@@ -906,51 +906,7 @@
     });
 }
 
-            const pathUtama = 'mastersales';
-            window.dbOnValue(window.dbRef(db, pathUtama), (snapshot) => {
-                const dataRaw = snapshot.val();
-                if (dataRaw) {
-                    prosesMasterSales(dataRaw);
-                    masterSalesLoaded = true;
-                } else if (!masterSalesLoaded) {
-                    window.dbOnValue(window.dbRef(db, 'data'), (snap2) => {
-                        const d2 = snap2.val();
-                        if (d2 && !masterSalesLoaded) {
-                            prosesMasterSales(d2);
-                            masterSalesLoaded = true;
-                        }
-                    });
-                }
-            });
-
-            window.dbOnValue(window.dbRef(db, 'setting'), (snapshot) => {
-                const setting = snapshot.val();
-                if (setting) {
-                    statusSistemGlobal = setting.statusAntrian || "BUKA";
-                    koordinatToko.lat = setting.latToko ? Number(setting.latToko) : null;
-                    koordinatToko.lng = setting.lngToko ? Number(setting.lngToko) : null;
-                    koordinatToko.radius = Number(setting.radiusToko) || 50;
-                }
-                renderUI();
-            });
-
-            window.dbOnValue(window.dbRef(db, 'statistikAktivitas'), (snapshot) => {
-                const dataRaw = snapshot.val();
-                aktivitasGlobal = [];
-                if (dataRaw) {
-                    Object.keys(dataRaw).forEach(k => {
-                        const item = dataRaw[k];
-                        if (item && item.nama) {
-                            item._key = k;
-                            aktivitasGlobal.push(item);
-                        }
-                    });
-                }
-                renderAktivitas();
-            });
-        }
-
-        function prosesMasterSales(dataRaw) {
+                function prosesMasterSales(dataRaw) {
             let selectHtml = '<option value="">-- Pilih Nama Anda --</option>';
             let listSales = Array.isArray(dataRaw) ? dataRaw : Object.values(dataRaw);
             let names = [];
