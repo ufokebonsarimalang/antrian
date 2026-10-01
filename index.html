@@ -1095,20 +1095,36 @@
             window.dbRemove(window.dbRef(window.db, 'antrian/' + clean));
         }
 
-        function aksiToggleCS() {
-            const nama = getAkunAktif();
-            const clean = sanitizeNama(nama);
-            const itemSaya = daftarAntrianGlobal.find(it => sanitizeNama(it.nama) === clean);
-            const statusNow = itemSaya ? itemSaya.status : "";
+       function aksiToggleCS() {
+    const nama = getAkunAktif();
+    const clean = sanitizeNama(nama);
+    const itemSaya = daftarAntrianGlobal.find(it => sanitizeNama(it.nama) === clean);
+    const statusNow = itemSaya ? itemSaya.status : "";
 
-            if (statusNow === "Standby") {
-                window.dbUpdate(window.dbRef(window.db, 'antrian/' + clean), { status: "Dipanggil CS" })
-                .then(() => catatAktivitas(nama, "PanggilCS", ""));
-            } else if (statusNow === "Dipanggil CS") {
-                window.dbUpdate(window.dbRef(window.db, 'antrian/' + clean), { status: "Standby", waktuStandby: Date.now() })
-                .then(() => catatAktivitas(nama, "KembaliAntriDariCS", ""));
-            }
-        }
+    if (statusNow === "Standby") {
+        // ✅ Saat dipanggil CS: simpan posisi & waktuStandby lama
+        const kat = String(itemSaya.kategori || "HA").toUpperCase();
+        const listStandby = daftarAntrianGlobal
+            .filter(i => i.status === "Standby" && String(i.kategori).toUpperCase() === kat)
+            .sort((a, b) => (a.waktuStandby || 0) - (b.waktuStandby || 0));
+        const posisi = listStandby.findIndex(i => sanitizeNama(i.nama) === clean) + 1;
+        const waktuStandbyLama = itemSaya.waktuStandby || Date.now();
+
+        window.dbUpdate(window.dbRef(window.db, 'antrian/' + clean), {
+            status: "Dipanggil CS",
+            posisiTerkunci: posisi,
+            waktuStandbySebelumCS: waktuStandbyLama
+        }).then(() => catatAktivitas(nama, "PanggilCS", ""));
+    } else if (statusNow === "Dipanggil CS") {
+        // ✅ Kembali antri: restore posisi lama (jangan reset waktuStandby)
+        const waktuStandbyKembali = itemSaya.waktuStandbySebelumCS || itemSaya.waktuStandby || Date.now();
+        window.dbUpdate(window.dbRef(window.db, 'antrian/' + clean), {
+            status: "Standby",
+            waktuStandby: waktuStandbyKembali,
+            posisiTerkunci: 0
+        }).then(() => catatAktivitas(nama, "KembaliAntriDariCS", ""));
+    }
+}
 
         function bukaModalKeluarIstirahat() {
             tampilkanModalKonfirmasi("Keluar Antrian", "Yakin ingin keluar dari antrian?", () => {
