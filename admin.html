@@ -728,259 +728,262 @@
             document.getElementById('list-AV').innerHTML = listAV || empty;
         }
 
-        function renderStatistikAdmin() {
-            const tanggalEl = document.getElementById('tanggal-statistik-admin');
-            const ringkasanEl = document.getElementById('ringkasan-statistik-admin');
-            const listEl = document.getElementById('list-statistik-admin');
-            if (!tanggalEl || !ringkasanEl || !listEl) return;
+       function renderStatistikAdmin() {
+    const tanggalEl = document.getElementById('tanggal-statistik-admin');
+    const ringkasanEl = document.getElementById('ringkasan-statistik-admin');
+    const listEl = document.getElementById('list-statistik-admin');
+    if (!tanggalEl || !ringkasanEl || !listEl) return;
 
-            const hariIni = getTanggalIndo();
-            tanggalEl.innerText = hariIni;
+    const hariIni = getTanggalIndo();
+    tanggalEl.innerText = hariIni;
 
-            const listHariIni = statistikGlobal.filter(a => a.tanggal === hariIni);
-            const totalCustomer = listHariIni.filter(a => a.aksi === "BawaCustomer").length;
-            const totalDeal = listHariIni.filter(a => a.aksi === "BawaCustomer" && a.hasil === "Deal").length;
-            const totalLihat = listHariIni.filter(a => a.aksi === "BawaCustomer" && a.hasil === "Lihat").length;
-            const promotorSet = new Set(listHariIni.map(a => sanitizeNama(a.nama)));
-            const totalPromotor = promotorSet.size;
+    const listHariIni = statistikGlobal.filter(a => a.tanggal === hariIni);
+    const totalCustomer = listHariIni.filter(a => a.aksi === "BawaCustomer").length;
+    const totalDeal = listHariIni.filter(a => a.aksi === "BawaCustomer" && a.hasil === "Deal").length;
+    const totalLihat = listHariIni.filter(a => a.aksi === "BawaCustomer" && a.hasil === "Lihat").length;
+    const promotorSet = new Set(listHariIni.map(a => sanitizeNama(a.nama)));
+    const totalPromotor = promotorSet.size;
 
-            if (listHariIni.length === 0) {
-                ringkasanEl.innerHTML = `<i>Belum ada aktivitas hari ini.</i>`;
-                listEl.innerHTML = `<li style="list-style:none;"><span style="color:#94a3b8; font-style:italic;">Belum ada aktivitas</span></li>`;
-                return;
-            }
+    if (listHariIni.length === 0) {
+        ringkasanEl.innerHTML = `<i>Belum ada aktivitas hari ini.</i>`;
+        listEl.innerHTML = `<li style="list-style:none;"><span style="color:#94a3b8; font-style:italic;">Belum ada aktivitas</span></li>`;
+        return;
+    }
 
-            let ringkasanHtml = `<b>${totalPromotor} promotor</b> • <b>${totalCustomer} customer</b>`;
-            if (totalDeal > 0 || totalLihat > 0) {
-                ringkasanHtml += ` • <span style="color:#059669; font-weight:700;">✓ ${totalDeal} Deal</span>`;
-                ringkasanHtml += ` • <span style="color:#d97706; font-weight:700;">◉ ${totalLihat} Lihat</span>`;
-            }
-            ringkasanEl.innerHTML = ringkasanHtml;
+    let ringkasanHtml = `<b>${totalPromotor} promotor</b> • <b>${totalCustomer} customer</b>`;
+    if (totalDeal > 0 || totalLihat > 0) {
+        ringkasanHtml += ` • <span style="color:#059669; font-weight:700;">✓ ${totalDeal} Deal</span>`;
+        ringkasanHtml += ` • <span style="color:#d97706; font-weight:700;">◉ ${totalLihat} Lihat</span>`;
+    }
+    ringkasanEl.innerHTML = ringkasanHtml;
 
-            const listBawaStatistik = listHariIni.filter(a => a.aksi === "BawaCustomer");
-            const statistikSelesai = listBawaStatistik.filter(a => a.waktuSelesai);
-            const statistikMasihProses = listBawaStatistik.filter(a => !a.waktuSelesai);
-            const namaSudahSelesai = new Set(statistikSelesai.map(a => sanitizeNama(a.nama)));
+    // ===== BAWA CUSTOMER =====
+    const listBawaStatistik = listHariIni.filter(a => a.aksi === "BawaCustomer");
+    const statistikSelesai = listBawaStatistik.filter(a => a.waktuSelesai);
+    const statistikMasihProses = listBawaStatistik.filter(a => !a.waktuSelesai);
+    const namaSudahSelesai = new Set(statistikSelesai.map(a => sanitizeNama(a.nama)));
 
-            const listSedangMelayani = daftarAntrianGlobal
-                .filter(item => item.status === "Melayani")
-                .filter(item => !namaSudahSelesai.has(sanitizeNama(item.nama)))
-                .map(item => ({
-                    nama: item.nama,
-                    waktuMulai: item.waktuMulaiMelayani || item.waktuStandby || Date.now(),
-                    waktuSelesai: null, hasil: null, _sedangMelayani: true
-                }));
+    const listSedangMelayani = daftarAntrianGlobal
+        .filter(item => item.status === "Melayani")
+        .filter(item => !namaSudahSelesai.has(sanitizeNama(item.nama)))
+        .map(item => ({
+            nama: item.nama,
+            waktuMulai: item.waktuMulaiMelayani || item.waktuStandby || Date.now(),
+            waktuSelesai: null, hasil: null, _sedangMelayani: true
+        }));
 
-            const namaSedangMelayani = new Set(listSedangMelayani.map(i => sanitizeNama(i.nama)));
-            let semuaBawa = [];
-            listSedangMelayani.forEach(item => semuaBawa.push(item));
-            statistikMasihProses.forEach(a => {
-                const clean = sanitizeNama(a.nama);
-                if (!namaSedangMelayani.has(clean)) {
-                    semuaBawa.push({
-                        nama: a.nama, waktuMulai: a.waktuMulai || a.waktu,
-                        waktuSelesai: null, hasil: null, _sedangMelayani: false
-                    });
-                }
+    const namaSedangMelayani = new Set(listSedangMelayani.map(i => sanitizeNama(i.nama)));
+    let semuaBawa = [];
+    listSedangMelayani.forEach(item => semuaBawa.push(item));
+    statistikMasihProses.forEach(a => {
+        const clean = sanitizeNama(a.nama);
+        if (!namaSedangMelayani.has(clean)) {
+            semuaBawa.push({
+                nama: a.nama, waktuMulai: a.waktuMulai || a.waktu,
+                waktuSelesai: null, hasil: null, _sedangMelayani: false
             });
-            statistikSelesai.forEach(a => {
-                semuaBawa.push({
-                    nama: a.nama, waktuMulai: a.waktuMulai || a.waktu,
-                    waktuSelesai: a.waktuSelesai, hasil: a.hasil, _sedangMelayani: false
-                });
-            });
-            semuaBawa.sort((a, b) => (b.waktuMulai || 0) - (a.waktuMulai || 0));
-
-            const listIbadah = gabungRentang(listHariIni, "MulaiIbadah", "SelesaiIbadah");
-            const listMakan = gabungRentang(listHariIni, "MulaiMakan", "SelesaiMakan");
-            const listKeluar = listHariIni.filter(a => a.aksi === "KeluarAntrian").sort((a,b) => (b.waktu||0) - (a.waktu||0));
-            const listAutokick = listHariIni.filter(a => a.aksi === "Autokick").sort((a,b) => (b.waktu||0) - (a.waktu||0));
-
-            let html = "";
-
-            if (semuaBawa.length > 0) {
-                html += `<li class="stat-kategori-card">
-                    <div class="stat-kategori-header">
-                        <span class="stat-kategori-icon green">${ICON.BAWA}</span>
-                        <b>BAWA CUSTOMER</b>
-                        <span class="stat-kategori-count">${semuaBawa.length}</span>
-                    </div>
-                    <div class="stat-kategori-body">`;
-                semuaBawa.forEach(a => {
-                    const mulai = a.waktuMulai;
-                    const selesai = a.waktuSelesai;
-                    let range, labelHasil, badge;
-                    if (a._sedangMelayani) {
-                        range = `${formatJam(mulai)} – ...`;
-                        labelHasil = `<span class="stat-action-label">(melayani)</span>`;
-                        badge = `<span class="stat-badge-info">Melayani</span>`;
-                    } else if (selesai) {
-                        range = `${formatJam(mulai)} – ${formatJam(selesai)}`;
-                        if (a.hasil === "Deal") {
-                            labelHasil = "";
-                            badge = `<span class="stat-badge-deal">✓ Deal</span>`;
-                        } else if (a.hasil === "Lihat") {
-                            labelHasil = `<span class="stat-action-label">(lihat)</span>`;
-                            badge = `<span class="stat-badge-lihat">◉ Lihat</span>`;
-                        } else {
-                            labelHasil = "";
-                            badge = `<span class="stat-badge-pending">Selesai</span>`;
-                        }
-                    } else {
-                        range = `${formatJam(mulai)} – ...`;
-                        labelHasil = `<span class="stat-action-label">(proses)</span>`;
-                        badge = `<span class="stat-badge-pending">Proses</span>`;
-                    }
-                    html += `
-                        <div class="stat-detail-row">
-                            <div class="stat-detail-left">
-                                <b class="stat-action-name">${a.nama}</b>
-                                ${labelHasil}
-                                <b class="stat-action-time">${range}</b>
-                            </div>
-                            ${badge}
-                        </div>
-                    `;
-                });
-                html += `</div></li>`;
-            }
-
-            if (listIbadah.length > 0) {
-                html += `<li class="stat-kategori-card">
-                    <div class="stat-kategori-header">
-                        <span class="stat-kategori-icon purple">${ICON.IBADAH}</span>
-                        <b>IBADAH</b>
-                        <span class="stat-kategori-count">${listIbadah.length}</span>
-                    </div>
-                    <div class="stat-kategori-body">`;
-                listIbadah.forEach(a => {
-                    const range = a.selesai
-                        ? `${formatJam(a.mulai)} – ${formatJam(a.selesai)}`
-                        : `${formatJam(a.mulai)} – ...`;
-                    html += `
-                        <div class="stat-detail-row">
-                            <div class="stat-detail-left">
-                                <b class="stat-action-name">${a.nama}</b>
-                                <b class="stat-action-time">${range}</b>
-                            </div>
-                            ${a.posisi ? `<span class="stat-badge-info">#${a.posisi}</span>` : ''}
-                        </div>
-                    `;
-                });
-                html += `</div></li>`;
-            }
-
-            if (listMakan.length > 0) {
-                html += `<li class="stat-kategori-card">
-                    <div class="stat-kategori-header">
-                        <span class="stat-kategori-icon amber">${ICON.MAKAN}</span>
-                        <b>WAKTU MAKAN</b>
-                        <span class="stat-kategori-count">${listMakan.length}</span>
-                    </div>
-                    <div class="stat-kategori-body">`;
-                listMakan.forEach(a => {
-                    const range = a.selesai
-                        ? `${formatJam(a.mulai)} – ${formatJam(a.selesai)}`
-                        : `${formatJam(a.mulai)} – ...`;
-                    html += `
-                        <div class="stat-detail-row">
-                            <div class="stat-detail-left">
-                                <b class="stat-action-name">${a.nama}</b>
-                                <b class="stat-action-time">${range}</b>
-                            </div>
-                            ${a.posisi ? `<span class="stat-badge-info">#${a.posisi}</span>` : ''}
-                        </div>
-                    `;
-                });
-                html += `</div></li>`;
-            }
-
-            if (listKeluar.length > 0) {
-                html += `<li class="stat-kategori-card">
-                    <div class="stat-kategori-header">
-                        <span class="stat-kategori-icon red">${ICON.KELUAR}</span>
-                        <b>KELUAR ANTRIAN</b>
-                        <span class="stat-kategori-count">${listKeluar.length}</span>
-                    </div>
-                    <div class="stat-kategori-body">`;
-                listKeluar.forEach(a => {
-                    html += `
-                        <div class="stat-detail-row">
-                            <div class="stat-detail-left">
-                                <b class="stat-action-name">${a.nama}</b>
-                                <b class="stat-action-time">${formatJam(a.waktu)}</b>
-                            </div>
-                            <span class="stat-badge-info">${a.hasil || "Manual"}</span>
-                        </div>
-                    `;
-                });
-                html += `</div></li>`;
-            }
-
-            if (listAutokick.length > 0) {
-                html += `<li class="stat-kategori-card">
-                    <div class="stat-kategori-header">
-                        <span class="stat-kategori-icon maroon">${ICON.AUTOKICK}</span>
-                        <b>AUTOKICK (PELANGGARAN / ADMIN)</b>
-                        <span class="stat-kategori-count">${listAutokick.length}</span>
-                    </div>
-                    <div class="stat-kategori-body">`;
-                listAutokick.forEach(a => {
-                    const teksAlasan = a.alasan ? a.alasan : (a.kategori || a.hasil || "");
-                    html += `
-                        <div class="stat-detail-row">
-                            <div class="stat-detail-left">
-                                <b class="stat-action-name">${a.nama}</b>
-                                <span class="stat-action-label">${teksAlasan}</span>
-                                <b class="stat-action-time">${formatJam(a.waktu)}</b>
-                            </div>
-                            <span class="stat-badge-info">${a.sumber || ""}</span>
-                        </div>
-                    `;
-                });
-                html += `</div></li>`;
-            }
-
-            if (!html) {
-                html = `<li style="list-style:none;"><span style="color:#94a3b8; font-style:italic;">Belum ada aktivitas</span></li>`;
-            }
-
-            const placeholderIbadah = listIbadah.length === 0 ? `
-                <li class="stat-kategori-card" style="opacity:0.5;">
-                    <div class="stat-kategori-header">
-                        <span class="stat-kategori-icon purple">${ICON.IBADAH}</span>
-                        <b>IBADAH</b>
-                        <span class="stat-kategori-count">0</span>
-                    </div>
-                    <div class="stat-kategori-body">
-                        <div style="text-align:center; font-size:11px; color:#94a3b8; font-style:italic; padding:6px 0;">Belum ada aktivitas ibadah</div>
-                    </div>
-                </li>` : "";
-            const placeholderMakan = listMakan.length === 0 ? `
-                <li class="stat-kategori-card" style="opacity:0.5;">
-                    <div class="stat-kategori-header">
-                        <span class="stat-kategori-icon amber">${ICON.MAKAN}</span>
-                        <b>WAKTU MAKAN</b>
-                        <span class="stat-kategori-count">0</span>
-                    </div>
-                    <div class="stat-kategori-body">
-                        <div style="text-align:center; font-size:11px; color:#94a3b8; font-style:italic; padding:6px 0;">Belum ada aktivitas makan</div>
-                    </div>
-                </li>` : "";
-            const placeholderAutokick = listAutokick.length === 0 ? `
-                <li class="stat-kategori-card" style="opacity:0.5;">
-                    <div class="stat-kategori-header">
-                        <span class="stat-kategori-icon maroon">${ICON.AUTOKICK}</span>
-                        <b>AUTOKICK (PELANGGARAN / ADMIN)</b>
-                        <span class="stat-kategori-count">0</span>
-                    </div>
-                    <div class="stat-kategori-body">
-                        <div style="text-align:center; font-size:11px; color:#94a3b8; font-style:italic; padding:6px 0;">Tidak ada pelanggaran hari ini 👍</div>
-                    </div>
-                </li>` : "";
-
-            listEl.innerHTML = html + placeholderIbadah + placeholderMakan + placeholderAutokick;
         }
+    });
+    statistikSelesai.forEach(a => {
+        semuaBawa.push({
+            nama: a.nama, waktuMulai: a.waktuMulai || a.waktu,
+            waktuSelesai: a.waktuSelesai, hasil: a.hasil, _sedangMelayani: false
+        });
+    });
+    semuaBawa.sort((a, b) => (b.waktuMulai || 0) - (a.waktuMulai || 0));
+
+    const listIbadah = gabungRentang(listHariIni, "MulaiIbadah", "SelesaiIbadah");
+    const listMakan = gabungRentang(listHariIni, "MulaiMakan", "SelesaiMakan");
+    const listKeluar = listHariIni.filter(a => a.aksi === "KeluarAntrian").sort((a,b) => (b.waktu||0) - (a.waktu||0));
+    const listAutokick = listHariIni.filter(a => a.aksi === "Autokick").sort((a,b) => (b.waktu||0) - (a.waktu||0));
+
+    let html = "";
+
+    // 1. BAWA CUSTOMER
+    if (semuaBawa.length > 0) {
+        html += `<li class="stat-kategori-card">
+            <div class="stat-kategori-header">
+                <span class="stat-kategori-icon green">${ICON.BAWA}</span>
+                <b>BAWA CUSTOMER</b>
+                <span class="stat-kategori-count">${semuaBawa.length}</span>
+            </div>
+            <div class="stat-kategori-body">`;
+        semuaBawa.forEach(a => {
+            const mulai = a.waktuMulai;
+            const selesai = a.waktuSelesai;
+            let range, labelHasil, badge;
+            if (a._sedangMelayani) {
+                range = `${formatJam(mulai)} – ...`;
+                labelHasil = `<span class="stat-action-label">(melayani)</span>`;
+                badge = `<span class="stat-badge-info">Melayani</span>`;
+            } else if (selesai) {
+                range = `${formatJam(mulai)} – ${formatJam(selesai)}`;
+                if (a.hasil === "Deal") {
+                    labelHasil = "";
+                    badge = `<span class="stat-badge-deal">✓ Deal</span>`;
+                } else if (a.hasil === "Lihat") {
+                    labelHasil = `<span class="stat-action-label">(lihat)</span>`;
+                    badge = `<span class="stat-badge-lihat">◉ Lihat</span>`;
+                } else {
+                    labelHasil = "";
+                    badge = `<span class="stat-badge-pending">Selesai</span>`;
+                }
+            } else {
+                range = `${formatJam(mulai)} – ...`;
+                labelHasil = `<span class="stat-action-label">(proses)</span>`;
+                badge = `<span class="stat-badge-pending">Proses</span>`;
+            }
+            html += `
+                <div class="stat-detail-row">
+                    <div class="stat-detail-left">
+                        <b class="stat-action-name">${a.nama}</b>
+                        ${labelHasil}
+                        <b class="stat-action-time">${range}</b>
+                    </div>
+                    ${badge}
+                </div>
+            `;
+        });
+        html += `</div></li>`;
+    }
+
+    // 2. IBADAH
+    if (listIbadah.length > 0) {
+        html += `<li class="stat-kategori-card">
+            <div class="stat-kategori-header">
+                <span class="stat-kategori-icon purple">${ICON.IBADAH}</span>
+                <b>IBADAH</b>
+                <span class="stat-kategori-count">${listIbadah.length}</span>
+            </div>
+            <div class="stat-kategori-body">`;
+        listIbadah.forEach(a => {
+            const range = a.selesai ? `${formatJam(a.mulai)} – ${formatJam(a.selesai)}` : `${formatJam(a.mulai)} – ...`;
+            html += `
+                <div class="stat-detail-row">
+                    <div class="stat-detail-left">
+                        <b class="stat-action-name">${a.nama}</b>
+                        <b class="stat-action-time">${range}</b>
+                    </div>
+                    ${a.posisi ? `<span class="stat-badge-info">#${a.posisi}</span>` : ''}
+                </div>
+            `;
+        });
+        html += `</div></li>`;
+    }
+
+    // 3. WAKTU MAKAN
+    if (listMakan.length > 0) {
+        html += `<li class="stat-kategori-card">
+            <div class="stat-kategori-header">
+                <span class="stat-kategori-icon amber">${ICON.MAKAN}</span>
+                <b>WAKTU MAKAN</b>
+                <span class="stat-kategori-count">${listMakan.length}</span>
+            </div>
+            <div class="stat-kategori-body">`;
+        listMakan.forEach(a => {
+            const range = a.selesai ? `${formatJam(a.mulai)} – ${formatJam(a.selesai)}` : `${formatJam(a.mulai)} – ...`;
+            html += `
+                <div class="stat-detail-row">
+                    <div class="stat-detail-left">
+                        <b class="stat-action-name">${a.nama}</b>
+                        <b class="stat-action-time">${range}</b>
+                    </div>
+                    ${a.posisi ? `<span class="stat-badge-info">#${a.posisi}</span>` : ''}
+                </div>
+            `;
+        });
+        html += `</div></li>`;
+    }
+
+    // 4. KELUAR ANTRIAN
+    if (listKeluar.length > 0) {
+        html += `<li class="stat-kategori-card">
+            <div class="stat-kategori-header">
+                <span class="stat-kategori-icon red">${ICON.KELUAR}</span>
+                <b>KELUAR ANTRIAN</b>
+                <span class="stat-kategori-count">${listKeluar.length}</span>
+            </div>
+            <div class="stat-kategori-body">`;
+        listKeluar.forEach(a => {
+            html += `
+                <div class="stat-detail-row">
+                    <div class="stat-detail-left">
+                        <b class="stat-action-name">${a.nama}</b>
+                        <b class="stat-action-time">${formatJam(a.waktu)}</b>
+                    </div>
+                    <span class="stat-badge-info">${a.hasil || "Manual"}</span>
+                </div>
+            `;
+        });
+        html += `</div></li>`;
+    }
+
+    // 5. AUTOKICK — LAYOUT 2 BARIS (nama di atas, alasan di bawah)
+    if (listAutokick.length > 0) {
+        html += `<li class="stat-kategori-card">
+            <div class="stat-kategori-header">
+                <span class="stat-kategori-icon maroon">${ICON.AUTOKICK}</span>
+                <b>AUTOKICK (PELANGGARAN / ADMIN)</b>
+                <span class="stat-kategori-count">${listAutokick.length}</span>
+            </div>
+            <div class="stat-kategori-body">`;
+        listAutokick.forEach(a => {
+            const teksAlasan = a.alasan ? a.alasan : (a.kategori || a.hasil || "");
+            html += `
+                <div class="stat-detail-row" style="flex-direction: column; align-items: flex-start; gap: 2px;">
+                    <div style="display: flex; justify-content: space-between; width: 100%; align-items: center; gap: 8px;">
+                        <b class="stat-action-name" style="max-width: 100%; white-space: normal; font-size: 13px;">${a.nama}</b>
+                        <span class="stat-badge-info" style="flex-shrink: 0;">${a.sumber || ""}</span>
+                    </div>
+                    <span style="font-size: 11px; color: #dc2626; font-weight: 700; font-style: italic; word-break: break-word; width: 100%;">${teksAlasan}</span>
+                    <span class="stat-action-time" style="font-size: 10px;">${formatJam(a.waktu)}</span>
+                </div>
+            `;
+        });
+        html += `</div></li>`;
+    }
+
+    if (!html) {
+        html = `<li style="list-style:none;"><span style="color:#94a3b8; font-style:italic;">Belum ada aktivitas</span></li>`;
+    }
+
+    // Placeholder kategori kosong
+    const placeholderIbadah = listIbadah.length === 0 ? `
+        <li class="stat-kategori-card" style="opacity:0.5;">
+            <div class="stat-kategori-header">
+                <span class="stat-kategori-icon purple">${ICON.IBADAH}</span>
+                <b>IBADAH</b>
+                <span class="stat-kategori-count">0</span>
+            </div>
+            <div class="stat-kategori-body">
+                <div style="text-align:center; font-size:11px; color:#94a3b8; font-style:italic; padding:6px 0;">Belum ada aktivitas ibadah</div>
+            </div>
+        </li>` : "";
+    const placeholderMakan = listMakan.length === 0 ? `
+        <li class="stat-kategori-card" style="opacity:0.5;">
+            <div class="stat-kategori-header">
+                <span class="stat-kategori-icon amber">${ICON.MAKAN}</span>
+                <b>WAKTU MAKAN</b>
+                <span class="stat-kategori-count">0</span>
+            </div>
+            <div class="stat-kategori-body">
+                <div style="text-align:center; font-size:11px; color:#94a3b8; font-style:italic; padding:6px 0;">Belum ada aktivitas makan</div>
+            </div>
+        </li>` : "";
+    const placeholderAutokick = listAutokick.length === 0 ? `
+        <li class="stat-kategori-card" style="opacity:0.5;">
+            <div class="stat-kategori-header">
+                <span class="stat-kategori-icon maroon">${ICON.AUTOKICK}</span>
+                <b>AUTOKICK (PELANGGARAN / ADMIN)</b>
+                <span class="stat-kategori-count">0</span>
+            </div>
+            <div class="stat-kategori-body">
+                <div style="text-align:center; font-size:11px; color:#94a3b8; font-style:italic; padding:6px 0;">Tidak ada pelanggaran hari ini 👍</div>
+            </div>
+        </li>` : "";
+
+    listEl.innerHTML = html + placeholderIbadah + placeholderMakan + placeholderAutokick;
+}
 
         function gabungRentang(list, aksiMulai, aksiSelesai) {
             const perNama = {};
