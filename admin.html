@@ -963,52 +963,90 @@
             }
         }
 
-        function bukaModalTambahAntriAdmin() {
-            if (masterSalesGlobal.length === 0) { tampilkanModal("Info", "Belum ada promotor di Master Sales."); return; }
-            let options = '<option value="">-- Pilih Promotor --</option>';
-            masterSalesGlobal.forEach(n => { options += `<option value="${n.nama}">${n.nama}</option>`; });
-            document.getElementById('modal-title').innerText = "Masukkan Promotor ke Antrian";
-            document.getElementById('modal-desc').innerHTML = `
-                Kategori:<br>
-                <select id="admin-select-kategori">
-                    <option value="HA">HA (Home Appliance)</option>
-                    <option value="AV">AV (Audio Video)</option>
-                </select><br><br>
-                Promotor:<br>
-                <select id="admin-select-sales">${options}</select>
-            `;
-            document.getElementById('modal-actions').innerHTML = `
-                <button type="button" class="btn-cancel" onclick="tutupModal()">Batal</button>
-                <button type="button" id="btn-modal-action-ok" onclick="eksekusiTambahAntriAdmin()">Proses</button>
-            `;
-            document.getElementById('custom-modal').classList.add('active');
+     function bukaModalTambahAntriAdmin() {
+    if (masterSalesGlobal.length === 0) { tampilkanModal("Info", "Belum ada promotor di Master Sales."); return; }
+    let options = '<option value="">-- Pilih Promotor --</option>';
+    masterSalesGlobal.forEach(n => { options += `<option value="${n.nama}">${n.nama}</option>`; });
+    
+    document.getElementById('modal-title').innerText = "Masukkan Promotor ke Antrian";
+    document.getElementById('modal-desc').innerHTML = `
+        Kategori:<br>
+        <select id="admin-select-kategori" style="margin-bottom:10px;">
+            <option value="HA">HA (Home Appliance)</option>
+            <option value="AV">AV (Audio Video)</option>
+        </select><br>
+        
+        Promotor:<br>
+        <select id="admin-select-sales" style="margin-bottom:10px;">${options}</select><br>
+        
+        Posisi Urutan:<br>
+        <input type="number" id="admin-input-posisi" value="1" min="1" placeholder="Nomor urut" style="margin-bottom:10px;">
+        <div style="font-size:10px; color:#94a3b8; margin-top:-6px;">Kosongkan / isi 0 untuk masuk paling belakang</div>
+    `;
+    document.getElementById('modal-actions').innerHTML = `
+        <button type="button" class="btn-cancel" onclick="tutupModal()">Batal</button>
+        <button type="button" id="btn-modal-action-ok" onclick="eksekusiTambahAntriAdmin()">Proses</button>
+    `;
+    document.getElementById('custom-modal').classList.add('active');
+}
+      async function eksekusiTambahAntriAdmin() {
+    const kategori = document.getElementById('admin-select-kategori').value;
+    const nama = document.getElementById('admin-select-sales').value;
+    const posisiInput = document.getElementById('admin-input-posisi').value;
+    const posisi = parseInt(posisiInput) || 0;
+
+    if (!nama) { tampilkanModal("Perhatian", "Pilih promotor!"); return; }
+    const clean = sanitizeNama(nama);
+
+    const btn = document.getElementById('btn-modal-action-ok');
+    btn.disabled = true;
+    btn.innerHTML = `<span class="spinner"></span> Memproses...`;
+
+    try {
+        const snap = await window.dbGet(window.dbRef(window.db, 'antrian/' + clean));
+        if (snap.exists()) {
+            tutupModal();
+            tampilkanModal("Gagal", "Promotor sudah ada di antrian.");
+            return;
         }
-        async function eksekusiTambahAntriAdmin() {
-            const kategori = document.getElementById('admin-select-kategori').value;
-            const nama = document.getElementById('admin-select-sales').value;
-            if (!nama) { tampilkanModal("Perhatian", "Pilih promotor!"); return; }
-            const clean = sanitizeNama(nama);
-            const btn = document.getElementById('btn-modal-action-ok');
-            btn.disabled = true;
-            btn.innerHTML = `<span class="spinner"></span> Memproses...`;
-            try {
-                const snap = await window.dbGet(window.dbRef(window.db, 'antrian/' + clean));
-                if (snap.exists()) {
-                    tutupModal();
-                    tampilkanModal("Gagal", "Promotor sudah ada di antrian.");
-                    return;
-                }
-                await window.dbSet(window.dbRef(window.db, 'antrian/' + clean), {
-                    nama: nama, status: "Standby", waktuStandby: Date.now(),
-                    kategori: kategori, subkategori: kategori, timerMulai: 0, timerAksi: "", posisiTerkunci: 0
-                });
-                tutupModal();
-                tampilkanModal("Berhasil", `Promotor ${nama} dimasukkan ke antrian kategori ${kategori}.`);
-            } catch (e) {
-                tutupModal();
-                tampilkanModal("Gagal", "Tidak bisa menambahkan ke antrian.");
+
+        // ✅ Hitung waktuStandby custom untuk posisi
+        let waktuStandby = Date.now();
+        
+        if (posisi > 0) {
+            // Ambil semua antrian standby di kategori ini, urut by waktuStandby
+            const snapAll = await window.dbGet(window.dbRef(window.db, 'antrian'));
+            const allData = snapAll.val() || {};
+            const listKategori = Object.keys(allData)
+                .map(k => ({ _key: k, ...allData[k] }))
+                .filter(a => String(a.kategori || '').toUpperCase() === String(kategori).toUpperCase() && a.status === 'Standby')
+                .sort((a, b) => (a.waktuStandby || 0) - (b.waktuStandby || 0));
+
+            if (posisi <= listKategori.length && listKategori.length > 0) {
+                // Sisipkan sebelum posisi ke-N: pakai waktuStandby sedikit lebih kecil
+                const target = listKategori[posisi - 1];
+                waktuStandby = (target.waktuStandby || Date.now()) - 1;
+            } else {
+                // Posisi di luar jangkauan → taruh paling belakang
+                const last = listKategori[listKategori.length - 1];
+                waktuStandby = (last && last.waktuStandby ? last.waktuStandby : Date.now()) + 1;
             }
         }
+
+        await window.dbSet(window.dbRef(window.db, 'antrian/' + clean), {
+            nama: nama, status: "Standby", waktuStandby: waktuStandby,
+            kategori: kategori, subkategori: kategori, timerMulai: 0, timerAksi: "", posisiTerkunci: 0
+        });
+
+        tutupModal();
+        const infoPosisi = posisi > 0 ? `di posisi #${posisi}` : `paling belakang`;
+        tampilkanModal("Berhasil", `Promotor ${nama} dimasukkan ke antrian kategori ${kategori} ${infoPosisi}.`);
+    } catch (e) {
+        console.warn("Error tambah antri:", e);
+        tutupModal();
+        tampilkanModal("Gagal", "Tidak bisa menambahkan ke antrian.");
+    }
+}
 
         function bukaModalKeluarkanAntrian() {
             if (daftarAntrianGlobal.length === 0) { tampilkanModal("Info", "Antrian kosong."); return; }
