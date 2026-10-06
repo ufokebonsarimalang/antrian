@@ -390,7 +390,7 @@
         let lockDataGlobal = null;
         let autoCleanupInterval = null;
 
-        const DURASI_TIMER_MENIT = 15;
+        const DURASI_TIMER_MENIT = 30;
         const SVG_CHECK_DEAL = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="11" fill="#059669"/><path d="M7 12.5L10.5 16L17 9" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
         const SVG_ICON_LIHAT = `👀`;
 
@@ -1014,7 +1014,7 @@
                     .sort((a,b) => (a.waktuStandby||0) - (b.waktuStandby||0));
                 const posisi = listStandby.findIndex(i => sanitizeNama(i.nama) === clean) + 1;
 
-                tampilkanModalKonfirmasi("Sedang Ibadah", `Posisi antrian Anda (#${posisi}) akan DIKUNCI selama 15 menit. Lanjutkan?`, () => {
+                tampilkanModalKonfirmasi("Sedang Ibadah", `Posisi antrian Anda (#${posisi}) akan DIKUNCI selama 30 menit. Lanjutkan?`, () => {
                     const now = waktuServer();
                     window.dbUpdate(window.dbRef(window.db, 'antrian/' + clean), { status: "Ibadah", timerMulai: now, timerAksi: "Ibadah", posisiTerkunci: posisi })
                     .then(() => catatAktivitasIbadah(nama, "MulaiIbadah", now, posisi));
@@ -1162,7 +1162,7 @@
             }
 
             box.style.display = 'block';
-            label.innerText = "TIMER " + (itemSaya.timerAksi || "").toUpperCase() + " (15 MENIT) - POSISI #" + (itemSaya.posisiTerkunci || "-");
+            label.innerText = "TIMER " + (itemSaya.timerAksi || "").toUpperCase() + " (30 MENIT) - POSISI #" + (itemSaya.posisiTerkunci || "-");
 
             const totalDetik = DURASI_TIMER_MENIT * 60;
             const cleanNama = sanitizeNama(itemSaya.nama);
@@ -1511,7 +1511,7 @@
                 btnIbadah.innerText = "SELESAI IBADAH (Lebih Awal)";
             } else {
                 btnIbadah.className = "btn-indigo";
-                btnIbadah.innerText = "SEDANG IBADAH (15 MENIT)";
+                btnIbadah.innerText = "SEDANG IBADAH (30 MENIT)";
             }
 
             updateTimerAktif(itemSaya);
