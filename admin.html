@@ -575,7 +575,7 @@
 
         function cekSemuaExpiredAdmin() {
             const sekarang = waktuServer();
-            const totalDetik = 15 * 60;
+            const totalDetik = 30 * 60;
             daftarAntrianGlobal.forEach(item => {
                 if (!item) return;
                 const isTimerStatus = (item.status === "Ibadah");
