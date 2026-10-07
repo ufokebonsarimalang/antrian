@@ -246,13 +246,7 @@
                 </div>
             </div>
 
-            <div id="timer-aktif-box" style="display:none; margin-bottom: 16px;">
-                <div class="timer-card-admin" style="border: 2px solid #d97706;">
-                    <span class="timer-badge-title" id="timer-aktif-label">TIMER</span>
-                    <div class="timer-display" id="timer-aktif-display">30:00</div>
-                    <div style="font-size:10px; color:var(--text-muted); margin-top:4px; font-weight:600;">⚠️ Posisi terkunci. Jika timer habis sebelum selesai → otomatis keluar antrian</div>
-                </div>
-            </div>
+            <!-- ⏱ Timer Ibadah DIHAPUS -->
 
             <div id="section-checkin-awal" style="display: none;">
                 <div class="gps-box">
@@ -398,7 +392,6 @@
         let masterSalesGlobal = [];
         let statusSistemGlobal = "BUKA";
         let namaSalesAktifGlobal = "";
-        let timerIntervalGlobal = null;
         let masterSalesLoaded = false;
         let aktivitasGlobal = [];
         let checkinHarianGlobal = {};
@@ -417,7 +410,6 @@
         let lockDataGlobal = null;
         let autoCleanupInterval = null;
 
-        const DURASI_TIMER_MENIT = 30;
         const SVG_CHECK_DEAL = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="11" fill="#059669"/><path d="M7 12.5L10.5 16L17 9" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
         const SVG_ICON_LIHAT = `👀`;
 
@@ -539,7 +531,6 @@
                         }
                     });
                 }
-                cekSemuaExpired();
                 renderUI();
                 renderAktivitas();
             });
@@ -586,6 +577,7 @@
                 }
                 renderAktivitas();
                 renderRekapBawaCustomer();
+                renderTotalBulanan();
             });
 
             window.dbOnValue(window.dbRef(db, 'checkinHarian'), (snapshot) => {
@@ -610,12 +602,6 @@
                 }
                 renderUI();
                 renderRekapBawaCustomer();
-            });
-
-            window.dbOnValue(window.dbRef(db, 'riwayatBulanan'), (snapshot) => {
-                const dataRaw = snapshot.val() || {};
-                riwayatBulananGlobal = dataRaw;
-                renderTotalBulanan();
             });
 
             window.dbOnValue(window.dbRef(db, 'lockPromotor'), (snapshot) => {
@@ -656,12 +642,10 @@
 
             if (autoCleanupInterval) clearInterval(autoCleanupInterval);
             autoCleanupInterval = setInterval(() => {
-                cekSemuaExpired();
                 cekLockExpired();
             }, 15000);
 
             setTimeout(() => {
-                cekSemuaExpired();
                 cekLockExpired();
             }, 2000);
         }
@@ -684,37 +668,6 @@
                     if (waktuExpired > 0 && sekarang >= waktuExpired) {
                         autoUnlockSendiri(clean, lockData);
                     }
-                }
-            });
-        }
-
-        function cekSemuaExpired() {
-            const sekarang = waktuServer();
-            const totalDetik = DURASI_TIMER_MENIT * 60;
-            daftarAntrianGlobal.forEach(item => {
-                if (!item) return;
-                const isTimerStatus = (item.status === "Ibadah");
-                if (!isTimerStatus) return;
-                if (!item.timerMulai || item.timerMulai === 0) return;
-
-                const elapsed = Math.floor((sekarang - item.timerMulai) / 1000);
-                const sisa = totalDetik - elapsed;
-
-                if (sisa <= 0) {
-                    const cleanNama = sanitizeNama(item.nama);
-                    const jenis = "Ibadah";
-                    const posisi = item.posisiTerkunci || 0;
-                    const timerMulai = item.timerMulai;
-
-                    window.dbRemove(window.dbRef(window.db, 'antrian/' + cleanNama)).then(() => {
-                        window.dbPush(window.dbRef(window.db, 'statistikAktivitas'), {
-                            nama: item.nama, aksi: "Autokick", waktu: sekarang,
-                            tanggal: getTanggalIndo(), hasil: `Timer ${jenis} Habis`,
-                            kategori: jenis, posisi: posisi, waktuMulai: timerMulai,
-                            sumber: "Auto-Kick"
-                        });
-                        console.log(`⛔ Auto-kick ${item.nama} (${jenis} expired)`);
-                    });
                 }
             });
         }
@@ -1034,6 +987,7 @@
             }).then(() => catatAktivitas(nama, "BawaCustomer", "", { waktuMulai: now }));
         }
 
+        // ✅ IBADAH MANUAL (TANPA TIMER) — seperti Dipanggil CS
         function aksiToggleIbadah() {
             const nama = getAkunAktif();
             const clean = sanitizeNama(nama);
@@ -1047,16 +1001,27 @@
                     .sort((a,b) => (a.waktuStandby||0) - (b.waktuStandby||0));
                 const posisi = listStandby.findIndex(i => sanitizeNama(i.nama) === clean) + 1;
 
-                tampilkanModalKonfirmasi("Sedang Ibadah", `Posisi antrian Anda (#${posisi}) akan DIKUNCI selama 30 menit. Lanjutkan?`, () => {
+                tampilkanModalKonfirmasi("Sedang Ibadah", `Posisi antrian Anda (#${posisi}) akan DIKUNCI. Lanjutkan?`, () => {
                     const now = waktuServer();
-                    window.dbUpdate(window.dbRef(window.db, 'antrian/' + clean), { status: "Ibadah", timerMulai: now, timerAksi: "Ibadah", posisiTerkunci: posisi })
-                    .then(() => catatAktivitasIbadah(nama, "MulaiIbadah", now, posisi));
+                    window.dbUpdate(window.dbRef(window.db, 'antrian/' + clean), {
+                        status: "Ibadah",
+                        timerMulai: 0,
+                        timerAksi: "",
+                        posisiTerkunci: posisi,
+                        waktuMulaiIbadah: now
+                    }).then(() => catatAktivitasIbadah(nama, "MulaiIbadah", now, posisi));
                 });
             } else if (statusNow === "Ibadah") {
                 const posisiLama = itemSaya.posisiTerkunci || 0;
                 const now = waktuServer();
-                window.dbUpdate(window.dbRef(window.db, 'antrian/' + clean), { status: "Standby", timerMulai: 0, timerAksi: "", posisiTerkunci: 0 })
-                .then(() => catatAktivitasIbadah(nama, "SelesaiIbadah", now, posisiLama, itemSaya.timerMulai));
+                const waktuMulai = itemSaya.waktuMulaiIbadah || itemSaya.timerMulai || now;
+                window.dbUpdate(window.dbRef(window.db, 'antrian/' + clean), {
+                    status: "Standby",
+                    timerMulai: 0,
+                    timerAksi: "",
+                    posisiTerkunci: 0,
+                    waktuMulaiIbadah: 0
+                }).then(() => catatAktivitasIbadah(nama, "SelesaiIbadah", now, posisiLama, waktuMulai));
             }
         }
 
@@ -1172,8 +1137,14 @@
         }
 
         function catatAktivitasIbadah(nama, aksi, waktuSekarang, posisi, waktuMulaiSebelumnya) {
-            const payload = { nama: nama, aksi: aksi, waktu: waktuSekarang, tanggal: getTanggalIndo(), hasil: "", kategori: "Ibadah", posisi: posisi || 0 };
-            if (aksi === "MulaiIbadah") payload.waktuMulai = waktuSekarang;
+            const payload = {
+                nama: nama, aksi: aksi, waktu: waktuSekarang,
+                tanggal: getTanggalIndo(), hasil: "",
+                kategori: "Ibadah", posisi: posisi || 0
+            };
+            if (aksi === "MulaiIbadah") {
+                payload.waktuMulai = waktuSekarang;
+            }
             if (aksi === "SelesaiIbadah") {
                 payload.waktuMulai = waktuMulaiSebelumnya || waktuSekarang;
                 payload.waktuSelesai = waktuSekarang;
@@ -1182,58 +1153,10 @@
             window.dbPush(window.dbRef(window.db, 'statistikAktivitas'), payload);
         }
 
+        // ❌ Timer Ibadah dihapus — tidak ada countdown / auto-kick
         function updateTimerAktif(itemSaya) {
             const box = document.getElementById('timer-aktif-box');
-            const label = document.getElementById('timer-aktif-label');
-            const display = document.getElementById('timer-aktif-display');
-
-            const isTimerStatus = itemSaya && (itemSaya.status === "Ibadah");
-            if (!isTimerStatus || !itemSaya.timerMulai || itemSaya.timerMulai === 0) {
-                box.style.display = 'none';
-                if (timerIntervalGlobal) { clearInterval(timerIntervalGlobal); timerIntervalGlobal = null; }
-                return;
-            }
-
-            box.style.display = 'block';
-            label.innerText = "TIMER " + (itemSaya.timerAksi || "").toUpperCase() + " (30 MENIT) - POSISI #" + (itemSaya.posisiTerkunci || "-");
-
-            const totalDetik = DURASI_TIMER_MENIT * 60;
-            const cleanNama = sanitizeNama(itemSaya.nama);
-            const posisiSaatItu = itemSaya.posisiTerkunci || 0;
-            const timerMulaiSaatItu = itemSaya.timerMulai;
-
-            const tick = () => {
-                const elapsed = Math.floor((waktuServer() - itemSaya.timerMulai) / 1000);
-                const sisa = totalDetik - elapsed;
-
-                if (sisa <= 0) {
-                    display.innerText = "00:00";
-                    display.classList.add('warning');
-                    if (timerIntervalGlobal) { clearInterval(timerIntervalGlobal); timerIntervalGlobal = null; }
-
-                    window.dbRemove(window.dbRef(window.db, 'antrian/' + cleanNama))
-                    .then(() => {
-                        window.dbPush(window.dbRef(window.db, 'statistikAktivitas'), {
-                            nama: itemSaya.nama, aksi: "Autokick", waktu: waktuServer(),
-                            tanggal: getTanggalIndo(), hasil: `Timer Ibadah Habis`,
-                            kategori: "Ibadah",
-                            posisi: posisiSaatItu, waktuMulai: timerMulaiSaatItu, sumber: "Timer"
-                        });
-                        tampilkanModal("Waktu Habis - Auto Keluar", `Waktu ${itemSaya.timerAksi} Anda sudah habis. Anda otomatis DIKELUARKAN dari antrian.`);
-                    });
-                    return;
-                }
-
-                const m = String(Math.floor(sisa / 60)).padStart(2, '0');
-                const s = String(sisa % 60).padStart(2, '0');
-                display.innerText = `${m}:${s}`;
-                if (sisa <= 120) display.classList.add('warning');
-                else display.classList.remove('warning');
-            };
-
-            if (timerIntervalGlobal) clearInterval(timerIntervalGlobal);
-            tick();
-            timerIntervalGlobal = setInterval(tick, 1000);
+            if (box) box.style.display = 'none';
         }
 
         function renderAktivitas() {
@@ -1437,53 +1360,52 @@
             tbody.innerHTML = html;
         }
 
-        // ✅ TOTAL CUSTOMER WALK-IN PER BULAN (tahun berjalan)
-      function renderTotalBulanan() {
-    const tbody = document.getElementById('total-bulanan-tbody');
-    const labelTahun = document.getElementById('total-bulanan-tahun-label');
-    if (!tbody) return;
+        function renderTotalBulanan() {
+            const tbody = document.getElementById('total-bulanan-tbody');
+            const labelTahun = document.getElementById('total-bulanan-tahun-label');
+            if (!tbody) return;
 
-    const tahunIni = String(new Date(waktuServer()).getFullYear());
-    if (labelTahun) labelTahun.innerText = tahunIni;
+            const tahunIni = String(new Date(waktuServer()).getFullYear());
+            if (labelTahun) labelTahun.innerText = tahunIni;
 
-    const namaBulan = ['Januari','Februari','Maret','April','Mei','Juni','Juli','Agustus','September','Oktober','November','Desember'];
+            const namaBulan = ['Januari','Februari','Maret','April','Mei','Juni','Juli','Agustus','September','Oktober','November','Desember'];
 
-    // ✅ Hitung dari aktivitasGlobal (statistikAktivitas) — sama seperti Rekap per Promotor
-    const perBulan = {};
+            const perBulan = {};
 
-    aktivitasGlobal.forEach(a => {
-        if (a.aksi !== "BawaCustomer") return;
-        if (!a.waktuSelesai) return;
-        if (!a.tanggal) return;
-        const parts = String(a.tanggal).split('-');
-        if (parts.length !== 3) return;
-        const tglKey = `${parts[2]}-${parts[1]}-${parts[0]}`;
-        if (!tglKey.startsWith(tahunIni)) return;
-        const bulanKey = tglKey.substring(0, 7); // "2026-10"
+            aktivitasGlobal.forEach(a => {
+                if (a.aksi !== "BawaCustomer") return;
+                if (!a.waktuSelesai) return;
+                if (!a.tanggal) return;
+                const parts = String(a.tanggal).split('-');
+                if (parts.length !== 3) return;
+                const tglKey = `${parts[2]}-${parts[1]}-${parts[0]}`;
+                if (!tglKey.startsWith(tahunIni)) return;
+                const bulanKey = tglKey.substring(0, 7);
 
-        if (!perBulan[bulanKey]) perBulan[bulanKey] = { deal: 0, lihat: 0 };
-        if (a.hasil === "Deal") perBulan[bulanKey].deal++;
-        else if (a.hasil === "Lihat") perBulan[bulanKey].lihat++;
-    });
+                if (!perBulan[bulanKey]) perBulan[bulanKey] = { deal: 0, lihat: 0 };
+                if (a.hasil === "Deal") perBulan[bulanKey].deal++;
+                else if (a.hasil === "Lihat") perBulan[bulanKey].lihat++;
+            });
 
-    const keysSorted = Object.keys(perBulan).sort().reverse();
+            const keysSorted = Object.keys(perBulan).sort().reverse();
 
-    if (keysSorted.length === 0) {
-        tbody.innerHTML = '<tr><td colspan="3" class="aktivitas-empty">Belum ada data tahun ini</td></tr>';
-        return;
-    }
+            if (keysSorted.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="3" class="aktivitas-empty">Belum ada data tahun ini</td></tr>';
+                return;
+            }
 
-    tbody.innerHTML = keysSorted.map(bulanKey => {
-        const p = perBulan[bulanKey];
-        const parts = bulanKey.split('-');
-        const namaBln = namaBulan[parseInt(parts[1]) - 1];
-        return `<tr>
-            <td class="kolom-nama">${namaBln} ${parts[0]}</td>
-            <td class="angka-deal">${p.deal}</td>
-            <td class="angka-lihat">${p.lihat}</td>
-        </tr>`;
-    }).join('');
-}
+            tbody.innerHTML = keysSorted.map(bulanKey => {
+                const p = perBulan[bulanKey];
+                const parts = bulanKey.split('-');
+                const namaBln = namaBulan[parseInt(parts[1]) - 1];
+                return `<tr>
+                    <td class="kolom-nama">${namaBln} ${parts[0]}</td>
+                    <td class="angka-deal">${p.deal}</td>
+                    <td class="angka-lihat">${p.lihat}</td>
+                </tr>`;
+            }).join('');
+        }
+
         function gabungRentang(list, aksiMulai, aksiSelesai) {
             const perNama = {};
             list.forEach(a => {
@@ -1587,10 +1509,10 @@
             const btnIbadah = document.getElementById('btn-utama-ibadah');
             if (statusSaya === "Ibadah") {
                 btnIbadah.className = "btn-indigo btn-gold-pulse";
-                btnIbadah.innerText = "SELESAI IBADAH (Lebih Awal)";
+                btnIbadah.innerText = "SELESAI IBADAH";
             } else {
                 btnIbadah.className = "btn-indigo";
-                btnIbadah.innerText = "SEDANG IBADAH (30 MENIT)";
+                btnIbadah.innerText = "SEDANG IBADAH";
             }
 
             updateTimerAktif(itemSaya);
