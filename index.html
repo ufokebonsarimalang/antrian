@@ -1438,50 +1438,52 @@
         }
 
         // ✅ TOTAL CUSTOMER WALK-IN PER BULAN (tahun berjalan)
-        function renderTotalBulanan() {
-            const tbody = document.getElementById('total-bulanan-tbody');
-            const labelTahun = document.getElementById('total-bulanan-tahun-label');
-            if (!tbody) return;
+      function renderTotalBulanan() {
+    const tbody = document.getElementById('total-bulanan-tbody');
+    const labelTahun = document.getElementById('total-bulanan-tahun-label');
+    if (!tbody) return;
 
-            const tahunIni = String(new Date(waktuServer()).getFullYear());
-            if (labelTahun) labelTahun.innerText = tahunIni;
+    const tahunIni = String(new Date(waktuServer()).getFullYear());
+    if (labelTahun) labelTahun.innerText = tahunIni;
 
-            const namaBulan = ['Januari','Februari','Maret','April','Mei','Juni','Juli','Agustus','September','Oktober','November','Desember'];
+    const namaBulan = ['Januari','Februari','Maret','April','Mei','Juni','Juli','Agustus','September','Oktober','November','Desember'];
 
-            const dataBulanan = riwayatBulananGlobal || {};
-            const perBulan = {};
+    // ✅ Hitung dari aktivitasGlobal (statistikAktivitas) — sama seperti Rekap per Promotor
+    const perBulan = {};
 
-            Object.keys(dataBulanan).forEach(bulanKey => {
-                if (!bulanKey.startsWith(tahunIni)) return;
-                const dataBulan = dataBulanan[bulanKey] || {};
-                let deal = 0, lihat = 0;
-                Object.values(dataBulan).forEach(p => {
-                    if (!p) return;
-                    deal += p.deal || 0;
-                    lihat += p.lihat || 0;
-                });
-                perBulan[bulanKey] = { deal, lihat };
-            });
+    aktivitasGlobal.forEach(a => {
+        if (a.aksi !== "BawaCustomer") return;
+        if (!a.waktuSelesai) return;
+        if (!a.tanggal) return;
+        const parts = String(a.tanggal).split('-');
+        if (parts.length !== 3) return;
+        const tglKey = `${parts[2]}-${parts[1]}-${parts[0]}`;
+        if (!tglKey.startsWith(tahunIni)) return;
+        const bulanKey = tglKey.substring(0, 7); // "2026-10"
 
-            const keysSorted = Object.keys(perBulan).sort().reverse();
+        if (!perBulan[bulanKey]) perBulan[bulanKey] = { deal: 0, lihat: 0 };
+        if (a.hasil === "Deal") perBulan[bulanKey].deal++;
+        else if (a.hasil === "Lihat") perBulan[bulanKey].lihat++;
+    });
 
-            if (keysSorted.length === 0) {
-                tbody.innerHTML = '<tr><td colspan="3" class="aktivitas-empty">Belum ada data tahun ini</td></tr>';
-                return;
-            }
+    const keysSorted = Object.keys(perBulan).sort().reverse();
 
-            tbody.innerHTML = keysSorted.map(bulanKey => {
-                const p = perBulan[bulanKey];
-                const parts = bulanKey.split('-');
-                const namaBln = namaBulan[parseInt(parts[1]) - 1];
-                return `<tr>
-                    <td class="kolom-nama">${namaBln} ${parts[0]}</td>
-                    <td class="angka-deal">${p.deal}</td>
-                    <td class="angka-lihat">${p.lihat}</td>
-                </tr>`;
-            }).join('');
-        }
+    if (keysSorted.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="3" class="aktivitas-empty">Belum ada data tahun ini</td></tr>';
+        return;
+    }
 
+    tbody.innerHTML = keysSorted.map(bulanKey => {
+        const p = perBulan[bulanKey];
+        const parts = bulanKey.split('-');
+        const namaBln = namaBulan[parseInt(parts[1]) - 1];
+        return `<tr>
+            <td class="kolom-nama">${namaBln} ${parts[0]}</td>
+            <td class="angka-deal">${p.deal}</td>
+            <td class="angka-lihat">${p.lihat}</td>
+        </tr>`;
+    }).join('');
+}
         function gabungRentang(list, aksiMulai, aksiSelesai) {
             const perNama = {};
             list.forEach(a => {
