@@ -389,7 +389,7 @@
         let statusSistemGlobal = "BUKA";
         let koordinatTokoAdmin = { lat: "", lng: "", radius: 50 };
         let savedPinAdmin = "";
-        let unsubAntrian = null, unsubSetting = null, unsubStatistik = null, unsubMaster = null, unsubLock = null, unsubCheckin = null, unsubRiwayat = null;
+        let unsubAntrian = null, unsubSetting = null, unsubStatistik = null, unsubMaster = null, unsubLock = null, unsubCheckin = null;
         let timerCekGantiHari = null;
 
         function waktuServer() { return Date.now() + (window.serverTimeOffset || 0); }
@@ -479,7 +479,6 @@
                         }
                     });
                 }
-                cekSemuaExpiredAdmin();
                 renderAntrianAdmin();
             });
 
@@ -525,16 +524,10 @@
                 renderRekapBawaCustomer();
             });
 
-            unsubRiwayat = window.dbOnValue(window.dbRef(db, 'riwayatBulanan'), snapshot => {
-                riwayatBulananGlobal = snapshot.val() || {};
-                renderTotalBulanan();
-            });
-
             cekDanJalankanAutoCleanup();
             if (timerCekGantiHari) clearInterval(timerCekGantiHari);
             timerCekGantiHari = setInterval(() => {
                 cekDanJalankanAutoCleanup();
-                cekSemuaExpiredAdmin();
                 cekLockExpiredAdmin();
             }, 30000);
         }
@@ -546,7 +539,6 @@
             if (unsubMaster) { unsubMaster(); unsubMaster = null; }
             if (unsubLock) { unsubLock(); unsubLock = null; }
             if (unsubCheckin) { unsubCheckin(); unsubCheckin = null; }
-            if (unsubRiwayat) { unsubRiwayat(); unsubRiwayat = null; }
             if (timerCekGantiHari) { clearInterval(timerCekGantiHari); timerCekGantiHari = null; }
         }
 
@@ -602,31 +594,6 @@
                     s.locked = false;
                     s.alasan = "";
                     s.waktuSelesaiLock = 0;
-                }
-            });
-        }
-
-        function cekSemuaExpiredAdmin() {
-            const sekarang = waktuServer();
-            const totalDetik = 30 * 60;
-            daftarAntrianGlobal.forEach(item => {
-                if (!item) return;
-                const isTimerStatus = (item.status === "Ibadah");
-                if (!isTimerStatus) return;
-                if (!item.timerMulai || item.timerMulai === 0) return;
-                const elapsed = Math.floor((sekarang - item.timerMulai) / 1000);
-                const sisa = totalDetik - elapsed;
-                if (sisa <= 0) {
-                    const cleanNama = sanitizeNama(item.nama);
-                    const jenis = "Ibadah";
-                    window.dbRemove(window.dbRef(window.db, 'antrian/' + cleanNama)).then(() => {
-                        window.dbPush(window.dbRef(window.db, 'statistikAktivitas'), {
-                            nama: item.nama, aksi: "Autokick", waktu: sekarang,
-                            tanggal: getTanggalIndo(), hasil: `Timer ${jenis} Habis`,
-                            kategori: jenis, posisi: item.posisiTerkunci || 0,
-                            waktuMulai: item.timerMulai, sumber: "Auto-Kick-Admin"
-                        });
-                    });
                 }
             });
         }
@@ -1068,53 +1035,51 @@
             tbody.innerHTML = html;
         }
 
-        // ✅ TOTAL CUSTOMER WALK-IN PER BULAN (tahun berjalan)
-      function renderTotalBulanan() {
-    const tbody = document.getElementById('total-bulanan-tbody');
-    const labelTahun = document.getElementById('total-bulanan-tahun-label');
-    if (!tbody) return;
+        function renderTotalBulanan() {
+            const tbody = document.getElementById('total-bulanan-tbody');
+            const labelTahun = document.getElementById('total-bulanan-tahun-label');
+            if (!tbody) return;
 
-    const tahunIni = String(new Date(waktuServer()).getFullYear());
-    if (labelTahun) labelTahun.innerText = tahunIni;
+            const tahunIni = String(new Date(waktuServer()).getFullYear());
+            if (labelTahun) labelTahun.innerText = tahunIni;
 
-    const namaBulan = ['Januari','Februari','Maret','April','Mei','Juni','Juli','Agustus','September','Oktober','November','Desember'];
+            const namaBulan = ['Januari','Februari','Maret','April','Mei','Juni','Juli','Agustus','September','Oktober','November','Desember'];
 
-    // ✅ Hitung dari aktivitasGlobal (statistikAktivitas) — sama seperti Rekap per Promotor
-    const perBulan = {};
+            const perBulan = {};
 
-    aktivitasGlobal.forEach(a => {
-        if (a.aksi !== "BawaCustomer") return;
-        if (!a.waktuSelesai) return;
-        if (!a.tanggal) return;
-        const parts = String(a.tanggal).split('-');
-        if (parts.length !== 3) return;
-        const tglKey = `${parts[2]}-${parts[1]}-${parts[0]}`;
-        if (!tglKey.startsWith(tahunIni)) return;
-        const bulanKey = tglKey.substring(0, 7); // "2026-10"
+            statistikGlobal.forEach(a => {
+                if (a.aksi !== "BawaCustomer") return;
+                if (!a.waktuSelesai) return;
+                if (!a.tanggal) return;
+                const parts = String(a.tanggal).split('-');
+                if (parts.length !== 3) return;
+                const tglKey = `${parts[2]}-${parts[1]}-${parts[0]}`;
+                if (!tglKey.startsWith(tahunIni)) return;
+                const bulanKey = tglKey.substring(0, 7);
 
-        if (!perBulan[bulanKey]) perBulan[bulanKey] = { deal: 0, lihat: 0 };
-        if (a.hasil === "Deal") perBulan[bulanKey].deal++;
-        else if (a.hasil === "Lihat") perBulan[bulanKey].lihat++;
-    });
+                if (!perBulan[bulanKey]) perBulan[bulanKey] = { deal: 0, lihat: 0 };
+                if (a.hasil === "Deal") perBulan[bulanKey].deal++;
+                else if (a.hasil === "Lihat") perBulan[bulanKey].lihat++;
+            });
 
-    const keysSorted = Object.keys(perBulan).sort().reverse();
+            const keysSorted = Object.keys(perBulan).sort().reverse();
 
-    if (keysSorted.length === 0) {
-        tbody.innerHTML = '<tr><td colspan="3" class="aktivitas-empty">Belum ada data tahun ini</td></tr>';
-        return;
-    }
+            if (keysSorted.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="3" class="aktivitas-empty">Belum ada data tahun ini</td></tr>';
+                return;
+            }
 
-    tbody.innerHTML = keysSorted.map(bulanKey => {
-        const p = perBulan[bulanKey];
-        const parts = bulanKey.split('-');
-        const namaBln = namaBulan[parseInt(parts[1]) - 1];
-        return `<tr>
-            <td class="kolom-nama">${namaBln} ${parts[0]}</td>
-            <td class="angka-deal">${p.deal}</td>
-            <td class="angka-lihat">${p.lihat}</td>
-        </tr>`;
-    }).join('');
-}
+            tbody.innerHTML = keysSorted.map(bulanKey => {
+                const p = perBulan[bulanKey];
+                const parts = bulanKey.split('-');
+                const namaBln = namaBulan[parseInt(parts[1]) - 1];
+                return `<tr>
+                    <td class="kolom-nama">${namaBln} ${parts[0]}</td>
+                    <td class="angka-deal">${p.deal}</td>
+                    <td class="angka-lihat">${p.lihat}</td>
+                </tr>`;
+            }).join('');
+        }
 
         function gabungRentang(list, aksiMulai, aksiSelesai) {
             const perNama = {};
