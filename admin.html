@@ -263,7 +263,10 @@
             <h2>Dashboard Admin</h2>
             <span class="header-sub-text">Sistem Antrian Promotor</span>
             <span class="header-sub-text">UFO Kebonsari</span>
-            <div id="badge-status-sistem" class="status-badge status-open">STATUS: OPEN</div>
+           <div id="badge-status-sistem" class="status-badge status-open">
+    <span class="dot"></span>
+    <span id="badge-status-text">STATUS: OPEN</span>
+</div>
         </div>
 
         <div id="login-admin-box">
@@ -865,9 +868,14 @@
         }
 
         function renderStatusSistem() {
-            const badge = document.getElementById('badge-status-sistem');
-            badge.innerText = statusSistemGlobal === "BUKA" ? "STATUS: OPEN" : "STATUS: CLOSED";
-            badge.className = statusSistemGlobal === "BUKA" ? "status-badge status-open" : "status-badge status-closed";
+           const badge = document.getElementById('badge-status-sistem');
+const badgeText = document.getElementById('badge-status-text');
+if (badge && badgeText) {
+    badgeText.innerText = statusSistemGlobal === "BUKA" ? "STATUS: OPEN" : "STATUS: CLOSED";
+    badge.className = statusSistemGlobal === "BUKA"
+        ? "status-badge status-open"
+        : "status-badge status-closed";
+}
             const btnBuka = document.getElementById('btn-buka-sistem');
             const btnTutup = document.getElementById('btn-tutup-sistem');
             if (btnBuka && btnTutup) {
