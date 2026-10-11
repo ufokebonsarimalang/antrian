@@ -9,59 +9,58 @@
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
-   <script type="module">
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-  import { getDatabase, ref, set, get, update, remove, onValue, push } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
-  import { getAuth, signInAnonymously, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+    <script type="module">
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+      import { getDatabase, ref, set, get, update, remove, onValue, push } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
+      import { getAuth, signInAnonymously, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
 
-  const firebaseConfig = {
-    apiKey: "AIzaSyBwMpFtET1sub8OPyfR_g7XDJYHjKSiFBI",
-    authDomain: "antrian-walk-in.firebaseapp.com",
-    databaseURL: "https://antrian-walk-in-default-rtdb.asia-southeast1.firebasedatabase.app",
-    projectId: "antrian-walk-in",
-    storageBucket: "antrian-walk-in.firebasestorage.app",
-    messagingSenderId: "229095316838",
-    appId: "1:229095316838:web:72c12839919c06d162fca7",
-    measurementId: "G-DKW3HEC8GD"
-  };
+      const firebaseConfig = {
+        apiKey: "AIzaSyBwMpFtET1sub8OPyfR_g7XDJYHjKSiFBI",
+        authDomain: "antrian-walk-in.firebaseapp.com",
+        databaseURL: "https://antrian-walk-in-default-rtdb.asia-southeast1.firebasedatabase.app",
+        projectId: "antrian-walk-in",
+        storageBucket: "antrian-walk-in.firebasestorage.app",
+        messagingSenderId: "229095316838",
+        appId: "1:229095316838:web:72c12839919c06d162fca7",
+        measurementId: "G-DKW3HEC8GD"
+      };
 
-  const app = initializeApp(firebaseConfig);
-  const db = getDatabase(app);
-  const auth = getAuth(app);
+      const app = initializeApp(firebaseConfig);
+      const db = getDatabase(app);
+      const auth = getAuth(app);
 
-  signInAnonymously(auth)
-    .then(() => {
-      console.log("✅ Anonymous login sukses:", auth.currentUser.uid);
+      signInAnonymously(auth)
+        .then(() => {
+          console.log("✅ Anonymous login sukses:", auth.currentUser.uid);
+          window.db = db;
+          window.dbRef = ref;
+          window.dbSet = set;
+          window.dbGet = get;
+          window.dbUpdate = update;
+          window.dbRemove = remove;
+          window.dbOnValue = onValue;
+          window.dbPush = push;
+          window.authUid = auth.currentUser.uid;
 
-      window.db = db;
-      window.dbRef = ref;
-      window.dbSet = set;
-      window.dbGet = get;
-      window.dbUpdate = update;
-      window.dbRemove = remove;
-      window.dbOnValue = onValue;
-      window.dbPush = push;
-      window.authUid = auth.currentUser.uid;
+          window.serverTimeOffset = 0;
+          window.dbOnValue(window.dbRef(db, '.info/serverTimeOffset'), (snap) => {
+            window.serverTimeOffset = snap.val() || 0;
+          });
 
-      window.serverTimeOffset = 0;
-      window.dbOnValue(window.dbRef(db, '.info/serverTimeOffset'), (snap) => {
-        window.serverTimeOffset = snap.val() || 0;
+          window.dispatchEvent(new Event('firebase-ready'));
+        })
+        .catch((error) => {
+          console.error("❌ Anonymous login gagal:", error);
+          alert("Gagal koneksi ke server. Cek koneksi internet Anda dan refresh halaman.");
+        });
+
+      onAuthStateChanged(auth, (user) => {
+        if (!user) {
+          console.warn("⚠️ User logout, reload halaman...");
+          setTimeout(() => location.reload(), 1000);
+        }
       });
-
-      window.dispatchEvent(new Event('firebase-ready'));
-    })
-    .catch((error) => {
-      console.error("❌ Anonymous login gagal:", error);
-      alert("Gagal koneksi ke server. Cek koneksi internet Anda dan refresh halaman.");
-    });
-
-  onAuthStateChanged(auth, (user) => {
-    if (!user) {
-      console.warn("⚠️ User logout, reload halaman...");
-      setTimeout(() => location.reload(), 1000);
-    }
-  });
-</script>
+    </script>
 
     <style>
         :root {
@@ -265,8 +264,6 @@
                 </div>
             </div>
 
-            <!-- TIMER AKTIF BOX DIHAPUS KARENA TIMER IBADAH SUDAH DIHILANGKAN -->
-
             <div id="section-checkin-awal" style="display: none;">
                 <div class="gps-box">
                     <div style="font-size:11px; font-weight:800; color:var(--text-muted); text-transform:uppercase; margin-bottom:8px; letter-spacing:0.3px; text-align:left;">📍 Peta Posisi Toko & Radius</div>
@@ -430,6 +427,8 @@
         let lockDataGlobal = null;
         let autoCleanupInterval = null;
 
+        const DURASI_PIN_VALID = 12 * 60 * 60 * 1000; // 12 jam
+
         const SVG_CHECK_DEAL = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="11" fill="#059669"/><path d="M7 12.5L10.5 16L17 9" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
         const SVG_ICON_LIHAT = `👀`;
 
@@ -484,17 +483,25 @@
             restoreAktivitasState();
 
             const cachedNama = localStorage.getItem('ufo_nama_sales_aktif');
-            if (cachedNama) {
+            const pinVerified = localStorage.getItem('ufo_pin_verified') === 'true';
+            const verifiedAt = Number(localStorage.getItem('ufo_pin_verified_at')) || 0;
+            const pinKadaluarsa = (Date.now() - verifiedAt) > DURASI_PIN_VALID;
+
+            if (cachedNama && pinVerified && !pinKadaluarsa) {
                 namaSalesAktifGlobal = cachedNama;
                 document.getElementById('panel-login').style.display = 'none';
                 document.getElementById('panel-menu-utama').style.display = 'block';
                 document.getElementById('label-user-aktif').innerText = cachedNama;
             } else {
+                localStorage.removeItem('ufo_nama_sales_aktif');
+                localStorage.removeItem('ufo_pin_verified');
+                localStorage.removeItem('ufo_pin_verified_at');
                 document.getElementById('panel-login').style.display = 'block';
                 document.getElementById('panel-menu-utama').style.display = 'none';
             }
 
             inisialisasiRealtimeFirebase();
+            cekPINVerification();
         });
 
         function resetCheckinHarianJikaPerlu() {
@@ -505,6 +512,23 @@
                 localStorage.removeItem('ufo_checkin_tanggal');
             }
         }
+
+        function cekPINVerification() {
+            const cachedNama = localStorage.getItem('ufo_nama_sales_aktif');
+            const verified = localStorage.getItem('ufo_pin_verified');
+            const verifiedAt = Number(localStorage.getItem('ufo_pin_verified_at')) || 0;
+
+            if (!cachedNama) return;
+
+            const kadaluarsa = (Date.now() - verifiedAt) > DURASI_PIN_VALID;
+            if (verified !== 'true' || kadaluarsa) {
+                localStorage.removeItem('ufo_nama_sales_aktif');
+                localStorage.removeItem('ufo_pin_verified');
+                localStorage.removeItem('ufo_pin_verified_at');
+                location.reload();
+            }
+        }
+        setInterval(cekPINVerification, 30 * 60 * 1000);
 
         function toggleAktivitasSection() {
             const header = document.getElementById('toggle-aktivitas');
@@ -551,7 +575,6 @@
                         }
                     });
                 }
-                // cekSemuaExpired() DIHAPUS karena timer ibadah sudah tidak ada
                 renderUI();
                 renderAktivitas();
             });
@@ -668,12 +691,10 @@
 
             if (autoCleanupInterval) clearInterval(autoCleanupInterval);
             autoCleanupInterval = setInterval(() => {
-                // cekSemuaExpired() DIHAPUS
                 cekLockExpired();
             }, 15000);
 
             setTimeout(() => {
-                // cekSemuaExpired() DIHAPUS
                 cekLockExpired();
             }, 2000);
         }
@@ -699,8 +720,6 @@
                 }
             });
         }
-
-        // FUNGSI cekSemuaExpired() DIHAPUS TOTAL
 
         function mulaiLockTimer(waktuExpired, alasan) {
             const box = document.getElementById('box-lock-timer');
@@ -793,9 +812,12 @@
             return namaSalesAktifGlobal;
         }
 
+        // =====================================================
+        // 🔐 LOGIN DENGAN PIN
+        // =====================================================
         function simpanAkunHP() {
             const namaPilih = document.getElementById('pilih-sales').value;
-            if(!namaPilih) { tampilkanModal("Perhatian", "Silakan pilih nama Anda!"); return; }
+            if (!namaPilih) { tampilkanModal("Perhatian", "Silakan pilih nama Anda!"); return; }
 
             const clean = sanitizeNama(namaPilih);
 
@@ -808,32 +830,124 @@
                         const waktuExpired = Number(lockData.waktuSelesaiLock) || 0;
                         const sudahMulai = waktuMulai === 0 || sekarang >= waktuMulai;
                         const belumExpired = waktuExpired === 0 || sekarang < waktuExpired;
-                        
+
                         if (sudahMulai && belumExpired) {
                             let sisaTeks = "tanpa batas waktu";
                             if (waktuExpired > 0) {
                                 const sisaMenit = Math.ceil((waktuExpired - sekarang) / 60000);
                                 sisaTeks = `${sisaMenit} menit lagi`;
                             }
-                            tampilkanModal("🔒 Akun Dikunci", 
+                            tampilkanModal("🔒 Akun Dikunci",
                                 `Nama "${namaPilih}" sedang DIKUNCI.\n\nAlasan: ${lockData.alasan || "-"}\nSisa: ${sisaTeks}`
                             );
                             return;
                         }
                     }
                 }
-
-                namaSalesAktifGlobal = namaPilih;
-                localStorage.setItem('ufo_nama_sales_aktif', namaPilih);
-                document.getElementById('panel-login').style.display = 'none';
-                document.getElementById('panel-menu-utama').style.display = 'block';
-                document.getElementById('label-user-aktif').innerText = namaPilih;
-                renderUI();
-                renderAktivitas();
-                renderRekapBawaCustomer();
+                tampilkanModalPIN(namaPilih, clean);
             });
         }
 
+        function tampilkanModalPIN(namaPilih, clean) {
+            document.getElementById('modal-title').innerText = "🔐 Masukkan PIN";
+            document.getElementById('modal-desc').innerHTML = `
+                <div style="text-align:center; margin-bottom:14px; font-weight:700; color:var(--text-main);">
+                    Halo, <b>${namaPilih}</b>
+                </div>
+                <div style="text-align:center; margin-bottom:10px; font-size:12px; color:var(--text-muted);">
+                    Masukkan PIN 6 digit Anda
+                </div>
+                <input type="password" id="input-pin" maxlength="6" inputmode="numeric" pattern="[0-9]*"
+                    placeholder="••••••"
+                    style="width:100%; padding:14px; border-radius:12px; border:2px solid var(--border);
+                    background:#f8fafc; color:var(--text-main); font-size:22px; font-weight:800;
+                    text-align:center; letter-spacing:8px; outline:none; box-sizing:border-box;"
+                    autocomplete="off">
+                <div id="pin-error" style="color:#dc2626; font-size:12px; font-weight:700;
+                    margin-top:8px; text-align:center; display:none;"></div>
+            `;
+            document.getElementById('modal-actions').innerHTML = `
+                <button type="button" class="btn-customer" onclick="tutupModal()">Batal</button>
+                <button type="button" class="btn-customer" id="btn-verif-pin">Masuk</button>
+            `;
+            document.getElementById('custom-modal').classList.add('active');
+
+            setTimeout(() => {
+                const inputPin = document.getElementById('input-pin');
+                if (!inputPin) return;
+                inputPin.focus();
+                inputPin.addEventListener('input', (e) => {
+                    e.target.value = e.target.value.replace(/\D/g, '').slice(0, 6);
+                });
+                inputPin.addEventListener('keypress', (e) => {
+                    if (e.key === 'Enter') verifikasiPIN(namaPilih, clean);
+                });
+            }, 100);
+
+            document.getElementById('btn-verif-pin').onclick = () => verifikasiPIN(namaPilih, clean);
+        }
+
+        function verifikasiPIN(namaPilih, clean) {
+            const inputPin = document.getElementById('input-pin');
+            const pin = inputPin ? inputPin.value.trim() : "";
+            const errEl = document.getElementById('pin-error');
+            if (!errEl) return;
+
+            if (pin.length !== 6) {
+                errEl.innerText = "PIN harus 6 digit angka";
+                errEl.style.display = 'block';
+                return;
+            }
+
+            window.dbGet(window.dbRef(window.db, 'pinPromotor/' + clean)).then(snap => {
+                if (!snap.exists()) {
+                    errEl.innerText = "PIN belum diatur. Hubungi admin.";
+                    errEl.style.display = 'block';
+                    return;
+                }
+
+                const pinBenar = String(snap.val()).trim();
+
+                if (pin !== pinBenar) {
+                    errEl.innerText = "❌ PIN salah. Coba lagi.";
+                    errEl.style.display = 'block';
+                    if (inputPin) { inputPin.value = ""; inputPin.focus(); }
+
+                    window.dbPush(window.dbRef(window.db, 'statistikAktivitas'), {
+                        nama: namaPilih,
+                        aksi: "PIN_Salah",
+                        waktu: waktuServer(),
+                        tanggal: getTanggalIndo(),
+                        hasil: "PIN Salah",
+                        kategori: "Keamanan",
+                        sumber: "Login"
+                    }).catch(() => {});
+                    return;
+                }
+
+                namaSalesAktifGlobal = namaPilih;
+                localStorage.setItem('ufo_nama_sales_aktif', namaPilih);
+                localStorage.setItem('ufo_pin_verified', 'true');
+                localStorage.setItem('ufo_pin_verified_at', String(waktuServer()));
+
+                document.getElementById('panel-login').style.display = 'none';
+                document.getElementById('panel-menu-utama').style.display = 'block';
+                document.getElementById('label-user-aktif').innerText = namaPilih;
+
+                tutupModal();
+                renderUI();
+                renderAktivitas();
+                renderRekapBawaCustomer();
+            }).catch((err) => {
+                console.error("Gagal verifikasi PIN:", err);
+                errEl.innerText = "Gagal koneksi. Coba lagi.";
+                errEl.style.display = 'block';
+            });
+        }
+
+        // =====================================================
+        // PETA & CHECK-IN
+        // =====================================================
         function initPetaPromotor() {
             if (mapPromotor) return;
             const container = document.getElementById('map-promotor');
@@ -1030,7 +1144,6 @@
                     .sort((a,b) => (a.waktuStandby||0) - (b.waktuStandby||0));
                 const posisi = listStandby.findIndex(i => sanitizeNama(i.nama) === clean) + 1;
 
-                // KONFIRMASI DIUBAH: Tidak ada lagi timer 30 menit
                 tampilkanModalKonfirmasi("Sedang Ibadah", `Posisi antrian Anda (#${posisi}) akan DIKUNCI sampai Anda menekan tombol "Selesai Ibadah". Lanjutkan?`, () => {
                     const now = waktuServer();
                     window.dbUpdate(window.dbRef(window.db, 'antrian/' + clean), { status: "Ibadah", timerMulai: 0, timerAksi: "Ibadah", posisiTerkunci: posisi })
@@ -1166,8 +1279,6 @@
             window.dbPush(window.dbRef(window.db, 'statistikAktivitas'), payload);
         }
 
-        // FUNGSI updateTimerAktif() DIHAPUS TOTAL
-
         function renderAktivitas() {
             const hariIni = getTanggalIndo();
             const list = aktivitasGlobal.filter(a => a.tanggal === hariIni);
@@ -1186,7 +1297,6 @@
             listSedangMelayani.forEach(item => semuaBawa.push(item));
             statistikMasihProses.forEach(a => {
                 const clean = sanitizeNama(a.nama);
-                // ✅ FIX: Jika nama sudah ada di statistikSelesai, jangan masukkan ke daftar proses
                 if (!namaSedangMelayani.has(clean) && !namaSudahSelesai.has(clean)) {
                     semuaBawa.push({ nama: a.nama, waktuMulai: a.waktuMulai || a.waktu, waktuSelesai: null, hasil: null, _sedangMelayani: false });
                 }
@@ -1370,51 +1480,52 @@
             tbody.innerHTML = html;
         }
 
-      function renderTotalBulanan() {
-        const tbody = document.getElementById('total-bulanan-tbody');
-        const labelTahun = document.getElementById('total-bulanan-tahun-label');
-        if (!tbody) return;
+        function renderTotalBulanan() {
+            const tbody = document.getElementById('total-bulanan-tbody');
+            const labelTahun = document.getElementById('total-bulanan-tahun-label');
+            if (!tbody) return;
 
-        const tahunIni = String(new Date(waktuServer()).getFullYear());
-        if (labelTahun) labelTahun.innerText = tahunIni;
+            const tahunIni = String(new Date(waktuServer()).getFullYear());
+            if (labelTahun) labelTahun.innerText = tahunIni;
 
-        const namaBulan = ['Januari','Februari','Maret','April','Mei','Juni','Juli','Agustus','September','Oktober','November','Desember'];
+            const namaBulan = ['Januari','Februari','Maret','April','Mei','Juni','Juli','Agustus','September','Oktober','November','Desember'];
 
-        const perBulan = {};
+            const perBulan = {};
 
-        aktivitasGlobal.forEach(a => {
-            if (a.aksi !== "BawaCustomer") return;
-            if (!a.waktuSelesai) return;
-            if (!a.tanggal) return;
-            const parts = String(a.tanggal).split('-');
-            if (parts.length !== 3) return;
-            const tglKey = `${parts[2]}-${parts[1]}-${parts[0]}`;
-            if (!tglKey.startsWith(tahunIni)) return;
-            const bulanKey = tglKey.substring(0, 7);
+            aktivitasGlobal.forEach(a => {
+                if (a.aksi !== "BawaCustomer") return;
+                if (!a.waktuSelesai) return;
+                if (!a.tanggal) return;
+                const parts = String(a.tanggal).split('-');
+                if (parts.length !== 3) return;
+                const tglKey = `${parts[2]}-${parts[1]}-${parts[0]}`;
+                if (!tglKey.startsWith(tahunIni)) return;
+                const bulanKey = tglKey.substring(0, 7);
 
-            if (!perBulan[bulanKey]) perBulan[bulanKey] = { deal: 0, lihat: 0 };
-            if (a.hasil === "Deal") perBulan[bulanKey].deal++;
-            else if (a.hasil === "Lihat") perBulan[bulanKey].lihat++;
-        });
+                if (!perBulan[bulanKey]) perBulan[bulanKey] = { deal: 0, lihat: 0 };
+                if (a.hasil === "Deal") perBulan[bulanKey].deal++;
+                else if (a.hasil === "Lihat") perBulan[bulanKey].lihat++;
+            });
 
-        const keysSorted = Object.keys(perBulan).sort().reverse();
+            const keysSorted = Object.keys(perBulan).sort().reverse();
 
-        if (keysSorted.length === 0) {
-            tbody.innerHTML = '<tr><td colspan="3" class="aktivitas-empty">Belum ada data tahun ini</td></tr>';
-            return;
+            if (keysSorted.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="3" class="aktivitas-empty">Belum ada data tahun ini</td></tr>';
+                return;
+            }
+
+            tbody.innerHTML = keysSorted.map(bulanKey => {
+                const p = perBulan[bulanKey];
+                const parts = bulanKey.split('-');
+                const namaBln = namaBulan[parseInt(parts[1]) - 1];
+                return `<tr>
+                    <td class="kolom-nama">${namaBln} ${parts[0]}</td>
+                    <td class="angka-deal">${p.deal}</td>
+                    <td class="angka-lihat">${p.lihat}</td>
+                </tr>`;
+            }).join('');
         }
 
-        tbody.innerHTML = keysSorted.map(bulanKey => {
-            const p = perBulan[bulanKey];
-            const parts = bulanKey.split('-');
-            const namaBln = namaBulan[parseInt(parts[1]) - 1];
-            return `<tr>
-                <td class="kolom-nama">${namaBln} ${parts[0]}</td>
-                <td class="angka-deal">${p.deal}</td>
-                <td class="angka-lihat">${p.lihat}</td>
-            </tr>`;
-        }).join('');
-    }
         function gabungRentang(list, aksiMulai, aksiSelesai) {
             const perNama = {};
             list.forEach(a => {
@@ -1523,8 +1634,6 @@
                 btnIbadah.className = "btn-indigo";
                 btnIbadah.innerText = "SEDANG IBADAH";
             }
-
-            // updateTimerAktif(itemSaya) DIHAPUS
         }
 
         function toggleDarkMode() {
