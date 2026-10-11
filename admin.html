@@ -10,6 +10,7 @@
     <script type="module">
       import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
       import { getDatabase, ref, set, get, update, remove, onValue, push } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
+      import { getAuth, signInAnonymously, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
 
       const firebaseConfig = {
         apiKey: "AIzaSyBwMpFtET1sub8OPyfR_g7XDJYHjKSiFBI",
@@ -24,22 +25,39 @@
 
       const app = initializeApp(firebaseConfig);
       const db = getDatabase(app);
+      const auth = getAuth(app);
 
-      window.db = db;
-      window.dbRef = ref;
-      window.dbSet = set;
-      window.dbGet = get;
-      window.dbUpdate = update;
-      window.dbRemove = remove;
-      window.dbOnValue = onValue;
-      window.dbPush = push;
+      signInAnonymously(auth)
+        .then(() => {
+          console.log("✅ Anonymous login sukses:", auth.currentUser.uid);
+          window.db = db;
+          window.dbRef = ref;
+          window.dbSet = set;
+          window.dbGet = get;
+          window.dbUpdate = update;
+          window.dbRemove = remove;
+          window.dbOnValue = onValue;
+          window.dbPush = push;
+          window.authUid = auth.currentUser.uid;
 
-      window.serverTimeOffset = 0;
-      window.dbOnValue(window.dbRef(db, '.info/serverTimeOffset'), (snap) => {
-          window.serverTimeOffset = snap.val() || 0;
+          window.serverTimeOffset = 0;
+          window.dbOnValue(window.dbRef(db, '.info/serverTimeOffset'), (snap) => {
+            window.serverTimeOffset = snap.val() || 0;
+          });
+
+          window.dispatchEvent(new Event('firebase-ready'));
+        })
+        .catch((error) => {
+          console.error("❌ Anonymous login gagal:", error);
+          alert("Gagal koneksi ke server. Cek koneksi internet dan refresh halaman.");
+        });
+
+      onAuthStateChanged(auth, (user) => {
+        if (!user) {
+          console.warn("⚠️ User logout, reload halaman...");
+          setTimeout(() => location.reload(), 1000);
+        }
       });
-
-      window.dispatchEvent(new Event('firebase-ready'));
     </script>
 
     <style>
@@ -142,6 +160,65 @@
         body.dark-mode .aktivitas-list li .waktu { color: #ff99a8; }
         .aktivitas-empty { text-align: center; font-size: 11px; color: var(--text-muted); font-weight: 600; padding: 8px; font-style: italic; }
         body.dark-mode .aktivitas-empty { color: #ff8585; }
+
+        /* ✅ FIX: List Bawa Customer RATA & TIDAK KEPOTONG */
+        #list-bawa { list-style: none; padding: 0; margin: 0 0 6px 0; }
+        #list-bawa li {
+            background: #f8fafc;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 10px 12px;
+            margin-bottom: 6px;
+            font-size: 12px;
+            font-weight: 600;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 10px;
+            width: 100%;
+            flex-wrap: wrap;
+        }
+        #list-bawa li .nama {
+            flex: 1 1 60%;
+            min-width: 0;
+            font-weight: 800;
+            color: var(--text-main);
+            word-break: break-word;
+            overflow-wrap: anywhere;
+            line-height: 1.35;
+            text-align: left;
+        }
+        #list-bawa li .waktu {
+            flex: 0 0 auto;
+            font-size: 11px;
+            color: var(--text-muted);
+            font-weight: 700;
+            font-variant-numeric: tabular-nums;
+            white-space: nowrap;
+            text-align: right;
+            margin-left: auto;
+        }
+        body.dark-mode #list-bawa li { background: #2b0007; border: 2px solid #ff1f3d; box-shadow: 0 0 15px rgba(255, 31, 61, 0.4); color: #ffffff; }
+        body.dark-mode #list-bawa li .nama { color: #ffffff; }
+        body.dark-mode #list-bawa li .waktu { color: #ff99a8; }
+
+        /* ✅ FIX: List Ibadah, Keluar, Autokick juga rata */
+        #list-ibadah li, #list-keluar li, #list-autokick li {
+            flex-wrap: wrap;
+            word-break: break-word;
+        }
+        #list-ibadah li .nama, #list-keluar li .nama, #list-autokick li .nama {
+            flex: 1 1 60%;
+            min-width: 0;
+            overflow-wrap: anywhere;
+            text-align: left;
+        }
+        #list-ibadah li .waktu, #list-keluar li .waktu, #list-autokick li .waktu {
+            flex: 0 0 auto;
+            margin-left: auto;
+            text-align: right;
+        }
+
         .check-deal { display: inline-flex; align-items: center; justify-content: center; margin-left: 6px; flex-shrink: 0; vertical-align: middle; }
         .label-lihat { font-size: 10px; color: #64748b; font-weight: 700; }
         body.dark-mode .label-lihat { color: #ff99a8; }
@@ -198,7 +275,6 @@
         </div>
 
         <div id="controls-admin-box" style="display: none;">
-          
 
             <div class="timer-box-wrapper">
                 <div class="timer-card-admin ha">
@@ -349,6 +425,7 @@
             <div class="admin-grid">
                 <button type="button" class="btn-black-custom" onclick="bukaModalTambahAntriAdmin()">+ Masukkan Promotor ke Antrian</button>
                 <button type="button" class="btn-black-custom" onclick="bukaModalTambahMasterSales()">+ Tambah Nama Baru (Master Sales)</button>
+                <button type="button" class="btn-black-custom" onclick="bukaModalKelolaPIN()">🔑 Buat / Atur PIN Promotor</button>
                 <button type="button" onclick="bukaModalHapusMasterSales()">- Hapus Nama Permanen (Master Sales)</button>
                 <button type="button" onclick="bukaModalKeluarkanAntrian()">- Keluarkan dari Antrian</button>
             </div>
@@ -390,7 +467,8 @@
         let statusSistemGlobal = "BUKA";
         let koordinatTokoAdmin = { lat: "", lng: "", radius: 50 };
         let savedPinAdmin = "";
-        let unsubAntrian = null, unsubSetting = null, unsubStatistik = null, unsubMaster = null, unsubLock = null, unsubCheckin = null, unsubRiwayat = null;
+        let unsubAntrian = null, unsubSetting = null, unsubStatistik = null, unsubMaster = null, unsubLock = null, unsubCheckin = null, unsubRiwayat = null, unsubPinPromotor = null;
+        let pinPromotorGlobal = {};
         let timerCekGantiHari = null;
 
         function waktuServer() { return Date.now() + (window.serverTimeOffset || 0); }
@@ -482,7 +560,7 @@
                 }
                 cekSemuaExpiredAdmin();
                 renderAntrianAdmin();
-                renderStatistikAdmin(); // ✅ TAMBAHAN: Refresh statistik saat antrian berubah
+                renderStatistikAdmin();
             });
 
             unsubSetting = window.dbOnValue(window.dbRef(db, 'setting'), snapshot => {
@@ -519,7 +597,7 @@
                 applyLockToMaster();
                 cekLockExpiredAdmin();
                 renderAntrianAdmin();
-                renderStatistikAdmin(); // ✅ TAMBAHAN: Refresh statistik saat lock berubah
+                renderStatistikAdmin();
             });
 
             unsubCheckin = window.dbOnValue(window.dbRef(db, 'checkinHarian'), snapshot => {
@@ -530,6 +608,11 @@
             unsubRiwayat = window.dbOnValue(window.dbRef(db, 'riwayatBulanan'), snapshot => {
                 riwayatBulananGlobal = snapshot.val() || {};
                 renderTotalBulanan();
+            });
+
+            unsubPinPromotor = window.dbOnValue(window.dbRef(db, 'pinPromotor'), snapshot => {
+                pinPromotorGlobal = snapshot.val() || {};
+                console.log("🔑 PIN promotor loaded:", Object.keys(pinPromotorGlobal).length, "promotor");
             });
 
             cekDanJalankanAutoCleanup();
@@ -549,6 +632,7 @@
             if (unsubLock) { unsubLock(); unsubLock = null; }
             if (unsubCheckin) { unsubCheckin(); unsubCheckin = null; }
             if (unsubRiwayat) { unsubRiwayat(); unsubRiwayat = null; }
+            if (unsubPinPromotor) { unsubPinPromotor(); unsubPinPromotor = null; }
             if (timerCekGantiHari) { clearInterval(timerCekGantiHari); timerCekGantiHari = null; }
         }
 
@@ -885,7 +969,6 @@
             listSedangMelayani.forEach(item => semuaBawa.push(item));
             statistikMasihProses.forEach(a => {
                 const clean = sanitizeNama(a.nama);
-                // ✅ FIX: Cegah data dobel (proses) muncul jika sudah ada data selesai
                 if (!namaSedangMelayani.has(clean) && !namaSudahSelesai.has(clean)) {
                     semuaBawa.push({
                         nama: a.nama, waktuMulai: a.waktuMulai || a.waktu,
@@ -1071,7 +1154,6 @@
             tbody.innerHTML = html;
         }
 
-        // ✅ FIX: Mengganti `aktivitasGlobal` menjadi `statistikGlobal`
         function renderTotalBulanan() {
             const tbody = document.getElementById('total-bulanan-tbody');
             const labelTahun = document.getElementById('total-bulanan-tahun-label');
@@ -1197,6 +1279,202 @@
                 tutupModal();
                 tampilkanModal("Gagal", "Tidak bisa menambahkan promotor.");
             }
+        }
+
+        // =====================================================
+        // 🔑 KELOLA PIN PROMOTOR
+        // =====================================================
+
+        function bukaModalKelolaPIN() {
+            if (masterSalesGlobal.length === 0) {
+                tampilkanModal("Info", "Belum ada promotor di Master Sales.");
+                return;
+            }
+
+            let options = '<option value="">-- Pilih Promotor --</option>';
+            masterSalesGlobal.forEach(n => {
+                const clean = sanitizeNama(n.nama);
+                const punyaPIN = pinPromotorGlobal[clean] ? " ✅" : " ⚠️ belum ada PIN";
+                options += `<option value="${n.nama}">${n.nama}${punyaPIN}</option>`;
+            });
+
+            document.getElementById('modal-title').innerText = "🔑 Buat / Atur PIN Promotor";
+            document.getElementById('modal-desc').innerHTML = `
+                <div style="font-size:12px; margin-bottom:10px; color:#64748b;">
+                    PIN wajib 6 digit angka. Promotor akan memasukkan PIN ini untuk login.
+                </div>
+                Pilih Promotor:<br>
+                <select id="admin-select-pin-sales" style="margin-bottom:12px;" onchange="tampilkanPINPromotor(this.value)">
+                    ${options}
+                </select>
+                <div id="info-pin-sekarang" style="font-size:11px; margin-bottom:10px; padding:8px; border-radius:8px; background:#f1f5f9; text-align:center; display:none;">
+                    PIN saat ini: <b id="pin-sekarang-text">-</b>
+                </div>
+                <label style="font-size:11px; font-weight:700;">PIN Baru (6 digit):</label><br>
+                <input type="text" id="admin-input-pin-baru" maxlength="6" inputmode="numeric" pattern="[0-9]*"
+                    placeholder="Contoh: 847291"
+                    style="width:100%; padding:12px; border-radius:10px; border:1px solid var(--border);
+                    background:#ffffff; font-size:18px; font-weight:800; text-align:center; letter-spacing:6px;
+                    outline:none; box-sizing:border-box; margin-bottom:10px;">
+                <div style="display:flex; gap:6px;">
+                    <button type="button" style="flex:1; font-size:11px; padding:8px;" onclick="generatePINAcak()">🎲 Acak</button>
+                    <button type="button" style="flex:1; font-size:11px; padding:8px;" onclick="lihatSemuaPIN()">👁️ Lihat Semua</button>
+                </div>
+            `;
+            document.getElementById('modal-actions').innerHTML = `
+                <button type="button" class="btn-cancel" onclick="tutupModal()">Batal</button>
+                <button type="button" id="btn-modal-action-ok" onclick="eksekusiSimpanPIN()">Simpan PIN</button>
+            `;
+            document.getElementById('custom-modal').classList.add('active');
+
+            setTimeout(() => {
+                const input = document.getElementById('admin-input-pin-baru');
+                if (input) {
+                    input.focus();
+                    input.addEventListener('input', (e) => {
+                        e.target.value = e.target.value.replace(/\D/g, '').slice(0, 6);
+                    });
+                    input.addEventListener('keypress', (e) => {
+                        if (e.key === 'Enter') eksekusiSimpanPIN();
+                    });
+                }
+            }, 100);
+        }
+
+        function tampilkanPINPromotor(namaPromotor) {
+            const infoBox = document.getElementById('info-pin-sekarang');
+            const pinText = document.getElementById('pin-sekarang-text');
+            const inputBaru = document.getElementById('admin-input-pin-baru');
+
+            if (!namaPromotor) {
+                infoBox.style.display = 'none';
+                if (inputBaru) inputBaru.value = '';
+                return;
+            }
+
+            const clean = sanitizeNama(namaPromotor);
+            const pinSekarang = pinPromotorGlobal[clean];
+
+            if (pinSekarang) {
+                infoBox.style.display = 'block';
+                infoBox.style.background = '#dcfce7';
+                infoBox.style.color = '#166534';
+                pinText.innerText = pinSekarang;
+            } else {
+                infoBox.style.display = 'block';
+                infoBox.style.background = '#fef3c7';
+                infoBox.style.color = '#92400e';
+                pinText.innerText = '(belum ada PIN)';
+            }
+        }
+
+        function generatePINAcak() {
+            const input = document.getElementById('admin-input-pin-baru');
+            if (!input) return;
+
+            let pin;
+            let attempts = 0;
+            do {
+                pin = String(Math.floor(100000 + Math.random() * 900000));
+                attempts++;
+            } while (
+                attempts < 50 &&
+                (pin === '123456' || pin === '654321' || 
+                 /^(\d)\1{5}$/.test(pin) ||
+                 /^123456$|^111111$|^000000$/.test(pin))
+            );
+
+            input.value = pin;
+            input.focus();
+
+            input.style.background = '#dcfce7';
+            setTimeout(() => { input.style.background = '#ffffff'; }, 400);
+        }
+
+        async function eksekusiSimpanPIN() {
+            const nama = document.getElementById('admin-select-pin-sales').value;
+            const pin = document.getElementById('admin-input-pin-baru').value.trim();
+
+            if (!nama) {
+                tampilkanModal("Perhatian", "Pilih promotor dulu!");
+                return;
+            }
+            if (!/^\d{6}$/.test(pin)) {
+                tampilkanModal("Perhatian", "PIN harus tepat 6 digit angka!");
+                return;
+            }
+            if (pin === '000000' || pin === '123456' || /^(\d)\1{5}$/.test(pin)) {
+                if (!confirm(`PIN "${pin}" terlalu mudah ditebak. Lanjutkan tetap pakai PIN ini?`)) {
+                    return;
+                }
+            }
+
+            const clean = sanitizeNama(nama);
+            const btn = document.getElementById('btn-modal-action-ok');
+            btn.disabled = true;
+            btn.innerHTML = `<span class="spinner"></span> Menyimpan...`;
+
+            try {
+                const pinLama = pinPromotorGlobal[clean];
+                await window.dbSet(window.dbRef(window.db, 'pinPromotor/' + clean), pin);
+
+                await window.dbPush(window.dbRef(window.db, 'statistikAktivitas'), {
+                    nama: nama,
+                    aksi: pinLama ? "ResetPIN" : "BuatPIN",
+                    waktu: waktuServer(),
+                    tanggal: getTanggalIndo(),
+                    hasil: pinLama ? "PIN direset admin" : "PIN baru dibuat admin",
+                    kategori: "Keamanan",
+                    sumber: "Admin"
+                });
+
+                tutupModal();
+                tampilkanModal("Berhasil", 
+                    `PIN untuk <b>${nama}</b> berhasil disimpan.<br><br>` +
+                    `PIN: <b style="font-size:20px; letter-spacing:4px;">${pin}</b><br><br>` +
+                    `<span style="font-size:11px; color:#64748b;">Bagikan PIN ini ke promotor via WhatsApp pribadi.</span>`
+                );
+            } catch (e) {
+                console.warn("Error simpan PIN:", e);
+                tutupModal();
+                tampilkanModal("Gagal", "Tidak bisa menyimpan PIN. Cek koneksi internet.");
+            }
+        }
+
+        function lihatSemuaPIN() {
+            if (masterSalesGlobal.length === 0) {
+                tampilkanModal("Info", "Belum ada promotor.");
+                return;
+            }
+
+            let html = `<div style="max-height:400px; overflow-y:auto; text-align:left;">`;
+            html += `<table style="width:100%; border-collapse:collapse; font-size:12px;">`;
+            html += `<thead><tr style="background:#f1f5f9;">
+                <th style="padding:6px; text-align:left; border-bottom:1px solid #e2e8f0;">Nama</th>
+                <th style="padding:6px; text-align:center; border-bottom:1px solid #e2e8f0;">PIN</th>
+            </tr></thead><tbody>`;
+
+            masterSalesGlobal.forEach(n => {
+                const clean = sanitizeNama(n.nama);
+                const pin = pinPromotorGlobal[clean];
+                const pinText = pin ? `<b style="font-family:monospace;">${pin}</b>` : `<span style="color:#dc2626;">— belum ada —</span>`;
+                html += `<tr>
+                    <td style="padding:6px; border-bottom:1px solid #f1f5f9;">${n.nama}</td>
+                    <td style="padding:6px; text-align:center; border-bottom:1px solid #f1f5f9;">${pinText}</td>
+                </tr>`;
+            });
+
+            html += `</tbody></table></div>`;
+            html += `<div style="font-size:11px; color:#64748b; margin-top:10px; text-align:center;">
+                Total: ${Object.keys(pinPromotorGlobal).length} dari ${masterSalesGlobal.length} promotor punya PIN
+            </div>`;
+
+            document.getElementById('modal-title').innerText = "👁️ Daftar Semua PIN Promotor";
+            document.getElementById('modal-desc').innerHTML = html;
+            document.getElementById('modal-actions').innerHTML = `
+                <button type="button" class="btn-cancel" onclick="bukaModalKelolaPIN()">← Kembali</button>
+                <button type="button" onclick="tutupModal()">Tutup</button>
+            `;
         }
 
         function bukaModalHapusMasterSales() {
@@ -1696,6 +1974,11 @@
         window.eksekusiToggleSistem = eksekusiToggleSistem;
         window.bukaModalTambahMasterSales = bukaModalTambahMasterSales;
         window.eksekusiTambahMasterSales = eksekusiTambahMasterSales;
+        window.bukaModalKelolaPIN = bukaModalKelolaPIN;
+        window.tampilkanPINPromotor = tampilkanPINPromotor;
+        window.generatePINAcak = generatePINAcak;
+        window.eksekusiSimpanPIN = eksekusiSimpanPIN;
+        window.lihatSemuaPIN = lihatSemuaPIN;
         window.bukaModalHapusMasterSales = bukaModalHapusMasterSales;
         window.eksekusiHapusMasterSales = eksekusiHapusMasterSales;
         window.bukaModalTambahAntriAdmin = bukaModalTambahAntriAdmin;
