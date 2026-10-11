@@ -9,23 +9,29 @@
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
-    <script type="module">
-      import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-      import { getDatabase, ref, set, get, update, remove, onValue, push } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
+   <script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+  import { getDatabase, ref, set, get, update, remove, onValue, push } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
+  import { getAuth, signInAnonymously, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
 
-      const firebaseConfig = {
-        apiKey: "AIzaSyBwMpFtET1sub8OPyfR_g7XDJYHjKSiFBI",
-        authDomain: "antrian-walk-in.firebaseapp.com",
-        databaseURL: "https://antrian-walk-in-default-rtdb.asia-southeast1.firebasedatabase.app",
-        projectId: "antrian-walk-in",
-        storageBucket: "antrian-walk-in.firebasestorage.app",
-        messagingSenderId: "229095316838",
-        appId: "1:229095316838:web:72c12839919c06d162fca7",
-        measurementId: "G-DKW3HEC8GD"
-      };
+  const firebaseConfig = {
+    apiKey: "AIzaSyBwMpFtET1sub8OPyfR_g7XDJYHjKSiFBI",
+    authDomain: "antrian-walk-in.firebaseapp.com",
+    databaseURL: "https://antrian-walk-in-default-rtdb.asia-southeast1.firebasedatabase.app",
+    projectId: "antrian-walk-in",
+    storageBucket: "antrian-walk-in.firebasestorage.app",
+    messagingSenderId: "229095316838",
+    appId: "1:229095316838:web:72c12839919c06d162fca7",
+    measurementId: "G-DKW3HEC8GD"
+  };
 
-      const app = initializeApp(firebaseConfig);
-      const db = getDatabase(app);
+  const app = initializeApp(firebaseConfig);
+  const db = getDatabase(app);
+  const auth = getAuth(app);
+
+  signInAnonymously(auth)
+    .then(() => {
+      console.log("✅ Anonymous login sukses:", auth.currentUser.uid);
 
       window.db = db;
       window.dbRef = ref;
@@ -35,14 +41,27 @@
       window.dbRemove = remove;
       window.dbOnValue = onValue;
       window.dbPush = push;
+      window.authUid = auth.currentUser.uid;
 
       window.serverTimeOffset = 0;
       window.dbOnValue(window.dbRef(db, '.info/serverTimeOffset'), (snap) => {
-          window.serverTimeOffset = snap.val() || 0;
+        window.serverTimeOffset = snap.val() || 0;
       });
 
       window.dispatchEvent(new Event('firebase-ready'));
-    </script>
+    })
+    .catch((error) => {
+      console.error("❌ Anonymous login gagal:", error);
+      alert("Gagal koneksi ke server. Cek koneksi internet Anda dan refresh halaman.");
+    });
+
+  onAuthStateChanged(auth, (user) => {
+    if (!user) {
+      console.warn("⚠️ User logout, reload halaman...");
+      setTimeout(() => location.reload(), 1000);
+    }
+  });
+</script>
 
     <style>
         :root {
