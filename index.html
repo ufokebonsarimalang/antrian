@@ -51,7 +51,7 @@
         })
         .catch((error) => {
           console.error("❌ Anonymous login gagal:", error);
-          alert("Gagal koneksi ke server. Cek koneksi internet Anda dan refresh halaman.");
+          alert("Gagal koneksi ke server. Cek koneksi internet dan refresh halaman.");
         });
 
       onAuthStateChanged(auth, (user) => {
@@ -89,10 +89,14 @@
         body.dark-mode .status-badge-sistem { background: #50000e !important; color: #ff667a !important; border: 2px solid #ff1f3d !important; box-shadow: 0 0 30px rgba(255, 31, 61, 0.9), inset 0 0 12px rgba(255, 31, 61, 0.5) !important; }
         .input-group { margin-bottom: 16px; text-align: left; }
         .input-group label { display: block; font-size: 11px; font-weight: 700; color: var(--text-muted); text-transform: uppercase; margin-bottom: 6px; letter-spacing: 0.3px; }
-        select, input[type="text"] { width: 100%; padding: 12px 14px; border-radius: 12px; border: 1px solid var(--border); background: #f8fafc; font-size: 14px; font-weight: 600; color: var(--text-main); outline: none; appearance: none; -webkit-appearance: none; -moz-appearance: none; background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2364748b' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e"); background-repeat: no-repeat; background-position: right 14px center; background-size: 16px; cursor: pointer; transition: all 0.2s ease; box-sizing: border-box; }
-        body.dark-mode select, body.dark-mode input[type="text"] { background: #2b0007; color: #ffffff; border: 2px solid #ff1f3d !important; box-shadow: 0 0 25px rgba(255, 31, 61, 0.6), inset 0 0 10px rgba(255, 31, 61, 0.3); }
-        .user-badge { background: #f8fafc; border: 1px solid var(--border); border-radius: 12px; padding: 12px 14px; margin-bottom: 16px; text-align: left; font-size: 13px; font-weight: 600; }
+        select, input[type="text"], input[type="password"] { width: 100%; padding: 12px 14px; border-radius: 12px; border: 1px solid var(--border); background: #f8fafc; font-size: 14px; font-weight: 600; color: var(--text-main); outline: none; appearance: none; -webkit-appearance: none; -moz-appearance: none; transition: all 0.2s ease; box-sizing: border-box; }
+        select { background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2364748b' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e"); background-repeat: no-repeat; background-position: right 14px center; background-size: 16px; cursor: pointer; }
+        input[type="password"] { text-align: center; font-size: 20px; font-weight: 800; letter-spacing: 6px; }
+        body.dark-mode select, body.dark-mode input[type="text"], body.dark-mode input[type="password"] { background: #2b0007; color: #ffffff; border: 2px solid #ff1f3d !important; box-shadow: 0 0 25px rgba(255, 31, 61, 0.6), inset 0 0 10px rgba(255, 31, 61, 0.3); }
+        .user-badge { background: #f8fafc; border: 1px solid var(--border); border-radius: 12px; padding: 12px 14px; margin-bottom: 16px; text-align: left; font-size: 13px; font-weight: 600; display: flex; justify-content: space-between; align-items: center; gap: 10px; }
         body.dark-mode .user-badge { background: #2b0007; border: 2px solid #ff1f3d; box-shadow: 0 0 25px rgba(255, 31, 61, 0.6); }
+        .logout-btn { background: #dc2626 !important; color: #ffffff !important; border: none; font-weight: 800; border-radius: 8px; padding: 6px 12px; font-size: 10px; cursor: pointer; text-transform: uppercase; letter-spacing: 0.5px; }
+        .logout-btn:hover { background: #b91c1c !important; }
         .timer-box-wrapper { display: flex; flex-direction: column; gap: 12px; margin-bottom: 18px; }
         .timer-card-admin { background: #f8fafc; border-radius: 14px; padding: 14px; text-align: center; border: 1px solid var(--border); display: flex; flex-direction: column; justify-content: center; }
         body.dark-mode .timer-card-admin { background: #3d000a; border: 2px solid #ff1f3d; box-shadow: 0 0 35px rgba(255, 31, 61, 0.9), inset 0 0 15px rgba(255, 31, 61, 0.5); }
@@ -217,11 +221,112 @@
         body.dark-mode #total-bawa-box { background: #50000e !important; color: #ffb3bc !important; border: 1px solid #ff1f3d; }
         body.dark-mode #total-bawa-box .total-lihat { color: #fbbf24; text-shadow: 0 0 6px rgba(251, 191, 36, 0.6); }
         body.dark-mode #total-bawa-box .total-deal { color: #34d399; text-shadow: 0 0 6px rgba(52, 211, 153, 0.6); }
+
+        /* LOGIN SCREEN */
+        #login-screen {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            z-index: 99999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 16px;
+        }
+        body.dark-mode #login-screen {
+            background: linear-gradient(135deg, #050102 0%, #1a0205 100%) !important;
+        }
+        .login-card {
+            background: var(--card-bg);
+            width: 100%;
+            max-width: 400px;
+            padding: 32px 24px;
+            border-radius: 20px;
+            border: 1px solid var(--border);
+            box-shadow: 0 20px 40px -5px rgba(15, 23, 42, 0.15);
+            text-align: center;
+        }
+        body.dark-mode .login-card {
+            background: #090204 !important;
+            border: 2px solid #ff1f3d !important;
+            box-shadow: 0 0 50px rgba(255, 31, 61, 0.6) !important;
+        }
+        .login-logo { font-size: 48px; margin-bottom: 12px; }
+        .login-title { font-size: 20px; font-weight: 800; color: var(--text-main); margin-bottom: 4px; }
+        .login-subtitle { font-size: 13px; font-weight: 600; color: var(--text-muted); margin-bottom: 24px; }
+        .login-error {
+            color: #dc2626;
+            font-size: 12px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            min-height: 18px;
+            text-align: center;
+            line-height: 1.4;
+        }
+        .login-footer {
+            font-size: 11px;
+            color: var(--text-muted);
+            margin-top: 20px;
+            line-height: 1.5;
+            font-weight: 600;
+        }
+        .login-btn {
+            width: 100%;
+            padding: 14px;
+            border-radius: 12px;
+            font-size: 13px;
+            font-weight: 800;
+            background: #0f172a;
+            color: #ffffff;
+            border: none;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-top: 8px;
+        }
+        .login-btn:hover { background: #1e293b; }
+        .login-btn:disabled { opacity: 0.6; cursor: not-allowed; }
+        body.dark-mode .login-btn {
+            background: #99001f !important;
+            color: #ffffff !important;
+            border: 2px solid #ff1f3d !important;
+        }
     </style>
 </head>
 <body>
 
-    <div class="app-container">
+    <!-- ========== LAYAR LOGIN (Tampil pertama kali) ========== -->
+    <div id="login-screen">
+        <div class="login-card">
+            <div class="login-logo">🔒</div>
+            <div class="login-title">Antrian Walk-In</div>
+            <div class="login-subtitle">UFO Kebonsari</div>
+
+            <div class="input-group">
+                <label>Pilih Nama Anda</label>
+                <select id="login-pilih-sales">
+                    <option value="">-- Memuat daftar promotor --</option>
+                </select>
+            </div>
+
+            <div class="input-group">
+                <label>PIN 6 Digit</label>
+                <input type="password" id="login-pin-input" maxlength="6" inputmode="numeric" pattern="[0-9]*"
+                    placeholder="••••••" autocomplete="off">
+            </div>
+
+            <div id="login-error" class="login-error"></div>
+
+            <button type="button" id="btn-login-promotor" class="login-btn">MASUK</button>
+
+            <div class="login-footer">
+                Belum punya PIN? Hubungi admin
+            </div>
+        </div>
+    </div>
+
+    <!-- ========== APLIKASI UTAMA (Tersembunyi sebelum login) ========== -->
+    <div class="app-container" id="app-container" style="display: none;">
         <div class="top-controls">
             <button type="button" class="dark-mode-btn" id="btn-toggle-dark" onclick="toggleDarkMode()">🌙 Gelap</button>
         </div>
@@ -243,7 +348,11 @@
 
         <div id="panel-menu-utama" style="display: none;">
             <div class="user-badge">
-                <span style="color: var(--text-muted);">Promotor:</span> <strong id="label-user-aktif" style="color:var(--primary); font-size: 14px;">-</strong>
+                <div>
+                    <span style="color: var(--text-muted);">Promotor:</span>
+                    <strong id="label-user-aktif" style="color:var(--primary); font-size: 14px;">-</strong>
+                </div>
+                <button type="button" class="logout-btn" onclick="logoutPromotor()">Logout</button>
             </div>
 
             <div id="box-lock-timer" style="display:none; margin-bottom: 16px;">
@@ -489,20 +598,40 @@
 
             if (cachedNama && pinVerified && !pinKadaluarsa) {
                 namaSalesAktifGlobal = cachedNama;
-                document.getElementById('panel-login').style.display = 'none';
-                document.getElementById('panel-menu-utama').style.display = 'block';
-                document.getElementById('label-user-aktif').innerText = cachedNama;
+                tampilkanAplikasiUtama();
             } else {
                 localStorage.removeItem('ufo_nama_sales_aktif');
                 localStorage.removeItem('ufo_pin_verified');
                 localStorage.removeItem('ufo_pin_verified_at');
-                document.getElementById('panel-login').style.display = 'block';
-                document.getElementById('panel-menu-utama').style.display = 'none';
+                tampilkanLayarLogin();
             }
 
             inisialisasiRealtimeFirebase();
             cekPINVerification();
         });
+
+        function tampilkanAplikasiUtama() {
+            const loginScreen = document.getElementById('login-screen');
+            const appContainer = document.getElementById('app-container');
+            if (loginScreen) loginScreen.style.display = 'none';
+            if (appContainer) appContainer.style.display = 'block';
+
+            const cachedNama = getAkunAktif();
+            document.getElementById('panel-login').style.display = 'none';
+            document.getElementById('panel-menu-utama').style.display = 'block';
+            document.getElementById('label-user-aktif').innerText = cachedNama;
+
+            renderUI();
+            renderAktivitas();
+            renderRekapBawaCustomer();
+        }
+
+        function tampilkanLayarLogin() {
+            const loginScreen = document.getElementById('login-screen');
+            const appContainer = document.getElementById('app-container');
+            if (loginScreen) loginScreen.style.display = 'flex';
+            if (appContainer) appContainer.style.display = 'none';
+        }
 
         function resetCheckinHarianJikaPerlu() {
             const tglTersimpan = localStorage.getItem('ufo_checkin_tanggal');
@@ -525,7 +654,7 @@
                 localStorage.removeItem('ufo_nama_sales_aktif');
                 localStorage.removeItem('ufo_pin_verified');
                 localStorage.removeItem('ufo_pin_verified_at');
-                location.reload();
+                tampilkanLayarLogin();
             }
         }
         setInterval(cekPINVerification, 30 * 60 * 1000);
@@ -805,6 +934,12 @@
             names.forEach(n => { selectHtml += `<option value="${n}">${n}</option>`; });
             const selectEl = document.getElementById('pilih-sales');
             if (selectEl) selectEl.innerHTML = selectHtml;
+
+            // Isi juga dropdown di layar login
+            const loginSelect = document.getElementById('login-pilih-sales');
+            if (loginSelect) {
+                loginSelect.innerHTML = selectHtml;
+            }
         }
 
         function getAkunAktif() {
@@ -813,17 +948,36 @@
         }
 
         // =====================================================
-        // 🔐 LOGIN DENGAN PIN
+        // 🔐 LOGIN VIA LAYAR AWAL (dropdown + PIN)
         // =====================================================
-        function simpanAkunHP() {
-            const namaPilih = document.getElementById('pilih-sales').value;
-            if (!namaPilih) { tampilkanModal("Perhatian", "Silakan pilih nama Anda!"); return; }
+        async function prosesLoginPromotor() {
+            const namaPilih = document.getElementById('login-pilih-sales').value;
+            const pin = document.getElementById('login-pin-input').value.trim();
+            const errEl = document.getElementById('login-error');
+            const btn = document.getElementById('btn-login-promotor');
+
+            errEl.style.color = '#dc2626';
+            errEl.innerText = '';
+
+            if (!namaPilih) {
+                errEl.innerText = 'Silakan pilih nama Anda!';
+                return;
+            }
+            if (!/^\d{6}$/.test(pin)) {
+                errEl.innerText = 'PIN harus 6 digit angka';
+                return;
+            }
 
             const clean = sanitizeNama(namaPilih);
+            const asli = btn.innerHTML;
+            btn.disabled = true;
+            btn.innerHTML = '<span class="spinner" style="width: 12px; height: 12px;"></span> Memeriksa...';
 
-            window.dbGet(window.dbRef(window.db, 'lockPromotor/' + clean)).then(snap => {
-                if (snap.exists()) {
-                    const lockData = snap.val();
+            try {
+                // 1) Cek lock
+                const snapLock = await window.dbGet(window.dbRef(window.db, 'lockPromotor/' + clean));
+                if (snapLock.exists()) {
+                    const lockData = snapLock.val();
                     if (lockData && lockData.locked) {
                         const sekarang = waktuServer();
                         const waktuMulai = Number(lockData.waktuMulaiLock) || 0;
@@ -832,86 +986,34 @@
                         const belumExpired = waktuExpired === 0 || sekarang < waktuExpired;
 
                         if (sudahMulai && belumExpired) {
-                            let sisaTeks = "tanpa batas waktu";
+                            let sisaTeks = 'tanpa batas waktu';
                             if (waktuExpired > 0) {
                                 const sisaMenit = Math.ceil((waktuExpired - sekarang) / 60000);
                                 sisaTeks = `${sisaMenit} menit lagi`;
                             }
-                            tampilkanModal("🔒 Akun Dikunci",
-                                `Nama "${namaPilih}" sedang DIKUNCI.\n\nAlasan: ${lockData.alasan || "-"}\nSisa: ${sisaTeks}`
-                            );
+                            errEl.innerText = `🔒 Akun dikunci: ${lockData.alasan || '-'} (${sisaTeks})`;
+                            btn.disabled = false;
+                            btn.innerHTML = asli;
                             return;
                         }
                     }
                 }
-                tampilkanModalPIN(namaPilih, clean);
-            });
-        }
 
-        function tampilkanModalPIN(namaPilih, clean) {
-            document.getElementById('modal-title').innerText = "🔐 Masukkan PIN";
-            document.getElementById('modal-desc').innerHTML = `
-                <div style="text-align:center; margin-bottom:14px; font-weight:700; color:var(--text-main);">
-                    Halo, <b>${namaPilih}</b>
-                </div>
-                <div style="text-align:center; margin-bottom:10px; font-size:12px; color:var(--text-muted);">
-                    Masukkan PIN 6 digit Anda
-                </div>
-                <input type="password" id="input-pin" maxlength="6" inputmode="numeric" pattern="[0-9]*"
-                    placeholder="••••••"
-                    style="width:100%; padding:14px; border-radius:12px; border:2px solid var(--border);
-                    background:#f8fafc; color:var(--text-main); font-size:22px; font-weight:800;
-                    text-align:center; letter-spacing:8px; outline:none; box-sizing:border-box;"
-                    autocomplete="off">
-                <div id="pin-error" style="color:#dc2626; font-size:12px; font-weight:700;
-                    margin-top:8px; text-align:center; display:none;"></div>
-            `;
-            document.getElementById('modal-actions').innerHTML = `
-                <button type="button" class="btn-customer" onclick="tutupModal()">Batal</button>
-                <button type="button" class="btn-customer" id="btn-verif-pin">Masuk</button>
-            `;
-            document.getElementById('custom-modal').classList.add('active');
-
-            setTimeout(() => {
-                const inputPin = document.getElementById('input-pin');
-                if (!inputPin) return;
-                inputPin.focus();
-                inputPin.addEventListener('input', (e) => {
-                    e.target.value = e.target.value.replace(/\D/g, '').slice(0, 6);
-                });
-                inputPin.addEventListener('keypress', (e) => {
-                    if (e.key === 'Enter') verifikasiPIN(namaPilih, clean);
-                });
-            }, 100);
-
-            document.getElementById('btn-verif-pin').onclick = () => verifikasiPIN(namaPilih, clean);
-        }
-
-        function verifikasiPIN(namaPilih, clean) {
-            const inputPin = document.getElementById('input-pin');
-            const pin = inputPin ? inputPin.value.trim() : "";
-            const errEl = document.getElementById('pin-error');
-            if (!errEl) return;
-
-            if (pin.length !== 6) {
-                errEl.innerText = "PIN harus 6 digit angka";
-                errEl.style.display = 'block';
-                return;
-            }
-
-            window.dbGet(window.dbRef(window.db, 'pinPromotor/' + clean)).then(snap => {
-                if (!snap.exists()) {
-                    errEl.innerText = "PIN belum diatur. Hubungi admin.";
-                    errEl.style.display = 'block';
+                // 2) Cek PIN
+                const snapPin = await window.dbGet(window.dbRef(window.db, 'pinPromotor/' + clean));
+                if (!snapPin.exists()) {
+                    errEl.innerText = 'PIN belum diatur. Hubungi admin.';
+                    btn.disabled = false;
+                    btn.innerHTML = asli;
                     return;
                 }
 
-                const pinBenar = String(snap.val()).trim();
+                const pinBenar = String(snapPin.val()).trim();
 
                 if (pin !== pinBenar) {
-                    errEl.innerText = "❌ PIN salah. Coba lagi.";
-                    errEl.style.display = 'block';
-                    if (inputPin) { inputPin.value = ""; inputPin.focus(); }
+                    errEl.innerText = '❌ PIN salah. Coba lagi.';
+                    document.getElementById('login-pin-input').value = '';
+                    document.getElementById('login-pin-input').focus();
 
                     window.dbPush(window.dbRef(window.db, 'statistikAktivitas'), {
                         nama: namaPilih,
@@ -922,32 +1024,79 @@
                         kategori: "Keamanan",
                         sumber: "Login"
                     }).catch(() => {});
+
+                    btn.disabled = false;
+                    btn.innerHTML = asli;
                     return;
                 }
 
+                // 3) PIN benar → login
                 namaSalesAktifGlobal = namaPilih;
                 localStorage.setItem('ufo_nama_sales_aktif', namaPilih);
                 localStorage.setItem('ufo_pin_verified', 'true');
                 localStorage.setItem('ufo_pin_verified_at', String(waktuServer()));
 
-                document.getElementById('panel-login').style.display = 'none';
-                document.getElementById('panel-menu-utama').style.display = 'block';
-                document.getElementById('label-user-aktif').innerText = namaPilih;
+                errEl.style.color = '#059669';
+                errEl.innerText = '✅ Login berhasil...';
 
-                tutupModal();
-                renderUI();
-                renderAktivitas();
-                renderRekapBawaCustomer();
-            }).catch((err) => {
-                console.error("Gagal verifikasi PIN:", err);
-                errEl.innerText = "Gagal koneksi. Coba lagi.";
-                errEl.style.display = 'block';
+                setTimeout(() => {
+                    tampilkanAplikasiUtama();
+                    document.getElementById('login-pin-input').value = '';
+                    errEl.innerText = '';
+                    btn.disabled = false;
+                    btn.innerHTML = asli;
+                }, 500);
+            } catch (e) {
+                console.error('Error login:', e);
+                errEl.innerText = 'Gagal koneksi. Coba lagi.';
+                btn.disabled = false;
+                btn.innerHTML = asli;
+            }
+        }
+
+        function logoutPromotor() {
+            tampilkanModalKonfirmasi("Logout", "Yakin ingin logout dari akun ini?\n\nAnda harus memasukkan PIN lagi untuk masuk.", () => {
+                localStorage.removeItem('ufo_nama_sales_aktif');
+                localStorage.removeItem('ufo_pin_verified');
+                localStorage.removeItem('ufo_pin_verified_at');
+                localStorage.removeItem('ufo_checkin_hari_ini');
+                localStorage.removeItem('ufo_checkin_tanggal');
+                namaSalesAktifGlobal = '';
+
+                // Reset UI
+                document.getElementById('login-pin-input').value = '';
+                document.getElementById('login-pilih-sales').value = '';
+                document.getElementById('login-error').innerText = '';
+
+                tampilkanLayarLogin();
             });
         }
 
+        // Event listener login screen
+        document.addEventListener('DOMContentLoaded', () => {
+            const btnLogin = document.getElementById('btn-login-promotor');
+            if (btnLogin) btnLogin.onclick = prosesLoginPromotor;
+
+            const inputPin = document.getElementById('login-pin-input');
+            if (inputPin) {
+                inputPin.addEventListener('input', (e) => {
+                    e.target.value = e.target.value.replace(/\D/g, '').slice(0, 6);
+                });
+                inputPin.addEventListener('keypress', (e) => {
+                    if (e.key === 'Enter') prosesLoginPromotor();
+                });
+            }
+        });
+
         // =====================================================
-        // PETA & CHECK-IN
+        // Fungsi lama (tidak berubah)
         // =====================================================
+        function simpanAkunHP() {
+            // Fungsi ini tidak dipakai lagi (login sekarang di layar awal)
+            // Tapi tetap ada untuk kompatibilitas
+            tampilkanLayarLogin();
+        }
+
         function initPetaPromotor() {
             if (mapPromotor) return;
             const container = document.getElementById('map-promotor');
@@ -1680,6 +1829,8 @@
         window.toggleDarkMode = toggleDarkMode;
         window.tutupModal = tutupModal;
         window.toggleAktivitasSection = toggleAktivitasSection;
+        window.prosesLoginPromotor = prosesLoginPromotor;
+        window.logoutPromotor = logoutPromotor;
     </script>
 </body>
 </html>
