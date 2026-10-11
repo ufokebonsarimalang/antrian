@@ -420,6 +420,113 @@ body.dark-mode .custom-select-menu .option.selected {
 body.dark-mode .custom-select-menu .option.empty {
     color: #ff99a8;
 }
+        /* ================= LOGIN SUCCESS TOAST ================= */
+.login-toast-overlay {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(15, 23, 42, 0.4);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 999999;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    padding: 16px;
+}
+.login-toast-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+.login-toast-card {
+    background: #ffffff;
+    padding: 32px 40px;
+    border-radius: 24px;
+    text-align: center;
+    box-shadow: 0 25px 60px rgba(15, 23, 42, 0.3);
+    transform: scale(0.8);
+    transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    min-width: 240px;
+}
+.login-toast-overlay.active .login-toast-card {
+    transform: scale(1);
+}
+.login-toast-icon {
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #10b981, #059669);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 16px;
+    box-shadow: 0 10px 25px rgba(16, 185, 129, 0.4);
+    animation: successPop 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.login-toast-icon svg {
+    width: 40px;
+    height: 40px;
+    stroke: #ffffff;
+    stroke-width: 3;
+    fill: none;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+.login-toast-icon svg path {
+    stroke-dasharray: 30;
+    stroke-dashoffset: 30;
+    animation: checkDraw 0.5s 0.2s ease-out forwards;
+}
+@keyframes successPop {
+    0% { transform: scale(0); }
+    50% { transform: scale(1.15); }
+    100% { transform: scale(1); }
+}
+@keyframes checkDraw {
+    to { stroke-dashoffset: 0; }
+}
+.login-toast-title {
+    font-size: 18px;
+    font-weight: 800;
+    color: #0f172a;
+    margin-bottom: 4px;
+    letter-spacing: -0.3px;
+}
+.login-toast-subtitle {
+    font-size: 13px;
+    font-weight: 600;
+    color: #64748b;
+}
+.login-toast-name {
+    color: #059669;
+    font-weight: 800;
+}
+
+/* Dark mode */
+body.dark-mode .login-toast-overlay {
+    background: rgba(0, 0, 0, 0.7);
+}
+body.dark-mode .login-toast-card {
+    background: #090204;
+    border: 2px solid #ff1f3d;
+    box-shadow: 0 25px 60px rgba(255, 31, 61, 0.4);
+}
+body.dark-mode .login-toast-icon {
+    background: linear-gradient(135deg, #ff1f3d, #99001f);
+    box-shadow: 0 10px 25px rgba(255, 31, 61, 0.6);
+}
+body.dark-mode .login-toast-title {
+    color: #ffffff;
+}
+body.dark-mode .login-toast-subtitle {
+    color: #ffb3bc;
+}
+body.dark-mode .login-toast-name {
+    color: #34d399;
+}
     </style>
 </head>
 <body>
@@ -1182,16 +1289,23 @@ renderCustomSelectOptions(names);
                 localStorage.setItem('ufo_pin_verified', 'true');
                 localStorage.setItem('ufo_pin_verified_at', String(waktuServer()));
 
-                errEl.style.color = '#059669';
-                errEl.innerText = '✅ Login berhasil...';
+               // Tampilkan toast sukses
+document.getElementById('login-toast-name').innerText = namaPilih;
+const toast = document.getElementById('login-toast');
+toast.classList.add('active');
 
-                setTimeout(() => {
-                    tampilkanAplikasiUtama();
-                    document.getElementById('login-pin-input').value = '';
-                    errEl.innerText = '';
-                    btn.disabled = false;
-                    btn.innerHTML = asli;
-                }, 500);
+setTimeout(() => {
+    tampilkanAplikasiUtama();
+    document.getElementById('login-pin-input').value = '';
+    errEl.innerText = '';
+    btn.disabled = false;
+    btn.innerHTML = asli;
+
+    // Tutup toast setelah masuk aplikasi
+    setTimeout(() => {
+        toast.classList.remove('active');
+    }, 800);
+}, 1400);
             } catch (e) {
                 console.error('Error login:', e);
                 errEl.innerText = 'Gagal koneksi. Coba lagi.';
@@ -2055,5 +2169,19 @@ document.getElementById('login-error').innerText = '';
         window.prosesLoginPromotor = prosesLoginPromotor;
         window.logoutPromotor = logoutPromotor;
     </script>
+    <!-- ========== LOGIN SUCCESS TOAST ========== -->
+<div class="login-toast-overlay" id="login-toast">
+    <div class="login-toast-card">
+        <div class="login-toast-icon">
+            <svg viewBox="0 0 24 24">
+                <path d="M20 6L9 17l-5-5"></path>
+            </svg>
+        </div>
+        <div class="login-toast-title">Login Berhasil!</div>
+        <div class="login-toast-subtitle">
+            Selamat datang, <span class="login-toast-name" id="login-toast-name">-</span>
+        </div>
+    </div>
+</div>
 </body>
 </html>
