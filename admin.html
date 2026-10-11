@@ -82,10 +82,81 @@
         .header-admin h2 { margin: 0 0 6px 0; font-size: 20px; font-weight: 700; }
         .header-admin .header-sub-text { margin: 0; font-size: 12.5px; opacity: 0.85; font-weight: 500; display: block; line-height: 1.4; }
         body.dark-mode .header-admin { background: linear-gradient(135deg, #7f0015 0%, #300008 100%) !important; border: 3px solid #ff1f3d !important; }
-        .status-badge { display: inline-block; padding: 6px 14px; border-radius: 6px; font-size: 11px; font-weight: 700; margin-top: 14px; text-transform: uppercase; }
-        .status-open { background: #dcfce7; color: #166534; border: 1px solid #bbf7d0; }
-        .status-closed { background: #fee2e2; color: #991b1b; border: 1px solid #fecaca; }
-        body.dark-mode .status-badge { background: #50000e !important; color: #ff667a !important; border: 2px solid #ff1f3d !important; }
+
+        /* ============ STATUS BADGE (SAMA DENGAN PROMOTOR) ============ */
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 7px 16px 7px 12px;
+            border-radius: 24px;
+            font-size: 11px;
+            font-weight: 800;
+            text-transform: uppercase;
+            margin-top: 14px;
+            letter-spacing: 0.6px;
+            transition: all 0.3s ease;
+        }
+        .status-badge .dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            flex-shrink: 0;
+            display: inline-block;
+        }
+        .status-open {
+            background: linear-gradient(135deg, #ecfdf5, #d1fae5);
+            color: #065f46;
+            border: 1px solid #6ee7b7;
+            box-shadow: 0 2px 8px rgba(5, 150, 105, 0.15);
+        }
+        .status-open .dot {
+            background: #10b981;
+            box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
+            animation: pulseOpen 2s infinite;
+        }
+        @keyframes pulseOpen {
+            0% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
+            70% { box-shadow: 0 0 0 8px rgba(16, 185, 129, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+        }
+        .status-closed {
+            background: linear-gradient(135deg, #fef2f2, #fee2e2);
+            color: #991b1b;
+            border: 1px solid #fca5a5;
+            box-shadow: 0 2px 8px rgba(220, 38, 38, 0.15);
+        }
+        .status-closed .dot {
+            background: #ef4444;
+            animation: none;
+        }
+        body.dark-mode .status-open {
+            background: linear-gradient(135deg, #022c22, #064e3b) !important;
+            color: #6ee7b7 !important;
+            border: 1px solid #059669 !important;
+            box-shadow: 0 0 20px rgba(16, 185, 129, 0.4), inset 0 0 8px rgba(16, 185, 129, 0.15) !important;
+        }
+        body.dark-mode .status-open .dot {
+            background: #34d399;
+            box-shadow: 0 0 0 0 rgba(52, 211, 153, 0.7);
+            animation: pulseOpenDark 2s infinite;
+        }
+        @keyframes pulseOpenDark {
+            0% { box-shadow: 0 0 0 0 rgba(52, 211, 153, 0.7), 0 0 8px rgba(52, 211, 153, 0.8); }
+            70% { box-shadow: 0 0 0 8px rgba(52, 211, 153, 0), 0 0 8px rgba(52, 211, 153, 0.8); }
+            100% { box-shadow: 0 0 0 0 rgba(52, 211, 153, 0), 0 0 8px rgba(52, 211, 153, 0.8); }
+        }
+        body.dark-mode .status-closed {
+            background: linear-gradient(135deg, #450a0a, #7f1d1d) !important;
+            color: #fca5a5 !important;
+            border: 1px solid #ef4444 !important;
+            box-shadow: 0 0 20px rgba(239, 68, 68, 0.4), inset 0 0 8px rgba(239, 68, 68, 0.15) !important;
+        }
+        body.dark-mode .status-closed .dot {
+            background: #ef4444;
+            box-shadow: 0 0 8px rgba(239, 68, 68, 0.8);
+        }
+
         .timer-box-wrapper { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 24px; }
         .timer-card-admin { background: #ffffff; border-radius: 14px; padding: 18px 14px; text-align: center; border: 1px solid var(--border); display: flex; flex-direction: column; justify-content: center; }
         body.dark-mode .timer-card-admin.ha, body.dark-mode .timer-card-admin.av { background: #3d000a !important; border: 3px solid #ff1f3d !important; }
@@ -145,12 +216,94 @@
         .riwayat-badge.lihat { background: #f59e0b; }
         .riwayat-badge.nosale { background: #dc2626; }
         .riwayat-badge.hari { background: #6366f1; }
+
+        /* ============ AKTIVITAS (SAMA DENGAN PROMOTOR) ============ */
         .aktivitas-section { margin-top: 20px; text-align: left; }
+
         .aktivitas-title { font-size: 12px; font-weight: 800; text-transform: uppercase; padding: 10px 12px; border-radius: 8px; color: white; display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; letter-spacing: 0.5px; gap: 8px; background: linear-gradient(135deg, #0f172a, #1e293b); }
         .aktivitas-title .count { font-size: 10px; background: rgba(255,255,255,0.25); padding: 2px 8px; border-radius: 10px; }
         .aktivitas-title .judul-kategori { display: flex; align-items: center; gap: 8px; flex: 1; }
         .aktivitas-icon { width: 22px; height: 22px; display: inline-flex; align-items: center; justify-content: center; border-radius: 6px; flex-shrink: 0; background: rgba(255,255,255,0.2); }
         .aktivitas-icon svg { width: 13px; height: 13px; stroke: currentColor; stroke-width: 2.4; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+
+        /* ============ HEADER TOGGLE AKTIVITAS (SAMA DENGAN PROMOTOR) ============ */
+        .aktivitas-header-toggle {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            user-select: none;
+            padding: 12px 14px;
+            border-radius: 12px;
+            background: linear-gradient(135deg, #0f172a, #1e293b);
+            color: #ffffff;
+            margin-bottom: 0;
+            transition: all 0.2s ease;
+            box-shadow: 0 2px 6px rgba(15, 23, 42, 0.15);
+        }
+        .aktivitas-header-toggle:hover {
+            background: linear-gradient(135deg, #1e293b, #334155);
+        }
+        body.dark-mode .aktivitas-header-toggle {
+            background: #2b0007 !important;
+            border: 2px solid #ff1f3d !important;
+            box-shadow: 0 0 25px rgba(255, 31, 61, 0.6) !important;
+        }
+        .aktivitas-header-toggle .judul {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 12px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .aktivitas-header-toggle .judul svg {
+            width: 14px;
+            height: 14px;
+            stroke: currentColor;
+            stroke-width: 2.4;
+            fill: none;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+        .aktivitas-header-toggle .arrow {
+            width: 24px;
+            height: 24px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.15);
+            transition: transform 0.3s ease;
+            flex-shrink: 0;
+        }
+        .aktivitas-header-toggle .arrow svg {
+            width: 12px;
+            height: 12px;
+            stroke: #ffffff;
+            stroke-width: 2.6;
+            fill: none;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+        .aktivitas-header-toggle.open .arrow {
+            transform: rotate(180deg);
+        }
+
+        .aktivitas-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.35s ease, padding 0.2s ease, opacity 0.2s ease;
+            opacity: 0;
+            padding: 0;
+        }
+        .aktivitas-content.open {
+            max-height: none;
+            opacity: 1;
+            padding-top: 12px;
+        }
+
         .aktivitas-list { list-style: none; padding: 0; margin: 0 0 6px 0; }
         .aktivitas-list li { background: #f8fafc; border: 1px solid var(--border); border-radius: 10px; padding: 8px 12px; margin-bottom: 5px; font-size: 12px; font-weight: 600; display: flex; justify-content: space-between; align-items: center; gap: 8px; }
         body.dark-mode .aktivitas-list li { background: #2b0007; border: 2px solid #ff1f3d; box-shadow: 0 0 15px rgba(255, 31, 61, 0.4); color: #ffffff; }
@@ -263,10 +416,10 @@
             <h2>Dashboard Admin</h2>
             <span class="header-sub-text">Sistem Antrian Promotor</span>
             <span class="header-sub-text">UFO Kebonsari</span>
-           <div id="badge-status-sistem" class="status-badge status-open">
-    <span class="dot"></span>
-    <span id="badge-status-text">STATUS: OPEN</span>
-</div>
+            <div id="badge-status-sistem" class="status-badge status-open">
+                <span class="dot"></span>
+                <span id="badge-status-text">STATUS: OPEN</span>
+            </div>
         </div>
 
         <div id="login-admin-box">
@@ -296,18 +449,22 @@
                 <ul id="list-AV" class="list-antrian"><li><span>Memuat...</span></li></ul>
             </div>
 
+            <!-- ============ AKTIVITAS SECTION (SAMA PERSIS PROMOTOR) ============ -->
             <div class="aktivitas-section">
-                <div class="aktivitas-title" style="cursor: pointer;" onclick="toggleAktivitasAdmin()">
-                    <span class="judul-kategori">
-                        <span class="aktivitas-icon">
-                            <svg viewBox="0 0 24 24"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect x="8" y="2" width="8" height="4" rx="1" ry="1"/></svg>
-                        </span>
+                <div class="aktivitas-header-toggle" id="toggle-aktivitas-admin" onclick="toggleAktivitasAdmin()">
+                    <span class="judul">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/>
+                            <rect x="8" y="2" width="8" height="4" rx="1" ry="1"/>
+                        </svg>
                         Aktivitas Hari Ini
                     </span>
-                    <span class="count" id="arrow-aktivitas-admin">▼</span>
+                    <span class="arrow" id="arrow-aktivitas-admin">
+                        <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+                    </span>
                 </div>
 
-                <div id="content-aktivitas-admin">
+                <div class="aktivitas-content" id="content-aktivitas-admin">
                     <div class="aktivitas-title">
                         <span class="judul-kategori">
                             <span class="aktivitas-icon">
@@ -868,14 +1025,14 @@
         }
 
         function renderStatusSistem() {
-           const badge = document.getElementById('badge-status-sistem');
-const badgeText = document.getElementById('badge-status-text');
-if (badge && badgeText) {
-    badgeText.innerText = statusSistemGlobal === "BUKA" ? "STATUS: OPEN" : "STATUS: CLOSED";
-    badge.className = statusSistemGlobal === "BUKA"
-        ? "status-badge status-open"
-        : "status-badge status-closed";
-}
+            const badge = document.getElementById('badge-status-sistem');
+            const badgeText = document.getElementById('badge-status-text');
+            if (badge && badgeText) {
+                badgeText.innerText = statusSistemGlobal === "BUKA" ? "STATUS: OPEN" : "STATUS: CLOSED";
+                badge.className = statusSistemGlobal === "BUKA"
+                    ? "status-badge status-open"
+                    : "status-badge status-closed";
+            }
             const btnBuka = document.getElementById('btn-buka-sistem');
             const btnTutup = document.getElementById('btn-tutup-sistem');
             if (btnBuka && btnTutup) {
@@ -1228,12 +1385,33 @@ if (badge && badgeText) {
         }
 
         function toggleAktivitasAdmin() {
+            const header = document.getElementById('toggle-aktivitas-admin');
             const content = document.getElementById('content-aktivitas-admin');
-            const arrow = document.getElementById('arrow-aktivitas-admin');
-            if (!content || !arrow) return;
-            const isHidden = content.style.display === 'none' || content.style.display === '';
-            content.style.display = isHidden ? 'block' : 'none';
-            arrow.innerText = isHidden ? '▲' : '▼';
+            if (!header || !content) return;
+            const isOpen = content.classList.contains('open');
+            if (isOpen) {
+                content.classList.remove('open');
+                header.classList.remove('open');
+                localStorage.setItem('ufo_admin_aktivitas_open', 'false');
+            } else {
+                content.classList.add('open');
+                header.classList.add('open');
+                localStorage.setItem('ufo_admin_aktivitas_open', 'true');
+            }
+        }
+
+        function restoreAktivitasAdminState() {
+            setTimeout(() => {
+                const saved = localStorage.getItem('ufo_admin_aktivitas_open');
+                if (saved === 'true') {
+                    const header = document.getElementById('toggle-aktivitas-admin');
+                    const content = document.getElementById('content-aktivitas-admin');
+                    if (header && content) {
+                        header.classList.add('open');
+                        content.classList.add('open');
+                    }
+                }
+            }, 150);
         }
 
         function bukaModalToggleSistem(targetStatus) {
@@ -1288,10 +1466,6 @@ if (badge && badgeText) {
                 tampilkanModal("Gagal", "Tidak bisa menambahkan promotor.");
             }
         }
-
-        // =====================================================
-        // 🔑 KELOLA PIN PROMOTOR
-        // =====================================================
 
         function bukaModalKelolaPIN() {
             if (masterSalesGlobal.length === 0) {
@@ -2005,6 +2179,11 @@ if (badge && badgeText) {
         window.toggleDarkMode = toggleDarkMode;
         window.tutupModal = tutupModal;
         window.toggleAktivitasAdmin = toggleAktivitasAdmin;
+
+        // Restore state Aktivitas saat firebase ready
+        window.addEventListener('firebase-ready', () => {
+            restoreAktivitasAdminState();
+        });
     </script>
 </body>
 </html>
