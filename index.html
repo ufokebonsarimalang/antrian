@@ -83,10 +83,88 @@
         .gradient-header h2 { margin: 0; font-size: 20px; font-weight: 800; letter-spacing: -0.3px; }
         .gradient-header p { margin: 6px 0 0 0; font-size: 13px; font-weight: 600; color: #94a3b8; }
         body.dark-mode .gradient-header { background: linear-gradient(135deg, #140205 0%, #050001 100%) !important; border: 2px solid #ff1f3d !important; box-shadow: 0 0 30px rgba(255, 31, 61, 0.6) !important; }
-        .status-badge-sistem { display: inline-block; padding: 6px 14px; border-radius: 20px; font-size: 11px; font-weight: 800; text-transform: uppercase; margin-bottom: 16px; letter-spacing: 0.5px; }
-        .status-open { background: #dcfce7; color: #166534; border: 1px solid #bbf7d0; }
-        .status-closed { background: #fee2e2; color: #991b1b; border: 1px solid #fecaca; }
-        body.dark-mode .status-badge-sistem { background: #50000e !important; color: #ff667a !important; border: 2px solid #ff1f3d !important; box-shadow: 0 0 30px rgba(255, 31, 61, 0.9), inset 0 0 12px rgba(255, 31, 61, 0.5) !important; }
+       .status-badge-sistem {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 7px 16px 7px 12px;
+    border-radius: 24px;
+    font-size: 11px;
+    font-weight: 800;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+    letter-spacing: 0.6px;
+    transition: all 0.3s ease;
+}
+
+.status-badge-sistem .dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    display: inline-block;
+}
+
+/* ===== OPEN ===== */
+.status-open {
+    background: linear-gradient(135deg, #ecfdf5, #d1fae5);
+    color: #065f46;
+    border: 1px solid #6ee7b7;
+    box-shadow: 0 2px 8px rgba(5, 150, 105, 0.15);
+}
+.status-open .dot {
+    background: #10b981;
+    box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
+    animation: pulseOpen 2s infinite;
+}
+
+@keyframes pulseOpen {
+    0% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
+    70% { box-shadow: 0 0 0 8px rgba(16, 185, 129, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+}
+
+/* ===== CLOSED ===== */
+.status-closed {
+    background: linear-gradient(135deg, #fef2f2, #fee2e2);
+    color: #991b1b;
+    border: 1px solid #fca5a5;
+    box-shadow: 0 2px 8px rgba(220, 38, 38, 0.15);
+}
+.status-closed .dot {
+    background: #ef4444;
+    animation: none;
+}
+
+/* ===== DARK MODE ===== */
+body.dark-mode .status-open {
+    background: linear-gradient(135deg, #022c22, #064e3b) !important;
+    color: #6ee7b7 !important;
+    border: 1px solid #059669 !important;
+    box-shadow: 0 0 20px rgba(16, 185, 129, 0.4), inset 0 0 8px rgba(16, 185, 129, 0.15) !important;
+}
+body.dark-mode .status-open .dot {
+    background: #34d399;
+    box-shadow: 0 0 0 0 rgba(52, 211, 153, 0.7);
+    animation: pulseOpenDark 2s infinite;
+}
+
+@keyframes pulseOpenDark {
+    0% { box-shadow: 0 0 0 0 rgba(52, 211, 153, 0.7), 0 0 8px rgba(52, 211, 153, 0.8); }
+    70% { box-shadow: 0 0 0 8px rgba(52, 211, 153, 0), 0 0 8px rgba(52, 211, 153, 0.8); }
+    100% { box-shadow: 0 0 0 0 rgba(52, 211, 153, 0), 0 0 8px rgba(52, 211, 153, 0.8); }
+}
+
+body.dark-mode .status-closed {
+    background: linear-gradient(135deg, #450a0a, #7f1d1d) !important;
+    color: #fca5a5 !important;
+    border: 1px solid #ef4444 !important;
+    box-shadow: 0 0 20px rgba(239, 68, 68, 0.4), inset 0 0 8px rgba(239, 68, 68, 0.15) !important;
+}
+body.dark-mode .status-closed .dot {
+    background: #ef4444;
+    box-shadow: 0 0 8px rgba(239, 68, 68, 0.8);
+}
         .input-group { margin-bottom: 16px; text-align: left; }
         .input-group label { display: block; font-size: 11px; font-weight: 700; color: var(--text-muted); text-transform: uppercase; margin-bottom: 6px; letter-spacing: 0.3px; }
         select, input[type="text"], input[type="password"] { width: 100%; padding: 12px 14px; border-radius: 12px; border: 1px solid var(--border); background: #f8fafc; font-size: 14px; font-weight: 600; color: var(--text-main); outline: none; appearance: none; -webkit-appearance: none; -moz-appearance: none; transition: all 0.2s ease; box-sizing: border-box; }
@@ -580,7 +658,10 @@ body.dark-mode .login-toast-name {
             <p>UFO Malang Kebonsari</p>
         </div>
 
-        <div id="badge-status-sistem" class="status-badge-sistem status-open">STATUS ANTRIAN: OPEN</div>
+        <div id="badge-status-sistem" class="status-badge-sistem status-open">
+    <span class="dot"></span>
+    <span id="badge-status-text">STATUS ANTRIAN: OPEN</span>
+</div>
 
         <div id="panel-login" style="display: none;">
             <div class="input-group">
@@ -2030,10 +2111,14 @@ document.getElementById('login-error').innerText = '';
         }
 
         function renderUI() {
-            const badge = document.getElementById('badge-status-sistem');
-            badge.innerText = statusSistemGlobal === "BUKA" ? "STATUS ANTRIAN: OPEN" : "STATUS ANTRIAN: CLOSED";
-            badge.className = statusSistemGlobal === "BUKA" ? "status-badge-sistem status-open" : "status-badge-sistem status-closed";
-
+           const badge = document.getElementById('badge-status-sistem');
+const badgeText = document.getElementById('badge-status-text');
+if (badge && badgeText) {
+    badgeText.innerText = statusSistemGlobal === "BUKA" ? "STATUS ANTRIAN: OPEN" : "STATUS ANTRIAN: CLOSED";
+    badge.className = statusSistemGlobal === "BUKA"
+        ? "status-badge-sistem status-open"
+        : "status-badge-sistem status-closed";
+}
             let listHA = "", listAV = "";
             let urutHA = 1, urutAV = 1;
             const akunSaya = sanitizeNama(getAkunAktif());
