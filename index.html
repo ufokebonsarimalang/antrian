@@ -294,6 +294,132 @@ body.dark-mode .info-radius.ok { color: #34d399 !important; background: #022c22 
             color: #ffffff !important;
             border: 2px solid #ff1f3d !important;
         }
+        /* ================= CUSTOM SELECT ================= */
+.custom-select {
+    width: 100%;
+    padding: 12px 14px;
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    background: #f8fafc;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-main);
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    transition: all 0.2s ease;
+    user-select: none;
+}
+.custom-select:hover {
+    border-color: #94a3b8;
+}
+.custom-select.open {
+    border-color: #0f172a;
+    box-shadow: 0 0 0 3px rgba(15, 23, 42, 0.08);
+}
+.custom-select-arrow {
+    width: 16px;
+    height: 16px;
+    color: #64748b;
+    transition: transform 0.25s ease;
+    flex-shrink: 0;
+}
+.custom-select.open .custom-select-arrow {
+    transform: rotate(180deg);
+}
+.custom-select-menu {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: calc(100% + 6px);
+    background: #ffffff;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(15, 23, 42, 0.15);
+    max-height: 260px;
+    overflow-y: auto;
+    z-index: 999;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-6px);
+    transition: all 0.2s ease;
+    padding: 6px;
+}
+.custom-select-menu.open {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+.custom-select-menu .option {
+    padding: 10px 14px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-main);
+    cursor: pointer;
+    transition: background 0.15s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+.custom-select-menu .option:hover {
+    background: #f1f5f9;
+}
+.custom-select-menu .option.selected {
+    background: #0f172a;
+    color: #ffffff;
+}
+.custom-select-menu .option.empty {
+    color: #94a3b8;
+    font-style: italic;
+    cursor: default;
+    justify-content: center;
+}
+.custom-select-menu .option.empty:hover {
+    background: transparent;
+}
+
+/* Bikin parent dropdown tidak kepotong */
+#login-screen .input-group {
+    position: relative;
+}
+
+/* ================= DARK MODE ================= */
+body.dark-mode .custom-select {
+    background: #2b0007;
+    color: #ffffff;
+    border: 2px solid #ff1f3d !important;
+    box-shadow: 0 0 25px rgba(255, 31, 61, 0.6), inset 0 0 10px rgba(255, 31, 61, 0.3);
+}
+body.dark-mode .custom-select:hover {
+    border-color: #ff667a !important;
+}
+body.dark-mode .custom-select.open {
+    box-shadow: 0 0 0 3px rgba(255, 31, 61, 0.3), 0 0 25px rgba(255, 31, 61, 0.6) !important;
+}
+body.dark-mode .custom-select-arrow {
+    color: #ff99a8;
+}
+body.dark-mode .custom-select-menu {
+    background: #2b0007;
+    border: 2px solid #ff1f3d;
+    box-shadow: 0 0 30px rgba(255, 31, 61, 0.6);
+}
+body.dark-mode .custom-select-menu .option {
+    color: #ffffff;
+}
+body.dark-mode .custom-select-menu .option:hover {
+    background: #450a0a;
+}
+body.dark-mode .custom-select-menu .option.selected {
+    background: #ff1f3d;
+    color: #ffffff;
+}
+body.dark-mode .custom-select-menu .option.empty {
+    color: #ff99a8;
+}
     </style>
 </head>
 <body>
@@ -305,12 +431,19 @@ body.dark-mode .info-radius.ok { color: #34d399 !important; background: #022c22 
             <div class="login-title">Antrian Walk-In</div>
             <div class="login-subtitle">UFO Malang Kebonsari</div>
 
-            <div class="input-group">
-                <label>Pilih Nama Anda</label>
-                <select id="login-pilih-sales">
-                    <option value="">-- Memuat daftar promotor --</option>
-                </select>
-            </div>
+           <div class="input-group">
+    <label>Pilih Nama Anda</label>
+    <input type="hidden" id="login-pilih-sales" value="">
+    <div class="custom-select" id="custom-select-trigger" onclick="toggleCustomSelect()">
+        <span id="custom-select-label">-- Memuat daftar promotor --</span>
+        <svg class="custom-select-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="6 9 12 15 18 9"></polyline>
+        </svg>
+    </div>
+    <div class="custom-select-menu" id="custom-select-menu">
+        <!-- diisi JS -->
+    </div>
+</div>
 
             <div class="input-group">
                 <label>Masukkan PIN</label>
@@ -941,11 +1074,13 @@ body.dark-mode .info-radius.ok { color: #34d399 !important; background: #022c22 
                     names.push(nama.trim());
                 }
             });
-            names = [...new Set(names)].sort();
-            names.forEach(n => { selectHtml += `<option value="${n}">${n}</option>`; });
-            const selectEl = document.getElementById('pilih-sales');
-            if (selectEl) selectEl.innerHTML = selectHtml;
+           names = [...new Set(names)].sort();
+names.forEach(n => { selectHtml += `<option value="${n}">${n}</option>`; });
+const selectEl = document.getElementById('pilih-sales');
+if (selectEl) selectEl.innerHTML = selectHtml;
 
+// Isi custom dropdown di layar login
+renderCustomSelectOptions(names);
             // Isi juga dropdown di layar login
             const loginSelect = document.getElementById('login-pilih-sales');
             if (loginSelect) {
@@ -1064,7 +1199,79 @@ body.dark-mode .info-radius.ok { color: #34d399 !important; background: #022c22 
                 btn.innerHTML = asli;
             }
         }
+// =====================================================
+// 🎨 CUSTOM SELECT (dropdown nama promotor)
+// =====================================================
+let customSelectOptions = [];
 
+function toggleCustomSelect() {
+    const menu = document.getElementById('custom-select-menu');
+    const trigger = document.getElementById('custom-select-trigger');
+    if (!menu || !trigger) return;
+    const isOpen = menu.classList.contains('open');
+    if (isOpen) {
+        menu.classList.remove('open');
+        trigger.classList.remove('open');
+    } else {
+        menu.classList.add('open');
+        trigger.classList.add('open');
+        // Scroll ke opsi yang sedang dipilih
+        const selected = menu.querySelector('.option.selected');
+        if (selected) selected.scrollIntoView({ block: 'nearest' });
+    }
+}
+
+function pilihOpsiCustom(value, label) {
+    const hidden = document.getElementById('login-pilih-sales');
+    const labelEl = document.getElementById('custom-select-label');
+    const menu = document.getElementById('custom-select-menu');
+    const trigger = document.getElementById('custom-select-trigger');
+    if (!hidden || !labelEl) return;
+
+    hidden.value = value;
+    labelEl.innerText = label;
+
+    // Update highlight
+    menu.querySelectorAll('.option').forEach(opt => {
+        opt.classList.toggle('selected', opt.dataset.value === value);
+    });
+
+    // Tutup menu
+    menu.classList.remove('open');
+    trigger.classList.remove('open');
+}
+
+function renderCustomSelectOptions(names) {
+    const menu = document.getElementById('custom-select-menu');
+    const labelEl = document.getElementById('custom-select-label');
+    if (!menu || !labelEl) return;
+
+    customSelectOptions = names;
+
+    if (!names || names.length === 0) {
+        menu.innerHTML = '<div class="option empty">-- Belum ada promotor --</div>';
+        labelEl.innerText = '-- Memuat daftar promotor --';
+        return;
+    }
+
+    labelEl.innerText = '-- Pilih Nama Anda --';
+
+    menu.innerHTML = names.map(n => {
+        const safe = String(n).replace(/"/g, '&quot;');
+        return `<div class="option" data-value="${safe}" onclick="pilihOpsiCustom('${safe.replace(/'/g, "\\'")}', '${safe.replace(/'/g, "\\'")}')">${n}</div>`;
+    }).join('');
+}
+
+// Tutup dropdown kalau klik di luar
+document.addEventListener('click', (e) => {
+    const wrap = document.getElementById('custom-select-trigger');
+    const menu = document.getElementById('custom-select-menu');
+    if (!wrap || !menu) return;
+    if (!wrap.contains(e.target) && !menu.contains(e.target)) {
+        menu.classList.remove('open');
+        wrap.classList.remove('open');
+    }
+});
         function logoutPromotor() {
             tampilkanModalKonfirmasi("Logout", "Yakin ingin logout dari akun ini?\n\nAnda harus memasukkan PIN lagi untuk masuk.", () => {
                 localStorage.removeItem('ufo_nama_sales_aktif');
@@ -1076,9 +1283,14 @@ body.dark-mode .info-radius.ok { color: #34d399 !important; background: #022c22 
 
                 // Reset UI
                 document.getElementById('login-pin-input').value = '';
-                document.getElementById('login-pilih-sales').value = '';
-                document.getElementById('login-error').innerText = '';
-
+document.getElementById('login-pilih-sales').value = '';
+const labelEl = document.getElementById('custom-select-label');
+if (labelEl) labelEl.innerText = '-- Pilih Nama Anda --';
+const menuEl = document.getElementById('custom-select-menu');
+if (menuEl) {
+    menuEl.querySelectorAll('.option').forEach(o => o.classList.remove('selected'));
+}
+document.getElementById('login-error').innerText = '';
                 tampilkanLayarLogin();
             });
         }
