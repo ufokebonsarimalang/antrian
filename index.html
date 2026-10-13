@@ -3535,9 +3535,9 @@ html body:not(.dark-mode) .popup-body #total-bawa-box {
                 <span class="fut-dot"></span>
                 <span>SISTEM ANTRIAN DIGITAL</span>
             </div>
-            <h1 class="fut-headline" id="fut-headline">
-                <span id="fut-headline-text">Antrian Walk-In</span>
-            </h1>
+           <h1 class="fut-headline" id="fut-headline" style="opacity: 0; transition: opacity 0.4s ease;">
+    <span id="fut-headline-text"></span>
+</h1>
             <p class="fut-subheadline" id="fut-subheadline">UFO Malang Kebonsari</p>
 
             <div class="fut-characters">
@@ -3893,8 +3893,14 @@ function applyBranding(setting) {
             };
         }
     }
+    
+    // Tampilkan headline & subheadline setelah branding diterapkan
+    const headline = document.getElementById('fut-headline');
+    if (headline) headline.style.opacity = '1';
+    
+    const subheadline = document.getElementById('fut-subheadline');
+    if (subheadline) subheadline.style.opacity = '1';
 }
-
 (function() {
     const container = document.getElementById('fut-particles');
     if (!container) return;
