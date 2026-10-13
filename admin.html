@@ -61,29 +61,168 @@
     </script>
 
     <style>
+        /* ============================================ */
+        /* ===== BAGIAN 1: TEMA SAMA DENGAN PROMOTOR === */
+        /* ============================================ */
         :root {
-            --bg: #f8fafc; --card-bg: #ffffff; --text-main: #0f172a; --text-muted: #64748b;
-            --border: #e2e8f0; --accent: #2563eb; --success: #059669; --warning: #d97706; --danger: #dc2626;
+            --bg: #f8fafc;
+            --card-bg: #ffffff;
+            --card-soft: #f8fafc;
+            --text-main: #0f172a;
+            --text-muted: #64748b;
+            --border: #e2e8f0;
+            --accent: #2563eb;
+            --success: #059669;
+            --warning: #d97706;
+            --danger: #dc2626;
         }
         body.dark-mode {
-            --bg: #050102 !important; --card-bg: #1a0205 !important; --text-main: #ffffff !important;
-            --text-muted: #ff8585 !important; --border: #ff1f3d !important;
+            --bg: #050102 !important;
+            --card-bg: #1a0205 !important;
+            --card-soft: #2b0007 !important;
+            --text-main: #ffffff !important;
+            --text-muted: #ff8585 !important;
+            --border: #ff1f3d !important;
         }
         *, body, button, select, input { font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif !important; box-sizing: border-box; }
-        body { background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%); color: var(--text-main); margin: 0; padding: 24px; display: flex; justify-content: center; min-height: 100vh; }
-        body.dark-mode { background: #050102 !important; }
-        .admin-container { width: 100%; max-width: 680px; background: var(--card-bg); border-radius: 20px; padding: 32px; border: 1px solid var(--border); box-shadow: 0 20px 25px -5px rgba(15, 23, 42, 0.05); }
-        body.dark-mode .admin-container { background: #1a0205 !important; border: 3px solid #ff1f3d !important; box-shadow: 0 0 50px rgba(255, 31, 61, 0.9) !important; }
-        .top-controls { display: flex; justify-content: flex-end; margin-bottom: 20px; }
-        .dark-mode-btn { background: #0f172a; color: #ffffff; border: 1px solid #1e293b; font-weight: 600; border-radius: 10px; padding: 8px 16px; cursor: pointer; font-size: 12px; width: auto; }
-        .dark-mode-btn:hover { background: #1e293b; }
-        body.dark-mode .dark-mode-btn { background: #ff1f3d !important; color: #ffffff !important; border: 2px solid #ffffff !important; }
-        .header-admin { background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); border-radius: 14px; padding: 24px 20px; color: white; text-align: center; margin-bottom: 24px; }
-        .header-admin h2 { margin: 0 0 6px 0; font-size: 20px; font-weight: 700; }
-        .header-admin .header-sub-text { margin: 0; font-size: 12.5px; opacity: 0.85; font-weight: 500; display: block; line-height: 1.4; }
-        body.dark-mode .header-admin { background: linear-gradient(135deg, #7f0015 0%, #300008 100%) !important; border: 3px solid #ff1f3d !important; }
+        
+      body { 
+    background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+    color: var(--text-main);
+    margin: 0;
+    padding: 16px;
+    display: flex;
+    justify-content: center;
+    min-height: 100vh;
+    transition: background 0.3s ease;
+}
+        body.dark-mode {
+            background: linear-gradient(135deg, #050102 0%, #1a0205 100%) !important;
+        }
+        
+      .admin-container {
+    width: 100%;
+    max-width: 500px;
+    background: var(--card-bg);
+    border-radius: 20px;
+    padding: 24px;
+    border: 1px solid var(--border);
+    box-shadow: 0 20px 25px -5px rgba(15, 23, 42, 0.05);
+    transition: all 0.3s ease;
+}
+        body.dark-mode .admin-container {
+            background: #090204 !important;
+            border: 2px solid #ff1f3d !important;
+            box-shadow: 0 0 40px rgba(255, 31, 61, 0.5), inset 0 0 15px rgba(255, 31, 61, 0.2) !important;
+        }
+        
+       .top-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+}
 
-        /* ============ STATUS BADGE (SAMA DENGAN PROMOTOR) ============ */
+.logout-btn {
+    background: #dc2626 !important;
+    color: #ffffff !important;
+    border: 1px solid #dc2626 !important;
+    font-weight: 700;
+    border-radius: 10px;
+    padding: 8px 16px;
+    font-size: 12px;
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+    width: auto;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    transition: all 0.2s ease;
+}
+.logout-btn:hover {
+    background: #b91c1c !important;
+    transform: translateY(-1px);
+}
+body.dark-mode .logout-btn {
+    background: linear-gradient(135deg, #ff1f3d 0%, #99001f 100%) !important;
+    color: #ffffff !important;
+    border: 2px solid #ff1f3d !important;
+    box-shadow: 0 0 25px rgba(255, 31, 61, 0.7), inset 0 0 8px rgba(255, 255, 255, 0.3) !important;
+    text-shadow: 0 0 6px rgba(255, 255, 255, 0.5) !important;
+}
+body.dark-mode .logout-btn:hover {
+    background: linear-gradient(135deg, #ff1f3d 0%, #ff1f3d 100%) !important;
+    box-shadow: 0 0 35px rgba(255, 31, 61, 1) !important;
+}
+        
+        /* Dark mode button */
+        .dark-mode-btn {
+            background: #0f172a;
+            color: #ffffff;
+            border: 1px solid #1e293b;
+            font-weight: 700;
+            border-radius: 10px;
+            padding: 8px 16px;
+            cursor: pointer;
+            font-size: 12px;
+            width: auto;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            transition: all 0.2s ease;
+        }
+        .dark-mode-btn:hover {
+            background: #1e293b;
+            transform: translateY(-1px);
+        }
+        body.dark-mode .dark-mode-btn {
+            background: linear-gradient(135deg, #ff1f3d 0%, #99001f 100%) !important;
+            color: #ffffff !important;
+            border: 2px solid #ff1f3d !important;
+            box-shadow: 0 0 20px rgba(255, 31, 61, 0.6) !important;
+            text-shadow: 0 0 6px rgba(255, 255, 255, 0.5) !important;
+        }
+        
+        /* Header admin */
+        .header-admin {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            border-radius: 14px;
+            padding: 24px 20px;
+            color: white;
+            text-align: center;
+            margin-bottom: 24px;
+            border: 1px solid #334155;
+            box-shadow: 0 4px 12px rgba(15, 23, 42, 0.15);
+            transition: all 0.3s ease;
+        }
+        .header-admin h2 {
+            margin: 0 0 6px 0;
+            font-size: 20px;
+            font-weight: 800;
+            letter-spacing: -0.3px;
+        }
+        .header-admin .header-sub-text {
+            margin: 0;
+            font-size: 12.5px;
+            opacity: 0.85;
+            font-weight: 600;
+            display: block;
+            line-height: 1.4;
+            color: #94a3b8;
+        }
+        body.dark-mode .header-admin {
+            background: linear-gradient(135deg, #7f0015 0%, #50000e 100%) !important;
+            border: 2px solid #ff1f3d !important;
+            box-shadow: 0 0 35px rgba(255, 31, 61, 0.7), inset 0 0 15px rgba(255, 31, 61, 0.4) !important;
+        }
+        body.dark-mode .header-admin h2 {
+            color: #ffffff !important;
+            text-shadow: 0 0 20px rgba(255, 31, 61, 1), 0 0 30px rgba(255, 31, 61, 0.6) !important;
+        }
+        body.dark-mode .header-admin .header-sub-text {
+            color: #ff99a8 !important;
+            text-shadow: 0 0 10px rgba(255, 31, 61, 0.8) !important;
+        }
+        
+        /* ===== STATUS BADGE (sama promotor) ===== */
         .status-badge {
             display: inline-flex;
             align-items: center;
@@ -130,103 +269,515 @@
             background: #ef4444;
             animation: none;
         }
-        body.dark-mode .status-open {
-            background: linear-gradient(135deg, #022c22, #064e3b) !important;
-            color: #6ee7b7 !important;
-            border: 1px solid #059669 !important;
-            box-shadow: 0 0 20px rgba(16, 185, 129, 0.4), inset 0 0 8px rgba(16, 185, 129, 0.15) !important;
+        body.dark-mode .status-badge,
+        body.dark-mode .status-open,
+        body.dark-mode .status-closed {
+            background: #ff1f3d !important;
+            color: #ffffff !important;
+            border: 2px solid #ff1f3d !important;
+            box-shadow: 0 0 30px rgba(255, 31, 61, 0.9), inset 0 0 10px rgba(255, 255, 255, 0.3) !important;
         }
-        body.dark-mode .status-open .dot {
-            background: #34d399;
-            box-shadow: 0 0 0 0 rgba(52, 211, 153, 0.7);
-            animation: pulseOpenDark 2s infinite;
+        body.dark-mode .status-badge .dot,
+        body.dark-mode .status-open .dot,
+        body.dark-mode .status-closed .dot {
+            background: #ffffff !important;
+            box-shadow: 0 0 15px #ffffff, 0 0 30px #ff1f3d !important;
+            animation: pulseOpenDark 2s infinite !important;
+        }
+        body.dark-mode #badge-status-text {
+            color: #ffffff !important;
+            text-shadow: 0 0 8px rgba(255, 255, 255, 0.8) !important;
         }
         @keyframes pulseOpenDark {
-            0% { box-shadow: 0 0 0 0 rgba(52, 211, 153, 0.7), 0 0 8px rgba(52, 211, 153, 0.8); }
-            70% { box-shadow: 0 0 0 8px rgba(52, 211, 153, 0), 0 0 8px rgba(52, 211, 153, 0.8); }
-            100% { box-shadow: 0 0 0 0 rgba(52, 211, 153, 0), 0 0 8px rgba(52, 211, 153, 0.8); }
+            0% { box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.7), 0 0 15px #ffffff; }
+            70% { box-shadow: 0 0 0 8px rgba(255, 255, 255, 0), 0 0 15px #ffffff; }
+            100% { box-shadow: 0 0 0 0 rgba(255, 255, 255, 0), 0 0 15px #ffffff; }
         }
-        body.dark-mode .status-closed {
-            background: linear-gradient(135deg, #450a0a, #7f1d1d) !important;
-            color: #fca5a5 !important;
-            border: 1px solid #ef4444 !important;
-            box-shadow: 0 0 20px rgba(239, 68, 68, 0.4), inset 0 0 8px rgba(239, 68, 68, 0.15) !important;
+        
+        /* ===== TIMER CARDS ===== */
+        .timer-box-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin-bottom: 24px;
         }
-        body.dark-mode .status-closed .dot {
-            background: #ef4444;
-            box-shadow: 0 0 8px rgba(239, 68, 68, 0.8);
+        .timer-card-admin {
+            background: var(--card-soft);
+            border-radius: 14px;
+            padding: 18px 14px;
+            text-align: center;
+            border: 1px solid var(--border);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            transition: all 0.3s ease;
         }
-
-        .timer-box-wrapper { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 24px; }
-        .timer-card-admin { background: #ffffff; border-radius: 14px; padding: 18px 14px; text-align: center; border: 1px solid var(--border); display: flex; flex-direction: column; justify-content: center; }
-        body.dark-mode .timer-card-admin.ha, body.dark-mode .timer-card-admin.av { background: #3d000a !important; border: 3px solid #ff1f3d !important; }
-        .timer-badge-title { font-size: 10px; font-weight: 700; padding: 4px 10px; border-radius: 6px; text-transform: uppercase; margin-bottom: 8px; display: inline-block; }
-        .ha .timer-badge-title { background: #e0f2fe; color: #0369a1; border: 1px solid #bae6fd; }
-        .av .timer-badge-title { background: #f3e8ff; color: #6b21a8; border: 1px solid #e9d5ff; }
-        body.dark-mode .timer-card-admin.ha .timer-badge-title, body.dark-mode .timer-card-admin.av .timer-badge-title { background: #50000e !important; color: #ffb3bc !important; border: 2px solid #ff1f3d !important; }
-        .admin-nama-promotor { font-size: 15px; font-weight: 700; color: var(--text-main); margin-top: 2px; line-height: 1.3; min-height: 32px; display: flex; align-items: center; justify-content: center; word-break: break-word; }
-        body.dark-mode .admin-nama-promotor { color: #ffffff !important; }
-        .input-group { margin-bottom: 18px; text-align: left; }
-        .input-group label { display: block; font-size: 11px; font-weight: 700; color: var(--text-muted); text-transform: uppercase; margin-bottom: 6px; }
-        select, input[type="text"], input[type="password"], input[type="number"], input[type="date"], input[type="time"] { width: 100%; padding: 12px 14px; border-radius: 10px; border: 1px solid var(--border); background: #ffffff; font-size: 14px; font-weight: 500; color: var(--text-main); outline: none; }
-        body.dark-mode select, body.dark-mode input { background: #2b0007 !important; color: #ffffff !important; border: 2px solid #ff1f3d !important; }
-        input[type="text"], input[type="password"], input[type="number"], input[type="date"], input[type="time"] { background-image: none; cursor: text; }
-        button { width: 100%; padding: 12px 16px; border-radius: 10px; font-size: 12px; font-weight: 600; cursor: pointer; border: 1px solid #b91c1c; text-transform: uppercase; display: inline-flex; justify-content: center; align-items: center; gap: 8px; background: #dc2626 !important; color: #ffffff !important; }
-        button:hover { background: #b91c1c !important; }
-        button:active { transform: scale(0.99); }
-        .btn-black-custom { background: #0f172a !important; color: #ffffff !important; border-color: #0f172a !important; }
-        .btn-black-custom:hover { background: #1e293b !important; }
-        .btn-cancel { background: #f1f5f9 !important; color: #475569 !important; border-color: #cbd5e1 !important; }
-        .btn-cancel:hover { background: #e2e8f0 !important; }
-        .btn-disabled { background: #e2e8f0 !important; color: #94a3b8 !important; border-color: #cbd5e1 !important; cursor: not-allowed !important; }
-        body.dark-mode button { background: #99001f !important; color: #ffffff !important; border: 2px solid #ff1f3d !important; }
-        body.dark-mode .btn-black-custom { background: #99001f !important; border: 2px solid #ff1f3d !important; }
-        body.dark-mode .btn-cancel { background: #50000e !important; color: #ffffff !important; border: 2px solid #ff1f3d !important; }
-        .spinner { width: 14px; height: 14px; border: 2px solid rgba(255, 255, 255, 0.3); border-radius: 50%; border-top-color: #ffffff; animation: spin 0.8s linear infinite; display: inline-block; }
+        body.dark-mode .timer-card-admin {
+            background: #3d000a !important;
+            border: 2px solid #ff1f3d !important;
+            box-shadow: 0 0 35px rgba(255, 31, 61, 0.7), inset 0 0 15px rgba(255, 31, 61, 0.4) !important;
+        }
+        .timer-badge-title {
+            font-size: 10px;
+            font-weight: 800;
+            padding: 4px 10px;
+            border-radius: 6px;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+            display: inline-block;
+        }
+        .ha .timer-badge-title {
+            background: #e0f2fe;
+            color: #0369a1;
+            border: 1px solid #bae6fd;
+        }
+        .av .timer-badge-title {
+            background: #f3e8ff;
+            color: #6b21a8;
+            border: 1px solid #e9d5ff;
+        }
+        body.dark-mode .timer-badge-title {
+            background: #50000e !important;
+            color: #ff99a8 !important;
+            border: 2px solid #ff1f3d !important;
+        }
+        .admin-nama-promotor {
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--text-main);
+            margin-top: 2px;
+            line-height: 1.3;
+            min-height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            word-break: break-word;
+        }
+        body.dark-mode .admin-nama-promotor {
+            color: #ffffff !important;
+            text-shadow: 0 0 20px rgba(255, 31, 61, 1) !important;
+        }
+        
+        /* ===== INPUT GROUP ===== */
+        .input-group {
+            margin-bottom: 18px;
+            text-align: left;
+        }
+        .input-group label {
+            display: block;
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            margin-bottom: 6px;
+            letter-spacing: 0.3px;
+        }
+        select, input[type="text"], input[type="password"], input[type="number"], input[type="date"], input[type="time"] {
+            width: 100%;
+            padding: 12px 14px;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            background: #f8fafc;
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-main);
+            outline: none;
+            appearance: none;
+            -webkit-appearance: none;
+            transition: all 0.2s ease;
+            box-sizing: border-box;
+        }
+        body.dark-mode select,
+        body.dark-mode input {
+            background: #2b0007 !important;
+            color: #ffffff !important;
+            border: 2px solid #ff1f3d !important;
+            box-shadow: 0 0 25px rgba(255, 31, 61, 0.5), inset 0 0 10px rgba(255, 31, 61, 0.3) !important;
+        }
+        
+        /* ===== BUTTONS ===== */
+        button {
+            width: 100%;
+            padding: 12px 16px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 700;
+            cursor: pointer;
+            border: none;
+            text-transform: uppercase;
+            transition: all 0.2s ease;
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+            letter-spacing: 0.3px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.04);
+            background: #dc2626 !important;
+            color: #ffffff !important;
+        }
+        button:hover {
+            background: #b91c1c !important;
+            transform: translateY(-1px);
+        }
+        button:active { transform: scale(0.98); }
+        
+        .btn-black-custom {
+            background: #0f172a !important;
+            color: #ffffff !important;
+            border-color: #0f172a !important;
+        }
+        .btn-black-custom:hover {
+            background: #1e293b !important;
+        }
+        
+        .btn-cancel {
+            background: #f1f5f9 !important;
+            color: #475569 !important;
+            border: 1px solid #cbd5e1 !important;
+            box-shadow: none !important;
+        }
+        .btn-cancel:hover {
+            background: #e2e8f0 !important;
+            color: #0f172a !important;
+        }
+        
+        .btn-disabled {
+            background: #f1f5f9 !important;
+            color: #94a3b8 !important;
+            border: 1px solid #cbd5e1 !important;
+            cursor: not-allowed !important;
+            pointer-events: none !important;
+            box-shadow: none !important;
+        }
+        
+        body.dark-mode button {
+            background: #99001f !important;
+            color: #ffffff !important;
+            border: 2px solid #ff1f3d !important;
+            box-shadow: 0 0 25px rgba(255, 31, 61, 0.7), inset 0 0 10px rgba(255, 255, 255, 0.3) !important;
+            text-shadow: 0 0 6px rgba(255, 255, 255, 0.5) !important;
+        }
+        body.dark-mode button:hover {
+            background: #ff1f3d !important;
+            box-shadow: 0 0 35px rgba(255, 31, 61, 1), inset 0 0 15px rgba(255, 255, 255, 0.4) !important;
+        }
+        body.dark-mode .btn-black-custom {
+            background: #99001f !important;
+            border: 2px solid #ff1f3d !important;
+        }
+        body.dark-mode .btn-cancel {
+            background: #50000e !important;
+            color: #ff99a8 !important;
+            border: 2px solid #ff1f3d !important;
+            box-shadow: 0 0 20px rgba(255, 31, 61, 0.5), inset 0 0 8px rgba(255, 31, 61, 0.3) !important;
+        }
+        body.dark-mode .btn-cancel:hover {
+            background: #7f0015 !important;
+            color: #ffffff !important;
+            box-shadow: 0 0 30px rgba(255, 31, 61, 0.8) !important;
+        }
+        body.dark-mode .btn-disabled {
+            background: #3d000a !important;
+            color: #ffffff !important;
+            border: 2px solid #7f1d1d !important;
+            box-shadow: none !important;
+            opacity: 1 !important;
+            text-shadow: 0 0 8px rgba(255, 255, 255, 0.3) !important;
+        }
+        
+        .spinner {
+            width: 14px;
+            height: 14px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: #ffffff;
+            animation: spin 0.8s linear infinite;
+            display: inline-block;
+        }
         @keyframes spin { to { transform: rotate(360deg); } }
-        .section-title { font-size: 11px; font-weight: 700; color: var(--text-muted); text-transform: uppercase; margin: 28px 0 10px 0; text-align: left; border-bottom: 1px solid var(--border); padding-bottom: 6px; }
-        .admin-grid { display: flex; flex-direction: column; gap: 10px; }
-        .list-section-wrapper { margin-bottom: 24px; text-align: left; }
-        .list-antrian { list-style: none; padding: 0; margin: 0 0 16px 0; }
-        .list-antrian li { padding: 10px 16px; background: #ffffff; border-radius: 10px; margin-bottom: 8px; border: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; font-size: 13px; font-weight: 600; gap: 8px; overflow: hidden; }
-        .list-antrian li b { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; flex: 1; }
-        body.dark-mode .list-antrian li { background: #2b0007 !important; border: 2px solid #ff1f3d !important; color: #ffffff !important; }
-        .badge-status-item { font-size: 10px; font-weight: 700; padding: 4px 10px; border-radius: 6px; white-space: nowrap; flex-shrink: 0; }
-        .badge-giliran-anda { background: #dc2626 !important; color: #ffffff !important; }
-        .badge-standby { background: #eab308 !important; color: #ffffff !important; }
-        .badge-makan { background: #0d9488 !important; color: #ffffff !important; }
-        .badge-melayani { background: #059669 !important; color: #ffffff !important; }
-        .badge-cs { background: #7c3aed !important; color: #ffffff !important; }
-        .badge-ibadah { background: #7c3aed !important; color: #ffffff !important; }
-        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(15, 23, 42, 0.6); display: flex; justify-content: center; align-items: center; z-index: 9999; opacity: 0; visibility: hidden; transition: all 0.2s; padding: 16px; }
-        .modal-overlay.active { opacity: 1; visibility: visible; }
-        .modal-box { background: white; width: 100%; max-width: 400px; padding: 28px; border-radius: 16px; text-align: center; border: 1px solid var(--border); max-height: 90vh; overflow-y: auto; }
-        body.dark-mode .modal-box { background: #2b0007 !important; border: 3px solid #ff1f3d !important; color: #ffffff !important; }
-        .modal-title { font-size: 16px; font-weight: 700; margin-bottom: 10px; }
-        .modal-desc { font-size: 13px; color: var(--text-muted); margin-bottom: 20px; line-height: 1.5; text-align: left; font-weight: 500; }
-        body.dark-mode .modal-desc { color: #ffffff !important; }
-        .modal-desc select, .modal-desc input { font-size: 13px; padding: 10px 12px; margin-top: 4px; border-radius: 8px; border: 1px solid var(--border); }
-        .modal-actions { display: flex; gap: 10px; }
-        .modal-actions button { flex: 1; padding: 10px; font-size: 12px; }
-        @media (max-width: 480px) { .timer-box-wrapper { grid-template-columns: 1fr; } }
-        .riwayat-list { list-style: none; padding: 0; margin: 0; }
-        .riwayat-list li { padding: 10px 14px; background: var(--card-bg); border-radius: 10px; margin-bottom: 6px; border: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; gap: 8px; flex-wrap: wrap; }
-        .riwayat-badge { padding: 3px 10px; border-radius: 12px; font-size: 10px; font-weight: 800; color: #ffffff; white-space: nowrap; }
-        .riwayat-badge.deal { background: #059669; }
-        .riwayat-badge.lihat { background: #f59e0b; }
-        .riwayat-badge.nosale { background: #dc2626; }
-        .riwayat-badge.hari { background: #6366f1; }
-
-        /* ============ AKTIVITAS (SAMA DENGAN PROMOTOR) ============ */
+        
+        /* ===== SECTION TITLE ===== */
+        .section-title {
+            font-size: 11px;
+            font-weight: 800;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            margin: 28px 0 10px 0;
+            text-align: left;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 6px;
+            letter-spacing: 0.5px;
+        }
+        body.dark-mode .section-title {
+            color: #ff99a8 !important;
+            border-bottom: 2px solid #ff1f3d !important;
+            text-shadow: 0 0 8px rgba(255, 31, 61, 0.6) !important;
+        }
+        
+        .admin-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        
+        .list-section-wrapper {
+            margin-bottom: 24px;
+            text-align: left;
+        }
+        
+        /* ===== LIST ANTRIAN ===== */
+        .list-antrian {
+            list-style: none;
+            padding: 0;
+            margin: 0 0 16px 0;
+        }
+        .list-antrian li {
+            padding: 10px 16px;
+            background: #f8fafc;
+            border-radius: 12px;
+            margin-bottom: 8px;
+            border: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 13px;
+            font-weight: 600;
+            gap: 8px;
+            overflow: hidden;
+            transition: all 0.2s ease;
+        }
+        .list-antrian li b {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            flex: 1;
+        }
+        body.dark-mode .list-antrian li {
+            background: #2b0007 !important;
+            border: 2px solid #ff1f3d !important;
+            color: #ffffff !important;
+            box-shadow: 0 0 25px rgba(255, 31, 61, 0.5) !important;
+        }
+        body.dark-mode .list-antrian li b {
+            color: #ffffff !important;
+        }
+        
+        /* ===== BADGES ===== */
+        .badge-status-item {
+            font-size: 10px;
+            font-weight: 800;
+            padding: 4px 10px;
+            border-radius: 6px;
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+        .badge-giliran-anda {
+            background: #dc2626 !important;
+            color: #ffffff !important;
+        }
+        .badge-standby {
+            background: #eab308 !important;
+            color: #ffffff !important;
+        }
+        .badge-makan {
+            background: #0d9488 !important;
+            color: #ffffff !important;
+        }
+        .badge-melayani {
+            background: #059669 !important;
+            color: #ffffff !important;
+        }
+        .badge-cs, .badge-ibadah {
+            background: #7c3aed !important;
+            color: #ffffff !important;
+        }
+        body.dark-mode .badge-status-item {
+            background: #50000e !important;
+            color: #ff99a8 !important;
+            border: 2px solid #ff1f3d !important;
+            box-shadow: 0 0 15px rgba(255, 31, 61, 0.6) !important;
+            text-shadow: 0 0 8px rgba(255, 31, 61, 0.8) !important;
+        }
+        body.dark-mode .badge-giliran-anda {
+            background: #99001f !important;
+            color: #ffffff !important;
+            border: 2px solid #ff1f3d !important;
+            box-shadow: 0 0 20px rgba(255, 31, 61, 0.9) !important;
+        }
+        
+        /* ===== MODAL ===== */
+        .modal-overlay {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(15, 23, 42, 0.6);
+            backdrop-filter: blur(4px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.2s;
+            padding: 16px;
+        }
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        .modal-box {
+            background: white;
+            width: 100%;
+            max-width: 400px;
+            padding: 28px;
+            border-radius: 16px;
+            text-align: center;
+            border: 1px solid var(--border);
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+        body.dark-mode .modal-box {
+            background: #090204 !important;
+            border: 2px solid #ff1f3d !important;
+            color: #ffffff !important;
+            box-shadow: 0 0 35px rgba(255, 31, 61, 0.8), inset 0 0 15px rgba(255, 31, 61, 0.3) !important;
+        }
+        .modal-title {
+            font-size: 16px;
+            font-weight: 800;
+            margin-bottom: 10px;
+            color: var(--text-main);
+        }
+        body.dark-mode .modal-title {
+            color: #ffffff !important;
+            text-shadow: 0 0 15px rgba(255, 31, 61, 0.8) !important;
+        }
+        .modal-desc {
+            font-size: 13px;
+            color: var(--text-muted);
+            margin-bottom: 20px;
+            line-height: 1.5;
+            text-align: left;
+            font-weight: 600;
+        }
+        body.dark-mode .modal-desc {
+            color: #ffb3bc !important;
+        }
+        .modal-desc select, .modal-desc input {
+            font-size: 13px;
+            padding: 10px 12px;
+            margin-top: 4px;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+        }
+        .modal-actions {
+            display: flex;
+            gap: 10px;
+        }
+        .modal-actions button {
+            flex: 1;
+            padding: 10px;
+            font-size: 12px;
+        }
+        
+        body.dark-mode .modal-actions button {
+            background: linear-gradient(135deg, #ff1f3d 0%, #99001f 100%) !important;
+            color: #ffffff !important;
+            border: 2px solid #ff1f3d !important;
+            box-shadow: 0 0 25px rgba(255, 31, 61, 0.7), inset 0 0 10px rgba(255, 255, 255, 0.3) !important;
+        }
+        body.dark-mode .modal-actions button.btn-cancel {
+            background: #50000e !important;
+            color: #ff99a8 !important;
+            border: 2px solid #ff1f3d !important;
+            box-shadow: 0 0 20px rgba(255, 31, 61, 0.5) !important;
+        }
+        body.dark-mode .modal-actions button.btn-cancel:hover {
+            background: #7f0015 !important;
+            color: #ffffff !important;
+        }
+        
+       /* ===== RESPONSIVE (sama dengan promotor) ===== */
+@media (min-width: 768px) {
+    .admin-container { max-width: 720px; }
+}
+@media (min-width: 1024px) {
+    .admin-container { max-width: 900px; }
+}
+@media (max-width: 480px) {
+    body { padding: 12px; }
+    .admin-container { padding: 20px; border-radius: 20px; }
+    .header-admin h2 { font-size: 18px; }
+    .admin-nama-promotor { font-size: 17px; }
+}
+        
+        /* ===== AKTIVITAS (sama promotor) ===== */
         .aktivitas-section { margin-top: 20px; text-align: left; }
-
-        .aktivitas-title { font-size: 12px; font-weight: 800; text-transform: uppercase; padding: 10px 12px; border-radius: 8px; color: white; display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; letter-spacing: 0.5px; gap: 8px; background: linear-gradient(135deg, #0f172a, #1e293b); }
-        .aktivitas-title .count { font-size: 10px; background: rgba(255,255,255,0.25); padding: 2px 8px; border-radius: 10px; }
-        .aktivitas-title .judul-kategori { display: flex; align-items: center; gap: 8px; flex: 1; }
-        .aktivitas-icon { width: 22px; height: 22px; display: inline-flex; align-items: center; justify-content: center; border-radius: 6px; flex-shrink: 0; background: rgba(255,255,255,0.2); }
-        .aktivitas-icon svg { width: 13px; height: 13px; stroke: currentColor; stroke-width: 2.4; fill: none; stroke-linecap: round; stroke-linejoin: round; }
-
-        /* ============ HEADER TOGGLE AKTIVITAS (SAMA DENGAN PROMOTOR) ============ */
+        .aktivitas-title {
+            font-size: 12px;
+            font-weight: 800;
+            text-transform: uppercase;
+            padding: 10px 12px;
+            border-radius: 8px;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 6px;
+            letter-spacing: 0.5px;
+            gap: 8px;
+            background: linear-gradient(135deg, #0f172a, #1e293b);
+        }
+        .aktivitas-title .count {
+            font-size: 10px;
+            background: rgba(255,255,255,0.25);
+            padding: 2px 8px;
+            border-radius: 10px;
+        }
+        .aktivitas-title .judul-kategori {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex: 1;
+        }
+        .aktivitas-icon {
+            width: 22px;
+            height: 22px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 6px;
+            flex-shrink: 0;
+            background: rgba(255,255,255,0.2);
+        }
+        .aktivitas-icon svg {
+            width: 13px;
+            height: 13px;
+            stroke: currentColor;
+            stroke-width: 2.4;
+            fill: none;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+        body.dark-mode .aktivitas-title {
+            background: linear-gradient(135deg, #ff1f3d 0%, #99001f 100%) !important;
+            color: #ffffff !important;
+            border: 2px solid #ff1f3d !important;
+            box-shadow: 0 0 25px rgba(255, 31, 61, 0.7) !important;
+        }
+        body.dark-mode .aktivitas-title .count {
+            background: rgba(255, 255, 255, 0.25) !important;
+            color: #ffffff !important;
+        }
+        body.dark-mode .aktivitas-title .aktivitas-icon {
+            background: rgba(255, 255, 255, 0.25) !important;
+        }
+        body.dark-mode .aktivitas-title .aktivitas-icon svg {
+            stroke: #ffffff !important;
+        }
+        
         .aktivitas-header-toggle {
             display: flex;
             justify-content: space-between;
@@ -278,6 +829,10 @@
             transition: transform 0.3s ease;
             flex-shrink: 0;
         }
+        body.dark-mode .aktivitas-header-toggle .arrow {
+            background: #99001f !important;
+            border: 1px solid #ff1f3d !important;
+        }
         .aktivitas-header-toggle .arrow svg {
             width: 12px;
             height: 12px;
@@ -290,7 +845,7 @@
         .aktivitas-header-toggle.open .arrow {
             transform: rotate(180deg);
         }
-
+        
         .aktivitas-content {
             max-height: 0;
             overflow: hidden;
@@ -303,124 +858,251 @@
             opacity: 1;
             padding-top: 12px;
         }
-
-        .aktivitas-list { list-style: none; padding: 0; margin: 0 0 6px 0; }
-        .aktivitas-list li { background: #f8fafc; border: 1px solid var(--border); border-radius: 10px; padding: 8px 12px; margin-bottom: 5px; font-size: 12px; font-weight: 600; display: flex; justify-content: space-between; align-items: center; gap: 8px; }
-        body.dark-mode .aktivitas-list li { background: #2b0007; border: 2px solid #ff1f3d; box-shadow: 0 0 15px rgba(255, 31, 61, 0.4); color: #ffffff; }
-        .aktivitas-list li .nama { flex: 1; font-weight: 800; color: var(--text-main); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-        body.dark-mode .aktivitas-list li .nama { color: #ffffff; }
-        .aktivitas-list li .waktu { font-size: 11px; color: var(--text-muted); font-weight: 700; font-variant-numeric: tabular-nums; white-space: nowrap; }
-        body.dark-mode .aktivitas-list li .waktu { color: #ff99a8; }
-        .aktivitas-empty { text-align: center; font-size: 11px; color: var(--text-muted); font-weight: 600; padding: 8px; font-style: italic; }
-        body.dark-mode .aktivitas-empty { color: #ff8585; }
-
-        /* ✅ FIX: List Bawa Customer RATA & TIDAK KEPOTONG */
-        #list-bawa { list-style: none; padding: 0; margin: 0 0 6px 0; }
-        #list-bawa li {
+        
+        .aktivitas-list {
+            list-style: none;
+            padding: 0;
+            margin: 0 0 6px 0;
+        }
+        .aktivitas-list li {
             background: #f8fafc;
             border: 1px solid var(--border);
             border-radius: 10px;
-            padding: 10px 12px;
-            margin-bottom: 6px;
+            padding: 8px 12px;
+            margin-bottom: 5px;
             font-size: 12px;
             font-weight: 600;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            gap: 10px;
-            width: 100%;
-            flex-wrap: wrap;
+            gap: 8px;
         }
-        #list-bawa li .nama {
-            flex: 1 1 60%;
-            min-width: 0;
+        body.dark-mode .aktivitas-list li {
+            background: #2b0007 !important;
+            border: 2px solid #ff1f3d !important;
+            box-shadow: 0 0 15px rgba(255, 31, 61, 0.4) !important;
+            color: #ffffff !important;
+        }
+        .aktivitas-list li .nama {
+            flex: 1;
             font-weight: 800;
             color: var(--text-main);
-            word-break: break-word;
-            overflow-wrap: anywhere;
-            line-height: 1.35;
-            text-align: left;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
         }
-        #list-bawa li .waktu {
-            flex: 0 0 auto;
+        body.dark-mode .aktivitas-list li .nama {
+            color: #ffffff !important;
+        }
+        .aktivitas-list li .waktu {
             font-size: 11px;
             color: var(--text-muted);
             font-weight: 700;
             font-variant-numeric: tabular-nums;
             white-space: nowrap;
-            text-align: right;
-            margin-left: auto;
         }
-        body.dark-mode #list-bawa li { background: #2b0007; border: 2px solid #ff1f3d; box-shadow: 0 0 15px rgba(255, 31, 61, 0.4); color: #ffffff; }
-        body.dark-mode #list-bawa li .nama { color: #ffffff; }
-        body.dark-mode #list-bawa li .waktu { color: #ff99a8; }
-
-        /* ✅ FIX: List Ibadah, Keluar, Autokick juga rata */
-        #list-ibadah li, #list-keluar li, #list-autokick li {
+        body.dark-mode .aktivitas-list li .waktu {
+            color: #ff99a8 !important;
+        }
+        .aktivitas-empty {
+            text-align: center;
+            font-size: 11px;
+            color: var(--text-muted);
+            font-weight: 600;
+            padding: 8px;
+            font-style: italic;
+        }
+        body.dark-mode .aktivitas-empty {
+            color: #ff8585 !important;
+        }
+        
+        /* Fix list bawa, ibadah, keluar, autokick */
+        #list-bawa, #list-ibadah, #list-keluar, #list-autokick {
+            list-style: none;
+            padding: 0;
+            margin: 0 0 6px 0;
+        }
+        #list-bawa li, #list-ibadah li, #list-keluar li, #list-autokick li {
             flex-wrap: wrap;
             word-break: break-word;
         }
-        #list-ibadah li .nama, #list-keluar li .nama, #list-autokick li .nama {
+        #list-bawa li .nama, #list-ibadah li .nama, #list-keluar li .nama, #list-autokick li .nama {
             flex: 1 1 60%;
             min-width: 0;
             overflow-wrap: anywhere;
             text-align: left;
         }
-        #list-ibadah li .waktu, #list-keluar li .waktu, #list-autokick li .waktu {
+        #list-bawa li .waktu, #list-ibadah li .waktu, #list-keluar li .waktu, #list-autokick li .waktu {
             flex: 0 0 auto;
             margin-left: auto;
             text-align: right;
         }
-
-        .check-deal { display: inline-flex; align-items: center; justify-content: center; margin-left: 6px; flex-shrink: 0; vertical-align: middle; }
-        .label-lihat { font-size: 10px; color: #64748b; font-weight: 700; }
-        body.dark-mode .label-lihat { color: #ff99a8; }
-        .label-melayani { font-size: 10px; color: #059669; font-weight: 800; text-transform: uppercase; letter-spacing: 0.3px; }
-        body.dark-mode .label-melayani { color: #34d399; text-shadow: 0 0 8px rgba(52, 211, 153, 0.8); }
+        
+        .check-deal {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin-left: 6px;
+            flex-shrink: 0;
+            vertical-align: middle;
+        }
+        .label-lihat {
+            font-size: 10px;
+            color: var(--text-muted);
+            font-weight: 700;
+        }
+        body.dark-mode .label-lihat {
+            color: #ff99a8 !important;
+        }
+        .label-melayani {
+            font-size: 10px;
+            color: #059669;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+        }
+        body.dark-mode .label-melayani {
+            color: #ff667a !important;
+            text-shadow: 0 0 8px rgba(255, 102, 122, 0.8) !important;
+        }
+        
         #total-bawa-box .total-lihat { color: #d97706; }
         #total-bawa-box .total-deal { color: #059669; }
-        body.dark-mode #total-bawa-box { background: #50000e !important; color: #ffb3bc !important; border: 1px solid #ff1f3d !important; }
-        body.dark-mode #total-bawa-box .total-lihat { color: #fbbf24; text-shadow: 0 0 6px rgba(251, 191, 36, 0.6); }
-        body.dark-mode #total-bawa-box .total-deal { color: #34d399; text-shadow: 0 0 6px rgba(52, 211, 153, 0.6); }
-        .rekap-tabel { width: 100%; border-collapse: collapse; font-size: 12px; margin-top: 4px; }
-        .rekap-tabel th { background: #f1f5f9; color: var(--text-muted); font-weight: 800; text-transform: uppercase; font-size: 10px; letter-spacing: 0.3px; padding: 8px 6px; text-align: center; border-bottom: 2px solid var(--border); }
-        .rekap-tabel th.kolom-nama { text-align: left; padding-left: 12px; }
-        .rekap-tabel td { padding: 10px 6px; text-align: center; font-weight: 700; border-bottom: 1px solid var(--border); color: var(--text-main); font-variant-numeric: tabular-nums; }
-        .rekap-tabel td.kolom-nama { text-align: left; padding-left: 12px; font-weight: 800; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 140px; }
+        body.dark-mode #total-bawa-box {
+            background: #50000e !important;
+            color: #ffb3bc !important;
+            border: 1px solid #ff1f3d !important;
+        }
+        body.dark-mode #total-bawa-box .total-lihat {
+            color: #ffb3bc !important;
+            text-shadow: 0 0 6px rgba(255, 179, 188, 0.6) !important;
+        }
+        body.dark-mode #total-bawa-box .total-deal {
+            color: #ff667a !important;
+            text-shadow: 0 0 6px rgba(255, 102, 122, 0.6) !important;
+        }
+        
+        /* ===== REKAP TABEL ===== */
+        .rekap-tabel {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 12px;
+            margin-top: 4px;
+        }
+        .rekap-tabel th {
+            background: #f1f5f9;
+            color: var(--text-muted);
+            font-weight: 800;
+            text-transform: uppercase;
+            font-size: 10px;
+            letter-spacing: 0.3px;
+            padding: 8px 6px;
+            text-align: center;
+            border-bottom: 2px solid var(--border);
+        }
+        .rekap-tabel th.kolom-nama {
+            text-align: left;
+            padding-left: 12px;
+        }
+        .rekap-tabel td {
+            padding: 10px 6px;
+            text-align: center;
+            font-weight: 700;
+            border-bottom: 1px solid var(--border);
+            color: var(--text-main);
+            font-variant-numeric: tabular-nums;
+        }
+        .rekap-tabel td.kolom-nama {
+            text-align: left;
+            padding-left: 12px;
+            font-weight: 800;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: 140px;
+        }
         .rekap-tabel td.angka-deal { color: #059669; }
         .rekap-tabel td.angka-lihat { color: #d97706; }
         .rekap-tabel td.angka-nosale { color: #dc2626; }
         .rekap-tabel td.angka-hari { color: #64748b; font-size: 11px; }
-        .rekap-tabel tr.total-row td { background: #f8fafc; border-top: 2px solid var(--border); border-bottom: none; font-weight: 800; padding-top: 10px; padding-bottom: 10px; }
-        .rekap-tabel tr.total-row td.angka-deal { color: #047857; }
-        .rekap-tabel tr.total-row td.angka-lihat { color: #b45309; }
-        .rekap-tabel tr.total-row td.angka-nosale { color: #b91c1c; }
-        body.dark-mode .rekap-tabel th { background: #2b0007; color: #ff99a8; border-bottom-color: #ff1f3d; }
-        body.dark-mode .rekap-tabel td { border-bottom-color: #5a0011; color: #ffffff; }
-        body.dark-mode .rekap-tabel td.kolom-nama { color: #ffffff; }
-        body.dark-mode .rekap-tabel tr.total-row td { background: #2b0007; border-top-color: #ff1f3d; }
-        body.dark-mode .rekap-tabel td.angka-deal { color: #34d399; text-shadow: 0 0 6px rgba(52, 211, 153, 0.6); }
-        body.dark-mode .rekap-tabel td.angka-lihat { color: #fbbf24; text-shadow: 0 0 6px rgba(251, 191, 36, 0.6); }
-        body.dark-mode .rekap-tabel td.angka-nosale { color: #ff667a; text-shadow: 0 0 6px rgba(255, 102, 122, 0.6); }
-        body.dark-mode .rekap-tabel td.angka-hari { color: #ffb3bc; }
+        .rekap-tabel tr.total-row td {
+            background: #f8fafc;
+            border-top: 2px solid var(--border);
+            border-bottom: none;
+            font-weight: 800;
+            padding-top: 10px;
+            padding-bottom: 10px;
+        }
+        body.dark-mode .rekap-tabel th {
+            background: #2b0007 !important;
+            color: #ff99a8 !important;
+            border-bottom: 2px solid #ff1f3d !important;
+        }
+        body.dark-mode .rekap-tabel td {
+            background: #1a0205 !important;
+            border-bottom: 1px solid #5a0011 !important;
+            color: #ffffff !important;
+        }
+        body.dark-mode .rekap-tabel td.kolom-nama {
+            color: #ffffff !important;
+        }
+        body.dark-mode .rekap-tabel tr.total-row td {
+            background: #50000e !important;
+            border-top: 2px solid #ff1f3d !important;
+            color: #ffffff !important;
+        }
+        body.dark-mode .rekap-tabel td.angka-deal {
+            color: #ff667a !important;
+            text-shadow: 0 0 6px rgba(255, 102, 122, 0.6) !important;
+        }
+        body.dark-mode .rekap-tabel td.angka-lihat {
+            color: #ffb3bc !important;
+            text-shadow: 0 0 6px rgba(255, 179, 188, 0.6) !important;
+        }
+        body.dark-mode .rekap-tabel td.angka-nosale {
+            color: #ff1f3d !important;
+            text-shadow: 0 0 6px rgba(255, 31, 61, 0.6) !important;
+        }
+        body.dark-mode .rekap-tabel td.angka-hari {
+            color: #ff99a8 !important;
+        }
+        
+        /* ===== REKAP BOX WRAPPER ===== */
+        body.dark-mode .aktivitas-content > div[style*="background: var(--card-bg)"] {
+            background: #2b0007 !important;
+            border: 2px solid #ff1f3d !important;
+            box-shadow: 0 0 20px rgba(255, 31, 61, 0.4) !important;
+        }
+        body.dark-mode .aktivitas-content > div[style*="background: var(--card-bg)"] div[style*="color: var(--text-muted)"] {
+            color: #ff99a8 !important;
+        }
+        
+        /* ===== GPS LABEL ===== */
+        body.dark-mode #label-status-gps {
+            color: #ff99a8 !important;
+            text-shadow: 0 0 8px rgba(255, 31, 61, 0.6) !important;
+        }
+        body.dark-mode #label-status-gps b {
+            text-shadow: 0 0 10px currentColor !important;
+        }
     </style>
 </head>
 <body>
 
     <div class="admin-container">
-        <div class="top-controls">
-            <button type="button" class="dark-mode-btn" id="btn-toggle-dark" onclick="toggleDarkMode()">🌙 Mode Gelap</button>
-        </div>
+       <div class="top-controls">
+    <button type="button" class="dark-mode-btn" id="btn-toggle-dark" onclick="toggleDarkMode()">🌙 Mode Gelap</button>
+    <button type="button" class="logout-btn" id="btn-logout-top" onclick="logoutAdmin()" style="display: none;">Logout</button>
+</div>
 
-        <div class="header-admin">
-            <h2>Dashboard Admin</h2>
-            <span class="header-sub-text">Sistem Antrian Promotor</span>
-            <span class="header-sub-text">UFO Kebonsari</span>
-            <div id="badge-status-sistem" class="status-badge status-open">
-                <span class="dot"></span>
-                <span id="badge-status-text">STATUS: OPEN</span>
-            </div>
-        </div>
+       <div class="header-admin">
+    <h2 id="header-nama-sistem">Dashboard Admin</h2>
+    <span class="header-sub-text" id="header-nama-toko">UFO Kebonsari</span>
+    <div id="badge-status-sistem" class="status-badge status-open">
+        <span class="dot"></span>
+        <span id="badge-status-text">STATUS: OPEN</span>
+    </div>
+</div>
 
         <div id="login-admin-box">
             <div class="input-group">
@@ -449,7 +1131,7 @@
                 <ul id="list-AV" class="list-antrian"><li><span>Memuat...</span></li></ul>
             </div>
 
-            <!-- ============ AKTIVITAS SECTION (SAMA PERSIS PROMOTOR) ============ -->
+            <!-- ============ AKTIVITAS SECTION ============ -->
             <div class="aktivitas-section">
                 <div class="aktivitas-header-toggle" id="toggle-aktivitas-admin" onclick="toggleAktivitasAdmin()">
                     <span class="judul">
@@ -576,16 +1258,17 @@
             </div>
 
             <div class="section-title">1. Manajemen Operasional Sistem</div>
-            <div class="admin-grid">
-                <button type="button" id="btn-buka-sistem" class="btn-black-custom" onclick="bukaModalToggleSistem('BUKA')">Buka Sistem Antrian</button>
-                <button type="button" id="btn-tutup-sistem" onclick="bukaModalToggleSistem('TUTUP')">Tutup Sistem Antrian</button>
-            </div>
+<div class="admin-grid">
+    <button type="button" id="btn-buka-sistem" class="btn-black-custom" onclick="bukaModalToggleSistem('BUKA')">Buka Sistem Antrian</button>
+    <button type="button" id="btn-tutup-sistem" onclick="bukaModalToggleSistem('TUTUP')">Tutup Sistem Antrian</button>
+    <button type="button" class="btn-black-custom" onclick="bukaModalBranding()">🎨 Pengaturan Branding</button>
+</div>
 
             <div class="section-title">2. Manajemen Urutan Antrian</div>
             <div class="admin-grid">
                 <button type="button" class="btn-black-custom" onclick="bukaModalTambahAntriAdmin()">+ Masukkan Promotor ke Antrian</button>
                 <button type="button" class="btn-black-custom" onclick="bukaModalTambahMasterSales()">+ Tambah Nama Promotor Baru</button>
-                <button type="button" class="btn-black-custom" onclick="bukaModalKelolaPIN()">🔑Buat PIN Promotor</button>
+                <button type="button" class="btn-black-custom" onclick="bukaModalKelolaPIN()">🔑 Buat PIN Promotor</button>
                 <button type="button" onclick="bukaModalHapusMasterSales()">- Hapus Nama Permanen</button>
                 <button type="button" onclick="bukaModalKeluarkanAntrian()">- Keluarkan dari Antrian</button>
             </div>
@@ -597,7 +1280,7 @@
                 <button type="button" onclick="bukaModalResetTotal()">Reset Seluruh Antrian Aktif</button>
             </div>
 
-            <button type="button" class="btn-cancel" style="margin-top: 28px; font-weight: 700;" onclick="logoutAdmin()">Keluar (Lock Panel Admin)</button>
+            
         </div>
     </div>
 
@@ -626,6 +1309,7 @@
         let riwayatBulananGlobal = {};
         let statusSistemGlobal = "BUKA";
         let koordinatTokoAdmin = { lat: "", lng: "", radius: 50 };
+window.settingGlobal = {};
         let savedPinAdmin = "";
         let unsubAntrian = null, unsubSetting = null, unsubStatistik = null, unsubMaster = null, unsubLock = null, unsubCheckin = null, unsubRiwayat = null, unsubPinPromotor = null;
         let pinPromotorGlobal = {};
@@ -649,18 +1333,36 @@
             const d = new Date(ts);
             return `${String(d.getHours()).padStart(2,'0')}.${String(d.getMinutes()).padStart(2,'0')}`;
         }
-
+function applyBrandingAdmin(s) {
+    if (!s) return;
+    
+    const namaToko = s.namaToko || "Nama Toko";
+    const namaSistem = s.namaSistem || "Dashboard Admin";
+    
+    // Update title browser
+    const titleEl = document.querySelector('title');
+    if (titleEl) titleEl.innerText = `${namaSistem} - ${namaToko}`;
+    
+    // Update header
+    const headerSistemEl = document.getElementById('header-nama-sistem');
+    if (headerSistemEl) headerSistemEl.innerText = namaSistem;
+    
+    const headerTokoEl = document.getElementById('header-nama-toko');
+    if (headerTokoEl) headerTokoEl.innerText = namaToko;
+}
         window.addEventListener('firebase-ready', () => {
             initDarkMode();
-            savedPinAdmin = localStorage.getItem('ufo_admin_pin') || "";
-            if (savedPinAdmin) {
-                document.getElementById('login-admin-box').style.display = 'none';
-                document.getElementById('controls-admin-box').style.display = 'block';
-                mulaiListenerFirebase();
-            } else {
-                document.getElementById('login-admin-box').style.display = 'block';
-                document.getElementById('controls-admin-box').style.display = 'none';
-            }
+          savedPinAdmin = localStorage.getItem('ufo_admin_pin') || "";
+if (savedPinAdmin) {
+    document.getElementById('login-admin-box').style.display = 'none';
+    document.getElementById('controls-admin-box').style.display = 'block';
+    document.getElementById('btn-logout-top').style.display = 'block';
+    mulaiListenerFirebase();
+} else {
+    document.getElementById('login-admin-box').style.display = 'block';
+    document.getElementById('controls-admin-box').style.display = 'none';
+    document.getElementById('btn-logout-top').style.display = 'none';
+}
         });
 
         async function prosesLoginAdmin() {
@@ -677,11 +1379,12 @@
                 if (!snap.exists()) {
                     await window.dbSet(window.dbRef(db, 'setting/pinAdmin'), PIN_ADMIN_DEFAULT);
                 }
-                if (pin === pinDb) {
+                           if (pin === pinDb) {
                     savedPinAdmin = pin;
                     localStorage.setItem('ufo_admin_pin', pin);
                     document.getElementById('login-admin-box').style.display = 'none';
                     document.getElementById('controls-admin-box').style.display = 'block';
+                    document.getElementById('btn-logout-top').style.display = 'block';
                     mulaiListenerFirebase();
                 } else {
                     tampilkanModal("Gagal Login", "PIN Admin salah!");
@@ -694,15 +1397,15 @@
             }
         }
 
-        function logoutAdmin() {
-            matikanListenerFirebase();
-            localStorage.removeItem('ufo_admin_pin');
-            savedPinAdmin = "";
-            document.getElementById('input-pin-admin').value = "";
-            document.getElementById('login-admin-box').style.display = 'block';
-            document.getElementById('controls-admin-box').style.display = 'none';
-        }
-
+      function logoutAdmin() {
+    matikanListenerFirebase();
+    localStorage.removeItem('ufo_admin_pin');
+    savedPinAdmin = "";
+    document.getElementById('input-pin-admin').value = "";
+    document.getElementById('login-admin-box').style.display = 'block';
+    document.getElementById('controls-admin-box').style.display = 'none';
+    document.getElementById('btn-logout-top').style.display = 'none';
+}
         function mulaiListenerFirebase() {
             const db = window.db;
 
@@ -723,16 +1426,17 @@
                 renderStatistikAdmin();
             });
 
-            unsubSetting = window.dbOnValue(window.dbRef(db, 'setting'), snapshot => {
-                const s = snapshot.val() || {};
-                statusSistemGlobal = s.statusAntrian || "BUKA";
-                koordinatTokoAdmin.lat = s.latToko || "";
-                koordinatTokoAdmin.lng = s.lngToko || "";
-                koordinatTokoAdmin.radius = Number(s.radiusToko) || 50;
-                renderStatusSistem();
-                renderStatusGPS();
-            });
-
+        unsubSetting = window.dbOnValue(window.dbRef(db, 'setting'), snapshot => {
+    const s = snapshot.val() || {};
+    statusSistemGlobal = s.statusAntrian || "BUKA";
+    koordinatTokoAdmin.lat = s.latToko || "";
+    koordinatTokoAdmin.lng = s.lngToko || "";
+    koordinatTokoAdmin.radius = Number(s.radiusToko) || 50;
+    window.settingGlobal = s;
+    applyBrandingAdmin(s);
+    renderStatusSistem();
+    renderStatusGPS();
+});
             unsubStatistik = window.dbOnValue(window.dbRef(db, 'statistikAktivitas'), snapshot => {
                 const dataRaw = snapshot.val();
                 statistikGlobal = [];
@@ -1433,7 +2137,187 @@
                 tampilkanModal("Gagal", "Tidak bisa mengubah status sistem.");
             }
         }
+function bukaModalBranding() {
+    document.getElementById('modal-title').innerText = "🎨 Pengaturan Branding & Lokasi";
+    
+    const s = window.settingGlobal || {};
+    const namaTokoSekarang = s.namaToko || "";
+    const namaSistemSekarang = s.namaSistem || "";
+    const logoUrlSekarang = s.logoUrl || "";
+    const latSekarang = s.latToko || "";
+    const lngSekarang = s.lngToko || "";
+    const radiusSekarang = s.radiusToko || 50;
+    
+    document.getElementById('modal-desc').innerHTML = `
+        <div style="font-size:12px; margin-bottom:12px; color:#64748b;">
+            Ubah branding & lokasi toko. Perubahan langsung tampil di semua HP promotor.
+        </div>
+        
+        <label style="font-size:11px; font-weight:700;">Nama Sistem:</label><br>
+        <input type="text" id="branding-nama-sistem" 
+            value="${namaSistemSekarang.replace(/"/g, '&quot;')}"
+            placeholder="Contoh: Antrian Walk-In Promotor"
+            style="width:100%; padding:10px; border-radius:8px; border:1px solid var(--border); margin-bottom:10px; box-sizing:border-box;">
+        
+        <label style="font-size:11px; font-weight:700;">Nama Toko:</label><br>
+        <input type="text" id="branding-nama-toko" 
+            value="${namaTokoSekarang.replace(/"/g, '&quot;')}"
+            placeholder="Contoh: UFO Malang Kebonsari"
+            style="width:100%; padding:10px; border-radius:8px; border:1px solid var(--border); margin-bottom:10px; box-sizing:border-box;">
+        
+        <label style="font-size:11px; font-weight:700;">URL Logo (opsional):</label><br>
+        <input type="url" id="branding-logo-url" 
+            value="${logoUrlSekarang.replace(/"/g, '&quot;')}"
+            placeholder="https://..."
+            style="width:100%; padding:10px; border-radius:8px; border:1px solid var(--border); margin-bottom:10px; box-sizing:border-box;">
+        
+        <hr style="border:none; border-top:1px solid var(--border); margin:14px 0;">
+        
+        <div style="font-size:11px; font-weight:800; color:var(--accent); margin-bottom:8px; text-transform:uppercase; letter-spacing:0.5px;">📍 Koordinat Toko (GPS)</div>
+        
+        <div style="font-size:10px; color:#94a3b8; padding:8px; background:#f1f5f9; border-radius:8px; line-height:1.5; margin-bottom:10px;">
+            💡 <b>Tips:</b> Buka <b>Google Maps</b> → cari lokasi toko → klik kanan → copy koordinat → paste ke bawah.
+        </div>
+        
+        <div style="display:flex; gap:8px; margin-bottom:10px;">
+            <div style="flex:1;">
+                <label style="font-size:11px; font-weight:700;">Latitude:</label><br>
+                <input type="text" id="branding-lat" 
+                    value="${String(latSekarang).replace(/"/g, '&quot;')}"
+                    placeholder="-8.0210821"
+                    style="width:100%; padding:10px; border-radius:8px; border:1px solid var(--border); box-sizing:border-box;">
+            </div>
+            <div style="flex:1;">
+                <label style="font-size:11px; font-weight:700;">Longitude:</label><br>
+                <input type="text" id="branding-lng" 
+                    value="${String(lngSekarang).replace(/"/g, '&quot;')}"
+                    placeholder="112.6189705"
+                    style="width:100%; padding:10px; border-radius:8px; border:1px solid var(--border); box-sizing:border-box;">
+            </div>
+        </div>
+        
+        <button type="button" onclick="isiKoordinatDariHP()" 
+            style="width:100%; padding:10px; border-radius:8px; border:1px dashed var(--accent); background:transparent; color:var(--accent); font-weight:700; font-size:11px; cursor:pointer; margin-bottom:10px;">
+            📍 Isi Otomatis dari Lokasi HP Sekarang
+        </button>
+        
+        <label style="font-size:11px; font-weight:700;">Radius Validasi (meter):</label><br>
+        <input type="number" id="branding-radius" 
+            value="${radiusSekarang}"
+            min="10" max="1000"
+            placeholder="50"
+            style="width:100%; padding:10px; border-radius:8px; border:1px solid var(--border); margin-bottom:10px; box-sizing:border-box;">
+        
+        <div style="font-size:10px; color:#94a3b8; padding:8px; background:#fef3c7; border-radius:8px; line-height:1.5;">
+            ⚠️ <b>Kosongkan Latitude & Longitude</b> jika ingin <b>mematikan GPS</b> (promotor bisa check-in dari mana saja).
+        </div>
+    `;
+    
+    document.getElementById('modal-actions').innerHTML = `
+        <button type="button" class="btn-cancel" onclick="tutupModal()">Batal</button>
+        <button type="button" id="btn-modal-action-ok" onclick="eksekusiSimpanBranding()">Simpan</button>
+    `;
+    
+    document.getElementById('custom-modal').classList.add('active');
+}
 
+function isiKoordinatDariHP() {
+    if (!navigator.geolocation) {
+        tampilkanModal("Gagal", "Browser tidak mendukung GPS.");
+        return;
+    }
+    
+    const latEl = document.getElementById('branding-lat');
+    const lngEl = document.getElementById('branding-lng');
+    
+    latEl.placeholder = "Mendeteksi...";
+    lngEl.placeholder = "Mendeteksi...";
+    
+    navigator.geolocation.getCurrentPosition(
+        function(pos) {
+            latEl.value = pos.coords.latitude.toFixed(7);
+            lngEl.value = pos.coords.longitude.toFixed(7);
+            latEl.placeholder = "-8.0210821";
+            lngEl.placeholder = "112.6189705";
+            latEl.style.background = '#dcfce7';
+            lngEl.style.background = '#dcfce7';
+            setTimeout(() => {
+                latEl.style.background = '#ffffff';
+                lngEl.style.background = '#ffffff';
+            }, 800);
+        },
+        function(err) {
+            latEl.placeholder = "-8.0210821";
+            lngEl.placeholder = "112.6189705";
+            let pesan = "Gagal mendeteksi lokasi.";
+            if (err.code === 1) pesan += "\n\n❌ Izin lokasi DITOLAK.\n\nCara fix:\n1. Klik ikon gembok di address bar\n2. Cari 'Location' / 'Lokasi'\n3. Set jadi 'Allow' / 'Izinkan'\n4. Refresh halaman";
+            else if (err.code === 2) pesan += "\n\n❌ Lokasi tidak tersedia.";
+            else if (err.code === 3) pesan += "\n\n❌ Waktu habis. Coba lagi.";
+            tampilkanModal("Gagal Deteksi GPS", pesan);
+        },
+        { enableHighAccuracy: true, timeout: 15000, maximumAge: 0 }
+    );
+}
+async function eksekusiSimpanBranding() {
+    const namaSistem = document.getElementById('branding-nama-sistem').value.trim();
+    const namaToko = document.getElementById('branding-nama-toko').value.trim();
+    const logoUrl = document.getElementById('branding-logo-url').value.trim();
+    const lat = document.getElementById('branding-lat').value.trim();
+    const lng = document.getElementById('branding-lng').value.trim();
+    const radius = parseInt(document.getElementById('branding-radius').value) || 50;
+    
+    if (!namaSistem) { tampilkanModal("Perhatian", "Nama Sistem tidak boleh kosong!"); return; }
+    if (!namaToko) { tampilkanModal("Perhatian", "Nama Toko tidak boleh kosong!"); return; }
+    
+    // Validasi lat/lng: harus diisi berdua, atau dikosongkan berdua
+    const latAda = lat !== "";
+    const lngAda = lng !== "";
+    if (latAda !== lngAda) {
+        tampilkanModal("Perhatian", "Latitude & Longitude harus diisi bersamaan, atau dikosongkan bersamaan!");
+        return;
+    }
+    
+    // Validasi format angka
+    if (latAda && (isNaN(parseFloat(lat)) || isNaN(parseFloat(lng)))) {
+        tampilkanModal("Perhatian", "Latitude & Longitude harus berupa angka!");
+        return;
+    }
+    
+    const btn = document.getElementById('btn-modal-action-ok');
+    btn.disabled = true;
+    btn.innerHTML = `<span class="spinner"></span> Menyimpan...`;
+    
+    try {
+        const updateData = {
+            namaSistem: namaSistem,
+            namaToko: namaToko,
+            logoUrl: logoUrl,
+            latToko: latAda ? parseFloat(lat) : "",
+            lngToko: lngAda ? parseFloat(lng) : "",
+            radiusToko: radius
+        };
+        
+        await window.dbUpdate(window.dbRef(window.db, 'setting'), updateData);
+        
+        let infoGPS = latAda 
+            ? `<b>📍 Koordinat:</b> ${lat}, ${lng}<br><b>📏 Radius:</b> ${radius}m` 
+            : `<b>📍 GPS:</b> NONAKTIF (check-in dari mana saja)`;
+        
+        tutupModal();
+        tampilkanModal("Berhasil", 
+            `Pengaturan berhasil disimpan!<br><br>` +
+            `<b>Nama Sistem:</b> ${namaSistem}<br>` +
+            `<b>Nama Toko:</b> ${namaToko}<br>` +
+            `<b>Logo:</b> ${logoUrl || "(default)"}<br>` +
+            `${infoGPS}<br><br>` +
+            `<span style="font-size:11px; color:#64748b;">Perubahan akan langsung tampil di HP promotor.</span>`
+        );
+    } catch (e) {
+        console.warn("Error simpan pengaturan:", e);
+        tutupModal();
+        tampilkanModal("Gagal", "Tidak bisa menyimpan pengaturan. Cek koneksi internet.");
+    }
+}
         function bukaModalTambahMasterSales() {
             document.getElementById('modal-title').innerText = "Tambah Nama Promotor Baru";
             document.getElementById('modal-desc').innerHTML = `Masukkan Nama Promotor Baru:<br><input type="text" id="input-nama-baru" placeholder="Nama Lengkap Promotor">`;
@@ -2072,13 +2956,14 @@
 
         function toggleGPSAdmin(aktif) {
             if (!aktif) {
-                tampilkanModalKonfirmasi("Matikan GPS", "Yakin ingin mematikan validasi GPS toko?", () => {
+                tampilkanModalKonfirmasi("Matikan GPS", "Yakin ingin mematikan validasi GPS toko?\n\nPromotor akan bisa check-in tanpa cek lokasi.", () => {
                     window.dbUpdate(window.dbRef(window.db, 'setting'), {
                         latToko: "", lngToko: "", radiusToko: 50
                     }).then(() => {
-                        tampilkanModal("GPS Dinonaktifkan", "Validasi radius GPS berhasil dimatikan.");
-                    }).catch(() => {
-                        tampilkanModal("Gagal", "Tidak bisa mematikan GPS.");
+                        tampilkanModal("GPS Dinonaktifkan", "Validasi radius GPS berhasil dimatikan.\n\nPromotor sekarang bisa check-in dari mana saja.");
+                    }).catch((err) => {
+                        console.error("Error matikan GPS:", err);
+                        tampilkanModal("Gagal", "Tidak bisa mematikan GPS. Cek koneksi internet.");
                     });
                 });
                 return;
@@ -2091,6 +2976,7 @@
             const asli = btnOn.innerHTML;
             btnOn.disabled = true;
             btnOn.innerHTML = `<span class="spinner"></span> Mendeteksi...`;
+            
             navigator.geolocation.getCurrentPosition(
                 function(pos) {
                     const lat = pos.coords.latitude;
@@ -2099,17 +2985,28 @@
                         latToko: lat, lngToko: lng, radiusToko: 50
                     }).then(() => {
                         btnOn.disabled = false; btnOn.innerHTML = asli;
-                        tampilkanModal("GPS Diaktifkan", "Titik GPS toko berhasil disimpan (radius 50m).");
-                    }).catch(() => {
+                        tampilkanModal("GPS Diaktifkan", 
+                            `Titik GPS toko berhasil disimpan.\n\n` +
+                            `📍 Lat: ${lat.toFixed(6)}\n` +
+                            `📍 Lng: ${lng.toFixed(6)}\n` +
+                            `📏 Radius: 50 meter\n\n` +
+                            `Promotor harus berada dalam radius 50m untuk check-in.`
+                        );
+                    }).catch((err) => {
+                        console.error("Error simpan GPS:", err);
                         btnOn.disabled = false; btnOn.innerHTML = asli;
-                        tampilkanModal("Gagal", "Tidak bisa menyimpan lokasi.");
+                        tampilkanModal("Gagal", "Tidak bisa menyimpan lokasi. Cek koneksi internet.");
                     });
                 },
-                function() {
+                function(err) {
                     btnOn.disabled = false; btnOn.innerHTML = asli;
-                    tampilkanModal("Gagal", "Gagal mendeteksi lokasi. Izinkan akses GPS.");
+                    let pesan = "Gagal mendeteksi lokasi.";
+                    if (err.code === 1) pesan += "\n\n❌ Izin lokasi DITOLAK.\n\nCara fix:\n1. Klik ikon gembok di address bar\n2. Cari 'Location' / 'Lokasi'\n3. Set jadi 'Allow' / 'Izinkan'\n4. Refresh halaman";
+                    else if (err.code === 2) pesan += "\n\n❌ Lokasi tidak tersedia.\n\nPastikan GPS HP menyala.";
+                    else if (err.code === 3) pesan += "\n\n❌ Waktu habis.\n\nCoba lagi di tempat terbuka.";
+                    tampilkanModal("Gagal Deteksi GPS", pesan);
                 },
-                { enableHighAccuracy: true, timeout: 10000, maximumAge: 0 }
+                { enableHighAccuracy: true, timeout: 30000, maximumAge: 0 }
             );
         }
 
@@ -2154,6 +3051,9 @@
         window.logoutAdmin = logoutAdmin;
         window.bukaModalToggleSistem = bukaModalToggleSistem;
         window.eksekusiToggleSistem = eksekusiToggleSistem;
+        window.bukaModalBranding = bukaModalBranding;
+window.eksekusiSimpanBranding = eksekusiSimpanBranding;
+window.isiKoordinatDariHP = isiKoordinatDariHP;
         window.bukaModalTambahMasterSales = bukaModalTambahMasterSales;
         window.eksekusiTambahMasterSales = eksekusiTambahMasterSales;
         window.bukaModalKelolaPIN = bukaModalKelolaPIN;
@@ -2180,7 +3080,6 @@
         window.tutupModal = tutupModal;
         window.toggleAktivitasAdmin = toggleAktivitasAdmin;
 
-        // Restore state Aktivitas saat firebase ready
         window.addEventListener('firebase-ready', () => {
             restoreAktivitasAdminState();
         });
