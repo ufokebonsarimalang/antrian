@@ -1549,6 +1549,135 @@ body.dark-mode .popup-title {
     color: #ffffff !important;
     text-shadow: 0 0 10px rgba(56, 189, 248, 0.8) !important;
 }
+        /* ============================================================ */
+/* ===== FIX KONTRAS TEKS TOMBOL POPUP — MODE TERANG ========== */
+/* ============================================================ */
+
+/* Background tombol popup mode terang → putih dengan border biru tegas */
+html body:not(.dark-mode) .popup-body .popup-btn {
+    background: #ffffff !important;
+    color: #0f172a !important;
+    border: 2px solid #2563eb !important;
+    box-shadow: 0 2px 8px rgba(37, 99, 235, 0.12) !important;
+}
+
+html body:not(.dark-mode) .popup-body .popup-btn:hover {
+    background: #eff6ff !important;
+    border-color: #1d4ed8 !important;
+    box-shadow: 0 4px 14px rgba(37, 99, 235, 0.25) !important;
+}
+
+html body:not(.dark-mode) .popup-body .popup-btn:active {
+    transform: scale(0.99);
+}
+
+/* Judul tombol → hitam tegas */
+html body:not(.dark-mode) .popup-body .popup-btn,
+html body:not(.dark-mode) .popup-body .popup-btn .popup-btn-text {
+    color: #0f172a !important;
+    font-weight: 800 !important;
+}
+
+/* Subtitle → abu tua tegas (bukan abu pudar) */
+html body:not(.dark-mode) .popup-body .popup-btn .popup-btn-text small {
+    color: #475569 !important;
+    font-weight: 700 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.3px !important;
+}
+
+/* Icon kotak → warna sesuai kategori */
+html body:not(.dark-mode) .popup-body .popup-btn-icon {
+    background: rgba(37, 99, 235, 0.1) !important;
+    border: 1px solid rgba(37, 99, 235, 0.3) !important;
+}
+
+html body:not(.dark-mode) .popup-body .popup-btn-icon svg {
+    stroke: #2563eb !important;
+}
+
+/* Warna icon per kategori — mode terang */
+html body:not(.dark-mode) .popup-body .popup-btn-icon.t-buka,
+html body:not(.dark-mode) .popup-body .popup-btn-icon.t-tambah,
+html body:not(.dark-mode) .popup-body .popup-btn-icon.t-gps-on {
+    background: rgba(5, 150, 105, 0.1) !important;
+    border-color: rgba(5, 150, 105, 0.35) !important;
+}
+html body:not(.dark-mode) .popup-body .popup-btn-icon.t-buka svg,
+html body:not(.dark-mode) .popup-body .popup-btn-icon.t-tambah svg,
+html body:not(.dark-mode) .popup-body .popup-btn-icon.t-gps-on svg {
+    stroke: #059669 !important;
+}
+
+html body:not(.dark-mode) .popup-body .popup-btn-icon.t-tutup,
+html body:not(.dark-mode) .popup-body .popup-btn-icon.t-hapus,
+html body:not(.dark-mode) .popup-body .popup-btn-icon.t-lock,
+html body:not(.dark-mode) .popup-body .popup-btn-icon.t-reset,
+html body:not(.dark-mode) .popup-body .popup-btn-icon.t-gps-off {
+    background: rgba(220, 38, 38, 0.1) !important;
+    border-color: rgba(220, 38, 38, 0.35) !important;
+}
+html body:not(.dark-mode) .popup-body .popup-btn-icon.t-tutup svg,
+html body:not(.dark-mode) .popup-body .popup-btn-icon.t-hapus svg,
+html body:not(.dark-mode) .popup-body .popup-btn-icon.t-lock svg,
+html body:not(.dark-mode) .popup-body .popup-btn-icon.t-reset svg,
+html body:not(.dark-mode) .popup-body .popup-btn-icon.t-gps-off svg {
+    stroke: #dc2626 !important;
+}
+
+html body:not(.dark-mode) .popup-body .popup-btn-icon.t-pin,
+html body:not(.dark-mode) .popup-body .popup-btn-icon.t-keluar {
+    background: rgba(217, 119, 6, 0.1) !important;
+    border-color: rgba(217, 119, 6, 0.35) !important;
+}
+html body:not(.dark-mode) .popup-body .popup-btn-icon.t-pin svg,
+html body:not(.dark-mode) .popup-body .popup-btn-icon.t-keluar svg {
+    stroke: #d97706 !important;
+}
+
+html body:not(.dark-mode) .popup-body .popup-btn-icon.t-branding,
+html body:not(.dark-mode) .popup-body .popup-btn-icon.t-paksa {
+    background: rgba(124, 58, 237, 0.1) !important;
+    border-color: rgba(124, 58, 237, 0.35) !important;
+}
+html body:not(.dark-mode) .popup-body .popup-btn-icon.t-branding svg,
+html body:not(.dark-mode) .popup-body .popup-btn-icon.t-paksa svg {
+    stroke: #7c3aed !important;
+}
+
+/* Header popup mode terang — tetap gelap biar kontras */
+html body:not(.dark-mode) .popup-header {
+    background: linear-gradient(135deg, #0f172a, #1e293b) !important;
+    border-bottom: 2px solid #2563eb !important;
+}
+
+html body:not(.dark-mode) .popup-title {
+    color: #ffffff !important;
+    text-shadow: none !important;
+}
+
+html body:not(.dark-mode) .popup-close {
+    background: rgba(255, 255, 255, 0.15) !important;
+    border: 1px solid rgba(255, 255, 255, 0.3) !important;
+    color: #ffffff !important;
+}
+
+html body:not(.dark-mode) .popup-close:hover {
+    background: rgba(255, 255, 255, 0.3) !important;
+}
+
+/* GPS status box mode terang */
+html body:not(.dark-mode) .gps-status-box.aktif {
+    background: rgba(5, 150, 105, 0.12) !important;
+    color: #047857 !important;
+    border: 1px solid rgba(5, 150, 105, 0.35) !important;
+}
+
+html body:not(.dark-mode) .gps-status-box.nonaktif {
+    background: rgba(220, 38, 38, 0.12) !important;
+    color: #b91c1c !important;
+    border: 1px solid rgba(220, 38, 38, 0.35) !important;
+}
     </style>
 </head>
 <body>
