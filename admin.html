@@ -61,9 +61,6 @@
     </script>
 
     <style>
-        /* ============================================ */
-        /* ===== TEMA DASAR ============================ */
-        /* ============================================ */
         :root {
             --bg: #f8fafc;
             --card-bg: #ffffff;
@@ -123,7 +120,6 @@
             gap: 10px;
             margin-bottom: 20px;
         }
-
         .logout-btn {
             background: #dc2626 !important;
             color: #ffffff !important;
@@ -137,24 +133,12 @@
             letter-spacing: 0.3px;
             width: auto;
             box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-            transition: all 0.2s ease;
-        }
-        .logout-btn:hover {
-            background: #b91c1c !important;
-            transform: translateY(-1px);
         }
         body.dark-mode .logout-btn {
             background: linear-gradient(135deg, #ff1f3d 0%, #99001f 100%) !important;
-            color: #ffffff !important;
             border: 2px solid #ff1f3d !important;
-            box-shadow: 0 0 25px rgba(255, 31, 61, 0.7), inset 0 0 8px rgba(255, 255, 255, 0.3) !important;
-            text-shadow: 0 0 6px rgba(255, 255, 255, 0.5) !important;
+            box-shadow: 0 0 25px rgba(255, 31, 61, 0.7) !important;
         }
-        body.dark-mode .logout-btn:hover {
-            background: linear-gradient(135deg, #ff1f3d 0%, #ff1f3d 100%) !important;
-            box-shadow: 0 0 35px rgba(255, 31, 61, 1) !important;
-        }
-        
         .dark-mode-btn {
             background: #0f172a;
             color: #ffffff;
@@ -165,19 +149,11 @@
             cursor: pointer;
             font-size: 12px;
             width: auto;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-            transition: all 0.2s ease;
-        }
-        .dark-mode-btn:hover {
-            background: #1e293b;
-            transform: translateY(-1px);
         }
         body.dark-mode .dark-mode-btn {
             background: linear-gradient(135deg, #ff1f3d 0%, #99001f 100%) !important;
-            color: #ffffff !important;
             border: 2px solid #ff1f3d !important;
             box-shadow: 0 0 20px rgba(255, 31, 61, 0.6) !important;
-            text-shadow: 0 0 6px rgba(255, 255, 255, 0.5) !important;
         }
         
         .header-admin {
@@ -189,7 +165,6 @@
             margin-bottom: 24px;
             border: 1px solid #334155;
             box-shadow: 0 4px 12px rgba(15, 23, 42, 0.15);
-            transition: all 0.3s ease;
         }
         .header-admin h2 {
             margin: 0 0 6px 0;
@@ -209,15 +184,13 @@
         body.dark-mode .header-admin {
             background: linear-gradient(135deg, #7f0015 0%, #50000e 100%) !important;
             border: 2px solid #ff1f3d !important;
-            box-shadow: 0 0 35px rgba(255, 31, 61, 0.7), inset 0 0 15px rgba(255, 31, 61, 0.4) !important;
+            box-shadow: 0 0 35px rgba(255, 31, 61, 0.7) !important;
         }
         body.dark-mode .header-admin h2 {
-            color: #ffffff !important;
-            text-shadow: 0 0 20px rgba(255, 31, 61, 1), 0 0 30px rgba(255, 31, 61, 0.6) !important;
+            text-shadow: 0 0 20px rgba(255, 31, 61, 1) !important;
         }
         body.dark-mode .header-admin .header-sub-text {
             color: #ff99a8 !important;
-            text-shadow: 0 0 10px rgba(255, 31, 61, 0.8) !important;
         }
         
         .status-badge {
@@ -231,24 +204,20 @@
             text-transform: uppercase;
             margin-top: 14px;
             letter-spacing: 0.6px;
-            transition: all 0.3s ease;
         }
         .status-badge .dot {
             width: 8px;
             height: 8px;
             border-radius: 50%;
             flex-shrink: 0;
-            display: inline-block;
         }
         .status-open {
             background: linear-gradient(135deg, #ecfdf5, #d1fae5);
             color: #065f46;
             border: 1px solid #6ee7b7;
-            box-shadow: 0 2px 8px rgba(5, 150, 105, 0.15);
         }
         .status-open .dot {
             background: #10b981;
-            box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
             animation: pulseOpen 2s infinite;
         }
         @keyframes pulseOpen {
@@ -260,11 +229,9 @@
             background: linear-gradient(135deg, #fef2f2, #fee2e2);
             color: #991b1b;
             border: 1px solid #fca5a5;
-            box-shadow: 0 2px 8px rgba(220, 38, 38, 0.15);
         }
         .status-closed .dot {
             background: #ef4444;
-            animation: none;
         }
         body.dark-mode .status-badge,
         body.dark-mode .status-open,
@@ -272,23 +239,11 @@
             background: #ff1f3d !important;
             color: #ffffff !important;
             border: 2px solid #ff1f3d !important;
-            box-shadow: 0 0 30px rgba(255, 31, 61, 0.9), inset 0 0 10px rgba(255, 255, 255, 0.3) !important;
+            box-shadow: 0 0 30px rgba(255, 31, 61, 0.9) !important;
         }
-        body.dark-mode .status-badge .dot,
-        body.dark-mode .status-open .dot,
-        body.dark-mode .status-closed .dot {
+        body.dark-mode .status-badge .dot {
             background: #ffffff !important;
             box-shadow: 0 0 15px #ffffff, 0 0 30px #ff1f3d !important;
-            animation: pulseOpenDark 2s infinite !important;
-        }
-        body.dark-mode #badge-status-text {
-            color: #ffffff !important;
-            text-shadow: 0 0 8px rgba(255, 255, 255, 0.8) !important;
-        }
-        @keyframes pulseOpenDark {
-            0% { box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.7), 0 0 15px #ffffff; }
-            70% { box-shadow: 0 0 0 8px rgba(255, 255, 255, 0), 0 0 15px #ffffff; }
-            100% { box-shadow: 0 0 0 0 rgba(255, 255, 255, 0), 0 0 15px #ffffff; }
         }
         
         .timer-box-wrapper {
@@ -306,12 +261,11 @@
             display: flex;
             flex-direction: column;
             justify-content: center;
-            transition: all 0.3s ease;
         }
         body.dark-mode .timer-card-admin {
             background: #3d000a !important;
             border: 2px solid #ff1f3d !important;
-            box-shadow: 0 0 35px rgba(255, 31, 61, 0.7), inset 0 0 15px rgba(255, 31, 61, 0.4) !important;
+            box-shadow: 0 0 35px rgba(255, 31, 61, 0.7) !important;
         }
         .timer-badge-title {
             font-size: 10px;
@@ -351,7 +305,6 @@
         }
         body.dark-mode .admin-nama-promotor {
             color: #ffffff !important;
-            text-shadow: 0 0 20px rgba(255, 31, 61, 1) !important;
         }
         
         .input-group {
@@ -379,7 +332,6 @@
             outline: none;
             appearance: none;
             -webkit-appearance: none;
-            transition: all 0.2s ease;
             box-sizing: border-box;
         }
         body.dark-mode select,
@@ -387,7 +339,6 @@
             background: #2b0007 !important;
             color: #ffffff !important;
             border: 2px solid #ff1f3d !important;
-            box-shadow: 0 0 25px rgba(255, 31, 61, 0.5), inset 0 0 10px rgba(255, 31, 61, 0.3) !important;
         }
         
         button {
@@ -399,13 +350,11 @@
             cursor: pointer;
             border: none;
             text-transform: uppercase;
-            transition: all 0.2s ease;
             display: inline-flex;
             justify-content: center;
             align-items: center;
             gap: 8px;
             letter-spacing: 0.3px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.04);
             background: #dc2626 !important;
             color: #ffffff !important;
         }
@@ -413,12 +362,10 @@
             background: #b91c1c !important;
             transform: translateY(-1px);
         }
-        button:active { transform: scale(0.98); }
         
         .btn-black-custom {
             background: #0f172a !important;
             color: #ffffff !important;
-            border-color: #0f172a !important;
         }
         .btn-black-custom:hover {
             background: #1e293b !important;
@@ -428,7 +375,6 @@
             background: #f1f5f9 !important;
             color: #475569 !important;
             border: 1px solid #cbd5e1 !important;
-            box-shadow: none !important;
         }
         .btn-cancel:hover {
             background: #e2e8f0 !important;
@@ -441,19 +387,17 @@
             border: 1px solid #cbd5e1 !important;
             cursor: not-allowed !important;
             pointer-events: none !important;
-            box-shadow: none !important;
         }
         
         body.dark-mode button {
             background: #99001f !important;
             color: #ffffff !important;
             border: 2px solid #ff1f3d !important;
-            box-shadow: 0 0 25px rgba(255, 31, 61, 0.7), inset 0 0 10px rgba(255, 255, 255, 0.3) !important;
-            text-shadow: 0 0 6px rgba(255, 255, 255, 0.5) !important;
+            box-shadow: 0 0 25px rgba(255, 31, 61, 0.7) !important;
         }
         body.dark-mode button:hover {
             background: #ff1f3d !important;
-            box-shadow: 0 0 35px rgba(255, 31, 61, 1), inset 0 0 15px rgba(255, 255, 255, 0.4) !important;
+            box-shadow: 0 0 35px rgba(255, 31, 61, 1) !important;
         }
         body.dark-mode .btn-black-custom {
             background: #99001f !important;
@@ -463,20 +407,11 @@
             background: #50000e !important;
             color: #ff99a8 !important;
             border: 2px solid #ff1f3d !important;
-            box-shadow: 0 0 20px rgba(255, 31, 61, 0.5), inset 0 0 8px rgba(255, 31, 61, 0.3) !important;
-        }
-        body.dark-mode .btn-cancel:hover {
-            background: #7f0015 !important;
-            color: #ffffff !important;
-            box-shadow: 0 0 30px rgba(255, 31, 61, 0.8) !important;
         }
         body.dark-mode .btn-disabled {
             background: #3d000a !important;
             color: #ffffff !important;
             border: 2px solid #7f1d1d !important;
-            box-shadow: none !important;
-            opacity: 1 !important;
-            text-shadow: 0 0 8px rgba(255, 255, 255, 0.3) !important;
         }
         
         .spinner {
@@ -513,7 +448,6 @@
             font-weight: 600;
             gap: 8px;
             overflow: hidden;
-            transition: all 0.2s ease;
         }
         .list-antrian li b {
             white-space: nowrap;
@@ -524,10 +458,6 @@
         body.dark-mode .list-antrian li {
             background: #2b0007 !important;
             border: 2px solid #ff1f3d !important;
-            color: #ffffff !important;
-            box-shadow: 0 0 25px rgba(255, 31, 61, 0.5) !important;
-        }
-        body.dark-mode .list-antrian li b {
             color: #ffffff !important;
         }
         
@@ -547,10 +477,6 @@
             background: #eab308 !important;
             color: #ffffff !important;
         }
-        .badge-makan {
-            background: #0d9488 !important;
-            color: #ffffff !important;
-        }
         .badge-melayani {
             background: #059669 !important;
             color: #ffffff !important;
@@ -563,14 +489,10 @@
             background: #50000e !important;
             color: #ff99a8 !important;
             border: 2px solid #ff1f3d !important;
-            box-shadow: 0 0 15px rgba(255, 31, 61, 0.6) !important;
-            text-shadow: 0 0 8px rgba(255, 31, 61, 0.8) !important;
         }
         body.dark-mode .badge-giliran-anda {
             background: #99001f !important;
             color: #ffffff !important;
-            border: 2px solid #ff1f3d !important;
-            box-shadow: 0 0 20px rgba(255, 31, 61, 0.9) !important;
         }
         
         .modal-overlay {
@@ -603,13 +525,11 @@
             max-height: 90vh;
             overflow-y: auto;
             box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-            transition: all 0.3s ease;
         }
         body.dark-mode .modal-box {
             background: #090204 !important;
             border: 2px solid #ff1f3d !important;
             color: #ffffff !important;
-            box-shadow: 0 0 35px rgba(255, 31, 61, 0.8), inset 0 0 15px rgba(255, 31, 61, 0.3) !important;
         }
         .modal-title {
             font-size: 16px;
@@ -619,7 +539,6 @@
         }
         body.dark-mode .modal-title {
             color: #ffffff !important;
-            text-shadow: 0 0 15px rgba(255, 31, 61, 0.8) !important;
         }
         .modal-desc {
             font-size: 13px;
@@ -649,23 +568,6 @@
             font-size: 12px;
         }
         
-        body.dark-mode .modal-actions button {
-            background: linear-gradient(135deg, #ff1f3d 0%, #99001f 100%) !important;
-            color: #ffffff !important;
-            border: 2px solid #ff1f3d !important;
-            box-shadow: 0 0 25px rgba(255, 31, 61, 0.7), inset 0 0 10px rgba(255, 255, 255, 0.3) !important;
-        }
-        body.dark-mode .modal-actions button.btn-cancel {
-            background: #50000e !important;
-            color: #ff99a8 !important;
-            border: 2px solid #ff1f3d !important;
-            box-shadow: 0 0 20px rgba(255, 31, 61, 0.5) !important;
-        }
-        body.dark-mode .modal-actions button.btn-cancel:hover {
-            background: #7f0015 !important;
-            color: #ffffff !important;
-        }
-        
         @media (min-width: 768px) {
             .admin-container { max-width: 720px; }
         }
@@ -676,7 +578,6 @@
             body { padding: 12px; }
             .admin-container { padding: 20px; border-radius: 20px; }
             .header-admin h2 { font-size: 18px; }
-            .admin-nama-promotor { font-size: 17px; }
         }
         
         /* ===== AKTIVITAS SECTION ===== */
@@ -724,8 +625,6 @@
             stroke: currentColor;
             stroke-width: 2.4;
             fill: none;
-            stroke-linecap: round;
-            stroke-linejoin: round;
         }
         
         .aktivitas-header-toggle {
@@ -739,16 +638,11 @@
             background: linear-gradient(135deg, #0f172a, #1e293b);
             color: #ffffff;
             margin-bottom: 0;
-            transition: all 0.2s ease;
             box-shadow: 0 2px 6px rgba(15, 23, 42, 0.15);
-        }
-        .aktivitas-header-toggle:hover {
-            background: linear-gradient(135deg, #1e293b, #334155);
         }
         body.dark-mode .aktivitas-header-toggle {
             background: #2b0007 !important;
             border: 2px solid #ff1f3d !important;
-            box-shadow: 0 0 25px rgba(255, 31, 61, 0.6) !important;
         }
         .aktivitas-header-toggle .judul {
             display: flex;
@@ -765,8 +659,6 @@
             stroke: currentColor;
             stroke-width: 2.4;
             fill: none;
-            stroke-linecap: round;
-            stroke-linejoin: round;
         }
         .aktivitas-header-toggle .arrow {
             width: 24px;
@@ -779,18 +671,12 @@
             transition: transform 0.3s ease;
             flex-shrink: 0;
         }
-        body.dark-mode .aktivitas-header-toggle .arrow {
-            background: #99001f !important;
-            border: 1px solid #ff1f3d !important;
-        }
         .aktivitas-header-toggle .arrow svg {
             width: 12px;
             height: 12px;
             stroke: #ffffff;
             stroke-width: 2.6;
             fill: none;
-            stroke-linecap: round;
-            stroke-linejoin: round;
         }
         .aktivitas-header-toggle.open .arrow {
             transform: rotate(180deg);
@@ -830,7 +716,6 @@
         body.dark-mode .aktivitas-list li {
             background: #2b0007 !important;
             border: 2px solid #ff1f3d !important;
-            box-shadow: 0 0 15px rgba(255, 31, 61, 0.4) !important;
             color: #ffffff !important;
         }
         .aktivitas-list li .nama {
@@ -848,7 +733,6 @@
             font-size: 11px;
             color: var(--text-muted);
             font-weight: 700;
-            font-variant-numeric: tabular-nums;
             white-space: nowrap;
         }
         body.dark-mode .aktivitas-list li .waktu {
@@ -866,62 +750,28 @@
             color: #ff8585 !important;
         }
         
-        #list-bawa, #list-ibadah, #list-keluar, #list-autokick {
-            list-style: none;
-            padding: 0;
-            margin: 0 0 6px 0;
-        }
-        #list-bawa li, #list-ibadah li, #list-keluar li, #list-autokick li {
-            flex-wrap: wrap;
-            word-break: break-word;
-        }
-        #list-bawa li .nama, #list-ibadah li .nama, #list-keluar li .nama, #list-autokick li .nama {
-            flex: 1 1 60%;
-            min-width: 0;
-            overflow-wrap: anywhere;
-            text-align: left;
-        }
-        #list-bawa li .waktu, #list-ibadah li .waktu, #list-keluar li .waktu, #list-autokick li .waktu {
-            flex: 0 0 auto;
-            margin-left: auto;
-            text-align: right;
-        }
-        
         .check-deal {
             display: inline-flex;
             align-items: center;
-            justify-content: center;
             margin-left: 6px;
-            flex-shrink: 0;
-            vertical-align: middle;
         }
         .label-lihat {
             font-size: 10px;
             color: var(--text-muted);
             font-weight: 700;
         }
-        body.dark-mode .label-lihat {
-            color: #ff99a8 !important;
-        }
         .label-melayani {
             font-size: 10px;
             color: #059669;
             font-weight: 800;
             text-transform: uppercase;
-            letter-spacing: 0.3px;
         }
         body.dark-mode .label-melayani {
             color: #ff667a !important;
-            text-shadow: 0 0 8px rgba(255, 102, 122, 0.8) !important;
         }
         
         #total-bawa-box .total-lihat { color: #d97706; }
         #total-bawa-box .total-deal { color: #059669; }
-        body.dark-mode #total-bawa-box {
-            background: #50000e !important;
-            color: #ffb3bc !important;
-            border: 1px solid #ff1f3d !important;
-        }
         
         .rekap-tabel {
             width: 100%;
@@ -935,7 +785,6 @@
             font-weight: 800;
             text-transform: uppercase;
             font-size: 10px;
-            letter-spacing: 0.3px;
             padding: 8px 6px;
             text-align: center;
             border-bottom: 2px solid var(--border);
@@ -950,7 +799,6 @@
             font-weight: 700;
             border-bottom: 1px solid var(--border);
             color: var(--text-main);
-            font-variant-numeric: tabular-nums;
         }
         .rekap-tabel td.kolom-nama {
             text-align: left;
@@ -968,10 +816,7 @@
         .rekap-tabel tr.total-row td {
             background: #f8fafc;
             border-top: 2px solid var(--border);
-            border-bottom: none;
             font-weight: 800;
-            padding-top: 10px;
-            padding-bottom: 10px;
         }
         body.dark-mode .rekap-tabel th {
             background: #2b0007 !important;
@@ -983,33 +828,13 @@
             border-bottom: 1px solid #5a0011 !important;
             color: #ffffff !important;
         }
-        body.dark-mode .rekap-tabel td.kolom-nama {
-            color: #ffffff !important;
-        }
         body.dark-mode .rekap-tabel tr.total-row td {
             background: #50000e !important;
             border-top: 2px solid #ff1f3d !important;
-            color: #ffffff !important;
-        }
-        body.dark-mode .rekap-tabel td.angka-deal {
-            color: #ff667a !important;
-        }
-        body.dark-mode .rekap-tabel td.angka-lihat {
-            color: #ffb3bc !important;
-        }
-        body.dark-mode .rekap-tabel td.angka-nosale {
-            color: #ff1f3d !important;
-        }
-        body.dark-mode .rekap-tabel td.angka-hari {
-            color: #ff99a8 !important;
-        }
-        
-        body.dark-mode #label-status-gps {
-            color: #ff99a8 !important;
         }
 
         /* ============================================================ */
-        /* ===== AKTIVITAS MENU GRID (SAMA PROMOTOR) ================= */
+        /* ===== AKTIVITAS MENU GRID ================================== */
         /* ============================================================ */
         .aktivitas-menu-grid {
             display: grid;
@@ -1087,11 +912,50 @@
             border-radius: 10px;
             min-width: 20px;
             text-align: center;
-            box-shadow: 0 2px 6px rgba(37, 99, 235, 0.4);
         }
 
         /* ============================================================ */
-        /* ===== MENU ADMIN GRID (2 KOLOM KARTU) ===================== */
+        /* ===== HEADER MENU ADMIN ==================================== */
+        /* ============================================================ */
+        .admin-menu-header {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 12px 14px;
+            border-radius: 12px;
+            background: linear-gradient(135deg, #0f172a, #1e293b);
+            color: #ffffff;
+            margin-top: 24px;
+            margin-bottom: 12px;
+            box-shadow: 0 2px 6px rgba(15, 23, 42, 0.15);
+            user-select: none;
+        }
+        .admin-menu-header .judul {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 12px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .admin-menu-header .judul svg {
+            width: 14px;
+            height: 14px;
+            stroke: currentColor;
+            stroke-width: 2.4;
+            fill: none;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+        body.dark-mode .admin-menu-header {
+            background: #2b0007 !important;
+            border: 2px solid #ff1f3d !important;
+            box-shadow: 0 0 25px rgba(255, 31, 61, 0.6) !important;
+        }
+
+        /* ============================================================ */
+        /* ===== MENU ADMIN GRID ====================================== */
         /* ============================================================ */
         .admin-menu-grid {
             display: grid;
@@ -1172,7 +1036,7 @@
         }
 
         /* ============================================================ */
-        /* ===== POPUP (AKTIVITAS & MENU ADMIN) ====================== */
+        /* ===== POPUP ================================================ */
         /* ============================================================ */
         .popup-overlay {
             position: fixed;
@@ -1217,6 +1081,18 @@
             text-transform: uppercase;
             color: #ffffff;
             letter-spacing: 0.5px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .popup-title svg {
+            width: 16px;
+            height: 16px;
+            stroke: currentColor;
+            stroke-width: 2.4;
+            fill: none;
+            stroke-linecap: round;
+            stroke-linejoin: round;
         }
         .popup-close {
             background: rgba(255, 255, 255, 0.15);
@@ -1244,34 +1120,207 @@
         .popup-body::-webkit-scrollbar-track { background: transparent; }
         .popup-body::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 3px; }
 
-        .rekap-wrapper {
-            background: var(--card-bg);
-            border: 1px solid var(--border);
-            border-radius: 10px;
-            padding: 8px;
-            margin-bottom: 10px;
+        /* ===== TOMBOL DI DALAM POPUP ===== */
+        .popup-body .popup-btn {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            width: 100%;
+            padding: 14px 16px;
+            border-radius: 12px;
+            background: #ffffff;
+            color: #0f172a;
+            font-weight: 700;
+            font-size: 12.5px;
+            text-transform: none;
+            letter-spacing: 0.2px;
+            text-align: left;
+            border: 2px solid #e2e8f0;
+            box-shadow: 0 2px 6px rgba(15, 23, 42, 0.05);
+            cursor: pointer;
+            transition: all 0.15s ease;
+            margin-bottom: 8px;
         }
-        .rekap-label {
+        .popup-body .popup-btn:hover {
+            background: #f8fafc;
+            border-color: #2563eb;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.15);
+        }
+        .popup-body .popup-btn:active {
+            transform: scale(0.99);
+        }
+        .popup-btn-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            background: rgba(37, 99, 235, 0.1);
+            border: 1px solid rgba(37, 99, 235, 0.25);
+        }
+        .popup-btn-icon svg {
+            width: 18px;
+            height: 18px;
+            stroke: #2563eb;
+            stroke-width: 2.2;
+            fill: none;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+        .popup-btn-text {
+            flex: 1;
+            line-height: 1.3;
+        }
+        .popup-btn-text small {
+            display: block;
             font-size: 10px;
-            font-weight: 800;
-            color: var(--text-muted);
-            text-align: center;
-            margin-bottom: 6px;
+            font-weight: 600;
+            color: #64748b;
+            margin-top: 2px;
             text-transform: uppercase;
             letter-spacing: 0.3px;
         }
 
-        /* ============================================================ */
-        /* ===== DARK MODE — MENU & POPUP ============================= */
-        /* ============================================================ */
+        /* Warna icon per kategori */
+        .popup-btn-icon.t-buka {
+            background: rgba(5, 150, 105, 0.12);
+            border-color: rgba(5, 150, 105, 0.3);
+        }
+        .popup-btn-icon.t-buka svg { stroke: #059669; }
+
+        .popup-btn-icon.t-tutup {
+            background: rgba(220, 38, 38, 0.12);
+            border-color: rgba(220, 38, 38, 0.3);
+        }
+        .popup-btn-icon.t-tutup svg { stroke: #dc2626; }
+
+        .popup-btn-icon.t-branding {
+            background: rgba(124, 58, 237, 0.12);
+            border-color: rgba(124, 58, 237, 0.3);
+        }
+        .popup-btn-icon.t-branding svg { stroke: #7c3aed; }
+
+        .popup-btn-icon.t-tambah {
+            background: rgba(5, 150, 105, 0.12);
+            border-color: rgba(5, 150, 105, 0.3);
+        }
+        .popup-btn-icon.t-tambah svg { stroke: #059669; }
+
+        .popup-btn-icon.t-pin {
+            background: rgba(217, 119, 6, 0.12);
+            border-color: rgba(217, 119, 6, 0.3);
+        }
+        .popup-btn-icon.t-pin svg { stroke: #d97706; }
+
+        .popup-btn-icon.t-hapus {
+            background: rgba(220, 38, 38, 0.12);
+            border-color: rgba(220, 38, 38, 0.3);
+        }
+        .popup-btn-icon.t-hapus svg { stroke: #dc2626; }
+
+        .popup-btn-icon.t-keluar {
+            background: rgba(217, 119, 6, 0.12);
+            border-color: rgba(217, 119, 6, 0.3);
+        }
+        .popup-btn-icon.t-keluar svg { stroke: #d97706; }
+
+        .popup-btn-icon.t-paksa {
+            background: rgba(124, 58, 237, 0.12);
+            border-color: rgba(124, 58, 237, 0.3);
+        }
+        .popup-btn-icon.t-paksa svg { stroke: #7c3aed; }
+
+        .popup-btn-icon.t-lock {
+            background: rgba(220, 38, 38, 0.12);
+            border-color: rgba(220, 38, 38, 0.3);
+        }
+        .popup-btn-icon.t-lock svg { stroke: #dc2626; }
+
+        .popup-btn-icon.t-reset {
+            background: rgba(220, 38, 38, 0.12);
+            border-color: rgba(220, 38, 38, 0.3);
+        }
+        .popup-btn-icon.t-reset svg { stroke: #dc2626; }
+
+        .popup-btn-icon.t-gps-on {
+            background: rgba(5, 150, 105, 0.12);
+            border-color: rgba(5, 150, 105, 0.3);
+        }
+        .popup-btn-icon.t-gps-on svg { stroke: #059669; }
+
+        .popup-btn-icon.t-gps-off {
+            background: rgba(220, 38, 38, 0.12);
+            border-color: rgba(220, 38, 38, 0.3);
+        }
+        .popup-btn-icon.t-gps-off svg { stroke: #dc2626; }
+
+        /* Dark mode popup button */
+        body.dark-mode .popup-body .popup-btn {
+            background: #2b0007 !important;
+            color: #ffffff !important;
+            border: 2px solid #ff1f3d !important;
+        }
+        body.dark-mode .popup-body .popup-btn:hover {
+            background: #3d000a !important;
+            box-shadow: 0 0 25px rgba(255, 31, 61, 0.6) !important;
+        }
+        body.dark-mode .popup-btn-text small {
+            color: #ff99a8 !important;
+        }
+        body.dark-mode .popup-btn-icon {
+            background: rgba(255, 31, 61, 0.15) !important;
+            border-color: rgba(255, 31, 61, 0.4) !important;
+        }
+        body.dark-mode .popup-btn-icon svg { stroke: #ff667a !important; }
+
+        /* Status box GPS */
+        .gps-status-box {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 14px;
+            border-radius: 10px;
+            margin-bottom: 14px;
+            font-size: 12px;
+            font-weight: 700;
+        }
+        .gps-status-box.aktif {
+            background: rgba(5, 150, 105, 0.12);
+            color: #059669;
+            border: 1px solid rgba(5, 150, 105, 0.3);
+        }
+        .gps-status-box.nonaktif {
+            background: rgba(220, 38, 38, 0.12);
+            color: #dc2626;
+            border: 1px solid rgba(220, 38, 38, 0.3);
+        }
+        .gps-status-box svg {
+            width: 20px;
+            height: 20px;
+            stroke: currentColor;
+            stroke-width: 2.2;
+            fill: none;
+            flex-shrink: 0;
+        }
+        body.dark-mode .gps-status-box.aktif {
+            background: rgba(5, 150, 105, 0.2) !important;
+            color: #34d399 !important;
+            border-color: rgba(5, 150, 105, 0.5) !important;
+        }
+        body.dark-mode .gps-status-box.nonaktif {
+            background: rgba(255, 31, 61, 0.2) !important;
+            color: #ff667a !important;
+            border-color: rgba(255, 31, 61, 0.5) !important;
+        }
+
+        /* Dark mode */
         body.dark-mode .aktivitas-menu-btn {
             background: #2b0007 !important;
             border: 2px solid #ff1f3d !important;
             color: #ffffff !important;
-            box-shadow: 0 0 25px rgba(255, 31, 61, 0.5) !important;
-        }
-        body.dark-mode .aktivitas-menu-btn:hover {
-            box-shadow: 0 0 35px rgba(255, 31, 61, 0.9) !important;
         }
         body.dark-mode .aktivitas-menu-label { color: #ffffff !important; }
         body.dark-mode .aktivitas-menu-icon {
@@ -1283,15 +1332,10 @@
             background: #ff1f3d !important;
             color: #ffffff !important;
         }
-
         body.dark-mode .admin-menu-card {
             background: #2b0007 !important;
             border: 2px solid #ff1f3d !important;
             color: #ffffff !important;
-            box-shadow: 0 0 25px rgba(255, 31, 61, 0.5) !important;
-        }
-        body.dark-mode .admin-menu-card:hover {
-            box-shadow: 0 0 35px rgba(255, 31, 61, 0.9) !important;
         }
         body.dark-mode .admin-menu-card-label { color: #ffffff !important; }
         body.dark-mode .admin-menu-card-icon {
@@ -1299,11 +1343,9 @@
             border: 1px solid rgba(255, 31, 61, 0.5) !important;
         }
         body.dark-mode .admin-menu-card-icon svg { stroke: #ff667a !important; }
-
         body.dark-mode .popup-box {
             background: #090204 !important;
             border: 2px solid #ff1f3d !important;
-            box-shadow: 0 0 35px rgba(255, 31, 61, 0.8) !important;
         }
         body.dark-mode .popup-header {
             background: linear-gradient(135deg, #7f0015, #50000e) !important;
@@ -1317,29 +1359,14 @@
             background: #2b0007 !important;
             border: 2px solid #ff1f3d !important;
         }
-        body.dark-mode .rekap-label {
-            color: #ff99a8 !important;
-        }
-        body.dark-mode .popup-body #total-bawa-box {
-            background: #50000e !important;
-            color: #ffb3bc !important;
-            border: 1px solid #ff1f3d !important;
-        }
+        body.dark-mode .rekap-label { color: #ff99a8 !important; }
 
-        /* ============================================================ */
-        /* ===== FIX MODE TERANG — MENU & KARTU ====================== */
-        /* ============================================================ */
+        /* Fix mode terang */
         html body:not(.dark-mode) .aktivitas-menu-btn,
         html body:not(.dark-mode) .admin-menu-card {
             background: #ffffff !important;
             border: 2px solid #2563eb !important;
             color: #0f172a !important;
-            box-shadow: 0 2px 8px rgba(37, 99, 235, 0.15) !important;
-        }
-        html body:not(.dark-mode) .aktivitas-menu-btn:hover,
-        html body:not(.dark-mode) .admin-menu-card:hover {
-            background: #f8fafc !important;
-            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.25) !important;
         }
         html body:not(.dark-mode) .aktivitas-menu-label,
         html body:not(.dark-mode) .admin-menu-card-label {
@@ -1374,11 +1401,6 @@
             border-color: rgba(5, 150, 105, 0.3) !important;
         }
         html body:not(.dark-mode) .aktivitas-menu-icon.t-rekap svg { stroke: #059669 !important; }
-        html body:not(.dark-mode) .aktivitas-menu-count {
-            background: #2563eb !important;
-            color: #ffffff !important;
-        }
-
         html body:not(.dark-mode) .admin-menu-card-icon.t-operasional {
             background: rgba(37, 99, 235, 0.12) !important;
             border-color: rgba(37, 99, 235, 0.3) !important;
@@ -1399,11 +1421,9 @@
             border-color: rgba(124, 58, 237, 0.3) !important;
         }
         html body:not(.dark-mode) .admin-menu-card-icon.t-gps svg { stroke: #7c3aed !important; }
-
         html body:not(.dark-mode) .popup-box {
             background: #ffffff !important;
             border: 2px solid #2563eb !important;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2) !important;
         }
         html body:not(.dark-mode) .popup-header {
             background: linear-gradient(135deg, #0f172a, #1e293b) !important;
@@ -1414,11 +1434,20 @@
             border: 1px solid #e2e8f0 !important;
         }
 
-        /* Tombol di dalam popup body */
-        .popup-body .admin-grid {
-            display: flex !important;
-            flex-direction: column !important;
-            gap: 8px !important;
+        .rekap-wrapper {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 8px;
+            margin-bottom: 10px;
+        }
+        .rekap-label {
+            font-size: 10px;
+            font-weight: 800;
+            color: var(--text-muted);
+            text-align: center;
+            margin-bottom: 6px;
+            text-transform: uppercase;
         }
     </style>
 </head>
@@ -1466,7 +1495,7 @@
                 <ul id="list-AV" class="list-antrian"><li><span>Memuat...</span></li></ul>
             </div>
 
-            <!-- ============ AKTIVITAS SECTION (GRID + POPUP) ============ -->
+            <!-- ============ AKTIVITAS SECTION ============ -->
             <div class="aktivitas-section">
                 <div class="aktivitas-header-toggle" id="toggle-aktivitas-admin" onclick="toggleAktivitasAdmin()">
                     <span class="judul">
@@ -1530,7 +1559,6 @@
                         </button>
                     </div>
 
-                    <!-- Container tersembunyi untuk list lama (dipakai JS render & popup) -->
                     <div style="display:none;">
                         <ul id="list-bawa" class="aktivitas-list"></ul>
                         <ul id="list-ibadah" class="aktivitas-list"></ul>
@@ -1555,6 +1583,24 @@
                         </div>
                     </div>
                 </div>
+            </div>
+
+            <!-- ============ HEADER MENU ADMIN ============ -->
+            <div class="admin-menu-header">
+                <span class="judul">
+                    <svg viewBox="0 0 24 24">
+                        <line x1="4" y1="21" x2="4" y2="14"/>
+                        <line x1="4" y1="10" x2="4" y2="3"/>
+                        <line x1="12" y1="21" x2="12" y2="12"/>
+                        <line x1="12" y1="8" x2="12" y2="3"/>
+                        <line x1="20" y1="21" x2="20" y2="16"/>
+                        <line x1="20" y1="12" x2="20" y2="3"/>
+                        <line x1="1" y1="14" x2="7" y2="14"/>
+                        <line x1="9" y1="8" x2="15" y2="8"/>
+                        <line x1="17" y1="16" x2="23" y2="16"/>
+                    </svg>
+                    Menu Admin
+                </span>
             </div>
 
             <!-- ============ MENU ADMIN (GRID 2 KOLOM KARTU) ============ -->
@@ -1620,7 +1666,6 @@
         </div>
     </div>
 
-    <!-- Popup Aktivitas & Menu Admin -->
     <div id="popup-aktivitas-admin" class="popup-overlay">
         <div class="popup-box">
             <div class="popup-header">
@@ -2425,34 +2470,47 @@
             const body = document.getElementById('popup-aktivitas-admin-body');
             if (!popup || !title || !body) return;
 
+            // Header dengan icon SVG (bukan emoji)
+            const iconSvg = {
+                bawa: `<svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>`,
+                ibadah: `<svg viewBox="0 0 24 24"><path d="M12 3v18"/><path d="M5 8l7-4 7 4"/><path d="M5 16l7-4 7 4"/></svg>`,
+                keluar: `<svg viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>`,
+                autokick: `<svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><line x1="9" y1="9" x2="15" y2="15"/><line x1="15" y1="9" x2="9" y2="15"/></svg>`,
+                rekap: `<svg viewBox="0 0 24 24"><path d="M3 3v18h18"/><path d="M18 17V9"/><path d="M13 17V5"/><path d="M8 17v-3"/></svg>`,
+                bulanan: `<svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>`
+            };
+            const namaTitle = {
+                bawa: 'Bawa Customer',
+                ibadah: 'Aktivitas Ibadah',
+                keluar: 'Keluar Antrian',
+                autokick: 'Autokick (Pelanggaran)',
+                rekap: 'Rekap Bawa Customer per Promotor',
+                bulanan: 'Total Customer Walk-In per Bulan'
+            };
+
             let kontenAsli = '';
             if (jenis === 'bawa') {
-                title.innerText = 'Bawa Customer';
                 const totalBox = document.getElementById('total-bawa-box');
                 const listBawa = document.getElementById('list-bawa');
                 kontenAsli = (totalBox ? totalBox.outerHTML : '') + (listBawa ? listBawa.outerHTML : '');
             } else if (jenis === 'ibadah') {
-                title.innerText = 'Aktivitas Ibadah';
                 const el = document.getElementById('list-ibadah');
                 kontenAsli = el ? el.outerHTML : '';
             } else if (jenis === 'keluar') {
-                title.innerText = 'Keluar Antrian';
                 const el = document.getElementById('list-keluar');
                 kontenAsli = el ? el.outerHTML : '';
             } else if (jenis === 'autokick') {
-                title.innerText = 'Autokick (Pelanggaran)';
                 const el = document.getElementById('list-autokick');
                 kontenAsli = el ? el.outerHTML : '';
             } else if (jenis === 'rekap') {
-                title.innerText = 'Rekap Bawa Customer per Promotor';
                 const wrappers = document.querySelectorAll('#content-aktivitas-admin .rekap-wrapper');
                 kontenAsli = wrappers[0] ? wrappers[0].outerHTML : '';
             } else if (jenis === 'bulanan') {
-                title.innerText = 'Total Customer Walk-In per Bulan';
                 const wrappers = document.querySelectorAll('#content-aktivitas-admin .rekap-wrapper');
                 kontenAsli = wrappers[1] ? wrappers[1].outerHTML : '';
             }
 
+            title.innerHTML = iconSvg[jenis] + namaTitle[jenis];
             body.innerHTML = kontenAsli;
             popup.classList.add('active');
             document.body.style.overflow = 'hidden';
@@ -2485,49 +2543,111 @@
             const body = document.getElementById('popup-aktivitas-admin-body');
             if (!popup || !title || !body) return;
 
+            // Icon SVG untuk header popup
+            const headerIcon = {
+                operasional: `<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>`,
+                urutan: `<svg viewBox="0 0 24 24"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>`,
+                darurat: `<svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>`,
+                gps: `<svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>`
+            };
+            const namaHeader = {
+                operasional: 'Operasional Sistem',
+                urutan: 'Manajemen Urutan',
+                darurat: 'Tindakan Darurat',
+                gps: 'Konfigurasi GPS Toko'
+            };
+
+            // Icon SVG untuk tombol-tombol di dalam popup
+            const ICONS = {
+                buka: `<svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg>`,
+                tutup: `<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="4.93" y1="4.93" x2="19.07" y2="19.07"/></svg>`,
+                branding: `<svg viewBox="0 0 24 24"><circle cx="13.5" cy="6.5" r=".5"/><circle cx="17.5" cy="10.5" r=".5"/><circle cx="8.5" cy="7.5" r=".5"/><circle cx="6.5" cy="12.5" r=".5"/><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.554C21.965 6.012 17.461 2 12 2z"/></svg>`,
+                tambahAntri: `<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg>`,
+                tambahSales: `<svg viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="4"/><line x1="20" y1="8" x2="20" y2="14"/><line x1="23" y1="11" x2="17" y2="11"/></svg>`,
+                pin: `<svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>`,
+                hapus: `<svg viewBox="0 0 24 24"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/></svg>`,
+                keluarkan: `<svg viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>`,
+                paksa: `<svg viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>`,
+                lock: `<svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>`,
+                reset: `<svg viewBox="0 0 24 24"><polyline points="23 4 23 10 17 10"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>`,
+                gpsOn: `<svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>`,
+                gpsOff: `<svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/><line x1="2" y1="2" x2="22" y2="22"/></svg>`
+            };
+
             let html = '';
 
             if (jenis === 'operasional') {
-                title.innerText = '⚙️ Operasional Sistem';
+                title.innerHTML = headerIcon.operasional + namaHeader.operasional;
                 html = `
-                    <div style="display:flex; flex-direction:column; gap:8px;">
-                        <button type="button" class="btn-black-custom" onclick="tutupPopupAktivitasAdmin(); bukaModalToggleSistem('BUKA')" style="width:100%; padding:14px; font-size:12px;">✅ Buka Sistem Antrian</button>
-                        <button type="button" onclick="tutupPopupAktivitasAdmin(); bukaModalToggleSistem('TUTUP')" style="width:100%; padding:14px; font-size:12px;">🔒 Tutup Sistem Antrian</button>
-                        <button type="button" class="btn-black-custom" onclick="tutupPopupAktivitasAdmin(); bukaModalBranding()" style="width:100%; padding:14px; font-size:12px;">🎨 Pengaturan Branding</button>
-                    </div>
+                    <button type="button" class="popup-btn" onclick="tutupPopupAktivitasAdmin(); bukaModalToggleSistem('BUKA')">
+                        <span class="popup-btn-icon t-buka">${ICONS.buka}</span>
+                        <span class="popup-btn-text">Buka Sistem Antrian<small>Aktifkan kembali antrian</small></span>
+                    </button>
+                    <button type="button" class="popup-btn" onclick="tutupPopupAktivitasAdmin(); bukaModalToggleSistem('TUTUP')">
+                        <span class="popup-btn-icon t-tutup">${ICONS.tutup}</span>
+                        <span class="popup-btn-text">Tutup Sistem Antrian<small>Hentikan sementara antrian</small></span>
+                    </button>
+                    <button type="button" class="popup-btn" onclick="tutupPopupAktivitasAdmin(); bukaModalBranding()">
+                        <span class="popup-btn-icon t-branding">${ICONS.branding}</span>
+                        <span class="popup-btn-text">Pengaturan Branding<small>Nama, logo & lokasi toko</small></span>
+                    </button>
                 `;
             } else if (jenis === 'urutan') {
-                title.innerText = '📋 Manajemen Urutan';
+                title.innerHTML = headerIcon.urutan + namaHeader.urutan;
                 html = `
-                    <div style="display:flex; flex-direction:column; gap:8px;">
-                        <button type="button" class="btn-black-custom" onclick="tutupPopupAktivitasAdmin(); bukaModalTambahAntriAdmin()" style="width:100%; padding:14px; font-size:12px;">➕ Masukkan Promotor ke Antrian</button>
-                        <button type="button" class="btn-black-custom" onclick="tutupPopupAktivitasAdmin(); bukaModalTambahMasterSales()" style="width:100%; padding:14px; font-size:12px;">➕ Tambah Nama Promotor Baru</button>
-                        <button type="button" class="btn-black-custom" onclick="tutupPopupAktivitasAdmin(); bukaModalKelolaPIN()" style="width:100%; padding:14px; font-size:12px;">🔑 Buat PIN Promotor</button>
-                        <button type="button" onclick="tutupPopupAktivitasAdmin(); bukaModalHapusMasterSales()" style="width:100%; padding:14px; font-size:12px;">🗑️ Hapus Nama Permanen</button>
-                        <button type="button" onclick="tutupPopupAktivitasAdmin(); bukaModalKeluarkanAntrian()" style="width:100%; padding:14px; font-size:12px;">🚪 Keluarkan dari Antrian</button>
-                    </div>
+                    <button type="button" class="popup-btn" onclick="tutupPopupAktivitasAdmin(); bukaModalTambahAntriAdmin()">
+                        <span class="popup-btn-icon t-tambah">${ICONS.tambahAntri}</span>
+                        <span class="popup-btn-text">Masukkan Promotor ke Antrian<small>Tambahkan ke urutan sekarang</small></span>
+                    </button>
+                    <button type="button" class="popup-btn" onclick="tutupPopupAktivitasAdmin(); bukaModalTambahMasterSales()">
+                        <span class="popup-btn-icon t-tambah">${ICONS.tambahSales}</span>
+                        <span class="popup-btn-text">Tambah Nama Promotor Baru<small>Daftarkan promotor baru</small></span>
+                    </button>
+                    <button type="button" class="popup-btn" onclick="tutupPopupAktivitasAdmin(); bukaModalKelolaPIN()">
+                        <span class="popup-btn-icon t-pin">${ICONS.pin}</span>
+                        <span class="popup-btn-text">Buat PIN Promotor<small>Atur kode akses login</small></span>
+                    </button>
+                    <button type="button" class="popup-btn" onclick="tutupPopupAktivitasAdmin(); bukaModalHapusMasterSales()">
+                        <span class="popup-btn-icon t-hapus">${ICONS.hapus}</span>
+                        <span class="popup-btn-text">Hapus Nama Permanen<small>Hapus dari daftar promotor</small></span>
+                    </button>
+                    <button type="button" class="popup-btn" onclick="tutupPopupAktivitasAdmin(); bukaModalKeluarkanAntrian()">
+                        <span class="popup-btn-icon t-keluar">${ICONS.keluarkan}</span>
+                        <span class="popup-btn-text">Keluarkan dari Antrian<small>Cabut dari urutan aktif</small></span>
+                    </button>
                 `;
             } else if (jenis === 'darurat') {
-                title.innerText = '⚠️ Tindakan Darurat';
+                title.innerHTML = headerIcon.darurat + namaHeader.darurat;
                 html = `
-                    <div style="display:flex; flex-direction:column; gap:8px;">
-                        <button type="button" class="btn-black-custom" onclick="tutupPopupAktivitasAdmin(); bukaModalPaksaBawaCustomer()" style="width:100%; padding:14px; font-size:12px;">⚡ Paksa Bawa Customer</button>
-                        <button type="button" onclick="tutupPopupAktivitasAdmin(); bukaModalLockPromotorAdmin()" style="width:100%; padding:14px; font-size:12px;">🔒 Kontrol Hukuman / Lock Akun</button>
-                        <button type="button" onclick="tutupPopupAktivitasAdmin(); bukaModalResetTotal()" style="width:100%; padding:14px; font-size:12px;">⚠️ Reset Seluruh Antrian Aktif</button>
-                    </div>
+                    <button type="button" class="popup-btn" onclick="tutupPopupAktivitasAdmin(); bukaModalPaksaBawaCustomer()">
+                        <span class="popup-btn-icon t-paksa">${ICONS.paksa}</span>
+                        <span class="popup-btn-text">Paksa Bawa Customer<small>Set promotor langsung melayani</small></span>
+                    </button>
+                    <button type="button" class="popup-btn" onclick="tutupPopupAktivitasAdmin(); bukaModalLockPromotorAdmin()">
+                        <span class="popup-btn-icon t-lock">${ICONS.lock}</span>
+                        <span class="popup-btn-text">Kontrol Hukuman / Lock Akun<small>Kunci/buka akun promotor</small></span>
+                    </button>
+                    <button type="button" class="popup-btn" onclick="tutupPopupAktivitasAdmin(); bukaModalResetTotal()">
+                        <span class="popup-btn-icon t-reset">${ICONS.reset}</span>
+                        <span class="popup-btn-text">Reset Seluruh Antrian Aktif<small>Hapus semua antrian hari ini</small></span>
+                    </button>
                 `;
             } else if (jenis === 'gps') {
-                title.innerText = '📍 Konfigurasi GPS Toko';
+                title.innerHTML = headerIcon.gps + namaHeader.gps;
                 const aktif = koordinatTokoAdmin.lat && koordinatTokoAdmin.lat !== "";
                 const statusHtml = aktif
-                    ? `<div style="font-size:11px; padding:10px; background:rgba(5,150,105,0.15); color:#059669; border-radius:8px; text-align:center; font-weight:800; margin-bottom:10px;">✅ GPS AKTIF — Radius ${koordinatTokoAdmin.radius}m</div>`
-                    : `<div style="font-size:11px; padding:10px; background:rgba(220,38,38,0.15); color:#dc2626; border-radius:8px; text-align:center; font-weight:800; margin-bottom:10px;">❌ GPS NONAKTIF</div>`;
+                    ? `<div class="gps-status-box aktif"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg><span>GPS Aktif — Radius ${koordinatTokoAdmin.radius}m</span></div>`
+                    : `<div class="gps-status-box nonaktif"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/><line x1="2" y1="2" x2="22" y2="22"/></svg><span>GPS Nonaktif — Check-in dari mana saja</span></div>`;
                 html = `
                     ${statusHtml}
-                    <div style="display:flex; flex-direction:column; gap:8px;">
-                        <button type="button" class="btn-black-custom" onclick="tutupPopupAktivitasAdmin(); toggleGPSAdmin(true)" style="width:100%; padding:14px; font-size:12px;">📍 Aktifkan GPS</button>
-                        <button type="button" onclick="tutupPopupAktivitasAdmin(); toggleGPSAdmin(false)" style="width:100%; padding:14px; font-size:12px;">❌ Matikan GPS</button>
-                    </div>
+                    <button type="button" class="popup-btn" onclick="tutupPopupAktivitasAdmin(); toggleGPSAdmin(true)">
+                        <span class="popup-btn-icon t-gps-on">${ICONS.gpsOn}</span>
+                        <span class="popup-btn-text">Aktifkan GPS Toko<small>Ambil koordinat lokasi HP sekarang</small></span>
+                    </button>
+                    <button type="button" class="popup-btn" onclick="tutupPopupAktivitasAdmin(); toggleGPSAdmin(false)">
+                        <span class="popup-btn-icon t-gps-off">${ICONS.gpsOff}</span>
+                        <span class="popup-btn-text">Matikan GPS Toko<small>Promotor bisa check-in dari mana saja</small></span>
+                    </button>
                 `;
             }
 
@@ -2651,9 +2771,9 @@
                     latEl.placeholder = "-8.0210821";
                     lngEl.placeholder = "112.6189705";
                     let pesan = "Gagal mendeteksi lokasi.";
-                    if (err.code === 1) pesan += "\n\n❌ Izin lokasi DITOLAK.\n\nCara fix:\n1. Klik ikon gembok di address bar\n2. Cari 'Location' / 'Lokasi'\n3. Set jadi 'Allow' / 'Izinkan'\n4. Refresh halaman";
+                    if (err.code === 1) pesan += "\n\n❌ Izin lokasi DITOLAK.";
                     else if (err.code === 2) pesan += "\n\n❌ Lokasi tidak tersedia.";
-                    else if (err.code === 3) pesan += "\n\n❌ Waktu habis. Coba lagi.";
+                    else if (err.code === 3) pesan += "\n\n❌ Waktu habis.";
                     tampilkanModal("Gagal Deteksi GPS", pesan);
                 },
                 { enableHighAccuracy: true, timeout: 15000, maximumAge: 0 }
@@ -3402,7 +3522,6 @@
 
         function tutupModal() { document.getElementById('custom-modal').classList.remove('active'); }
 
-        // Export
         window.prosesLoginAdmin = prosesLoginAdmin;
         window.logoutAdmin = logoutAdmin;
         window.bukaModalToggleSistem = bukaModalToggleSistem;
