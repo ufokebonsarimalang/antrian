@@ -62,7 +62,7 @@
 
     <style>
         /* ============================================ */
-        /* ===== BAGIAN 1: TEMA SAMA DENGAN PROMOTOR === */
+        /* ===== TEMA DASAR ============================ */
         /* ============================================ */
         :root {
             --bg: #f8fafc;
@@ -86,76 +86,75 @@
         }
         *, body, button, select, input { font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif !important; box-sizing: border-box; }
         
-      body { 
-    background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
-    color: var(--text-main);
-    margin: 0;
-    padding: 16px;
-    display: flex;
-    justify-content: center;
-    min-height: 100vh;
-    transition: background 0.3s ease;
-}
+        body { 
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            color: var(--text-main);
+            margin: 0;
+            padding: 16px;
+            display: flex;
+            justify-content: center;
+            min-height: 100vh;
+            transition: background 0.3s ease;
+        }
         body.dark-mode {
             background: linear-gradient(135deg, #050102 0%, #1a0205 100%) !important;
         }
         
-      .admin-container {
-    width: 100%;
-    max-width: 500px;
-    background: var(--card-bg);
-    border-radius: 20px;
-    padding: 24px;
-    border: 1px solid var(--border);
-    box-shadow: 0 20px 25px -5px rgba(15, 23, 42, 0.05);
-    transition: all 0.3s ease;
-}
+        .admin-container {
+            width: 100%;
+            max-width: 500px;
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: 24px;
+            border: 1px solid var(--border);
+            box-shadow: 0 20px 25px -5px rgba(15, 23, 42, 0.05);
+            transition: all 0.3s ease;
+        }
         body.dark-mode .admin-container {
             background: #090204 !important;
             border: 2px solid #ff1f3d !important;
             box-shadow: 0 0 40px rgba(255, 31, 61, 0.5), inset 0 0 15px rgba(255, 31, 61, 0.2) !important;
         }
         
-       .top-controls {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 10px;
-    margin-bottom: 20px;
-}
+        .top-controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
 
-.logout-btn {
-    background: #dc2626 !important;
-    color: #ffffff !important;
-    border: 1px solid #dc2626 !important;
-    font-weight: 700;
-    border-radius: 10px;
-    padding: 8px 16px;
-    font-size: 12px;
-    cursor: pointer;
-    text-transform: uppercase;
-    letter-spacing: 0.3px;
-    width: auto;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-    transition: all 0.2s ease;
-}
-.logout-btn:hover {
-    background: #b91c1c !important;
-    transform: translateY(-1px);
-}
-body.dark-mode .logout-btn {
-    background: linear-gradient(135deg, #ff1f3d 0%, #99001f 100%) !important;
-    color: #ffffff !important;
-    border: 2px solid #ff1f3d !important;
-    box-shadow: 0 0 25px rgba(255, 31, 61, 0.7), inset 0 0 8px rgba(255, 255, 255, 0.3) !important;
-    text-shadow: 0 0 6px rgba(255, 255, 255, 0.5) !important;
-}
-body.dark-mode .logout-btn:hover {
-    background: linear-gradient(135deg, #ff1f3d 0%, #ff1f3d 100%) !important;
-    box-shadow: 0 0 35px rgba(255, 31, 61, 1) !important;
-}
+        .logout-btn {
+            background: #dc2626 !important;
+            color: #ffffff !important;
+            border: 1px solid #dc2626 !important;
+            font-weight: 700;
+            border-radius: 10px;
+            padding: 8px 16px;
+            font-size: 12px;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+            width: auto;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            transition: all 0.2s ease;
+        }
+        .logout-btn:hover {
+            background: #b91c1c !important;
+            transform: translateY(-1px);
+        }
+        body.dark-mode .logout-btn {
+            background: linear-gradient(135deg, #ff1f3d 0%, #99001f 100%) !important;
+            color: #ffffff !important;
+            border: 2px solid #ff1f3d !important;
+            box-shadow: 0 0 25px rgba(255, 31, 61, 0.7), inset 0 0 8px rgba(255, 255, 255, 0.3) !important;
+            text-shadow: 0 0 6px rgba(255, 255, 255, 0.5) !important;
+        }
+        body.dark-mode .logout-btn:hover {
+            background: linear-gradient(135deg, #ff1f3d 0%, #ff1f3d 100%) !important;
+            box-shadow: 0 0 35px rgba(255, 31, 61, 1) !important;
+        }
         
-        /* Dark mode button */
         .dark-mode-btn {
             background: #0f172a;
             color: #ffffff;
@@ -181,7 +180,6 @@ body.dark-mode .logout-btn:hover {
             text-shadow: 0 0 6px rgba(255, 255, 255, 0.5) !important;
         }
         
-        /* Header admin */
         .header-admin {
             background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
             border-radius: 14px;
@@ -222,7 +220,6 @@ body.dark-mode .logout-btn:hover {
             text-shadow: 0 0 10px rgba(255, 31, 61, 0.8) !important;
         }
         
-        /* ===== STATUS BADGE (sama promotor) ===== */
         .status-badge {
             display: inline-flex;
             align-items: center;
@@ -294,7 +291,6 @@ body.dark-mode .logout-btn:hover {
             100% { box-shadow: 0 0 0 0 rgba(255, 255, 255, 0), 0 0 15px #ffffff; }
         }
         
-        /* ===== TIMER CARDS ===== */
         .timer-box-wrapper {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -358,7 +354,6 @@ body.dark-mode .logout-btn:hover {
             text-shadow: 0 0 20px rgba(255, 31, 61, 1) !important;
         }
         
-        /* ===== INPUT GROUP ===== */
         .input-group {
             margin-bottom: 18px;
             text-align: left;
@@ -395,7 +390,6 @@ body.dark-mode .logout-btn:hover {
             box-shadow: 0 0 25px rgba(255, 31, 61, 0.5), inset 0 0 10px rgba(255, 31, 61, 0.3) !important;
         }
         
-        /* ===== BUTTONS ===== */
         button {
             width: 100%;
             padding: 12px 16px;
@@ -496,7 +490,6 @@ body.dark-mode .logout-btn:hover {
         }
         @keyframes spin { to { transform: rotate(360deg); } }
         
-        /* ===== SECTION TITLE ===== */
         .section-title {
             font-size: 11px;
             font-weight: 800;
@@ -525,7 +518,6 @@ body.dark-mode .logout-btn:hover {
             text-align: left;
         }
         
-        /* ===== LIST ANTRIAN ===== */
         .list-antrian {
             list-style: none;
             padding: 0;
@@ -562,7 +554,6 @@ body.dark-mode .logout-btn:hover {
             color: #ffffff !important;
         }
         
-        /* ===== BADGES ===== */
         .badge-status-item {
             font-size: 10px;
             font-weight: 800;
@@ -605,7 +596,6 @@ body.dark-mode .logout-btn:hover {
             box-shadow: 0 0 20px rgba(255, 31, 61, 0.9) !important;
         }
         
-        /* ===== MODAL ===== */
         .modal-overlay {
             position: fixed;
             top: 0; left: 0;
@@ -699,21 +689,20 @@ body.dark-mode .logout-btn:hover {
             color: #ffffff !important;
         }
         
-       /* ===== RESPONSIVE (sama dengan promotor) ===== */
-@media (min-width: 768px) {
-    .admin-container { max-width: 720px; }
-}
-@media (min-width: 1024px) {
-    .admin-container { max-width: 900px; }
-}
-@media (max-width: 480px) {
-    body { padding: 12px; }
-    .admin-container { padding: 20px; border-radius: 20px; }
-    .header-admin h2 { font-size: 18px; }
-    .admin-nama-promotor { font-size: 17px; }
-}
+        @media (min-width: 768px) {
+            .admin-container { max-width: 720px; }
+        }
+        @media (min-width: 1024px) {
+            .admin-container { max-width: 900px; }
+        }
+        @media (max-width: 480px) {
+            body { padding: 12px; }
+            .admin-container { padding: 20px; border-radius: 20px; }
+            .header-admin h2 { font-size: 18px; }
+            .admin-nama-promotor { font-size: 17px; }
+        }
         
-        /* ===== AKTIVITAS (sama promotor) ===== */
+        /* ===== AKTIVITAS SECTION (SAMA PROMOTOR) ===== */
         .aktivitas-section { margin-top: 20px; text-align: left; }
         .aktivitas-title {
             font-size: 12px;
@@ -916,7 +905,6 @@ body.dark-mode .logout-btn:hover {
             color: #ff8585 !important;
         }
         
-        /* Fix list bawa, ibadah, keluar, autokick */
         #list-bawa, #list-ibadah, #list-keluar, #list-autokick {
             list-style: none;
             padding: 0;
@@ -982,7 +970,6 @@ body.dark-mode .logout-btn:hover {
             text-shadow: 0 0 6px rgba(255, 102, 122, 0.6) !important;
         }
         
-        /* ===== REKAP TABEL ===== */
         .rekap-tabel {
             width: 100%;
             border-collapse: collapse;
@@ -1067,17 +1054,6 @@ body.dark-mode .logout-btn:hover {
             color: #ff99a8 !important;
         }
         
-        /* ===== REKAP BOX WRAPPER ===== */
-        body.dark-mode .aktivitas-content > div[style*="background: var(--card-bg)"] {
-            background: #2b0007 !important;
-            border: 2px solid #ff1f3d !important;
-            box-shadow: 0 0 20px rgba(255, 31, 61, 0.4) !important;
-        }
-        body.dark-mode .aktivitas-content > div[style*="background: var(--card-bg)"] div[style*="color: var(--text-muted)"] {
-            color: #ff99a8 !important;
-        }
-        
-        /* ===== GPS LABEL ===== */
         body.dark-mode #label-status-gps {
             color: #ff99a8 !important;
             text-shadow: 0 0 8px rgba(255, 31, 61, 0.6) !important;
@@ -1085,24 +1061,260 @@ body.dark-mode .logout-btn:hover {
         body.dark-mode #label-status-gps b {
             text-shadow: 0 0 10px currentColor !important;
         }
+
+        /* ============================================================ */
+        /* ===== AKTIVITAS MENU GRID (BARU — SAMA PROMOTOR) ========== */
+        /* ============================================================ */
+        .aktivitas-menu-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .aktivitas-menu-btn {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            padding: 16px 10px;
+            background: var(--card-soft);
+            border: 2px solid var(--accent);
+            border-radius: 12px;
+            cursor: pointer;
+            color: var(--text-main);
+            font-weight: 800;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+            position: relative;
+            transition: transform 0.15s ease, box-shadow 0.15s ease;
+            box-shadow: 0 2px 6px rgba(37, 99, 235, 0.15);
+            font-family: 'Inter', sans-serif;
+            width: 100%;
+            min-height: 90px;
+        }
+
+        .aktivitas-menu-btn:active { transform: scale(0.97); }
+        .aktivitas-menu-btn:hover { box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3); }
+
+        .aktivitas-menu-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            background: rgba(37, 99, 235, 0.15);
+            border: 1px solid rgba(37, 99, 235, 0.4);
+        }
+
+        .aktivitas-menu-icon svg {
+            width: 20px;
+            height: 20px;
+            stroke: var(--accent);
+            stroke-width: 2.2;
+            fill: none;
+        }
+
+        .aktivitas-menu-icon.t-ibadah { background: rgba(124, 58, 237, 0.15); border-color: rgba(124, 58, 237, 0.4); }
+        .aktivitas-menu-icon.t-ibadah svg { stroke: #7c3aed; }
+        .aktivitas-menu-icon.t-keluar { background: rgba(217, 119, 6, 0.15); border-color: rgba(217, 119, 6, 0.4); }
+        .aktivitas-menu-icon.t-keluar svg { stroke: #d97706; }
+        .aktivitas-menu-icon.t-autokick { background: rgba(220, 38, 38, 0.15); border-color: rgba(220, 38, 38, 0.4); }
+        .aktivitas-menu-icon.t-autokick svg { stroke: #dc2626; }
+        .aktivitas-menu-icon.t-rekap { background: rgba(5, 150, 105, 0.15); border-color: rgba(5, 150, 105, 0.4); }
+        .aktivitas-menu-icon.t-rekap svg { stroke: #059669; }
+
+        .aktivitas-menu-label {
+            font-size: 10.5px;
+            font-weight: 800;
+            text-align: center;
+            color: var(--text-main);
+            line-height: 1.2;
+        }
+
+        .aktivitas-menu-count {
+            position: absolute;
+            top: 6px;
+            right: 6px;
+            font-size: 10px;
+            font-weight: 800;
+            background: var(--accent);
+            color: #ffffff;
+            padding: 2px 7px;
+            border-radius: 10px;
+            min-width: 20px;
+            text-align: center;
+            box-shadow: 0 2px 6px rgba(37, 99, 235, 0.4);
+        }
+
+        /* Dark mode grid menu */
+        body.dark-mode .aktivitas-menu-btn {
+            background: #2b0007 !important;
+            border: 2px solid #ff1f3d !important;
+            color: #ffffff !important;
+            box-shadow: 0 0 25px rgba(255, 31, 61, 0.5) !important;
+        }
+        body.dark-mode .aktivitas-menu-btn:hover {
+            box-shadow: 0 0 35px rgba(255, 31, 61, 0.9) !important;
+        }
+        body.dark-mode .aktivitas-menu-label { color: #ffffff !important; }
+        body.dark-mode .aktivitas-menu-icon {
+            background: rgba(255, 31, 61, 0.2) !important;
+            border: 1px solid rgba(255, 31, 61, 0.5) !important;
+        }
+        body.dark-mode .aktivitas-menu-icon svg { stroke: #ff667a !important; }
+        body.dark-mode .aktivitas-menu-count {
+            background: #ff1f3d !important;
+            color: #ffffff !important;
+        }
+
+        /* ============================================================ */
+        /* ===== POPUP AKTIVITAS ====================================== */
+        /* ============================================================ */
+        .popup-overlay {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            width: 100vw; height: 100vh;
+            background: rgba(15, 23, 42, 0.88);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 99998;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.2s;
+            padding: 16px;
+            box-sizing: border-box;
+        }
+
+        .popup-overlay.active { opacity: 1; visibility: visible; }
+
+        .popup-box {
+            background: var(--card-bg);
+            border: 2px solid var(--border);
+            border-radius: 16px;
+            width: 100%;
+            max-width: 480px;
+            max-height: 85vh;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+            overflow: hidden;
+        }
+
+        .popup-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 14px 18px;
+            background: linear-gradient(135deg, #0f172a, #1e293b);
+            border-bottom: 2px solid var(--border);
+            flex-shrink: 0;
+        }
+
+        .popup-title {
+            font-size: 14px;
+            font-weight: 800;
+            text-transform: uppercase;
+            color: #ffffff;
+            letter-spacing: 0.5px;
+        }
+
+        .popup-close {
+            background: rgba(255, 255, 255, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: #ffffff;
+            width: 32px; height: 32px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 800;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0;
+            line-height: 1;
+        }
+
+        .popup-close:hover { background: rgba(255, 255, 255, 0.3); }
+
+        .popup-body {
+            padding: 14px 16px;
+            overflow-y: auto;
+            flex: 1;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .popup-body::-webkit-scrollbar { width: 6px; }
+        .popup-body::-webkit-scrollbar-track { background: transparent; }
+        .popup-body::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 3px; }
+
+        /* Rekap wrapper */
+        .rekap-wrapper {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 8px;
+            margin-bottom: 10px;
+        }
+        .rekap-label {
+            font-size: 10px;
+            font-weight: 800;
+            color: var(--text-muted);
+            text-align: center;
+            margin-bottom: 6px;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+        }
+
+        /* Dark mode popup */
+        body.dark-mode .popup-box {
+            background: #090204 !important;
+            border: 2px solid #ff1f3d !important;
+            box-shadow: 0 0 35px rgba(255, 31, 61, 0.8) !important;
+        }
+        body.dark-mode .popup-header {
+            background: linear-gradient(135deg, #7f0015, #50000e) !important;
+            border-bottom: 2px solid #ff1f3d !important;
+        }
+        body.dark-mode .popup-close {
+            background: #99001f !important;
+            border: 1px solid #ff1f3d !important;
+        }
+        body.dark-mode .rekap-wrapper {
+            background: #2b0007 !important;
+            border: 2px solid #ff1f3d !important;
+        }
+        body.dark-mode .rekap-label {
+            color: #ff99a8 !important;
+        }
+        body.dark-mode .popup-body #total-bawa-box {
+            background: #50000e !important;
+            color: #ffb3bc !important;
+            border: 1px solid #ff1f3d !important;
+        }
     </style>
 </head>
 <body>
 
     <div class="admin-container">
-       <div class="top-controls">
-    <button type="button" class="dark-mode-btn" id="btn-toggle-dark" onclick="toggleDarkMode()">🌙 Mode Gelap</button>
-    <button type="button" class="logout-btn" id="btn-logout-top" onclick="logoutAdmin()" style="display: none;">Logout</button>
-</div>
+        <div class="top-controls">
+            <button type="button" class="dark-mode-btn" id="btn-toggle-dark" onclick="toggleDarkMode()">🌙 Mode Gelap</button>
+            <button type="button" class="logout-btn" id="btn-logout-top" onclick="logoutAdmin()" style="display: none;">Logout</button>
+        </div>
 
-       <div class="header-admin">
-    <h2 id="header-nama-sistem">Dashboard Admin</h2>
-    <span class="header-sub-text" id="header-nama-toko">UFO Kebonsari</span>
-    <div id="badge-status-sistem" class="status-badge status-open">
-        <span class="dot"></span>
-        <span id="badge-status-text">STATUS: OPEN</span>
-    </div>
-</div>
+        <div class="header-admin">
+            <h2 id="header-nama-sistem">Dashboard Admin</h2>
+            <span class="header-sub-text" id="header-nama-toko">UFO Kebonsari</span>
+            <div id="badge-status-sistem" class="status-badge status-open">
+                <span class="dot"></span>
+                <span id="badge-status-text">STATUS: OPEN</span>
+            </div>
+        </div>
 
         <div id="login-admin-box">
             <div class="input-group">
@@ -1131,7 +1343,7 @@ body.dark-mode .logout-btn:hover {
                 <ul id="list-AV" class="list-antrian"><li><span>Memuat...</span></li></ul>
             </div>
 
-            <!-- ============ AKTIVITAS SECTION ============ -->
+            <!-- ============ AKTIVITAS SECTION (GRID + POPUP) ============ -->
             <div class="aktivitas-section">
                 <div class="aktivitas-header-toggle" id="toggle-aktivitas-admin" onclick="toggleAktivitasAdmin()">
                     <span class="judul">
@@ -1147,104 +1359,78 @@ body.dark-mode .logout-btn:hover {
                 </div>
 
                 <div class="aktivitas-content" id="content-aktivitas-admin">
-                    <div class="aktivitas-title">
-                        <span class="judul-kategori">
-                            <span class="aktivitas-icon">
+                    <div class="aktivitas-menu-grid">
+                        <button type="button" class="aktivitas-menu-btn" onclick="bukaPopupAktivitasAdmin('bawa')">
+                            <span class="aktivitas-menu-icon t-bawa-customer">
                                 <svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
                             </span>
-                            Bawa Customer
-                        </span>
-                        <span class="count" id="count-bawa">0</span>
-                    </div>
-                    <ul id="list-bawa" class="aktivitas-list"></ul>
-                    <div id="total-bawa-box" style="font-size: 11px; font-weight: 800; text-align: center; padding: 6px 8px; margin-bottom: 6px; border-radius: 8px; background: rgba(100, 116, 139, 0.1); color: var(--text-muted); display: none;"></div>
+                            <span class="aktivitas-menu-label">Bawa Customer</span>
+                            <span class="aktivitas-menu-count" id="count-bawa">0</span>
+                        </button>
 
-                    <div class="aktivitas-title">
-                        <span class="judul-kategori">
-                            <span class="aktivitas-icon">
+                        <button type="button" class="aktivitas-menu-btn" onclick="bukaPopupAktivitasAdmin('ibadah')">
+                            <span class="aktivitas-menu-icon t-ibadah">
                                 <svg viewBox="0 0 24 24"><path d="M12 3v18"/><path d="M5 8l7-4 7 4"/><path d="M5 16l7-4 7 4"/></svg>
                             </span>
-                            Ibadah
-                        </span>
-                        <span class="count" id="count-ibadah">0</span>
-                    </div>
-                    <ul id="list-ibadah" class="aktivitas-list"></ul>
+                            <span class="aktivitas-menu-label">Ibadah</span>
+                            <span class="aktivitas-menu-count" id="count-ibadah">0</span>
+                        </button>
 
-                    <div class="aktivitas-title">
-                        <span class="judul-kategori">
-                            <span class="aktivitas-icon">
+                        <button type="button" class="aktivitas-menu-btn" onclick="bukaPopupAktivitasAdmin('keluar')">
+                            <span class="aktivitas-menu-icon t-keluar">
                                 <svg viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
                             </span>
-                            Keluar Antrian
-                        </span>
-                        <span class="count" id="count-keluar">0</span>
-                    </div>
-                    <ul id="list-keluar" class="aktivitas-list"></ul>
+                            <span class="aktivitas-menu-label">Keluar Antrian</span>
+                            <span class="aktivitas-menu-count" id="count-keluar">0</span>
+                        </button>
 
-                    <div class="aktivitas-title">
-                        <span class="judul-kategori">
-                            <span class="aktivitas-icon">
-                                <svg viewBox="0 0 24 24"><path d="M3 3v18h18"/><path d="M18 17V9"/><path d="M13 17V5"/><path d="M8 17v-3"/></svg>
-                            </span>
-                            List Bawa Customer per Promotor
-                        </span>
-                    </div>
-                    <div style="background: var(--card-bg); border: 1px solid var(--border); border-radius: 10px; padding: 8px; margin-bottom: 10px;">
-                        <div style="font-size: 10px; font-weight: 800; color: var(--text-muted); text-align: center; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.3px;">
-                            Periode: <span id="rekap-periode-label">-</span>
-                        </div>
-                        <table class="rekap-tabel">
-                            <thead>
-                                <tr>
-                                    <th class="kolom-nama">Nama Promotor</th>
-                                    <th>Deal</th>
-                                    <th>Lihat</th>
-                                    <th>No Sale</th>
-                                    <th>Hari</th>
-                                </tr>
-                            </thead>
-                            <tbody id="rekap-tbody">
-                                <tr><td colspan="5" class="aktivitas-empty">Memuat data...</td></tr>
-                            </tbody>
-                        </table>
-                    </div>
-
-                    <div class="aktivitas-title">
-                        <span class="judul-kategori">
-                            <span class="aktivitas-icon">
-                                <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-                            </span>
-                            Total Customer Walk-In per Bulan
-                        </span>
-                    </div>
-                    <div style="background: var(--card-bg); border: 1px solid var(--border); border-radius: 10px; padding: 8px; margin-bottom: 10px;">
-                        <div style="font-size: 10px; font-weight: 800; color: var(--text-muted); text-align: center; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.3px;">
-                            Tahun: <span id="total-bulanan-tahun-label">-</span>
-                        </div>
-                        <table class="rekap-tabel">
-                            <thead>
-                                <tr>
-                                    <th class="kolom-nama">Bulan</th>
-                                    <th>Deal</th>
-                                    <th>Lihat</th>
-                                </tr>
-                            </thead>
-                            <tbody id="total-bulanan-tbody">
-                                <tr><td colspan="3" class="aktivitas-empty">Memuat data...</td></tr>
-                            </tbody>
-                        </table>
-                    </div>
-
-                    <div class="aktivitas-title">
-                        <span class="judul-kategori">
-                            <span class="aktivitas-icon">
+                        <button type="button" class="aktivitas-menu-btn" onclick="bukaPopupAktivitasAdmin('autokick')">
+                            <span class="aktivitas-menu-icon t-autokick">
                                 <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><line x1="9" y1="9" x2="15" y2="15"/><line x1="15" y1="9" x2="9" y2="15"/></svg>
                             </span>
-                            Autokick (Pelanggaran)
-                        </span>
-                        <span class="count" id="count-autokick">0</span>
+                            <span class="aktivitas-menu-label">Autokick</span>
+                            <span class="aktivitas-menu-count" id="count-autokick">0</span>
+                        </button>
+
+                        <button type="button" class="aktivitas-menu-btn" onclick="bukaPopupAktivitasAdmin('rekap')">
+                            <span class="aktivitas-menu-icon t-rekap">
+                                <svg viewBox="0 0 24 24"><path d="M3 3v18h18"/><path d="M18 17V9"/><path d="M13 17V5"/><path d="M8 17v-3"/></svg>
+                            </span>
+                            <span class="aktivitas-menu-label">Rekap Promotor</span>
+                        </button>
+
+                        <button type="button" class="aktivitas-menu-btn" onclick="bukaPopupAktivitasAdmin('bulanan')">
+                            <span class="aktivitas-menu-icon t-rekap">
+                                <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                            </span>
+                            <span class="aktivitas-menu-label">Total Bulanan</span>
+                        </button>
                     </div>
-                    <ul id="list-autokick" class="aktivitas-list"></ul>
+
+                    <!-- Container tersembunyi untuk list lama (dipakai JS render & popup) -->
+                    <div style="display:none;">
+                        <ul id="list-bawa" class="aktivitas-list"></ul>
+                        <ul id="list-ibadah" class="aktivitas-list"></ul>
+                        <ul id="list-keluar" class="aktivitas-list"></ul>
+                        <ul id="list-autokick" class="aktivitas-list"></ul>
+                        <div id="total-bawa-box"></div>
+                        <div class="rekap-wrapper">
+                            <div class="rekap-label">Periode: <span id="rekap-periode-label">-</span></div>
+                            <table class="rekap-tabel">
+                                <thead><tr>
+                                    <th class="kolom-nama">Nama Promotor</th><th>Deal</th><th>Lihat</th><th>No Sale</th><th>Hari</th>
+                                </tr></thead>
+                                <tbody id="rekap-tbody"><tr><td colspan="5" class="aktivitas-empty">Memuat...</td></tr></tbody>
+                            </table>
+                        </div>
+                        <div class="rekap-wrapper">
+                            <div class="rekap-label">Tahun: <span id="total-bulanan-tahun-label">-</span></div>
+                            <table class="rekap-tabel">
+                                <thead><tr><th class="kolom-nama">Bulan</th><th>Deal</th><th>Lihat</th></tr></thead>
+                                <tbody id="total-bulanan-tbody"><tr><td colspan="3" class="aktivitas-empty">Memuat...</td></tr></tbody>
+                            </table>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -1258,11 +1444,11 @@ body.dark-mode .logout-btn:hover {
             </div>
 
             <div class="section-title">1. Manajemen Operasional Sistem</div>
-<div class="admin-grid">
-    <button type="button" id="btn-buka-sistem" class="btn-black-custom" onclick="bukaModalToggleSistem('BUKA')">Buka Sistem Antrian</button>
-    <button type="button" id="btn-tutup-sistem" onclick="bukaModalToggleSistem('TUTUP')">Tutup Sistem Antrian</button>
-    <button type="button" class="btn-black-custom" onclick="bukaModalBranding()">🎨 Pengaturan Branding</button>
-</div>
+            <div class="admin-grid">
+                <button type="button" id="btn-buka-sistem" class="btn-black-custom" onclick="bukaModalToggleSistem('BUKA')">Buka Sistem Antrian</button>
+                <button type="button" id="btn-tutup-sistem" onclick="bukaModalToggleSistem('TUTUP')">Tutup Sistem Antrian</button>
+                <button type="button" class="btn-black-custom" onclick="bukaModalBranding()">🎨 Pengaturan Branding</button>
+            </div>
 
             <div class="section-title">2. Manajemen Urutan Antrian</div>
             <div class="admin-grid">
@@ -1280,7 +1466,6 @@ body.dark-mode .logout-btn:hover {
                 <button type="button" onclick="bukaModalResetTotal()">Reset Seluruh Antrian Aktif</button>
             </div>
 
-            
         </div>
     </div>
 
@@ -1293,7 +1478,18 @@ body.dark-mode .logout-btn:hover {
             </div>
         </div>
     </div>
-    
+
+    <!-- Popup Aktivitas Admin -->
+    <div id="popup-aktivitas-admin" class="popup-overlay">
+        <div class="popup-box">
+            <div class="popup-header">
+                <div class="popup-title" id="popup-aktivitas-admin-title">Aktivitas</div>
+                <button type="button" class="popup-close" onclick="tutupPopupAktivitasAdmin()">✕</button>
+            </div>
+            <div class="popup-body" id="popup-aktivitas-admin-body"></div>
+        </div>
+    </div>
+
     <script>
         window.addEventListener('unhandledrejection', e => { e.preventDefault(); console.warn("Handled:", e.reason); });
 
@@ -1309,7 +1505,7 @@ body.dark-mode .logout-btn:hover {
         let riwayatBulananGlobal = {};
         let statusSistemGlobal = "BUKA";
         let koordinatTokoAdmin = { lat: "", lng: "", radius: 50 };
-window.settingGlobal = {};
+        window.settingGlobal = {};
         let savedPinAdmin = "";
         let unsubAntrian = null, unsubSetting = null, unsubStatistik = null, unsubMaster = null, unsubLock = null, unsubCheckin = null, unsubRiwayat = null, unsubPinPromotor = null;
         let pinPromotorGlobal = {};
@@ -1333,36 +1529,30 @@ window.settingGlobal = {};
             const d = new Date(ts);
             return `${String(d.getHours()).padStart(2,'0')}.${String(d.getMinutes()).padStart(2,'0')}`;
         }
-function applyBrandingAdmin(s) {
-    if (!s) return;
-    
-    const namaToko = s.namaToko || "Nama Toko";
-    const namaSistem = s.namaSistem || "Dashboard Admin";
-    
-    // Update title browser
-    const titleEl = document.querySelector('title');
-    if (titleEl) titleEl.innerText = `${namaSistem} - ${namaToko}`;
-    
-    // Update header
-    const headerSistemEl = document.getElementById('header-nama-sistem');
-    if (headerSistemEl) headerSistemEl.innerText = namaSistem;
-    
-    const headerTokoEl = document.getElementById('header-nama-toko');
-    if (headerTokoEl) headerTokoEl.innerText = namaToko;
-}
+        function applyBrandingAdmin(s) {
+            if (!s) return;
+            const namaToko = s.namaToko || "Nama Toko";
+            const namaSistem = s.namaSistem || "Dashboard Admin";
+            const titleEl = document.querySelector('title');
+            if (titleEl) titleEl.innerText = `${namaSistem} - ${namaToko}`;
+            const headerSistemEl = document.getElementById('header-nama-sistem');
+            if (headerSistemEl) headerSistemEl.innerText = namaSistem;
+            const headerTokoEl = document.getElementById('header-nama-toko');
+            if (headerTokoEl) headerTokoEl.innerText = namaToko;
+        }
         window.addEventListener('firebase-ready', () => {
             initDarkMode();
-          savedPinAdmin = localStorage.getItem('ufo_admin_pin') || "";
-if (savedPinAdmin) {
-    document.getElementById('login-admin-box').style.display = 'none';
-    document.getElementById('controls-admin-box').style.display = 'block';
-    document.getElementById('btn-logout-top').style.display = 'block';
-    mulaiListenerFirebase();
-} else {
-    document.getElementById('login-admin-box').style.display = 'block';
-    document.getElementById('controls-admin-box').style.display = 'none';
-    document.getElementById('btn-logout-top').style.display = 'none';
-}
+            savedPinAdmin = localStorage.getItem('ufo_admin_pin') || "";
+            if (savedPinAdmin) {
+                document.getElementById('login-admin-box').style.display = 'none';
+                document.getElementById('controls-admin-box').style.display = 'block';
+                document.getElementById('btn-logout-top').style.display = 'block';
+                mulaiListenerFirebase();
+            } else {
+                document.getElementById('login-admin-box').style.display = 'block';
+                document.getElementById('controls-admin-box').style.display = 'none';
+                document.getElementById('btn-logout-top').style.display = 'none';
+            }
         });
 
         async function prosesLoginAdmin() {
@@ -1379,7 +1569,7 @@ if (savedPinAdmin) {
                 if (!snap.exists()) {
                     await window.dbSet(window.dbRef(db, 'setting/pinAdmin'), PIN_ADMIN_DEFAULT);
                 }
-                           if (pin === pinDb) {
+                if (pin === pinDb) {
                     savedPinAdmin = pin;
                     localStorage.setItem('ufo_admin_pin', pin);
                     document.getElementById('login-admin-box').style.display = 'none';
@@ -1397,15 +1587,16 @@ if (savedPinAdmin) {
             }
         }
 
-      function logoutAdmin() {
-    matikanListenerFirebase();
-    localStorage.removeItem('ufo_admin_pin');
-    savedPinAdmin = "";
-    document.getElementById('input-pin-admin').value = "";
-    document.getElementById('login-admin-box').style.display = 'block';
-    document.getElementById('controls-admin-box').style.display = 'none';
-    document.getElementById('btn-logout-top').style.display = 'none';
-}
+        function logoutAdmin() {
+            matikanListenerFirebase();
+            localStorage.removeItem('ufo_admin_pin');
+            savedPinAdmin = "";
+            document.getElementById('input-pin-admin').value = "";
+            document.getElementById('login-admin-box').style.display = 'block';
+            document.getElementById('controls-admin-box').style.display = 'none';
+            document.getElementById('btn-logout-top').style.display = 'none';
+        }
+
         function mulaiListenerFirebase() {
             const db = window.db;
 
@@ -1426,17 +1617,18 @@ if (savedPinAdmin) {
                 renderStatistikAdmin();
             });
 
-        unsubSetting = window.dbOnValue(window.dbRef(db, 'setting'), snapshot => {
-    const s = snapshot.val() || {};
-    statusSistemGlobal = s.statusAntrian || "BUKA";
-    koordinatTokoAdmin.lat = s.latToko || "";
-    koordinatTokoAdmin.lng = s.lngToko || "";
-    koordinatTokoAdmin.radius = Number(s.radiusToko) || 50;
-    window.settingGlobal = s;
-    applyBrandingAdmin(s);
-    renderStatusSistem();
-    renderStatusGPS();
-});
+            unsubSetting = window.dbOnValue(window.dbRef(db, 'setting'), snapshot => {
+                const s = snapshot.val() || {};
+                statusSistemGlobal = s.statusAntrian || "BUKA";
+                koordinatTokoAdmin.lat = s.latToko || "";
+                koordinatTokoAdmin.lng = s.lngToko || "";
+                koordinatTokoAdmin.radius = Number(s.radiusToko) || 50;
+                window.settingGlobal = s;
+                applyBrandingAdmin(s);
+                renderStatusSistem();
+                renderStatusGPS();
+            });
+
             unsubStatistik = window.dbOnValue(window.dbRef(db, 'statistikAktivitas'), snapshot => {
                 const dataRaw = snapshot.val();
                 statistikGlobal = [];
@@ -1476,7 +1668,6 @@ if (savedPinAdmin) {
 
             unsubPinPromotor = window.dbOnValue(window.dbRef(db, 'pinPromotor'), snapshot => {
                 pinPromotorGlobal = snapshot.val() || {};
-                console.log("🔑 PIN promotor loaded:", Object.keys(pinPromotorGlobal).length, "promotor");
             });
 
             cekDanJalankanAutoCleanup();
@@ -1544,14 +1735,10 @@ if (savedPinAdmin) {
                         s.alasan = lockData.alasan || "";
                         s.waktuSelesaiLock = waktuExpired;
                     } else {
-                        s.locked = false;
-                        s.alasan = "";
-                        s.waktuSelesaiLock = 0;
+                        s.locked = false; s.alasan = ""; s.waktuSelesaiLock = 0;
                     }
                 } else {
-                    s.locked = false;
-                    s.alasan = "";
-                    s.waktuSelesaiLock = 0;
+                    s.locked = false; s.alasan = ""; s.waktuSelesaiLock = 0;
                 }
             });
         }
@@ -1601,7 +1788,6 @@ if (savedPinAdmin) {
                 const now = new Date(waktuServer());
                 const hariIniKey = getTanggalKey();
                 const bulanIniKey = getBulanKey();
-
                 const lastCleanup = localStorage.getItem('ufo_admin_last_cleanup');
                 if (lastCleanup !== hariIniKey) {
                     const jam = now.getHours();
@@ -1610,9 +1796,7 @@ if (savedPinAdmin) {
                         await jalankanAutoCleanup(hariIniKey);
                     }
                 }
-
                 await catatNoSaleHarian();
-
                 const lastBulanCleanup = localStorage.getItem('ufo_admin_last_bulan_cleanup');
                 if (lastBulanCleanup !== bulanIniKey) {
                     await jalankanResetBulanan(bulanIniKey);
@@ -1652,7 +1836,6 @@ if (savedPinAdmin) {
             const kemarin = new Date(now.getTime() - 24 * 60 * 60 * 1000);
             const tanggalKemarin = getTanggalIndo(kemarin);
             const kemarinKey = getTanggalKey(kemarin);
-
             const lastReset = localStorage.getItem('ufo_admin_last_nosale_reset');
             if (lastReset === kemarinKey) {
                 localStorage.setItem('ufo_admin_last_nosale_auto', kemarinKey);
@@ -1660,7 +1843,6 @@ if (savedPinAdmin) {
             }
             const lastAuto = localStorage.getItem('ufo_admin_last_nosale_auto');
             if (lastAuto === kemarinKey) return;
-
             const snapCheckin = await window.dbGet(window.dbRef(db, 'checkinHarian'));
             const dataCheckin = snapCheckin.exists() ? snapCheckin.val() : {};
             const promotorCheckinKemarin = new Set();
@@ -1674,14 +1856,12 @@ if (savedPinAdmin) {
                 localStorage.setItem('ufo_admin_last_nosale_auto', kemarinKey);
                 return;
             }
-
             const snapStat = await window.dbGet(window.dbRef(db, 'statistikAktivitas'));
             const dataStat = snapStat.exists() ? snapStat.val() : {};
             const listKemarin = Object.values(dataStat).filter(a => a && a.tanggal === tanggalKemarin);
             const promotorDeal = new Set(
                 listKemarin.filter(a => a.aksi === "BawaCustomer" && a.hasil === "Deal").map(a => sanitizeNama(a.nama))
             );
-
             const snapMaster = await window.dbGet(window.dbRef(db, 'data'));
             const mapNamaAsli = {};
             if (snapMaster.exists()) {
@@ -1691,7 +1871,6 @@ if (savedPinAdmin) {
                     if (n) mapNamaAsli[sanitizeNama(n)] = String(n).trim();
                 });
             }
-
             for (const clean of promotorCheckinKemarin) {
                 if (!promotorDeal.has(clean)) {
                     const namaAsli = mapNamaAsli[clean] || clean;
@@ -2118,6 +2297,66 @@ if (savedPinAdmin) {
             }, 150);
         }
 
+        /* ============================================================ */
+        /* ===== POPUP AKTIVITAS ADMIN ================================ */
+        /* ============================================================ */
+        function bukaPopupAktivitasAdmin(jenis) {
+            const popup = document.getElementById('popup-aktivitas-admin');
+            const title = document.getElementById('popup-aktivitas-admin-title');
+            const body = document.getElementById('popup-aktivitas-admin-body');
+            if (!popup || !title || !body) return;
+
+            let kontenAsli = '';
+            if (jenis === 'bawa') {
+                title.innerText = 'Bawa Customer';
+                const totalBox = document.getElementById('total-bawa-box');
+                const listBawa = document.getElementById('list-bawa');
+                kontenAsli = (totalBox ? totalBox.outerHTML : '') + (listBawa ? listBawa.outerHTML : '');
+            } else if (jenis === 'ibadah') {
+                title.innerText = 'Aktivitas Ibadah';
+                const el = document.getElementById('list-ibadah');
+                kontenAsli = el ? el.outerHTML : '';
+            } else if (jenis === 'keluar') {
+                title.innerText = 'Keluar Antrian';
+                const el = document.getElementById('list-keluar');
+                kontenAsli = el ? el.outerHTML : '';
+            } else if (jenis === 'autokick') {
+                title.innerText = 'Autokick (Pelanggaran)';
+                const el = document.getElementById('list-autokick');
+                kontenAsli = el ? el.outerHTML : '';
+            } else if (jenis === 'rekap') {
+                title.innerText = 'Rekap Bawa Customer per Promotor';
+                const wrappers = document.querySelectorAll('#content-aktivitas-admin .rekap-wrapper');
+                kontenAsli = wrappers[0] ? wrappers[0].outerHTML : '';
+            } else if (jenis === 'bulanan') {
+                title.innerText = 'Total Customer Walk-In per Bulan';
+                const wrappers = document.querySelectorAll('#content-aktivitas-admin .rekap-wrapper');
+                kontenAsli = wrappers[1] ? wrappers[1].outerHTML : '';
+            }
+
+            body.innerHTML = kontenAsli;
+            popup.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function tutupPopupAktivitasAdmin() {
+            const popup = document.getElementById('popup-aktivitas-admin');
+            if (!popup) return;
+            popup.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        document.addEventListener('click', (e) => {
+            const popup = document.getElementById('popup-aktivitas-admin');
+            if (popup && e.target === popup) {
+                tutupPopupAktivitasAdmin();
+            }
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') tutupPopupAktivitasAdmin();
+        });
+
         function bukaModalToggleSistem(targetStatus) {
             document.getElementById('modal-title').innerText = targetStatus === 'BUKA' ? 'Mulai Antrian' : 'Hentikan Antrian';
             document.getElementById('modal-desc').innerHTML = `Ubah status sistem menjadi: <b>${targetStatus}</b>?`;
@@ -2137,187 +2376,160 @@ if (savedPinAdmin) {
                 tampilkanModal("Gagal", "Tidak bisa mengubah status sistem.");
             }
         }
-function bukaModalBranding() {
-    document.getElementById('modal-title').innerText = "🎨 Pengaturan Branding & Lokasi";
-    
-    const s = window.settingGlobal || {};
-    const namaTokoSekarang = s.namaToko || "";
-    const namaSistemSekarang = s.namaSistem || "";
-    const logoUrlSekarang = s.logoUrl || "";
-    const latSekarang = s.latToko || "";
-    const lngSekarang = s.lngToko || "";
-    const radiusSekarang = s.radiusToko || 50;
-    
-    document.getElementById('modal-desc').innerHTML = `
-        <div style="font-size:12px; margin-bottom:12px; color:#64748b;">
-            Ubah branding & lokasi toko. Perubahan langsung tampil di semua HP promotor.
-        </div>
-        
-        <label style="font-size:11px; font-weight:700;">Nama Sistem:</label><br>
-        <input type="text" id="branding-nama-sistem" 
-            value="${namaSistemSekarang.replace(/"/g, '&quot;')}"
-            placeholder="Contoh: Antrian Walk-In Promotor"
-            style="width:100%; padding:10px; border-radius:8px; border:1px solid var(--border); margin-bottom:10px; box-sizing:border-box;">
-        
-        <label style="font-size:11px; font-weight:700;">Nama Toko:</label><br>
-        <input type="text" id="branding-nama-toko" 
-            value="${namaTokoSekarang.replace(/"/g, '&quot;')}"
-            placeholder="Contoh: UFO Malang Kebonsari"
-            style="width:100%; padding:10px; border-radius:8px; border:1px solid var(--border); margin-bottom:10px; box-sizing:border-box;">
-        
-        <label style="font-size:11px; font-weight:700;">URL Logo (opsional):</label><br>
-        <input type="url" id="branding-logo-url" 
-            value="${logoUrlSekarang.replace(/"/g, '&quot;')}"
-            placeholder="https://..."
-            style="width:100%; padding:10px; border-radius:8px; border:1px solid var(--border); margin-bottom:10px; box-sizing:border-box;">
-        
-        <hr style="border:none; border-top:1px solid var(--border); margin:14px 0;">
-        
-        <div style="font-size:11px; font-weight:800; color:var(--accent); margin-bottom:8px; text-transform:uppercase; letter-spacing:0.5px;">📍 Koordinat Toko (GPS)</div>
-        
-        <div style="font-size:10px; color:#94a3b8; padding:8px; background:#f1f5f9; border-radius:8px; line-height:1.5; margin-bottom:10px;">
-            💡 <b>Tips:</b> Buka <b>Google Maps</b> → cari lokasi toko → klik kanan → copy koordinat → paste ke bawah.
-        </div>
-        
-        <div style="display:flex; gap:8px; margin-bottom:10px;">
-            <div style="flex:1;">
-                <label style="font-size:11px; font-weight:700;">Latitude:</label><br>
-                <input type="text" id="branding-lat" 
-                    value="${String(latSekarang).replace(/"/g, '&quot;')}"
-                    placeholder="-8.0210821"
-                    style="width:100%; padding:10px; border-radius:8px; border:1px solid var(--border); box-sizing:border-box;">
-            </div>
-            <div style="flex:1;">
-                <label style="font-size:11px; font-weight:700;">Longitude:</label><br>
-                <input type="text" id="branding-lng" 
-                    value="${String(lngSekarang).replace(/"/g, '&quot;')}"
-                    placeholder="112.6189705"
-                    style="width:100%; padding:10px; border-radius:8px; border:1px solid var(--border); box-sizing:border-box;">
-            </div>
-        </div>
-        
-        <button type="button" onclick="isiKoordinatDariHP()" 
-            style="width:100%; padding:10px; border-radius:8px; border:1px dashed var(--accent); background:transparent; color:var(--accent); font-weight:700; font-size:11px; cursor:pointer; margin-bottom:10px;">
-            📍 Isi Otomatis dari Lokasi HP Sekarang
-        </button>
-        
-        <label style="font-size:11px; font-weight:700;">Radius Validasi (meter):</label><br>
-        <input type="number" id="branding-radius" 
-            value="${radiusSekarang}"
-            min="10" max="1000"
-            placeholder="50"
-            style="width:100%; padding:10px; border-radius:8px; border:1px solid var(--border); margin-bottom:10px; box-sizing:border-box;">
-        
-        <div style="font-size:10px; color:#94a3b8; padding:8px; background:#fef3c7; border-radius:8px; line-height:1.5;">
-            ⚠️ <b>Kosongkan Latitude & Longitude</b> jika ingin <b>mematikan GPS</b> (promotor bisa check-in dari mana saja).
-        </div>
-    `;
-    
-    document.getElementById('modal-actions').innerHTML = `
-        <button type="button" class="btn-cancel" onclick="tutupModal()">Batal</button>
-        <button type="button" id="btn-modal-action-ok" onclick="eksekusiSimpanBranding()">Simpan</button>
-    `;
-    
-    document.getElementById('custom-modal').classList.add('active');
-}
+        function bukaModalBranding() {
+            document.getElementById('modal-title').innerText = "🎨 Pengaturan Branding & Lokasi";
+            const s = window.settingGlobal || {};
+            const namaTokoSekarang = s.namaToko || "";
+            const namaSistemSekarang = s.namaSistem || "";
+            const logoUrlSekarang = s.logoUrl || "";
+            const latSekarang = s.latToko || "";
+            const lngSekarang = s.lngToko || "";
+            const radiusSekarang = s.radiusToko || 50;
+            document.getElementById('modal-desc').innerHTML = `
+                <div style="font-size:12px; margin-bottom:12px; color:#64748b;">
+                    Ubah branding & lokasi toko. Perubahan langsung tampil di semua HP promotor.
+                </div>
+                <label style="font-size:11px; font-weight:700;">Nama Sistem:</label><br>
+                <input type="text" id="branding-nama-sistem" 
+                    value="${namaSistemSekarang.replace(/"/g, '&quot;')}"
+                    placeholder="Contoh: Antrian Walk-In Promotor"
+                    style="width:100%; padding:10px; border-radius:8px; border:1px solid var(--border); margin-bottom:10px; box-sizing:border-box;">
+                <label style="font-size:11px; font-weight:700;">Nama Toko:</label><br>
+                <input type="text" id="branding-nama-toko" 
+                    value="${namaTokoSekarang.replace(/"/g, '&quot;')}"
+                    placeholder="Contoh: UFO Malang Kebonsari"
+                    style="width:100%; padding:10px; border-radius:8px; border:1px solid var(--border); margin-bottom:10px; box-sizing:border-box;">
+                <label style="font-size:11px; font-weight:700;">URL Logo (opsional):</label><br>
+                <input type="url" id="branding-logo-url" 
+                    value="${logoUrlSekarang.replace(/"/g, '&quot;')}"
+                    placeholder="https://..."
+                    style="width:100%; padding:10px; border-radius:8px; border:1px solid var(--border); margin-bottom:10px; box-sizing:border-box;">
+                <hr style="border:none; border-top:1px solid var(--border); margin:14px 0;">
+                <div style="font-size:11px; font-weight:800; color:var(--accent); margin-bottom:8px; text-transform:uppercase; letter-spacing:0.5px;">📍 Koordinat Toko (GPS)</div>
+                <div style="font-size:10px; color:#94a3b8; padding:8px; background:#f1f5f9; border-radius:8px; line-height:1.5; margin-bottom:10px;">
+                    💡 <b>Tips:</b> Buka <b>Google Maps</b> → cari lokasi toko → klik kanan → copy koordinat → paste ke bawah.
+                </div>
+                <div style="display:flex; gap:8px; margin-bottom:10px;">
+                    <div style="flex:1;">
+                        <label style="font-size:11px; font-weight:700;">Latitude:</label><br>
+                        <input type="text" id="branding-lat" 
+                            value="${String(latSekarang).replace(/"/g, '&quot;')}"
+                            placeholder="-8.0210821"
+                            style="width:100%; padding:10px; border-radius:8px; border:1px solid var(--border); box-sizing:border-box;">
+                    </div>
+                    <div style="flex:1;">
+                        <label style="font-size:11px; font-weight:700;">Longitude:</label><br>
+                        <input type="text" id="branding-lng" 
+                            value="${String(lngSekarang).replace(/"/g, '&quot;')}"
+                            placeholder="112.6189705"
+                            style="width:100%; padding:10px; border-radius:8px; border:1px solid var(--border); box-sizing:border-box;">
+                    </div>
+                </div>
+                <button type="button" onclick="isiKoordinatDariHP()" 
+                    style="width:100%; padding:10px; border-radius:8px; border:1px dashed var(--accent); background:transparent; color:var(--accent); font-weight:700; font-size:11px; cursor:pointer; margin-bottom:10px;">
+                    📍 Isi Otomatis dari Lokasi HP Sekarang
+                </button>
+                <label style="font-size:11px; font-weight:700;">Radius Validasi (meter):</label><br>
+                <input type="number" id="branding-radius" 
+                    value="${radiusSekarang}"
+                    min="10" max="1000"
+                    placeholder="50"
+                    style="width:100%; padding:10px; border-radius:8px; border:1px solid var(--border); margin-bottom:10px; box-sizing:border-box;">
+                <div style="font-size:10px; color:#94a3b8; padding:8px; background:#fef3c7; border-radius:8px; line-height:1.5;">
+                    ⚠️ <b>Kosongkan Latitude & Longitude</b> jika ingin <b>mematikan GPS</b> (promotor bisa check-in dari mana saja).
+                </div>
+            `;
+            document.getElementById('modal-actions').innerHTML = `
+                <button type="button" class="btn-cancel" onclick="tutupModal()">Batal</button>
+                <button type="button" id="btn-modal-action-ok" onclick="eksekusiSimpanBranding()">Simpan</button>
+            `;
+            document.getElementById('custom-modal').classList.add('active');
+        }
 
-function isiKoordinatDariHP() {
-    if (!navigator.geolocation) {
-        tampilkanModal("Gagal", "Browser tidak mendukung GPS.");
-        return;
-    }
-    
-    const latEl = document.getElementById('branding-lat');
-    const lngEl = document.getElementById('branding-lng');
-    
-    latEl.placeholder = "Mendeteksi...";
-    lngEl.placeholder = "Mendeteksi...";
-    
-    navigator.geolocation.getCurrentPosition(
-        function(pos) {
-            latEl.value = pos.coords.latitude.toFixed(7);
-            lngEl.value = pos.coords.longitude.toFixed(7);
-            latEl.placeholder = "-8.0210821";
-            lngEl.placeholder = "112.6189705";
-            latEl.style.background = '#dcfce7';
-            lngEl.style.background = '#dcfce7';
-            setTimeout(() => {
-                latEl.style.background = '#ffffff';
-                lngEl.style.background = '#ffffff';
-            }, 800);
-        },
-        function(err) {
-            latEl.placeholder = "-8.0210821";
-            lngEl.placeholder = "112.6189705";
-            let pesan = "Gagal mendeteksi lokasi.";
-            if (err.code === 1) pesan += "\n\n❌ Izin lokasi DITOLAK.\n\nCara fix:\n1. Klik ikon gembok di address bar\n2. Cari 'Location' / 'Lokasi'\n3. Set jadi 'Allow' / 'Izinkan'\n4. Refresh halaman";
-            else if (err.code === 2) pesan += "\n\n❌ Lokasi tidak tersedia.";
-            else if (err.code === 3) pesan += "\n\n❌ Waktu habis. Coba lagi.";
-            tampilkanModal("Gagal Deteksi GPS", pesan);
-        },
-        { enableHighAccuracy: true, timeout: 15000, maximumAge: 0 }
-    );
-}
-async function eksekusiSimpanBranding() {
-    const namaSistem = document.getElementById('branding-nama-sistem').value.trim();
-    const namaToko = document.getElementById('branding-nama-toko').value.trim();
-    const logoUrl = document.getElementById('branding-logo-url').value.trim();
-    const lat = document.getElementById('branding-lat').value.trim();
-    const lng = document.getElementById('branding-lng').value.trim();
-    const radius = parseInt(document.getElementById('branding-radius').value) || 50;
-    
-    if (!namaSistem) { tampilkanModal("Perhatian", "Nama Sistem tidak boleh kosong!"); return; }
-    if (!namaToko) { tampilkanModal("Perhatian", "Nama Toko tidak boleh kosong!"); return; }
-    
-    // Validasi lat/lng: harus diisi berdua, atau dikosongkan berdua
-    const latAda = lat !== "";
-    const lngAda = lng !== "";
-    if (latAda !== lngAda) {
-        tampilkanModal("Perhatian", "Latitude & Longitude harus diisi bersamaan, atau dikosongkan bersamaan!");
-        return;
-    }
-    
-    // Validasi format angka
-    if (latAda && (isNaN(parseFloat(lat)) || isNaN(parseFloat(lng)))) {
-        tampilkanModal("Perhatian", "Latitude & Longitude harus berupa angka!");
-        return;
-    }
-    
-    const btn = document.getElementById('btn-modal-action-ok');
-    btn.disabled = true;
-    btn.innerHTML = `<span class="spinner"></span> Menyimpan...`;
-    
-    try {
-        const updateData = {
-            namaSistem: namaSistem,
-            namaToko: namaToko,
-            logoUrl: logoUrl,
-            latToko: latAda ? parseFloat(lat) : "",
-            lngToko: lngAda ? parseFloat(lng) : "",
-            radiusToko: radius
-        };
-        
-        await window.dbUpdate(window.dbRef(window.db, 'setting'), updateData);
-        
-        let infoGPS = latAda 
-            ? `<b>📍 Koordinat:</b> ${lat}, ${lng}<br><b>📏 Radius:</b> ${radius}m` 
-            : `<b>📍 GPS:</b> NONAKTIF (check-in dari mana saja)`;
-        
-        tutupModal();
-        tampilkanModal("Berhasil", 
-            `Pengaturan berhasil disimpan!<br><br>` +
-            `<b>Nama Sistem:</b> ${namaSistem}<br>` +
-            `<b>Nama Toko:</b> ${namaToko}<br>` +
-            `<b>Logo:</b> ${logoUrl || "(default)"}<br>` +
-            `${infoGPS}<br><br>` +
-            `<span style="font-size:11px; color:#64748b;">Perubahan akan langsung tampil di HP promotor.</span>`
-        );
-    } catch (e) {
-        console.warn("Error simpan pengaturan:", e);
-        tutupModal();
-        tampilkanModal("Gagal", "Tidak bisa menyimpan pengaturan. Cek koneksi internet.");
-    }
-}
+        function isiKoordinatDariHP() {
+            if (!navigator.geolocation) {
+                tampilkanModal("Gagal", "Browser tidak mendukung GPS.");
+                return;
+            }
+            const latEl = document.getElementById('branding-lat');
+            const lngEl = document.getElementById('branding-lng');
+            latEl.placeholder = "Mendeteksi...";
+            lngEl.placeholder = "Mendeteksi...";
+            navigator.geolocation.getCurrentPosition(
+                function(pos) {
+                    latEl.value = pos.coords.latitude.toFixed(7);
+                    lngEl.value = pos.coords.longitude.toFixed(7);
+                    latEl.placeholder = "-8.0210821";
+                    lngEl.placeholder = "112.6189705";
+                    latEl.style.background = '#dcfce7';
+                    lngEl.style.background = '#dcfce7';
+                    setTimeout(() => {
+                        latEl.style.background = '#ffffff';
+                        lngEl.style.background = '#ffffff';
+                    }, 800);
+                },
+                function(err) {
+                    latEl.placeholder = "-8.0210821";
+                    lngEl.placeholder = "112.6189705";
+                    let pesan = "Gagal mendeteksi lokasi.";
+                    if (err.code === 1) pesan += "\n\n❌ Izin lokasi DITOLAK.\n\nCara fix:\n1. Klik ikon gembok di address bar\n2. Cari 'Location' / 'Lokasi'\n3. Set jadi 'Allow' / 'Izinkan'\n4. Refresh halaman";
+                    else if (err.code === 2) pesan += "\n\n❌ Lokasi tidak tersedia.";
+                    else if (err.code === 3) pesan += "\n\n❌ Waktu habis. Coba lagi.";
+                    tampilkanModal("Gagal Deteksi GPS", pesan);
+                },
+                { enableHighAccuracy: true, timeout: 15000, maximumAge: 0 }
+            );
+        }
+        async function eksekusiSimpanBranding() {
+            const namaSistem = document.getElementById('branding-nama-sistem').value.trim();
+            const namaToko = document.getElementById('branding-nama-toko').value.trim();
+            const logoUrl = document.getElementById('branding-logo-url').value.trim();
+            const lat = document.getElementById('branding-lat').value.trim();
+            const lng = document.getElementById('branding-lng').value.trim();
+            const radius = parseInt(document.getElementById('branding-radius').value) || 50;
+            if (!namaSistem) { tampilkanModal("Perhatian", "Nama Sistem tidak boleh kosong!"); return; }
+            if (!namaToko) { tampilkanModal("Perhatian", "Nama Toko tidak boleh kosong!"); return; }
+            const latAda = lat !== "";
+            const lngAda = lng !== "";
+            if (latAda !== lngAda) {
+                tampilkanModal("Perhatian", "Latitude & Longitude harus diisi bersamaan, atau dikosongkan bersamaan!");
+                return;
+            }
+            if (latAda && (isNaN(parseFloat(lat)) || isNaN(parseFloat(lng)))) {
+                tampilkanModal("Perhatian", "Latitude & Longitude harus berupa angka!");
+                return;
+            }
+            const btn = document.getElementById('btn-modal-action-ok');
+            btn.disabled = true;
+            btn.innerHTML = `<span class="spinner"></span> Menyimpan...`;
+            try {
+                const updateData = {
+                    namaSistem: namaSistem,
+                    namaToko: namaToko,
+                    logoUrl: logoUrl,
+                    latToko: latAda ? parseFloat(lat) : "",
+                    lngToko: lngAda ? parseFloat(lng) : "",
+                    radiusToko: radius
+                };
+                await window.dbUpdate(window.dbRef(window.db, 'setting'), updateData);
+                let infoGPS = latAda 
+                    ? `<b>📍 Koordinat:</b> ${lat}, ${lng}<br><b>📏 Radius:</b> ${radius}m` 
+                    : `<b>📍 GPS:</b> NONAKTIF (check-in dari mana saja)`;
+                tutupModal();
+                tampilkanModal("Berhasil", 
+                    `Pengaturan berhasil disimpan!<br><br>` +
+                    `<b>Nama Sistem:</b> ${namaSistem}<br>` +
+                    `<b>Nama Toko:</b> ${namaToko}<br>` +
+                    `<b>Logo:</b> ${logoUrl || "(default)"}<br>` +
+                    `${infoGPS}<br><br>` +
+                    `<span style="font-size:11px; color:#64748b;">Perubahan akan langsung tampil di HP promotor.</span>`
+                );
+            } catch (e) {
+                console.warn("Error simpan pengaturan:", e);
+                tutupModal();
+                tampilkanModal("Gagal", "Tidak bisa menyimpan pengaturan. Cek koneksi internet.");
+            }
+        }
         function bukaModalTambahMasterSales() {
             document.getElementById('modal-title').innerText = "Tambah Nama Promotor Baru";
             document.getElementById('modal-desc').innerHTML = `Masukkan Nama Promotor Baru:<br><input type="text" id="input-nama-baru" placeholder="Nama Lengkap Promotor">`;
@@ -2356,14 +2568,12 @@ async function eksekusiSimpanBranding() {
                 tampilkanModal("Info", "Belum ada promotor di Master Sales.");
                 return;
             }
-
             let options = '<option value="">-- Pilih Promotor --</option>';
             masterSalesGlobal.forEach(n => {
                 const clean = sanitizeNama(n.nama);
                 const punyaPIN = pinPromotorGlobal[clean] ? " ✅" : " ⚠️ belum ada PIN";
                 options += `<option value="${n.nama}">${n.nama}${punyaPIN}</option>`;
             });
-
             document.getElementById('modal-title').innerText = "🔑 Buat / Atur PIN Promotor";
             document.getElementById('modal-desc').innerHTML = `
                 <div style="font-size:12px; margin-bottom:10px; color:#64748b;">
@@ -2392,7 +2602,6 @@ async function eksekusiSimpanBranding() {
                 <button type="button" id="btn-modal-action-ok" onclick="eksekusiSimpanPIN()">Simpan PIN</button>
             `;
             document.getElementById('custom-modal').classList.add('active');
-
             setTimeout(() => {
                 const input = document.getElementById('admin-input-pin-baru');
                 if (input) {
@@ -2411,16 +2620,13 @@ async function eksekusiSimpanBranding() {
             const infoBox = document.getElementById('info-pin-sekarang');
             const pinText = document.getElementById('pin-sekarang-text');
             const inputBaru = document.getElementById('admin-input-pin-baru');
-
             if (!namaPromotor) {
                 infoBox.style.display = 'none';
                 if (inputBaru) inputBaru.value = '';
                 return;
             }
-
             const clean = sanitizeNama(namaPromotor);
             const pinSekarang = pinPromotorGlobal[clean];
-
             if (pinSekarang) {
                 infoBox.style.display = 'block';
                 infoBox.style.background = '#dcfce7';
@@ -2437,7 +2643,6 @@ async function eksekusiSimpanBranding() {
         function generatePINAcak() {
             const input = document.getElementById('admin-input-pin-baru');
             if (!input) return;
-
             let pin;
             let attempts = 0;
             do {
@@ -2449,10 +2654,8 @@ async function eksekusiSimpanBranding() {
                  /^(\d)\1{5}$/.test(pin) ||
                  /^123456$|^111111$|^000000$/.test(pin))
             );
-
             input.value = pin;
             input.focus();
-
             input.style.background = '#dcfce7';
             setTimeout(() => { input.style.background = '#ffffff'; }, 400);
         }
@@ -2460,7 +2663,6 @@ async function eksekusiSimpanBranding() {
         async function eksekusiSimpanPIN() {
             const nama = document.getElementById('admin-select-pin-sales').value;
             const pin = document.getElementById('admin-input-pin-baru').value.trim();
-
             if (!nama) {
                 tampilkanModal("Perhatian", "Pilih promotor dulu!");
                 return;
@@ -2474,16 +2676,13 @@ async function eksekusiSimpanBranding() {
                     return;
                 }
             }
-
             const clean = sanitizeNama(nama);
             const btn = document.getElementById('btn-modal-action-ok');
             btn.disabled = true;
             btn.innerHTML = `<span class="spinner"></span> Menyimpan...`;
-
             try {
                 const pinLama = pinPromotorGlobal[clean];
                 await window.dbSet(window.dbRef(window.db, 'pinPromotor/' + clean), pin);
-
                 await window.dbPush(window.dbRef(window.db, 'statistikAktivitas'), {
                     nama: nama,
                     aksi: pinLama ? "ResetPIN" : "BuatPIN",
@@ -2493,7 +2692,6 @@ async function eksekusiSimpanBranding() {
                     kategori: "Keamanan",
                     sumber: "Admin"
                 });
-
                 tutupModal();
                 tampilkanModal("Berhasil", 
                     `PIN untuk <b>${nama}</b> berhasil disimpan.<br><br>` +
@@ -2512,14 +2710,12 @@ async function eksekusiSimpanBranding() {
                 tampilkanModal("Info", "Belum ada promotor.");
                 return;
             }
-
             let html = `<div style="max-height:400px; overflow-y:auto; text-align:left;">`;
             html += `<table style="width:100%; border-collapse:collapse; font-size:12px;">`;
             html += `<thead><tr style="background:#f1f5f9;">
                 <th style="padding:6px; text-align:left; border-bottom:1px solid #e2e8f0;">Nama</th>
                 <th style="padding:6px; text-align:center; border-bottom:1px solid #e2e8f0;">PIN</th>
             </tr></thead><tbody>`;
-
             masterSalesGlobal.forEach(n => {
                 const clean = sanitizeNama(n.nama);
                 const pin = pinPromotorGlobal[clean];
@@ -2529,12 +2725,10 @@ async function eksekusiSimpanBranding() {
                     <td style="padding:6px; text-align:center; border-bottom:1px solid #f1f5f9;">${pinText}</td>
                 </tr>`;
             });
-
             html += `</tbody></table></div>`;
             html += `<div style="font-size:11px; color:#64748b; margin-top:10px; text-align:center;">
                 Total: ${Object.keys(pinPromotorGlobal).length} dari ${masterSalesGlobal.length} promotor punya PIN
             </div>`;
-
             document.getElementById('modal-title').innerText = "👁️ Daftar Semua PIN Promotor";
             document.getElementById('modal-desc').innerHTML = html;
             document.getElementById('modal-actions').innerHTML = `
@@ -2737,7 +2931,6 @@ async function eksekusiSimpanBranding() {
             const now = new Date(waktuServer());
             const tglDefault = now.toISOString().split('T')[0];
             const jamDefault = String(now.getHours()).padStart(2, '0') + ':' + String(now.getMinutes()).padStart(2, '0');
-
             document.getElementById('modal-title').innerText = "Kontrol Hukuman / Lock Akun";
             document.getElementById('modal-desc').innerHTML = `
                 Pilih Promotor:<br>
@@ -2872,13 +3065,11 @@ async function eksekusiSimpanBranding() {
             const btn = document.getElementById('btn-modal-action-ok');
             btn.disabled = true;
             btn.innerHTML = `<span class="spinner"></span> Memproses Reset...`;
-
             try {
                 const db = window.db;
                 const hariIni = getTanggalIndo();
                 const hariIniKey = getTanggalKey();
                 const bulanKey = getBulanKey();
-
                 const snapCheckin = await window.dbGet(window.dbRef(db, 'checkinHarian'));
                 const dataCheckin = snapCheckin.exists() ? snapCheckin.val() : {};
                 const promotorCheckinHariIni = new Set();
@@ -2888,14 +3079,12 @@ async function eksekusiSimpanBranding() {
                     if (dataPromotor[hariIniKey]) promotorCheckinHariIni.add(clean);
                     else if (dataPromotor.tanggalKey === hariIniKey) promotorCheckinHariIni.add(clean);
                 });
-
                 const snapStat = await window.dbGet(window.dbRef(db, 'statistikAktivitas'));
                 const dataStat = snapStat.exists() ? snapStat.val() : {};
                 const listHariIni = Object.values(dataStat).filter(a => a && a.tanggal === hariIni);
                 const promotorDealHariIni = new Set(
                     listHariIni.filter(a => a.aksi === "BawaCustomer" && a.hasil === "Deal").map(a => sanitizeNama(a.nama))
                 );
-
                 const snapMaster = await window.dbGet(window.dbRef(db, 'data'));
                 const mapNamaAsli = {};
                 if (snapMaster.exists()) {
@@ -2905,7 +3094,6 @@ async function eksekusiSimpanBranding() {
                         if (n) mapNamaAsli[sanitizeNama(n)] = String(n).trim();
                     });
                 }
-
                 let noSaleCount = 0;
                 for (const clean of promotorCheckinHariIni) {
                     if (!promotorDealHariIni.has(clean)) {
@@ -2922,9 +3110,7 @@ async function eksekusiSimpanBranding() {
                         noSaleCount++;
                     }
                 }
-
                 await window.dbRemove(window.dbRef(db, 'antrian'));
-
                 const updatesStat = {};
                 Object.keys(dataStat).forEach(k => {
                     const a = dataStat[k];
@@ -2937,10 +3123,8 @@ async function eksekusiSimpanBranding() {
                 if (Object.keys(updatesStat).length > 0) {
                     await window.dbUpdate(window.dbRef(db), updatesStat);
                 }
-
                 console.log("✅ Reset selesai. Deal/Lihat tetap tersimpan di statistikAktivitas.");
                 localStorage.setItem('ufo_admin_last_nosale_reset', hariIniKey);
-
                 tutupModal();
                 let pesan = "Semua antrian berhasil direset.\n\n✅ Data Deal, Lihat, dan No Sale tetap aman.";
                 if (noSaleCount > 0) {
@@ -2976,7 +3160,6 @@ async function eksekusiSimpanBranding() {
             const asli = btnOn.innerHTML;
             btnOn.disabled = true;
             btnOn.innerHTML = `<span class="spinner"></span> Mendeteksi...`;
-            
             navigator.geolocation.getCurrentPosition(
                 function(pos) {
                     const lat = pos.coords.latitude;
@@ -3047,13 +3230,14 @@ async function eksekusiSimpanBranding() {
 
         function tutupModal() { document.getElementById('custom-modal').classList.remove('active'); }
 
+        // Export ke window
         window.prosesLoginAdmin = prosesLoginAdmin;
         window.logoutAdmin = logoutAdmin;
         window.bukaModalToggleSistem = bukaModalToggleSistem;
         window.eksekusiToggleSistem = eksekusiToggleSistem;
         window.bukaModalBranding = bukaModalBranding;
-window.eksekusiSimpanBranding = eksekusiSimpanBranding;
-window.isiKoordinatDariHP = isiKoordinatDariHP;
+        window.eksekusiSimpanBranding = eksekusiSimpanBranding;
+        window.isiKoordinatDariHP = isiKoordinatDariHP;
         window.bukaModalTambahMasterSales = bukaModalTambahMasterSales;
         window.eksekusiTambahMasterSales = eksekusiTambahMasterSales;
         window.bukaModalKelolaPIN = bukaModalKelolaPIN;
@@ -3079,6 +3263,8 @@ window.isiKoordinatDariHP = isiKoordinatDariHP;
         window.toggleDarkMode = toggleDarkMode;
         window.tutupModal = tutupModal;
         window.toggleAktivitasAdmin = toggleAktivitasAdmin;
+        window.bukaPopupAktivitasAdmin = bukaPopupAktivitasAdmin;
+        window.tutupPopupAktivitasAdmin = tutupPopupAktivitasAdmin;
 
         window.addEventListener('firebase-ready', () => {
             restoreAktivitasAdminState();
