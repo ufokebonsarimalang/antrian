@@ -156,14 +156,12 @@ body {
     border: none !important;
     box-shadow: none !important;
     text-shadow: none !important;
-    padding: 8px !important;
-    font-size: 22px !important;
+    padding: 0 !important;
+    font-size: 24px !important;
     line-height: 1 !important;
     cursor: pointer;
-    border-radius: 8px !important;
-    width: auto !important;
-    min-width: 40px !important;
-    flex: 0 0 auto !important;
+    width: 40px !important;       /* Lebar tetap agar tidak melar */
+    flex: 0 0 40px !important;    /* Kunci ukuran */
     display: flex !important;
     align-items: center !important;
     justify-content: center !important;
@@ -173,7 +171,6 @@ body {
 .dark-mode-btn:active {
     transform: scale(0.9) !important;
 }
-
 .logout-btn {
     background: linear-gradient(135deg, #dc2626 0%, #991b1b 100%) !important;
     color: #ffffff !important;
@@ -1668,19 +1665,16 @@ html body:not(.dark-mode) .top-controls {
     gap: 10px !important;
     margin-bottom: 12px !important;
 }
-
 html body:not(.dark-mode) .dark-mode-btn {
     background: transparent !important;
     color: #0f172a !important;
     border: none !important;
     box-shadow: none !important;
-    padding: 8px !important;
-    font-size: 22px !important;
+    padding: 0 !important;
+    font-size: 24px !important;
     line-height: 1 !important;
-    border-radius: 8px !important;
-    width: auto !important;
-    min-width: 40px !important;
-    flex: 0 0 auto !important;
+    width: 40px !important;
+    flex: 0 0 40px !important;
     cursor: pointer !important;
 }
 
@@ -3502,31 +3496,19 @@ html body:not(.dark-mode) .popup-body #total-bawa-box {
         padding: 12px;
     }
 }
-  /* ===== TOMBOL TOP CONTROLS — 50:50 SEMUA MODE ===== */
-.top-controls {
-    display: flex !important;
-    gap: 10px !important;
-    justify-content: stretch !important;
-}
-
-.top-controls .dark-mode-btn,
-.top-controls .logout-btn {
-    flex: 1 1 0 !important;
-    width: auto !important;
-    min-width: 0 !important;
-}
-  /* ===== FORCE TOP-CONTROLS 50:50 ===== */
+/* ===== PERBAIKAN TOP CONTROLS ===== */
 .top-controls {
     display: flex !important;
     justify-content: space-between !important;
-    gap: 10px !important;
+    align-items: center !important;
+    gap: 12px !important;
+    margin-bottom: 16px !important;
 }
 
-.top-controls > button {
-    flex: 1 1 0 !important;
+.top-controls .logout-btn {
+    flex: 1 1 auto !important;
     width: auto !important;
-    min-width: 0 !important;
-    max-width: none !important;
+    margin: 0 !important;
 }
 </style>
 </head>
