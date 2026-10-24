@@ -5026,7 +5026,7 @@ function toggleDarkMode() {
     document.body.classList.toggle('dark-mode');
     localStorage.setItem('ufo_dark_mode', document.body.classList.contains('dark-mode'));
    document.getElementById('btn-toggle-dark').innerHTML = document.body.classList.contains('dark-mode') ? '☀️' : '🌙';
-
+} 
 function initDarkMode() {
     // DEFAULT = DARK MODE (biru cyber)
     // Hanya jadi light mode kalau user klik eksplisit "Terang"
@@ -5135,6 +5135,8 @@ window.prosesLoginPromotor = prosesLoginPromotor;
 window.logoutPromotor = logoutPromotor;
   window.bukaPopupAktivitas = bukaPopupAktivitas;
 window.tutupPopupAktivitas = tutupPopupAktivitas;
+  window.toggleCustomSelect = toggleCustomSelect;   // ← tambah
+window.pilihOpsiCustom = pilihOpsiCustom;
 </script>
 </body>
 </html>
