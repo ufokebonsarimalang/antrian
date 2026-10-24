@@ -151,19 +151,27 @@ body {
 }
 
 .dark-mode-btn {
-    background: linear-gradient(135deg, #38bdf8 0%, #0ea5e9 100%) !important;
+    background: transparent !important;
     color: #ffffff !important;
-    border: 2px solid #38bdf8 !important;
-    font-weight: 700;
-    border-radius: 10px;
-    padding: 8px 14px;
+    border: none !important;
+    box-shadow: none !important;
+    text-shadow: none !important;
+    padding: 8px !important;
+    font-size: 22px !important;
+    line-height: 1 !important;
     cursor: pointer;
-    font-size: 12px;
-    text-transform: uppercase;
-    letter-spacing: 0.3px;
-    box-shadow: 0 0 25px rgba(56, 189, 248, 0.8), inset 0 0 8px rgba(255, 255, 255, 0.3) !important;
-    text-shadow: 0 0 6px rgba(255, 255, 255, 0.5) !important;
-    
+    border-radius: 8px !important;
+    width: auto !important;
+    min-width: 40px !important;
+    flex: 0 0 auto !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    transition: transform 0.15s ease !important;
+}
+
+.dark-mode-btn:active {
+    transform: scale(0.9) !important;
 }
 
 .logout-btn {
@@ -1662,15 +1670,18 @@ html body:not(.dark-mode) .top-controls {
 }
 
 html body:not(.dark-mode) .dark-mode-btn {
-    background: #0f172a !important;
-    color: #ffffff !important;
-    border: 1px solid #334155 !important;
-    font-weight: 700 !important;
-    border-radius: 10px !important;
-    padding: 8px 14px !important;
+    background: transparent !important;
+    color: #0f172a !important;
+    border: none !important;
+    box-shadow: none !important;
+    padding: 8px !important;
+    font-size: 22px !important;
+    line-height: 1 !important;
+    border-radius: 8px !important;
+    width: auto !important;
+    min-width: 40px !important;
+    flex: 0 0 auto !important;
     cursor: pointer !important;
-    font-size: 12px !important;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.05) !important;
 }
 
 html body:not(.dark-mode) .logout-btn {
@@ -3592,7 +3603,7 @@ html body:not(.dark-mode) .popup-body #total-bawa-box {
 <!-- ========== APLIKASI UTAMA ========== -->
 <div class="app-container" id="app-container" style="display: none;">
     <div class="top-controls">
-        <button type="button" class="dark-mode-btn" id="btn-toggle-dark" onclick="toggleDarkMode()">🌙 Gelap</button>
+       <button type="button" class="dark-mode-btn" id="btn-toggle-dark" onclick="toggleDarkMode()" aria-label="Ganti tema">🌙</button>
         <button type="button" class="logout-btn" id="btn-logout-top" onclick="logoutPromotor()" style="display: none;">Logout</button>
     </div>
 
@@ -5014,8 +5025,7 @@ function renderUI() {
 function toggleDarkMode() {
     document.body.classList.toggle('dark-mode');
     localStorage.setItem('ufo_dark_mode', document.body.classList.contains('dark-mode'));
-    document.getElementById('btn-toggle-dark').innerHTML = document.body.classList.contains('dark-mode') ? '☀️ Terang' : '🌙 Gelap';
-}
+   document.getElementById('btn-toggle-dark').innerHTML = document.body.classList.contains('dark-mode') ? '☀️' : '🌙';
 
 function initDarkMode() {
     // DEFAULT = DARK MODE (biru cyber)
@@ -5024,11 +5034,11 @@ function initDarkMode() {
     if (saved === 'false') {
         // User pilih Terang → biarkan light (tanpa class dark-mode)
         document.body.classList.remove('dark-mode');
-        document.getElementById('btn-toggle-dark').innerHTML = '🌙 Gelap';
+       document.getElementById('btn-toggle-dark').innerHTML = '🌙';
     } else {
         // Default / user pilih Gelap → aktifkan dark mode
         document.body.classList.add('dark-mode');
-        document.getElementById('btn-toggle-dark').innerHTML = '☀️ Terang';
+       document.getElementById('btn-toggle-dark').innerHTML = '☀️';
     }
 }
 function tampilkanModal(j, d) {
