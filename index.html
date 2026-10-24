@@ -3513,57 +3513,74 @@ html body:not(.dark-mode) .popup-body #total-bawa-box {
 .top-controls,
 html body:not(.dark-mode) .top-controls {
     display: flex !important;
-    justify-content: flex-end !important; /* Paksa selalu rata kanan */
+    justify-content: flex-end !important; /* Rata kanan */
     align-items: center !important;
-    gap: 8px !important; /* Jarak antar tombol */
+    gap: 10px !important; /* Jarak antara ikon dan tombol logout */
     margin-bottom: 16px !important;
     width: 100% !important;
 }
 
-/* Paksa tombol agar TIDAK melar selebar layar */
+/* Paksa tombol agar tidak melar selebar layar */
 .top-controls .dark-mode-btn,
 .top-controls .logout-btn,
 html body:not(.dark-mode) .top-controls .dark-mode-btn,
 html body:not(.dark-mode) .top-controls .logout-btn {
     width: auto !important;
-    flex: 0 0 auto !important; /* Kunci ukuran agar tidak terdorong */
+    flex: 0 0 auto !important; 
     height: 34px !important;
     border-radius: 8px !important;
     display: inline-flex !important;
     align-items: center !important;
     justify-content: center !important;
     font-size: 12px !important;
-    font-weight: 700 !important;
+    font-weight: 800 !important;
     margin: 0 !important;
 }
 
-/* Tombol Tema - Polos tanpa kotak */
-.top-controls .dark-mode-btn,
-html body:not(.dark-mode) .top-controls .dark-mode-btn {
+/* ===== 1. TOMBOL TEMA (KIRI) ===== */
+.top-controls .dark-mode-btn {
     background: transparent !important;
     border: none !important;
     box-shadow: none !important;
-    padding: 0 8px !important;
+    padding: 0 4px !important;
     font-size: 24px !important;
     cursor: pointer !important;
 }
 
-/* Tombol Logout - Kecil & Rapi */
-.top-controls .logout-btn,
-html body:not(.dark-mode) .top-controls .logout-btn {
+/* ===== 2. TOMBOL LOGOUT (KANAN) ===== */
+.top-controls .logout-btn {
     padding: 0 16px !important;
     text-transform: uppercase !important;
+    letter-spacing: 0.5px !important;
+}
+
+/* ===== 3. TAMPILAN MODE GELAP (MENYALA / GLOW) ===== */
+body.dark-mode .top-controls .dark-mode-btn {
+    color: #fbbf24 !important;
+    text-shadow: 0 0 10px rgba(245, 158, 11, 0.8) !important; /* Ikon menyala */
+}
+
+body.dark-mode .top-controls .logout-btn {
+    background: linear-gradient(135deg, #dc2626 0%, #991b1b 100%) !important;
+    color: #ffffff !important;
+    border: 2px solid #ef4444 !important;
+    /* Efek Glow Merah */
+    box-shadow: 0 0 15px rgba(239, 68, 68, 0.6), inset 0 0 8px rgba(255, 255, 255, 0.2) !important;
+    text-shadow: 0 0 5px rgba(255, 255, 255, 0.5) !important;
+}
+
+/* ===== 4. TAMPILAN MODE TERANG (POLOS) ===== */
+html body:not(.dark-mode) .top-controls .dark-mode-btn {
+    color: #0f172a !important;
+    text-shadow: none !important;
+}
+
+html body:not(.dark-mode) .top-controls .logout-btn {
     background: #dc2626 !important;
     color: #ffffff !important;
     border: 1px solid #dc2626 !important;
     box-shadow: none !important;
-}
-
-/* Warna Khusus Mode Gelap */
-body.dark-mode .top-controls .logout-btn {
-    background: linear-gradient(135deg, #dc2626 0%, #991b1b 100%) !important;
-    border: 1px solid #ef4444 !important;
-    box-shadow: 0 0 10px rgba(239, 68, 68, 0.4) !important;
+    text-shadow: none !important;
 }
 </style>
 </head>
