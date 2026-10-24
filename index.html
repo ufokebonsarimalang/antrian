@@ -3589,6 +3589,69 @@ html body:not(.dark-mode) .aktivitas-menu-btn {
     background: #ffffff !important;
     box-shadow: none !important;
 }
+  /* ============================================================ */
+/* ===== PERBAIKAN BADGE STATUS (TANPA BORDER SHADOW) ========= */
+/* ============================================================ */
+
+/* 1. Paksa semua teks badge menjadi putih bersih tanpa shadow */
+.badge-status-item,
+.badge-giliran-anda,
+.badge-standby,
+.badge-melayani,
+.badge-cs,
+.badge-ibadah,
+body.dark-mode .badge-status-item,
+body.dark-mode .badge-giliran-anda,
+body.dark-mode .badge-standby,
+body.dark-mode .badge-melayani,
+body.dark-mode .badge-cs,
+body.dark-mode .badge-ibadah,
+html body:not(.dark-mode) .badge-status-item,
+html body:not(.dark-mode) .badge-giliran-anda,
+html body:not(.dark-mode) .badge-standby,
+html body:not(.dark-mode) .badge-melayani,
+html body:not(.dark-mode) .badge-cs,
+html body:not(.dark-mode) .badge-ibadah {
+    color: #ffffff !important;
+    text-shadow: none !important; /* MENGHAPUS EFEK BORDER PUTIH */
+    border: none !important;      /* Memastikan tidak ada border kotak */
+    font-weight: 800 !important;
+    letter-spacing: 0.3px !important;
+}
+
+/* 2. Warna Background Badge di Mode Terang */
+html body:not(.dark-mode) .badge-giliran-anda {
+    background: #dc2626 !important; /* Merah */
+}
+html body:not(.dark-mode) .badge-standby {
+    background: #eab308 !important; /* Kuning */
+}
+html body:not(.dark-mode) .badge-melayani {
+    background: #059669 !important; /* Hijau */
+}
+html body:not(.dark-mode) .badge-cs,
+html body:not(.dark-mode) .badge-ibadah {
+    background: #7c3aed !important; /* Ungu */
+}
+
+/* 3. Warna Background Badge di Mode Gelap (Glow) */
+body.dark-mode .badge-giliran-anda {
+    background: linear-gradient(135deg, #dc2626, #991b1b) !important;
+    box-shadow: 0 0 10px rgba(239, 68, 68, 0.5) !important;
+}
+body.dark-mode .badge-standby {
+    background: linear-gradient(135deg, #eab308, #ca8a04) !important;
+    box-shadow: 0 0 10px rgba(250, 204, 21, 0.5) !important;
+}
+body.dark-mode .badge-melayani {
+    background: linear-gradient(135deg, #059669, #022c22) !important;
+    box-shadow: 0 0 10px rgba(16, 185, 129, 0.5) !important;
+}
+body.dark-mode .badge-cs,
+body.dark-mode .badge-ibadah {
+    background: linear-gradient(135deg, #7c3aed, #3b0764) !important;
+    box-shadow: 0 0 10px rgba(168, 85, 247, 0.5) !important;
+}
 </style>
 </head>
 <body>
