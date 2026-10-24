@@ -3473,49 +3473,13 @@ html body:not(.dark-mode) .popup-body #total-bawa-box {
     border: 1px solid #e2e8f0 !important;
 }
 
-/* ============================================================ */
-/* ===== RESPONSIVE — POPUP =================================== */
-/* ============================================================ */
-@media (max-width: 480px) {
-    .aktivitas-menu-grid {
-        gap: 8px;
-    }
-    .aktivitas-menu-btn {
-        padding: 12px 8px;
-        min-height: 80px;
-    }
-    .aktivitas-menu-icon {
-        width: 30px;
-        height: 30px;
-    }
-    .aktivitas-menu-icon svg {
-        width: 16px;
-        height: 16px;
-    }
-    .aktivitas-menu-label {
-        font-size: 10px;
-    }
-    .popup-box {
-        max-height: 90vh;
-        border-radius: 14px;
-    }
-    .popup-header {
-        padding: 12px 14px;
-    }
-    .popup-title {
-        font-size: 12px;
-    }
-    .popup-body {
-        padding: 12px;
-    }
-}
-/* ===== PERBAIKAN TOP CONTROLS (RAPAT KANAN) ===== */
+/* ===== PERBAIKAN TOP CONTROLS (RAPAT KANAN & UKURAN SAMA) ===== */
 .top-controls,
 html body:not(.dark-mode) .top-controls {
     display: flex !important;
     justify-content: flex-end !important; /* Rata kanan */
     align-items: center !important;
-    gap: 10px !important; /* Jarak antara ikon dan tombol logout */
+    gap: 8px !important; /* Jarak antara ikon dan tombol logout */
     margin-bottom: 16px !important;
     width: 100% !important;
 }
@@ -3532,26 +3496,29 @@ html body:not(.dark-mode) .top-controls .logout-btn {
     display: inline-flex !important;
     align-items: center !important;
     justify-content: center !important;
-    font-size: 12px !important;
-    font-weight: 800 !important;
     margin: 0 !important;
 }
 
-/* ===== 1. TOMBOL TEMA (KIRI) ===== */
-.top-controls .dark-mode-btn {
+/* ===== 1. TOMBOL TEMA (KIRI) - UKURAN DIKUNCI ===== */
+.top-controls .dark-mode-btn,
+html body:not(.dark-mode) .top-controls .dark-mode-btn {
     background: transparent !important;
     border: none !important;
     box-shadow: none !important;
     padding: 0 4px !important;
-    font-size: 24px !important;
+    font-size: 26px !important; /* Paksa ukuran selalu besar di semua mode */
+    line-height: 1 !important;
     cursor: pointer !important;
 }
 
 /* ===== 2. TOMBOL LOGOUT (KANAN) ===== */
-.top-controls .logout-btn {
+.top-controls .logout-btn,
+html body:not(.dark-mode) .top-controls .logout-btn {
     padding: 0 16px !important;
     text-transform: uppercase !important;
     letter-spacing: 0.5px !important;
+    font-size: 12px !important;
+    font-weight: 800 !important;
 }
 
 /* ===== 3. TAMPILAN MODE GELAP (MENYALA / GLOW) ===== */
@@ -3564,7 +3531,6 @@ body.dark-mode .top-controls .logout-btn {
     background: linear-gradient(135deg, #dc2626 0%, #991b1b 100%) !important;
     color: #ffffff !important;
     border: 2px solid #ef4444 !important;
-    /* Efek Glow Merah */
     box-shadow: 0 0 15px rgba(239, 68, 68, 0.6), inset 0 0 8px rgba(255, 255, 255, 0.2) !important;
     text-shadow: 0 0 5px rgba(255, 255, 255, 0.5) !important;
 }
