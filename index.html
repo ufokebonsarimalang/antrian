@@ -149,19 +149,21 @@ body {
     gap: 10px;
     margin-bottom: 16px;
 }
-
 .dark-mode-btn {
     background: transparent !important;
-    color: #ffffff !important;
     border: none !important;
     box-shadow: none !important;
-    text-shadow: none !important;
+    outline: none !important;
+    color: #ffffff !important;
     padding: 0 !important;
-    font-size: 24px !important;
+    margin: 0 !important;
+    font-size: 26px !important; /* Ukuran icon */
     line-height: 1 !important;
     cursor: pointer;
-    width: 40px !important;       /* Lebar tetap agar tidak melar */
-    flex: 0 0 40px !important;    /* Kunci ukuran */
+    width: 36px !important;
+    height: 36px !important;
+    min-width: 36px !important;
+    flex: 0 0 36px !important;
     display: flex !important;
     align-items: center !important;
     justify-content: center !important;
@@ -176,17 +178,19 @@ body {
     color: #ffffff !important;
     border: 2px solid #ef4444 !important;
     font-weight: 700;
-    border-radius: 10px;
-    padding: 8px 14px;
+    border-radius: 8px !important;
+    padding: 0 16px !important;
+    height: 36px !important;
     font-size: 12px;
     cursor: pointer;
     text-transform: uppercase;
     letter-spacing: 0.3px;
-    box-shadow: 0 0 25px rgba(239, 68, 68, 0.8), inset 0 0 8px rgba(255, 255, 255, 0.3) !important;
-    text-shadow: 0 0 6px rgba(255, 255, 255, 0.5) !important;
-   
+    box-shadow: 0 0 15px rgba(239, 68, 68, 0.5) !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    flex: 1 1 auto !important;
 }
-
 /* ===== HEADER ===== */
 .gradient-header,
 .header-admin {
@@ -1667,14 +1671,18 @@ html body:not(.dark-mode) .top-controls {
 }
 html body:not(.dark-mode) .dark-mode-btn {
     background: transparent !important;
-    color: #0f172a !important;
     border: none !important;
     box-shadow: none !important;
+    outline: none !important;
+    color: #0f172a !important;
     padding: 0 !important;
-    font-size: 24px !important;
+    margin: 0 !important;
+    font-size: 26px !important;
     line-height: 1 !important;
-    width: 40px !important;
-    flex: 0 0 40px !important;
+    width: 36px !important;
+    height: 36px !important;
+    min-width: 36px !important;
+    flex: 0 0 36px !important;
     cursor: pointer !important;
 }
 
@@ -1683,12 +1691,17 @@ html body:not(.dark-mode) .logout-btn {
     color: #ffffff !important;
     border: 1px solid #dc2626 !important;
     font-weight: 700 !important;
-    border-radius: 10px !important;
-    padding: 8px 14px !important;
+    border-radius: 8px !important; /* Disamakan */
+    padding: 0 16px !important;    /* Padding vertikal dihapus */
+    height: 36px !important;       /* Tinggi disamakan dengan ikon */
     font-size: 12px !important;
     text-transform: uppercase !important;
     letter-spacing: 0.3px !important;
-     box-shadow: 0 2px 4px rgba(0,0,0,0.05) !important;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05) !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    flex: 1 1 auto !important;     /* Mengisi sisa ruang */
 }
 
 /* ===== HEADER ===== */
@@ -3509,6 +3522,51 @@ html body:not(.dark-mode) .popup-body #total-bawa-box {
     flex: 1 1 auto !important;
     width: auto !important;
     margin: 0 !important;
+}
+  /* ===== TOP CONTROLS FINAL (RAPI) ===== */
+.top-controls {
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    gap: 12px !important;
+    margin-bottom: 16px !important;
+}
+
+/* Tombol Tema (Kiri) - Selalu polos dan tidak melar */
+.top-controls .dark-mode-btn {
+    flex: 0 0 36px !important; 
+    width: 36px !important;
+    height: 36px !important;
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    font-size: 26px !important;
+    cursor: pointer !important;
+}
+
+/* Tombol Logout (Kanan) - Memanjang mengisi sisa ruang */
+.top-controls .logout-btn {
+    flex: 1 1 auto !important;
+    height: 36px !important;
+    padding: 0 16px !important;
+    border-radius: 8px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
+
+/* Warna untuk Mode Terang */
+html body:not(.dark-mode) .top-controls .dark-mode-btn {
+    color: #0f172a !important;
+}
+html body:not(.dark-mode) .top-controls .logout-btn {
+    background: #dc2626 !important;
+    color: #ffffff !important;
+    border: 1px solid #dc2626 !important;
 }
 </style>
 </head>
