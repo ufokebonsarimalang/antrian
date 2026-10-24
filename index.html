@@ -3516,11 +3516,14 @@ html body:not(.dark-mode) .popup-body #total-bawa-box {
     align-items: center !important;
     gap: 8px !important; /* Jarak antar tombol */
     margin-bottom: 16px !important;
+    width: 100% !important;
 }
 
-/* Paksa tombol agar TIDAK melar selebar layar */
+/* Paksa tombol agar TIDAK melar selebar layar (Mode Gelap & Terang) */
 .top-controls .dark-mode-btn,
-.top-controls .logout-btn {
+.top-controls .logout-btn,
+html body:not(.dark-mode) .top-controls .dark-mode-btn,
+html body:not(.dark-mode) .top-controls .logout-btn {
     width: auto !important;
     flex: 0 0 auto !important; 
     height: 34px !important;
@@ -3530,10 +3533,12 @@ html body:not(.dark-mode) .popup-body #total-bawa-box {
     justify-content: center !important;
     font-size: 12px !important;
     font-weight: 700 !important;
+    margin: 0 !important;
 }
 
 /* Tombol Tema - Polos tanpa kotak */
-.top-controls .dark-mode-btn {
+.top-controls .dark-mode-btn,
+html body:not(.dark-mode) .top-controls .dark-mode-btn {
     background: transparent !important;
     border: none !important;
     box-shadow: none !important;
@@ -3552,7 +3557,7 @@ html body:not(.dark-mode) .popup-body #total-bawa-box {
     box-shadow: 0 0 10px rgba(239, 68, 68, 0.4) !important;
 }
 
-/* Warna untuk Mode Terang */
+/* Warna Khusus Mode Terang */
 html body:not(.dark-mode) .top-controls .dark-mode-btn {
     color: #0f172a !important;
 }
@@ -3562,6 +3567,7 @@ html body:not(.dark-mode) .top-controls .logout-btn {
     color: #ffffff !important;
     border: 1px solid #dc2626 !important;
     box-shadow: none !important;
+    padding: 0 16px !important; /* Paksa padding kecil di mode terang */
 }
 </style>
 </head>
