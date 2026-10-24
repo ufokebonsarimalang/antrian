@@ -3548,6 +3548,37 @@ html body:not(.dark-mode) .top-controls .logout-btn {
     box-shadow: none !important;
     text-shadow: none !important;
 }
+  /* ============================================================ */
+/* ===== AKTIVITAS MENU GRID — HITAM SEMUA (LIGHT MODE) ======= */
+/* ============================================================ */
+
+/* 1. Teks Label & Judul jadi Hitam */
+html body:not(.dark-mode) .aktivitas-menu-label {
+    color: #000000 !important;
+}
+
+/* 2. Icon SVG jadi Hitam */
+html body:not(.dark-mode) .aktivitas-menu-icon svg,
+html body:not(.dark-mode) .aktivitas-menu-icon.t-ibadah svg,
+html body:not(.dark-mode) .aktivitas-menu-icon.t-keluar svg,
+html body:not(.dark-mode) .aktivitas-menu-icon.t-autokick svg,
+html body:not(.dark-mode) .aktivitas-menu-icon.t-rekap svg {
+    stroke: #000000 !important;
+}
+
+/* 3. Kotak Latar Belakang Icon jadi Putih/Abu Terang dengan Garis Hitam */
+html body:not(.dark-mode) .aktivitas-menu-icon {
+    background: #ffffff !important;
+    border: 1px solid #000000 !important;
+}
+
+/* 4. Angka Count (Bulat di pojok kanan atas) jadi Hitam */
+html body:not(.dark-mode) .aktivitas-menu-count {
+    background: #000000 !important;
+    color: #ffffff !important; /* Tulisan angka tetap putih agar terbaca */
+    border: none !important;
+    box-shadow: none !important;
+}
 </style>
 </head>
 <body>
