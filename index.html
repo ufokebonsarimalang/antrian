@@ -3509,23 +3509,24 @@ html body:not(.dark-mode) .popup-body #total-bawa-box {
         padding: 12px;
     }
 }
-/* ===== PERBAIKAN TOP CONTROLS (RATA KANAN & KECIL) ===== */
-.top-controls {
+/* ===== PERBAIKAN TOP CONTROLS (RAPAT KANAN) ===== */
+.top-controls,
+html body:not(.dark-mode) .top-controls {
     display: flex !important;
-    justify-content: flex-end !important; /* Rapat ke kanan */
+    justify-content: flex-end !important; /* Paksa selalu rata kanan */
     align-items: center !important;
     gap: 8px !important; /* Jarak antar tombol */
     margin-bottom: 16px !important;
     width: 100% !important;
 }
 
-/* Paksa tombol agar TIDAK melar selebar layar (Mode Gelap & Terang) */
+/* Paksa tombol agar TIDAK melar selebar layar */
 .top-controls .dark-mode-btn,
 .top-controls .logout-btn,
 html body:not(.dark-mode) .top-controls .dark-mode-btn,
 html body:not(.dark-mode) .top-controls .logout-btn {
     width: auto !important;
-    flex: 0 0 auto !important; 
+    flex: 0 0 auto !important; /* Kunci ukuran agar tidak terdorong */
     height: 34px !important;
     border-radius: 8px !important;
     display: inline-flex !important;
@@ -3548,26 +3549,21 @@ html body:not(.dark-mode) .top-controls .dark-mode-btn {
 }
 
 /* Tombol Logout - Kecil & Rapi */
-.top-controls .logout-btn {
+.top-controls .logout-btn,
+html body:not(.dark-mode) .top-controls .logout-btn {
     padding: 0 16px !important;
     text-transform: uppercase !important;
-    background: linear-gradient(135deg, #dc2626 0%, #991b1b 100%) !important;
-    color: #ffffff !important;
-    border: 1px solid #ef4444 !important;
-    box-shadow: 0 0 10px rgba(239, 68, 68, 0.4) !important;
-}
-
-/* Warna Khusus Mode Terang */
-html body:not(.dark-mode) .top-controls .dark-mode-btn {
-    color: #0f172a !important;
-}
-
-html body:not(.dark-mode) .top-controls .logout-btn {
     background: #dc2626 !important;
     color: #ffffff !important;
     border: 1px solid #dc2626 !important;
     box-shadow: none !important;
-    padding: 0 16px !important; /* Paksa padding kecil di mode terang */
+}
+
+/* Warna Khusus Mode Gelap */
+body.dark-mode .top-controls .logout-btn {
+    background: linear-gradient(135deg, #dc2626 0%, #991b1b 100%) !important;
+    border: 1px solid #ef4444 !important;
+    box-shadow: 0 0 10px rgba(239, 68, 68, 0.4) !important;
 }
 </style>
 </head>
